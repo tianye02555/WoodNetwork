@@ -9,14 +9,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="sysfunction.activity.LoginActivity">
+        <activity android:name="sysfunction.activity.LoginActivity"></activity>
+        <activity android:name="sysfunction.activity.GetPasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="sysfunction.activity.GetPasswordActivity"></activity>
+        <activity android:name="ShoppingMall.activity.ShoppingMallActivity"></activity>
     </application>
 
 </manifest>

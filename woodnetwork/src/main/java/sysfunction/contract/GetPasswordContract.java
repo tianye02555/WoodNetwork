@@ -1,5 +1,6 @@
 package sysfunction.contract;
 
+import sysfunction.presenter.GetPasswordPresenter;
 import woodnetwork.hebg3.com.woodnetwork.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.BaseView;
 
@@ -8,7 +9,7 @@ import woodnetwork.hebg3.com.woodnetwork.BaseView;
  */
 
 public interface GetPasswordContract {
-    interface GetPasswordView extends BaseView{
+    interface GetPasswordView extends BaseView<GetPasswordPresenter>{
         String getUserName();
         String getCode();
         String getNewPassword();
@@ -18,7 +19,7 @@ public interface GetPasswordContract {
         void submitNewPassword();
 
     }
-    interface GetPasswordPresenter extends BasePresenter{
+    interface GetPasswordPresenterInterface extends BasePresenter{
         void sendCode();
         void submit();
     }

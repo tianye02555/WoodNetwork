@@ -1,0 +1,511 @@
+package Utils;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Environment;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.squareup.picasso.Picasso;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
+
+import static java.security.spec.MGF1ParameterSpec.SHA1;
+
+/** 工具类 */
+@SuppressLint({ "SimpleDateFormat", "DefaultLocale" }) public class CommonUtils {
+
+	private final static String customTagPrefix = "WoodNetwork";// tag前缀
+	public static Context mContext=null;
+	public static Toast mToast=null;
+	public static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+	private  static List<Activity> activityList=new ArrayList<Activity>();
+
+//	/** 头像配置 */
+//	public static final DisplayImageOptions displayHeaderOptions = new DisplayImageOptions.Builder()
+//			// .showStubImage(R.drawable.ic_launcher)
+//			.showImageForEmptyUri(R.drawable.default_avatar).showImageOnLoading(R.drawable.default_avatar)
+//			// 加载时显示选择进度条
+//			.showImageOnFail(R.drawable.default_avatar)
+//			// 加载失败时显示缺省头像
+//			.imageScaleType(ImageScaleType.EXACTLY).cacheInMemory(false).cacheOnDisk(isExistSdcard())
+//			.bitmapConfig(Bitmap.Config.RGB_565).resetViewBeforeLoading(true).build();
+
+//	public static void showToast(Context context, String msg) {
+//		if (context != null && !TextUtils.isEmpty(msg)) {
+//			Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//			if (DEBUG)
+//				Log.i(generateTag(), msg);
+//		}
+//	}
+//
+//	public static void showToast(Context context, int strId) {
+//		if (context != null) {
+//			Toast.makeText(context, strId, Toast.LENGTH_SHORT).show();
+//			if (DEBUG)
+//				Log.i(generateTag(), context.getString(strId));
+//		}
+//	}
+	/**
+	 * 加载图片  分是否要求wifi网络
+	 * @param uri 图片地址
+	 * @param view 控件
+	 * @param context 上下文
+	 * @param isWIFI 是否要求wifi
+	 */
+		public static void displayImage(Context context,String uri,ImageView view,boolean isWIFI) {
+			if (null != uri && !"".equals(uri) && null != view && !"".equals(view)) {
+				if(isWIFI){//要求在wifi下加载
+					if(CommonUtils.isWiFiActive(context)){//判断是否是wifi
+						Picasso.with(context).load(uri).into(view);
+						return;
+					}else{
+						return;
+					}
+				}else{//在任何网络下
+					Picasso.with(context).load(uri).into(view);
+				}
+				
+			}
+		}
+
+	/**
+	 * 获取toast对象，防止重复显示时间过长
+	 * @param context 上下文对象 区别toast的标识
+	 * @param msg   需要提示的内容
+	 * @return
+	 */
+	public static void showToast(Context context,String msg){
+	    if(CommonUtils.mContext==context){
+	        CommonUtils.mToast.setText(msg);
+	    }else{
+	        CommonUtils.mContext=context;
+	        CommonUtils.mToast=Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+	    }
+	     CommonUtils.mToast.show();
+	}
+	/**
+	 * 获取toast对象，防止重复显示时间过长
+	 * @param context 上下文对象 区别toast的标识
+	 * @param res   需要提示的内容id
+	 * @return
+	 */
+	public static void showToast(Context context,int res){
+	    if(CommonUtils.mContext==context){
+	        CommonUtils.mToast.setText(context.getResources().getString(res));
+	    }else{
+	        CommonUtils.mContext=context;
+	        CommonUtils.mToast=Toast.makeText(context, context.getResources().getString(res), Toast.LENGTH_SHORT);
+	    }
+	     CommonUtils.mToast.show();
+	}
+	/**
+	 * 获取应用版本
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static String getVersionName(Context context) {
+		try {
+			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+		} catch (NameNotFoundException e) {
+			return "";
+		}
+	}
+
+//	/** 获取屏幕宽度 */
+//	@SuppressWarnings("deprecation")
+//	public static int getWindowWidth() {
+//		WindowManager wm = (WindowManager) g.getInstance().getSystemService(Context.WINDOW_SERVICE);
+//		return wm.getDefaultDisplay().getWidth();
+//	}
+//
+//	/** 获取屏幕高度 */
+//	@SuppressWarnings("deprecation")
+//	public static int getWindowHeight() {
+//		WindowManager wm = (WindowManager) YTXApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+//		return wm.getDefaultDisplay().getHeight();
+//	}
+
+	public static int dipToPixel(Context context, int nDip) {
+		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(dm);
+		return (int) (dm.density * nDip);
+	}
+
+	/**
+	 * 检测网络是否可用
+	 * 
+	 * @param context
+	 * @return boolean 如果当前网络可用则返回true，否则返回false
+	 */
+	public static boolean isNetWorkConnected(Context context) {
+		if (context != null) {
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+			if (mNetworkInfo != null) {
+				return mNetworkInfo.isAvailable();
+			}
+		}
+		return false;
+	}
+
+	/** 检测WiFi是否可用 */
+	public static boolean isWiFiActive(Context inContext) {
+		Context context = inContext.getApplicationContext();
+		ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity != null) {
+			NetworkInfo[] info = connectivity.getAllNetworkInfo();
+			if (info != null) {
+				for (int i = 0; i < info.length; i++) {
+					if (info[i].getTypeName().equals("WIFI") && info[i].isConnected()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+//	/** 是否需要省流量 */
+//	public static boolean isSaveFlow(Context context) {
+//		boolean blnSaveFlow;
+//		if (isWiFiActive(context))
+//			blnSaveFlow = false;
+//		else {
+//			PreferenceDao pd = new PreferenceDao(context);
+//			blnSaveFlow = pd.isSaveFlow();
+//		}
+//		return blnSaveFlow;
+//	}
+
+	/**
+	 * 检测Sdcard是否存在
+	 * 
+	 * @return
+	 */
+	public static boolean isExistSdcard() {
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
+			return true;
+		else
+			return false;
+	}
+
+//	/** 显示登录对话框 */
+//	public static void showSdcardNotFoundDialog(Context context) {
+//		new AlertDialog.Builder(context).setTitle(R.string.tip).setMessage(R.string.sdcard_is_not_ok)
+//				.setPositiveButton(R.string.ok, null).show();
+//	}
+
+	@SuppressWarnings("deprecation")
+	public static String getTopActivity(Context context) {
+		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningTaskInfo> runningTaskInfos = manager.getRunningTasks(1);
+		if (runningTaskInfos != null)
+			return runningTaskInfos.get(0).topActivity.getClassName();
+		else
+			return "";
+	}
+
+	/** 获取输入框里的内容 */
+	public static String getEditTextString(EditText et) {
+		return et.getText().toString().trim();
+	}
+
+	/** 从网络路径里获取文件名称 */
+	public static String getFilePathFromString(String param) {
+		return param.substring(param.lastIndexOf("/") + 1);
+	}
+
+	
+
+	/**
+	 * 判断字符串是否为手机号
+	 * 
+	 * 移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
+	 * 联通：130、131、132、152、155、156、185、186 电信：133、153、180、189、（1349卫通）
+	 * 
+	 * 
+	 * @param param
+	 *            要判断的字符串
+	 * @return boolean 如果是有效的手机号返回true，否则返回false
+	 * 
+	 */
+	public static boolean isMobileNO(String param) {
+		Pattern p = Pattern.compile("^((17[0-9])|(13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$");
+		Matcher m = p.matcher(param);
+		return m.matches();
+	}
+
+	/**
+	 * 判断字符串是否为QQ号 [1-9][0-9]{4,}
+	 */
+	public static boolean isQQ(String param) {
+		Pattern p = Pattern.compile("[1-9][0-9]{4,}");
+		Matcher m = p.matcher(param);
+		return m.matches();
+	}
+
+	/**
+	 * 版本字符串比较
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @return v1大于v2返回1;v1等于v2返回0;v1小于v2返回-1
+	 */
+	public static int versionNameCompare(String v1, String v2) {
+		try {
+			String[] tmp1 = v1.split("\\.");
+			String[] tmp2 = v2.split("\\.");
+			if (tmp1.length != tmp2.length) {
+				if (tmp1.length > tmp2.length) {
+					tmp2 = fixStringArray(tmp2, tmp1.length);
+				} else {
+					tmp1 = fixStringArray(tmp1, tmp2.length);
+				}
+			}
+			int len = tmp1.length;
+			for (int i = 0; i < len; i++) {
+				int a = Integer.parseInt(tmp1[i]);
+				int b = Integer.parseInt(tmp2[i]);
+				if (a == b) {
+					continue;
+				} else {
+					if (a > b) {
+						return 1;
+					} else {
+						return -1;
+					}
+				}
+			}
+			return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	private static String[] fixStringArray(String[] arr, int length) {
+		String[] tmp = Arrays.copyOf(arr, length);
+		for (int i = 0; i < tmp.length; i++) {
+			if (TextUtils.isEmpty(tmp[i])) {
+				tmp[i] = "0";
+			}
+		}
+		return tmp;
+	}
+
+	/**
+	 * 安装应用
+	 * 
+	 * @param context
+	 * @param uri
+	 *            应用apk的uri
+	 */
+	public static void installAPK(Context context, Uri uri) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.setDataAndType(uri, "application/vnd.android.package-archive");
+		context.startActivity(intent);
+	}
+
+	/**
+	 * 从map获取json字符串
+	 * 
+	 * @param param
+	 *            Map<String, String> param
+	 * @return String
+	 */
+	public static String getJsonString(Map<String, String> param) {
+		JsonObject jo = new JsonObject();
+		for (String key : param.keySet())
+			jo.addProperty(key, param.get(key));
+		return jo.toString();
+	}
+
+	
+
+	
+
+	/** 比较两个list是否相等 */
+	public static <T extends Comparable<T>> boolean compare(List<T> a, List<T> b) {
+		if (a.size() != b.size())
+			return false;
+		Collections.sort(a);
+		Collections.sort(b);
+		for (int i = 0; i < a.size(); i++) {
+			if (!a.get(i).equals(b.get(i)))
+				return false;
+		}
+		return true;
+	}
+
+	public static Bitmap drawableToBitmap(Drawable drawable) {
+		Bitmap bitmap = null;
+		try {
+			int width = drawable.getIntrinsicWidth();
+			int height = drawable.getIntrinsicHeight();
+			bitmap = Bitmap.createBitmap(width, height,
+					drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+			Canvas canvas = new Canvas(bitmap);
+			drawable.setBounds(0, 0, width, height);
+			drawable.draw(canvas);
+		} catch (Exception e) {
+
+		}
+		return bitmap;
+	}
+
+	/**
+	 * 验证字符串是否只由字符或数字组成 "^[A-Za-z0-9]+$"
+	 * 
+	 * @param param
+	 *            要判断的字符串
+	 * @return boolean 如果是只由字符或数字组成返回true，否则返回false
+	 */
+	public static boolean isOnlyCharOrNumber(String param) {
+		Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
+		Matcher m = pattern.matcher(param);
+		return m.matches();
+	}
+	/**
+	 * 按照指定格式获取日期
+	 * @param format  格式"yyyy-MM-dd HH-mm-ss" HH为24  hh为12
+	 * @param milliseconds  毫秒
+	 * @return
+	 */
+	public static String getDate(String format,long milliseconds){
+		SimpleDateFormat sdf=new SimpleDateFormat(format, Locale.getDefault());		
+		return sdf.format(new Date(milliseconds));
+	}
+	/**
+	 * 添加activity到管理集合
+	 * @param activity
+	 */
+	public static void addActivity(Activity activity){
+		activityList.add(activity);
+	}
+	/**
+	 * 清除所有activity
+	 */
+	public static void removeActivity(){
+		for(Activity activity : activityList){
+			activity.finish();
+		}
+	}
+	/**
+	 * 判断是否为数字
+	 * @param string
+	 * @return
+	 */
+	public static boolean isNumber(String string){
+		Pattern pattern = Pattern.compile("[0-9]*"); 
+		   Matcher isNum = pattern.matcher(string);
+		   if( !isNum.matches() ){
+		       return false; 
+		   } 
+		   return true; 
+	}
+	/**   
+     * 获取文件夹大小   
+     * @param file File实例   
+     * @return long      
+     */     
+    public static long getFolderSize(File file){
+   
+        long size = 0;    
+        try {  
+            File[] fileList = file.listFiles();
+            for (int i = 0; i < fileList.length; i++)     
+            {     
+                if (fileList[i].isDirectory())     
+                {     
+                    size = size + getFolderSize(fileList[i]);    
+   
+                }else{     
+                    size = size + fileList[i].length();    
+   
+                }     
+            }  
+        } catch (Exception e) {  
+            // TODO Auto-generated catch block  
+            e.printStackTrace();  
+        }     
+       //return size/1048576;    
+        return size;    
+    }    
+    /**
+     * 删除文件夹下所有内容
+     * @param root  指定文件夹
+     */
+    public static void deleteAllFiles(File root) {  
+        File files[] = root.listFiles();  
+        if (files != null)  
+            for (File f : files) {  
+                if (f.isDirectory()) { // 判断是否为文件夹  
+                    deleteAllFiles(f);  
+                    try {  
+                        f.delete();  
+                    } catch (Exception e) {  
+                    }  
+                } else {  
+                    if (f.exists()) { // 判断是否存在  
+                        deleteAllFiles(f);  
+                        try {  
+                            f.delete();  
+                        } catch (Exception e) {  
+                        }  
+                    }  
+                }  
+            }  
+    }
+
+	/**
+	 * 根据url地址获取okhttp的builder
+	 * @param url
+	 * @param param
+     */
+	public static PostFormBuilder getOkhttpBuilder(String url,HashMap<String,String> param){
+		PostFormBuilder builder = OkHttpUtils.post().url(url);
+		for (String key : param.keySet()) {
+			builder.addParams( key,  param.get(key));
+		}
+		return builder;
+	}
+    
+}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WoodNetwork</string>
+    <string name="login">登录</string>
+    <string name="zhanghu">账户:</string>
+    <string name="mima">密码:</string>
+    <string name="mulianwang">木联网</string>
+    <string name="wangjimima">忘记密码</string>
+</resources>

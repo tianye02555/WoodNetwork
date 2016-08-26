@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/includ_title"
+        layout="@layout/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+
+        ></include>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_margin="20dp"
+        fresco:actualImageScaleType="focusCrop"
+        fresco:placeholderImage="@drawable/logo"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:text="@string/mulianwang"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_big"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/zhanghu"
+            android:textSize="@dimen/font_normal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/text_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_normal"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/distance_short"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/mima"
+            android:textSize="@dimen/font_normal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_normal"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:layout_marginTop="20dp"
+        android:text="@string/login"
+
+        android:textSize="@dimen/font_big"
+        android:id="@+id/button" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+        <TextView
+            android:id="@+id/activity_login_text_wangjimima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wangjimima"
+            android:textSize="@dimen/font_normal"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/distance_longest"
+            android:textColor="@android:color/holo_green_light"
+            android:layout_marginTop="30dp"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

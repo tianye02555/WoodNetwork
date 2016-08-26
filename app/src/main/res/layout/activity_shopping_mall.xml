@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_shopping_mall"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShoppingMall.activity.ShoppingMallActivity">
+<include
+    android:id="@+id/includ_title"
+    layout="@layout/layout_title"></include>
+<RadioGroup
+    android:id="@+id/activity_shopping_mall_rag"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_alignParentBottom="true">
+    <RadioButton
+        android:id="@+id/activity_shopping_mall_rab_shangcheng"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/shangcheng"
+        android:gravity="center"
+        android:background="@null"
+        android:layout_height="match_parent" />
+
+    <RadioButton
+        android:id="@+id/activity_shopping_mall_rab_qiugou"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/qiugou"
+        android:gravity="center"
+        android:background="@null"
+        android:layout_height="match_parent" />
+
+    <RadioButton
+        android:id="@+id/activity_shopping_mall_rab_zixun"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/zixun"
+        android:gravity="center"
+        android:background="@null"
+        android:layout_height="match_parent" />
+    <RadioButton
+        android:id="@+id/activity_shopping_mall_rab_wode"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@mipmap/ic_launcher"
+        android:text="@string/wode"
+        android:gravity="center"
+        android:background="@null"
+        android:layout_height="match_parent" />
+</RadioGroup>
+    <FrameLayout
+        android:id="@+id/activity_shopping_mall_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/includ_title"
+        android:layout_above="@id/activity_shopping_mall_rag"></FrameLayout>
+</RelativeLayout>

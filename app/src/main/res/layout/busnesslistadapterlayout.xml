@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/busnesslistadapterlayout_layout"
+>
+<com.facebook.drawee.view.SimpleDraweeView
+    android:id="@+id/busnesslistadapterlayout_image_head"
+    fresco:placeholderImage="@drawable/defaultimg"
+    android:layout_width="60dp"
+    android:layout_margin="@dimen/distance_normal"
+    android:layout_height="70dp"
+    />
+
+    <TextView
+        android:id="@+id/busnesslistadapterlayout_text_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="哈尔滨精达木材交易公司"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_alignTop="@+id/busnesslistadapterlayout_image_head"
+        android:layout_toRightOf="@+id/busnesslistadapterlayout_image_head"
+        android:layout_toEndOf="@+id/busnesslistadapterlayout_image_head" />
+
+    <TextView
+        android:id="@+id/busnesslistadapterlayout_text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wood@163.com"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/busnesslistadapterlayout_text_company"
+        android:layout_toRightOf="@+id/busnesslistadapterlayout_image_head"
+        android:layout_toEndOf="@+id/busnesslistadapterlayout_image_head"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/busnesslistadapterlayout_text_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17093281001"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/busnesslistadapterlayout_text_email"
+        android:layout_toRightOf="@+id/busnesslistadapterlayout_image_head"
+        android:layout_toEndOf="@+id/busnesslistadapterlayout_image_head"
+        android:layout_marginTop="5dp" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/busnesslistadapterlayout_image_phone"
+        fresco:placeholderImage="@drawable/defaultimg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/busnesslistadapterlayout_text_company"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_marginStart="26dp" />
+</RelativeLayout>

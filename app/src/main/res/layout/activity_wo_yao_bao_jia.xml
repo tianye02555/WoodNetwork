@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_woyaobaojia"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/includ_title"
+        layout="@layout/layout_title"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reltivelayout"
+        android:layout_below="@+id/includ_title">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_chanpinyixiang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_woyaobaojia_text_jiaohuodidian"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="产品意向："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_goumaishuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_woyaobaojia_text_chanpinyixiang"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="购买数量："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_qitaxuqiu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_woyaobaojia_text_goumaishuliang"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="其他需求："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_fabuyu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_woyaobaojia_text_maijia"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="16dp"
+                android:text="发布于："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_jiaohuodidian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_woyaobaojia_text_fabuyu"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="交货地点："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_nindebaojia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_woyaobaojia_text_lianxifangshi"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:text="您的报价："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <EditText
+                android:id="@+id/activity_woyaobaojia_edit_nindebaojia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/activity_woyaobaojia_text_nindebaojia"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_toLeftOf="@+id/view_nindebaojia"
+                android:layout_toRightOf="@+id/activity_woyaobaojia_text_nindebaojia"
+                android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_maijia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="16dp"
+                android:text="买家："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_shouhuodi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_woyaobaojia_text_nindebaojia"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:text="收  货  地："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <EditText
+                android:id="@+id/activity_woyaobaojia_edit_shouhuodi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/activity_woyaobaojia_text_shouhuodi"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_toLeftOf="@+id/activity_woyaobaojia_simpleDraweeView_shouhuodi"
+                android:layout_toRightOf="@+id/activity_woyaobaojia_text_shouhuodi"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_xiangxidizhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_woyaobaojia_text_shouhuodi"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:text="详细地址："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <EditText
+                android:id="@+id/activity_woyaobaojia_edit_xiangxidizhi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/activity_woyaobaojia_text_xiangxidizhi"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_toLeftOf="@+id/view_xiangxidizhi"
+                android:layout_toRightOf="@+id/activity_woyaobaojia_text_xiangxidizhi"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_beizhu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_woyaobaojia_text_xiangxidizhi"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:text="备       注："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <EditText
+                android:id="@+id/activity_woyaobaojia_edit_beizhu"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignTop="@+id/activity_woyaobaojia_text_beizhu"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_toLeftOf="@+id/view_beizhu"
+                android:layout_toRightOf="@+id/activity_woyaobaojia_text_beizhu" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/activity_woyaobaojia_simpleDraweeView_shouhuodi"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/activity_woyaobaojia_edit_shouhuodi"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/distance_normal"
+                fresco:placeholderImage="@drawable/defaultimg" />
+
+            <View
+                android:id="@+id/view_nindebaojia"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/activity_woyaobaojia_edit_nindebaojia"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/distance_normal"></View>
+
+            <View
+                android:id="@+id/view_xiangxidizhi"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/activity_woyaobaojia_edit_xiangxidizhi"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/distance_normal"></View>
+
+            <View
+                android:id="@+id/view_beizhu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/activity_woyaobaojia_edit_beizhu"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/distance_normal"></View>
+
+            <Button
+                android:id="@+id/activity_woyaobaojia_btn_tijiao"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/activity_woyaobaojia_edit_beizhu"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="@string/tijiao" />
+
+            <TextView
+                android:id="@+id/activity_woyaobaojia_text_lianxifangshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="联系方式："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal"
+                android:layout_below="@+id/activity_woyaobaojia_text_qitaxuqiu"
+                android:layout_toLeftOf="@+id/activity_woyaobaojia_edit_nindebaojia"
+                android:layout_toStartOf="@+id/activity_woyaobaojia_edit_nindebaojia" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                fresco:placeholderImage="@drawable/defaultimg"
+                android:id="@+id/activity_woyaobaojia_image_dianhua"
+                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_alignBottom="@+id/activity_woyaobaojia_text_lianxifangshi"
+                android:layout_toRightOf="@+id/activity_woyaobaojia_text_lianxifangshi"
+        />
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>
+

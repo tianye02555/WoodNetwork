@@ -13,14 +13,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/includ_title">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/activity_confirm_order_text_sellername"
@@ -54,78 +52,101 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_harvestplace"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity_confirm_order_text_ordertype"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:text="收货地点："
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_address"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/activity_confirm_order_text_harvestplace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收货地点："
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <EditText
+                    android:id="@+id/activity_confirm_order_edit_harvestplace"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/activity_confirm_order_text_harvestplace"
+                    android:layout_alignBottom="@+id/activity_confirm_order_text_harvestplace"
+                    android:layout_toEndOf="@+id/activity_confirm_order_text_harvestplace"
+                    android:layout_toRightOf="@+id/activity_confirm_order_text_harvestplace"
+                    android:layout_weight="7"
+                    android:lines="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/simpleDraweeView"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_alignBottom="@+id/activity_confirm_order_edit_harvestplace"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/activity_confirm_order_edit_harvestplace"
+                    android:layout_toRightOf="@+id/activity_confirm_order_edit_harvestplace"
+                    android:layout_weight="1"
+                    fresco:placeholderImage="@drawable/defaultimg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_harvestplace"
+                android:layout_below="@id/ll"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:text="详细地址："
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/activity_confirm_order_text_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll"
+                    android:text="详细地址："
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <EditText
+                    android:id="@+id/activity_confirm_order_edit_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/activity_confirm_order_text_address"
+                    android:layout_alignBottom="@+id/activity_confirm_order_text_address"
+                    android:layout_toEndOf="@+id/activity_confirm_order_text_address"
+                    android:layout_toRightOf="@+id/activity_confirm_order_text_address"
+                    android:layout_weight="7"
+                    android:lines="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:layout_weight="1"></View>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/activity_confirm_order_text_extracttype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_address"
+                android:layout_below="@+id/ll2"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:text="提取方式："
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 
-            <EditText
-                android:id="@+id/activity_confirm_order_edit_harvestplace"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/activity_confirm_order_text_harvestplace"
-                android:layout_toRightOf="@id/activity_confirm_order_text_harvestplace"
-                android:lines="1"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <Spinner
-                android:id="@+id/activity_confirm_order_spinner_extracttype"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/activity_confirm_order_text_extracttype"
-                android:layout_toRightOf="@id/activity_confirm_order_text_extracttype"></Spinner>
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/simpleDraweeView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignBottom="@+id/activity_confirm_order_edit_harvestplace"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_toEndOf="@+id/activity_confirm_order_edit_harvestplace"
-                android:layout_toRightOf="@+id/activity_confirm_order_edit_harvestplace"
-                fresco:placeholderImage="@drawable/defaultimg" />
-
-            <EditText
-                android:id="@+id/activity_confirm_order_edit_address"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/activity_confirm_order_text_address"
-                android:layout_alignBottom="@+id/activity_confirm_order_text_address"
-                android:layout_toEndOf="@+id/activity_confirm_order_text_address"
-                android:layout_toRightOf="@+id/activity_confirm_order_text_address"
-                android:lines="1"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
 
             <View
                 android:id="@+id/line"
@@ -135,160 +156,101 @@
                 android:layout_marginTop="@dimen/distance_longest"
                 android:background="@color/dise"></View>
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_product"
-                android:layout_width="wrap_content"
+            <woodnetwork.hebg3.com.woodnetwork.view.MyListView
+                android:id="@+id/activity_confirm_order_listview"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/line"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="商   品："
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                android:cacheColorHint="#00000000"
+                android:dividerHeight="10dp"
+                android:listSelector="#00000000">
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/line"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="12"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+            </woodnetwork.hebg3.com.woodnetwork.view.MyListView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:layout_toLeftOf="@+id/activity_confirm_order_text_price"
-                android:text="@string/danjia"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+            <!--<TextView-->
+            <!--android:id="@+id/gengduo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/line"-->
+            <!--android:layout_marginTop="@dimen/distance_normal"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/distance_normal"-->
+            <!--android:text="@string/gengduo"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="@dimen/font_normal" />-->
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_gongyingshang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_product"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="供应商："
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_shuliang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/activity_confirm_order_text_product"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="12"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_product"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:layout_toLeftOf="@+id/activity_confirm_order_text_shuliang"
-                android:text="@string/shuliang"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <TextView
-                android:id="@+id/activity_confirm_order_text_dengji"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_gongyingshang"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="等   级："
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <TextView
-                android:id="@+id/activity_confirm_order_text_jinge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/activity_confirm_order_text_gongyingshang"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="12"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <TextView
-                android:id="@+id/jinge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_gongyingshang"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:layout_toLeftOf="@+id/activity_confirm_order_text_jinge"
-                android:text="@string/jinge"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <TextView
-                android:id="@+id/gengduo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_jinge"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:layout_toLeftOf="@+id/activity_confirm_order_text_jinge"
-                android:text="@string/gengduo"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <View
-                android:id="@+id/line_kuan"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_below="@+id/gengduo"
-                android:background="@color/dise"></View>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_below="@+id/line_kuan"></FrameLayout>
-
-            <View
-                android:id="@+id/line1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/line_kuan"
-                android:background="@color/dise"></View>
-
-            <Button
-                android:id="@+id/activity_confirm_order_btn_querenxiadan"
+            <Spinner
+                android:id="@+id/activity_confirm_order_spinner_extracttype"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/line1"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="@string/querenxiadan"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                android:layout_alignTop="@+id/activity_confirm_order_text_extracttype"
+                android:layout_toEndOf="@+id/activity_confirm_order_text_extracttype"
+                android:layout_toRightOf="@+id/activity_confirm_order_text_extracttype"></Spinner>
 
-            <Button
-                android:id="@+id/activity_confirm_order_btn_quxiao"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/line1"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:layout_toLeftOf="@+id/activity_confirm_order_btn_querenxiadan"
-                android:text="@string/quxiao"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
 
         </RelativeLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/activity_confirm_order_listview">
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dise"></View>
+
+        <Button
+            android:id="@+id/activity_confirm_order_btn_querenxiadan"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/activity_confirm_order_text_yingfujinge"
+            android:layout_marginRight="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:gravity="center"
+            android:text="@string/querenxiadan"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <Button
+            android:id="@+id/activity_confirm_order_btn_quxiao"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_confirm_order_text_yingfujinge"
+            android:layout_marginRight="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:layout_toLeftOf="@+id/activity_confirm_order_btn_querenxiadan"
+            android:gravity="center"
+            android:text="@string/quxiao"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/activity_confirm_order_text_yingfujinge0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_marginLeft="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:text="@string/yingfujinge"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/activity_confirm_order_text_yingfujinge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_marginLeft="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:layout_toRightOf="@+id/activity_confirm_order_text_yingfujinge0"
+            android:text="5000元"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+    </RelativeLayout>
 </RelativeLayout>

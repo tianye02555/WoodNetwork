@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+    android:id="@+id/confirm_order_adapter_text_product"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/distance_normal"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:text="商   品："
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:id="@+id/confirm_order_adapter_text_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="@dimen/distance_normal"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:text="12"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/line"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:layout_toLeftOf="@+id/confirm_order_adapter_text_price"
+    android:text="@string/danjia"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:id="@+id/confirm_order_adapter_text_gongyingshang"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/confirm_order_adapter_text_product"
+    android:layout_marginLeft="@dimen/distance_normal"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:text="供应商："
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:id="@+id/confirm_order_adapter_text_shuliang"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/confirm_order_adapter_text_product"
+    android:layout_marginRight="@dimen/distance_normal"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:text="12"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/confirm_order_adapter_text_product"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:layout_toLeftOf="@+id/confirm_order_adapter_text_shuliang"
+    android:text="@string/shuliang"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:id="@+id/confirm_order_adapter_text_dengji"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/confirm_order_adapter_text_gongyingshang"
+    android:layout_marginLeft="@dimen/distance_normal"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:text="等   级："
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:id="@+id/confirm_order_adapter_text_jinge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/confirm_order_adapter_text_gongyingshang"
+    android:layout_marginRight="@dimen/distance_normal"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:text="12"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+
+    <TextView
+    android:id="@+id/jinge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/confirm_order_adapter_text_gongyingshang"
+    android:layout_marginTop="@dimen/distance_normal"
+    android:layout_toLeftOf="@+id/confirm_order_adapter_text_jinge"
+    android:text="@string/jinge"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/font_normal" />
+</RelativeLayout>

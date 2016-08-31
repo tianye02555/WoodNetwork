@@ -1,10 +1,5 @@
 <resources>
-    <array name="demo">
-        <item>全部</item>
-        <item>ewe</item>
-        <item>ewe</item>
-        <item>wrfr</item>
-    </array>
+    <string name="qingshaohou">请稍后……</string>
     <string name="app_name">WoodNetwork</string>
     <string name="login">登录</string>
     <string name="zhanghu">账户</string>
@@ -34,10 +29,32 @@
     <string name="shuliang">数量：</string>
     <string name="quxiao">取消</string>
     <string name="querenxiadan">确认下单</string>
+    <string name="yingfujinge">应付金额：</string>
     <array name="tiqufangshi">
         <item>自提</item>
         <item>送货</item>
     </array>
+    <!-- 下单列表页-->
+    <string name="chaxunyue">查询余额</string>
+    <string name="xuanzeshouhuodi">选择收货地：</string>
+    <string name="queding">确定</string>
+
+    <!-- 购物车-->
+    <string name="quanxuan">全选</string>
+    <string name="yixuanshangping">已选商品</string>
+    <string name="jian">件</string>
+    <string name="shanchu">删除</string>
+    <string name="jiesuan">结算</string>
+    <string name="heji">合计</string>
+    <string name="yuan">元</string>
+    <string name="yuanmeifang">元/方</string>
+    <string name="fang">方</string>
+    <string name="xuanzhong">选中</string>
+    <string name="xiaoji">小计：</string>
+    <!-- 求购首页-->
+    <string name="woyaobaojia">我要报价</string>
+    <string name="tijiao">提交</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

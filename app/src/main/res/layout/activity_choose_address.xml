@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ChooseAddressActivity">
+
+    <include
+        android:id="@+id/includ_title"
+        layout="@layout/layout_title"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/includ_title">
+
+        <RelativeLayout
+            android:id="@+id/activity_choose_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/activity_choose_address_text_shouhuodizhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginRight="@dimen/distance_longest"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:text="@string/xuanzeshouhuodi"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/activity_choose_address_btn_queding"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/distance_normal"
+        android:text="@string/queding" />
+</RelativeLayout>

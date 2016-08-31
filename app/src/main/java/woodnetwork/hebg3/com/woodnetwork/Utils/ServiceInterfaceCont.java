@@ -29,4 +29,31 @@ public class ServiceInterfaceCont {
 
     //获取产品详情接口
     public static final String PRODUCTINFO="/product/info?param=";
+
+    //保存订单接口
+    public static final String ORDERADD="/order/add";
+
+    //获取区域接口
+    public static final String AREALIST="/area/list?param=";
+
+    //查询余额接口
+    public static final String ACCOUNTBALANCEINFO="/account/balance/info?param=";
+
+    //获取购物车列表接口
+    public static final String SHOPCARLIST="/shopcar/list?param=";
+
+    //删除购物车商品接口
+    public static final String SHOPCARDELETE="/shopcar/delete";
+
+    //修改购物车商品数量接口
+    public static final String SHOPCARUPDATE="/shopcar/update";
+
+    //获取求购列表接口
+    public static final String DEMANDLIST="/demand/list?param=";
+
+    //11.1获取求购详情接口
+    public static final String DEMANDINFO="/demand/info?param=";
+
+    //11.2保存报价接口
+    public static final String QUOTATIONADD="/quotation/add";
 }

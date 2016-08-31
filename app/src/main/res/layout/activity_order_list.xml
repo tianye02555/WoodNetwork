@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_confirm_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/includ_title"
+        layout="@layout/layout_title"></include>
+
+    <RelativeLayout
+        android:id="@+id/reltivelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dise"></View>
+
+        <Button
+            android:id="@+id/activity_order_list_btn_querenxiadan"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/activity_order_list_text_yue"
+            android:layout_marginRight="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:gravity="center"
+            android:text="@string/chaxunyue"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/activity_order_list_text_yingfujinge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_marginLeft="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:layout_toRightOf="@+id/activity_order_list_text_yingfujinge0"
+            android:text="5000元"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/activity_order_list_text_yingfujinge0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/activity_order_list_text_yingfujinge"
+            android:layout_alignBottom="@+id/activity_order_list_text_yingfujinge"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:text="@string/yingfujinge"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/activity_order_list_text_yue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/activity_order_list_text_yingfujinge0"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="余额：----"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_normal" />
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reltivelayout"
+        android:layout_below="@+id/includ_title">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/activity_order_list_text_sellername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_list_text_orderstate"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="卖家名称："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_order_list_text_buyername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_order_list_text_sellername"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="买家名称："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_order_list_text_ordertype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_order_list_text_buyername"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="订单类型："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+            <TextView
+                android:id="@+id/activity_order_list_text_ordertime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_list_text_ordernumber"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="16dp"
+                android:text="下单时间："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_order_list_text_orderstate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_order_list_text_ordertime"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="订单状态："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_order_list_text_harvestplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_order_list_text_ordertype"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="收货地点："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+
+            <TextView
+                android:id="@+id/activity_order_list_text_extracttype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_list_text_harvestplace"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="提取方式："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/activity_order_list_text_extracttype"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:background="@color/dise"></View>
+
+            <woodnetwork.hebg3.com.woodnetwork.view.MyListView
+                android:id="@+id/activity_order_list_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line"
+                android:cacheColorHint="#00000000"
+                android:dividerHeight="10dp"
+                android:listSelector="#00000000">
+
+            </woodnetwork.hebg3.com.woodnetwork.view.MyListView>
+
+            <TextView
+                android:id="@+id/activity_order_list_text_ordernumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginTop="16dp"
+                android:text="订单编号："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/gengduo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/line"-->
+            <!--android:layout_marginTop="@dimen/distance_normal"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/distance_normal"-->
+            <!--android:text="@string/gengduo"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="@dimen/font_normal" />-->
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
+

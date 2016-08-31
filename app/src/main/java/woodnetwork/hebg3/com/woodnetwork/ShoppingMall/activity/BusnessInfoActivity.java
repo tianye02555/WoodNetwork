@@ -16,6 +16,8 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.BusnessInfoContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.BusnessInfoPresenter;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 
 public class BusnessInfoActivity extends AppCompatActivity implements BusnessInfoContrac.BusnessInfoViewInterface {
 
@@ -74,17 +76,17 @@ public class BusnessInfoActivity extends AppCompatActivity implements BusnessInf
 
     @Override
     public void showProgress() {
-
+        ProgressUtils.show(this,getResources().getString(R.string.qingshaohou));
     }
 
     @Override
     public void closeProgress() {
-
+        ProgressUtils.hide();
     }
 
     @Override
     public void showfailMessage(String string) {
-
+        CommonUtils.showToast(this,string);
     }
 
     @OnClick(R.id.imge_title_left)

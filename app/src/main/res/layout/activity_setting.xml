@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_my_information"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.MyInformationActivity">
+
+    <include layout="@layout/layout_title">
+
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/activity_setting_text_qingchuhuancun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/right"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="@string/qingchuhuancun"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/activity_setting_text_wifi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:drawableRight="@drawable/back_left"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:paddingRight="@dimen/distance_longest"
+                    android:text="@string/jinwifi"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <CheckBox
+                    android:id="@+id/activity_setting_checkbox_wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/activity_setting_text_wifi"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/distance_longest" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <RelativeLayout
+                android:id="@+id/activity_setting_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_shortest"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/activity_setting_text_jianchagengxin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:text="@string/jianchagengxin"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <TextView
+                    android:id="@+id/activity_setting_text_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/activity_setting_text_jianchagengxin"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:layout_toLeftOf="@+id/activity_setting_image"
+                    android:text="1.2"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/activity_setting_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/distance_long"
+                    fresco:placeholderImage="@drawable/right" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_shortest"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:background="@color/dise"
+                android:padding="@dimen/distance_normal"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/activity_setting_text_yijianfankui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/right"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="@string/yijianfankui"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:id="@+id/activity_setting_text_guanyuwomen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/right"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="@string/guanyuwomen"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:background="@color/dise"
+                android:padding="@dimen/distance_normal"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/activity_setting_btn_zhuxiao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginRight="@dimen/distance_longest"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:gravity="center"
+                android:text="@string/zhuxiao" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

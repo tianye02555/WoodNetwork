@@ -1,6 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_busnessList;
@@ -30,7 +31,7 @@ public class BusnessListPresenter implements BusnessListContrac.BusnessListPrese
     @Override
     public void start() {
         mBusnessListView.showProgress();
-        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils((Activity)mBusnessListView);
+        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(((Fragment)mBusnessListView).getActivity());
         Request_getAttribute request_getAttribute=new Request_getAttribute();
         request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
 
@@ -46,7 +47,7 @@ public class BusnessListPresenter implements BusnessListContrac.BusnessListPrese
             @Override
             public void onFailed(String string) {
                 mBusnessListView.closeProgress();
-                mBusnessListView.showfailMessage(string);
+                mBusnessListView.showMessage(string);
             }
         });
     }

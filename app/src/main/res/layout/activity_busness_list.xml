@@ -4,7 +4,7 @@
     android:id="@+id/activity_busness_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessListActivity">
+    >
 
     <include
         android:id="@+id/includ_title"

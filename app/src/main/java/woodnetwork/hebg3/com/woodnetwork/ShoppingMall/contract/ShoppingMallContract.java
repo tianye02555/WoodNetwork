@@ -17,14 +17,24 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterInfo;
 
 public interface ShoppingMallContract {
     interface ShoppingMallView extends BaseView<ShoppingMallPresenter>{
+        /**
+         * 跳转页面
+         * @param MyClass
+         */
        void jumpActivity(Class MyClass);
-        void showSpinnerData(List<WoodFilterInfo> list);
+
+        /**
+         * 显示商品信息
+         * @param list
+         */
         void showGoodsData(List<ProductFilterList_productsItem> list);
-        void showBusnessInfo(List<BusnessInfo> list);
 
     }
     interface ShoppingMallPresenter extends BasePresenter{
-        void getMoreBusiness();
+        /**
+         * 获取商品信息
+         * @param request_shoppingMall_woodsList
+         */
         void getWoodsList(Request_shoppingMall_woodsList request_shoppingMall_woodsList);
     }
 }

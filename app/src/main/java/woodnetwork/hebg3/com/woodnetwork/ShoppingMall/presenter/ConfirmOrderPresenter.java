@@ -51,7 +51,7 @@ public class ConfirmOrderPresenter implements ConfirmOrderContrac.ConfirmOrderPr
             @Override
             public void onFailed(String string) {
                 confirmOrderView.closeProgress();
-                confirmOrderView.showfailMessage(string);
+                confirmOrderView.showMessage(string);
             }
         });
     }

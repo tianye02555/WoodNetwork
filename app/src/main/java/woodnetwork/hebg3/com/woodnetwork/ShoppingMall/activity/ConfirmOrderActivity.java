@@ -67,6 +67,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_order);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
 
         imgeTitleLeft.setVisibility(View.GONE);
@@ -195,7 +196,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 

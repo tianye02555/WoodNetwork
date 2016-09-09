@@ -34,11 +34,6 @@ public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallP
     }
 
     @Override
-    public void getMoreBusiness() {
-
-    }
-
-    @Override
     public void getWoodsList(Request_shoppingMall_woodsList request_shoppingMall_woodsList) {
         shoppingMallView.showProgress();
         SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(((Fragment)shoppingMallView).getActivity());
@@ -55,7 +50,7 @@ public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallP
             @Override
             public void onFailed(String string) {
                 shoppingMallView.closeProgress();
-                shoppingMallView.showfailMessage(string);
+                shoppingMallView.showMessage(string);
             }
         });
 
@@ -64,34 +59,6 @@ public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallP
 
     @Override
     public void start() {
-        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(((Fragment)shoppingMallView).getActivity());
-        Request_getAttribute request_getAttribute=new Request_getAttribute();
-        request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
-
-        shoppingMallModel.getSpinnerData(CommonUtils.getRequestInfo(new Object(),request_getAttribute), new OnServiceBaceInterface() {
-            @Override
-            public void onSuccess(Object object) {
-                shoppingMallView.showSpinnerData(((WoodFilterAttribute)((ResponseBody)object).obj).attribute);
-            }
-
-            @Override
-            public void onFailed(String string) {
-
-            }
-        });
-        Request_busnessList request_busnessList=new Request_busnessList();
-        request_busnessList.page_size=4;
-        request_busnessList.page_no=1;
-        shoppingMallModel.getBusinessData(CommonUtils.getRequestInfo(request_busnessList,request_getAttribute), new OnServiceBaceInterface() {
-            @Override
-            public void onSuccess(Object object) {
-                shoppingMallView.showBusnessInfo(((BusnessListInfo)((ResponseBody)object).obj).seller_list);
-            }
-            @Override
-            public void onFailed(String string) {
-
-            }
-        });
 
     }
 }

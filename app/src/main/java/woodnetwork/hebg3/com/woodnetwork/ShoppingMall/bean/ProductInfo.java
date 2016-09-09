@@ -14,15 +14,15 @@ public class ProductInfo {
     @Expose
     public String pname;
     @Expose
-    public String price;
+    public Double price;
     @Expose
-    public String stock;
+    public Double stock;
     @Expose
-    public String type;
+    public Integer type;
     @Expose
     public String seller;
     @Expose
-    public String address;
+    public String delivery;
     @Expose
     public List<String> pimg;
     @Expose

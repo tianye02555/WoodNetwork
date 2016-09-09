@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/adapter_quotationinfo_txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="姓名："
+        android:gravity="left"
+        android:textSize="@dimen/font_normal"
+
+        android:textColor="@android:color/black"
+        android:layout_below="@id/includ_title"
+        android:layout_marginLeft="@dimen/distance_normal" />
+    <TextView
+        android:id="@+id/adapter_quotationinfo_txt_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="李海涛"
+        android:layout_marginTop="@dimen/distance_shortest"
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@id/adapter_quotationinfo_txt_name"
+        android:layout_alignBaseline="@+id/adapter_quotationinfo_txt_name"
+        android:layout_gravity="center_horizontal"/>
+</RelativeLayout>

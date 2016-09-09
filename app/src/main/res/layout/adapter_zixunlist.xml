@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+    <RelativeLayout
+        android:id="@+id/reltivelayout"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="@dimen/distance_normal">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/adapter_zixunlist_imag"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            fresco:placeholderImage="@drawable/defaultimg" />
+        <TextView
+            android:id="@+id/shopppingcart_adapter__text_qihuo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_smalltest"
+            android:text="@string/qihuo"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/adapter_zixunlist_txt_newsname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/reltivelayout"
+        android:layout_toRightOf="@+id/reltivelayout"
+        android:text="杉木fdsfdsfdsfsdffdsfdsfsfdsfsdfsdfsdfd"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_zixunlist_txt_newsfrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_short"
+        android:layout_toRightOf="@+id/reltivelayout"
+        android:text="耀邦木材"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_zixunlist_txt_newsdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_short"
+        android:text="2016-01_01"
+        android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
+        android:textSize="@dimen/font_normal" />
+
+</RelativeLayout>

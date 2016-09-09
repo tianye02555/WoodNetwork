@@ -19,7 +19,7 @@ public interface BaseView<T> {
      */
     void closeProgress();
     /**
-     *显示失败信息
+     *显示信息
      */
-    void showfailMessage(String string);
+    void showMessage(String string);
 }

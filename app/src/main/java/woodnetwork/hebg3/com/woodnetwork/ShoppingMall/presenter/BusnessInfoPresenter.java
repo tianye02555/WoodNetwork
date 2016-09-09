@@ -6,6 +6,7 @@ import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_busnessInfo;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.BusnessInfoContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.model.BusnessInfoModel;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
@@ -52,10 +53,32 @@ public class BusnessInfoPresenter implements BusnessInfoContrac.BusnessInfoPrese
             @Override
             public void onFailed(String string) {
                 busnessInfoView.closeProgress();
-                busnessInfoView.showfailMessage(string);
+                busnessInfoView.showMessage(string);
             }
         });
 
 
+    }
+
+    @Override
+    public void getSellerBussnessInfo() {
+        busnessInfoView.showProgress();
+        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils((Activity)busnessInfoView);
+        Request_getAttribute request_getAttribute=new Request_getAttribute();
+        request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
+
+        busnessInfoModel.getBusnessInfo(CommonUtils.getRequestInfo(new Object(), request_getAttribute), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                busnessInfoView.closeProgress();
+                busnessInfoView.showSellerBusnessData((ShopInfo) ((ResponseBody)object).obj);
+            }
+
+            @Override
+            public void onFailed(String string) {
+                busnessInfoView.closeProgress();
+                busnessInfoView.showMessage(string);
+            }
+        });
     }
 }

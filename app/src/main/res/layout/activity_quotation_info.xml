@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_quotation_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessInfoActivity">
+    <include android:id="@+id/includ_title"
+        layout="@layout/layout_title"></include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/includ_title">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <TextView
+        android:id="@+id/activity_quotation_info_txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商家名称："
+        android:textSize="@dimen/font_normal"
+        android:layout_marginTop="@dimen/distance_longest"
+        android:textColor="@android:color/black"
+
+        android:layout_marginLeft="@dimen/distance_normal" />
+
+    <TextView
+        android:id="@+id/activity_quotation_info_txt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="求购数量："
+        android:layout_marginTop="@dimen/distance_shortest"
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/activity_quotation_info_txt_name"
+        android:layout_alignLeft="@id/activity_quotation_info_txt_name"
+        android:layout_gravity="center_horizontal"/>
+    <woodnetwork.hebg3.com.woodnetwork.view.MyListView
+        android:id="@+id/activity_quotation_info_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_shortest"
+        android:listSelector="#00000000"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:layout_below="@+id/activity_quotation_info_txt_number">
+
+    </woodnetwork.hebg3.com.woodnetwork.view.MyListView>
+    <TextView
+        android:id="@+id/activity_quotation_info_txt_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="产品类型："
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/activity_quotation_info_listview"
+        android:layout_marginTop="0dp"
+        android:layout_alignLeft="@id/activity_quotation_info_txt_name"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/activity_quotation_info_txt_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="状       态："
+        android:textSize="@dimen/font_normal"
+        android:layout_marginTop="@dimen/distance_shortest"
+        android:textColor="@android:color/black"
+        android:layout_alignLeft="@id/activity_quotation_info_txt_name"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/activity_quotation_info_txt_type" />
+
+    <TextView
+        android:id="@+id/activity_quotation_info_txt_myprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的报价："
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/activity_quotation_info_txt_state"
+        android:layout_alignLeft="@id/activity_quotation_info_txt_name"
+        android:layout_marginTop="@dimen/distance_shortest"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/activity_quotation_info_txt_recevi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收货地址："
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/activity_quotation_info_txt_myprice"
+        android:layout_alignLeft="@id/activity_quotation_info_txt_name"
+        android:layout_marginTop="@dimen/distance_shortest"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_gravity="center_horizontal"/>
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

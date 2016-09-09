@@ -36,7 +36,7 @@ public class ShoopingCartPresenter implements ShoopingCartContract.ShoopingCartP
 
             @Override
             public void onFailed(String string) {
-                shoopingCartView.showfailMessage(string);
+                shoopingCartView.showMessage(string);
             }
         });
     }
@@ -51,7 +51,7 @@ public class ShoopingCartPresenter implements ShoopingCartContract.ShoopingCartP
 
             @Override
             public void onFailed(String string) {
-                shoopingCartView.showfailMessage(string);
+                shoopingCartView.showMessage(string);
             }
         });
     }
@@ -69,7 +69,7 @@ public class ShoopingCartPresenter implements ShoopingCartContract.ShoopingCartP
             @Override
             public void onFailed(String string) {
                 shoopingCartView.closeProgress();
-                shoopingCartView.showfailMessage(string);
+                shoopingCartView.showMessage(string);
             }
         });
     }

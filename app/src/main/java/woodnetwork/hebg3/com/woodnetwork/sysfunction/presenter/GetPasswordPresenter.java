@@ -45,7 +45,7 @@ public class GetPasswordPresenter implements GetPasswordContract.GetPasswordPres
             @Override
             public void onFailed(String string) {
                 mGetPasswordView.closeProgress();
-                mGetPasswordView.showfailMessage(string);
+                mGetPasswordView.showMessage(string);
             }
         });
     }
@@ -64,7 +64,7 @@ public class GetPasswordPresenter implements GetPasswordContract.GetPasswordPres
 
             @Override
             public void onFailed(String string) {
-                mGetPasswordView.showfailMessage(string);
+                mGetPasswordView.showMessage(string);
             }
         });
     }

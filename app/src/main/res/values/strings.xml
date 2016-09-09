@@ -2,8 +2,8 @@
     <string name="qingshaohou">请稍后……</string>
     <string name="app_name">WoodNetwork</string>
     <string name="login">登录</string>
-    <string name="zhanghu">账户</string>
-    <string name="mima">密码</string>
+    <string name="zhanghu">账户:</string>
+    <string name="mima">密码:</string>
     <string name="mulianwang">木联网</string>
     <string name="wangjimima">忘记密码</string>
     <!--忘记密码-->
@@ -14,6 +14,7 @@
     <string name="submit">提交</string>
     <!--商城首页-->
     <string name="shangcheng">商城</string>
+    <string name="shangjia">商家</string>
     <string name="qiugou">求购</string>
     <string name="zixun">资讯</string>
     <string name="wode">我的</string>
@@ -54,6 +55,41 @@
     <!-- 求购首页-->
     <string name="woyaobaojia">我要报价</string>
     <string name="tijiao">提交</string>
+    <!-- 我的页面-->
+    <string name="shezhi">设置</string>
+    <string name="wodexinxi">我的信息</string>
+    <string name="wodedindan">我的订单</string>
+    <string name="qiugouxinxi">求购信息</string>
+    <string name="wodeqiugouxinxi">我的求购信息</string>
+    <string name="qiugoudingdan">求购订单</string>
+    <string name="maijiazhongxin">卖家中心</string>
+    <string name="wodeshangpu">我的商铺</string>
+    <string name="wodeshangpin">我的商品</string>
+    <string name="dingdanliebiao">订单列表</string>
+    <string name="tongjichaxun">统计查询</string>
+    <string name="wodebaojia">我的报价</string>
+    <!-- 我的信息页面-->
+    <string name="gerenxinxi">个人信息</string>
+    <string name="zizhixinxi">资质信息</string>
+    <string name="zhengjianzhaopian">证件照片</string>
+    <string name="xiugaimima">修改密码</string>
+    <!-- 设置页面-->
+    <string name="zhuxiao">注销</string>
+    <string name="jianchagengxin">检查更新</string>
+    <string name="jinwifi">仅Wi-Fi网络下载图片</string>
+    <string name="dangqianweizuixinban">当前为最新版</string>
+    <string name="qingchuhuancun">清除缓存</string>
+    <string name="yijianfankui">意见反馈</string>
+    <string name="guanyuwomen">关于我们</string>
+    <!-- 意见反馈页面-->
+    <string name="mingcheng">名称  </string>
+    <string name="youxiang">邮箱  </string>
+    <string name="dianhua">电话  </string>
+    <string name="fenlei">分类  </string>
+    <string name="liuyanneirong">留言内容</string>
+    <string name="qingshurumingcheng">请输入名称</string>
+    <string name="qingshurulianxiyouxiang">请输入联系邮箱</string>
+    <string name="qingshurulianxidianhua">请输入联系电话</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

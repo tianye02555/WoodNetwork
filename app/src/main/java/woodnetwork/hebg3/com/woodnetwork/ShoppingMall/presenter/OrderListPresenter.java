@@ -36,7 +36,7 @@ public class OrderListPresenter implements OrderListContrac.OrderListPresenterIn
             @Override
             public void onFailed(String string) {
                 orderListView.closeProgress();
-                orderListView.showfailMessage(string);
+                orderListView.showMessage(string);
             }
         });
     }

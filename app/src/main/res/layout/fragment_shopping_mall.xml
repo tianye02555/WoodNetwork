@@ -5,105 +5,49 @@
     android:layout_height="match_parent"
     android:background="@color/dise"
     tools:context=".ShoppingMall.fragment.ShoppingMallFragment">
-<LinearLayout
-    android:id="@+id/fragment_shopping_mall_spinnerlayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/distance_normal">
-   <Spinner
-       android:id="@+id/fragment_shopping_mall_spinner_dengji"
-       android:layout_width="0dp"
-       android:layout_weight="1"
-       android:layout_height="wrap_content"></Spinner>
-    <Spinner
-        android:id="@+id/fragment_shopping_mall_spinner_changdi"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="@dimen/distance_normal"
-        android:layout_height="wrap_content"></Spinner>
-    <Spinner
-        android:id="@+id/fragment_shopping_mall_spinner_shuzhong"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="@dimen/distance_normal"
-        android:layout_height="wrap_content"></Spinner>
-</LinearLayout>
-
     <RelativeLayout
-        android:id="@+id/layout_shangjia"
+        android:id="@+id/rel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/distance_normal"
-        android:paddingRight="@dimen/distance_normal"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/white"
-        android:paddingTop="5dp"
-        android:layout_alignParentBottom="true">
-        <TextView
-            android:id="@+id/line1"
-            android:layout_width="2dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:layout_alignParentLeft="true"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tuijianshangjia"
-            android:layout_toRightOf="@+id/line1"
-            android:layout_marginLeft="5dp"
-            />
-        <TextView
-            android:id="@+id/fragment_shopping_mall_text_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gengduo"
-            android:layout_alignParentRight="true"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/distance_normal"
-            android:layout_below="@+id/line1">
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/fragment_shopping_mall_image_1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="100dp"
-                fresco:placeholderImage="@drawable/defaultimg"
-                />
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/fragment_shopping_mall_image_2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="100dp"
-                fresco:placeholderImage="@drawable/defaultimg"
-                />
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/fragment_shopping_mall_image_3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="100dp"
-                fresco:placeholderImage="@drawable/defaultimg"
-                />
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/fragment_shopping_mall_image_4"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="100dp"
-                fresco:placeholderImage="@drawable/defaultimg"
-                />
-        </LinearLayout>
+        android:layout_height="55dp"
 
+        android:background="@color/title">
+
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="木联网"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_bigest" />
+
+        <ImageView
+            android:id="@+id/image_title_gouwuche"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/image_title_shaixuan"
+            android:layout_marginRight="@dimen/distance_short"
+            android:scaleType="fitXY"
+            android:src="@drawable/shooppingcart" />
+        <ImageView
+            android:id="@+id/image_title_shaixuan"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/distance_short"
+            android:scaleType="fitXY"
+            android:src="@drawable/shaixuan" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_shopping_mall_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fragment_shopping_mall_spinnerlayout"
+        android:layout_below="@id/rel"
         android:background="@android:color/white"
-        android:layout_above="@+id/layout_shangjia"
         ></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

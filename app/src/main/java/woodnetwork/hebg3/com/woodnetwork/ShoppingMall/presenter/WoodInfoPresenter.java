@@ -11,6 +11,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.WoodInfoContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.model.WoodInfoModel;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.ProductSellerInfo;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
 
 /**
@@ -33,16 +34,6 @@ public class WoodInfoPresenter implements WoodInfoContrac.WoodInfoPresenterInter
     }
 
     @Override
-    public void buy() {
-
-    }
-
-    @Override
-    public void toShoppingCart() {
-
-    }
-
-    @Override
     public void getWoodInfo(String pid) {
         woodInfoView.showProgress();
         SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils((Activity)woodInfoView);
@@ -61,10 +52,34 @@ public class WoodInfoPresenter implements WoodInfoContrac.WoodInfoPresenterInter
             @Override
             public void onFailed(String string) {
                 woodInfoView.closeProgress();
-                woodInfoView.showfailMessage(string);
+                woodInfoView.showMessage(string);
             }
         });
 
+    }
+
+    @Override
+    public void getWoodInfoOther(String pid) {
+        woodInfoView.showProgress();
+        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils((Activity)woodInfoView);
+        Request_getAttribute request_getAttribute=new Request_getAttribute();
+        request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
+
+        Request_woodInfo request_woodInfo=new Request_woodInfo();
+        request_woodInfo.pid=pid;
+        woodInfoModel.getWoodDataOther(CommonUtils.getRequestInfo(request_woodInfo,request_getAttribute), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                woodInfoView.closeProgress();
+                woodInfoView.showWoodData((ProductSellerInfo)((ResponseBody)object).obj);
+            }
+
+            @Override
+            public void onFailed(String string) {
+                woodInfoView.closeProgress();
+                woodInfoView.showMessage(string);
+            }
+        });
     }
 
     @Override

@@ -1,10 +1,14 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +26,10 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.BusnessListPrese
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 
-public class BusnessListActivity extends AppCompatActivity implements BusnessListContrac.BusnessListViewInterface{
+/**
+ * 商家列表页
+ */
+public class BusnessListActivity extends Fragment implements BusnessListContrac.BusnessListViewInterface{
 
     @Bind(R.id.text_title)
     TextView textTitle;
@@ -32,27 +39,23 @@ public class BusnessListActivity extends AppCompatActivity implements BusnessLis
     RecyclerView recyclerview;
     private BusnessListContrac.BusnessListPresenterInterface presenter;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_busness_list);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_busness_list, container, false);
+        ButterKnife.bind(this,view);
         imageTitleRight.setVisibility(View.GONE);
         textTitle.setText("商家信息");
         new BusnessListPresenter(this);
         presenter.start();
-    }
-
-    @OnClick(R.id.imge_title_left)
-    public void onClick() {
-        finish();
+        return view;
     }
 
     @Override
     public void showBusnessListData(List<BusnessInfo> list) {
-        recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        BusnessListAdapter adapter=new BusnessListAdapter(this,list);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL,5));
+        BusnessListAdapter adapter=new BusnessListAdapter(getActivity(),list);
         recyclerview.setAdapter(adapter);
 
     }
@@ -67,7 +70,7 @@ public class BusnessListActivity extends AppCompatActivity implements BusnessLis
 
     @Override
     public void showProgress( ) {
-        ProgressUtils.show(this, "请稍后……");
+        ProgressUtils.show(getActivity(), "请稍后……");
     }
 
     @Override
@@ -76,7 +79,7 @@ public class BusnessListActivity extends AppCompatActivity implements BusnessLis
     }
 
     @Override
-    public void showfailMessage(String string) {
-        CommonUtils.showToast(this,string);
+    public void showMessage(String string) {
+        CommonUtils.showToast(getActivity(),string);
     }
 }

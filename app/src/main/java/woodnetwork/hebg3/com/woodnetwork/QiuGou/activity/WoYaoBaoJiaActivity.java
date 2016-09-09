@@ -21,6 +21,7 @@ import woodnetwork.hebg3.com.woodnetwork.QiuGou.presenter.WoYaoBaoJiaPresenter;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_demandInfo;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_quotation_add;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcarList;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
@@ -97,6 +98,23 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
 //                startActivityForResult();
                 break;
             case R.id.activity_woyaobaojia_btn_tijiao:
+                SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
+                Request_getAttribute request_getAttribute = new Request_getAttribute();
+                request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
+
+
+               Request_quotation_add request_quotation_add = new Request_quotation_add();
+                request_quotation_add.delivery_address ="新中路228号";
+                request_quotation_add.delivery_area="1234";
+                request_quotation_add.demand_id="1234";
+                request_quotation_add.price=250.00;
+                request_quotation_add.remarks="无";
+
+                MyRequestInfo myRequestInfo = new MyRequestInfo();
+                myRequestInfo.req = request_quotation_add;
+                myRequestInfo.req_meta = request_getAttribute;
+
+                presenter.saveWoDeBaoJia(myRequestInfo);
                 break;
             case R.id.activity_woyaobaojia_image_dianhua://拨打电话
                 Intent intent = new Intent();
@@ -138,7 +156,7 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 }

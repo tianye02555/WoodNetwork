@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_advice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.AdviceActivity">
+
+    <include
+        android:id="@+id/includ_title"
+        layout="@layout/layout_title"></include>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_below="@+id/includ_title"
+        android:background="@color/dise"></View>
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_marginLeft="@dimen/distance_longest"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="@string/mingcheng"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <EditText
+        android:id="@+id/activity_advice_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/qingshurumingcheng"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal"
+        android:layout_alignBaseline="@+id/text_name"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/text_name" />
+
+    <View
+        android:id="@+id/view_name"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/text_name"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+    <TextView
+        android:id="@+id/text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_name"
+
+        android:layout_marginLeft="@dimen/distance_longest"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="@string/youxiang"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <EditText
+        android:id="@+id/activity_advice_edit_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/qingshurulianxiyouxiang"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal"
+        android:layout_alignBaseline="@+id/text_email"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/text_name" />
+
+    <View
+        android:id="@+id/view_email"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/text_email"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+
+    <TextView
+        android:id="@+id/text_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_email"
+
+        android:layout_marginLeft="@dimen/distance_longest"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="@string/dianhua"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <EditText
+        android:id="@+id/activity_advice_edit_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/qingshurulianxiyouxiang"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal"
+        android:layout_alignBaseline="@+id/text_phone"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/text_name" />
+
+    <View
+        android:id="@+id/view_phone"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/text_phone"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+
+    <TextView
+        android:id="@+id/text_fenlei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_phone"
+
+        android:layout_marginLeft="@dimen/distance_longest"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="@string/fenlei"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <View
+        android:id="@+id/view_fenlei"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/text_fenlei"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+
+    <Spinner
+        android:id="@+id/activity_advice_spinner_fenlei"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:layout_alignTop="@+id/text_fenlei"
+        android:layout_toRightOf="@+id/text_fenlei"
+ />
+
+    <View
+        android:id="@+id/view_liuyanneirong"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_below="@+id/view_fenlei"
+        android:background="@color/dise"></View>
+    <TextView
+        android:id="@+id/text_liuyanneirong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liuyanneirong"
+        android:layout_marginLeft="@dimen/distance_longest"
+        android:layout_below="@+id/view_liuyanneirong"
+        android:layout_marginTop="@dimen/distance_longest"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal"/>
+
+    <EditText
+        android:id="@+id/activity_advice_edit_liuyanneirong"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:layout_below="@+id/text_liuyanneirong"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal"
+        android:gravity="top"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/text_name" />
+
+    <Button
+        android:id="@+id/activity_advice_btn_tijiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tijiao"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:layout_marginLeft="@dimen/distance_longest"
+        android:layout_marginTop="@dimen/distance_longest"
+        android:layout_below="@+id/activity_advice_edit_liuyanneirong"/>
+</RelativeLayout>

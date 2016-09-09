@@ -36,10 +36,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
+
+import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.SettingActivity;
 
 /** 工具类 */
 @SuppressLint({ "SimpleDateFormat", "DefaultLocale" }) public class CommonUtils {
@@ -533,6 +536,34 @@ public static void log(String msg) {
 		requestInfo.req=object;
 		requestInfo.req_meta=object2;
 		return requestInfo;
+	}
+	public static boolean isOnlyWIFIDownLoadPic(Context context){
+
+		SharePreferencesUtils sharePreferences=  SharePreferencesUtils.getSharePreferencesUtils(context);
+		return  (Boolean)sharePreferences.getData("isdown",false);
+	}
+	/**
+	 * 加载图片  分是否要求wifi网络
+	 * @param uri 图片地址
+	 * @param view 控件
+	 * @param context 上下文
+	 * @param isWIFI 是否要求wifi
+	 */
+	public static void displayImage(String uri, SimpleDraweeView view, Context context, boolean isWIFI) {
+		if (null != uri && !"".equals(uri) && null != view && !"".equals(view)) {
+			if(isWIFI){//要求在wifi下加载
+				if(CommonUtils.isWiFiActive(context)){//判断是否是wifi
+					view.setImageURI(Uri.parse(uri));
+					return;
+				}else{
+					showToast(context,"无WIFI网络！");
+					return;
+				}
+			}else{//在任何网络下
+				view.setImageURI(Uri.parse(uri));
+			}
+
+		}
 	}
     
 }

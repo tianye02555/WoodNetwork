@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/adapter_demandbuyerlist_text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商品名称："
+        android:textSize="@dimen/font_small"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/distance_normal"
+
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/adapter_demandbuyerlist_text_shouhuoditou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收货地址："
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/adapter_demandbuyerlist_text_name"
+        android:layout_marginTop="@dimen/distance_normal" />
+    <TextView
+        android:id="@+id/adapter_demandbuyerlist_text_shouhuodi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="石家庄"
+        android:textSize="@dimen/font_small"
+        android:layout_marginLeft="@dimen/distance_shortest"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@+id/adapter_demandbuyerlist_text_shouhuoditou"
+        android:layout_alignBaseline="@+id/adapter_demandbuyerlist_text_shouhuoditou"
+        android:layout_marginTop="@dimen/distance_normal" />
+
+    <TextView
+        android:id="@+id/adapter_demandbuyerlist_text_shuliang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="购买数量："
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/adapter_demandbuyerlist_text_shouhuoditou"
+        android:layout_marginTop="@dimen/distance_normal" />
+
+    <TextView
+        android:id="@+id/adapter_demandbuyerlist_text_fabu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="未发布"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="@dimen/distance_longest"
+        android:layout_alignBaseline="@+id/adapter_demandbuyerlist_text_name"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp" />
+    <TextView
+        android:id="@+id/adapter_demandbuyerlist_text_baojiarenshu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="报价人数：0"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_alignBaseline="@+id/adapter_demandbuyerlist_text_shuliang"
+        android:layout_marginTop="@dimen/distance_normal" />
+
+
+</RelativeLayout>

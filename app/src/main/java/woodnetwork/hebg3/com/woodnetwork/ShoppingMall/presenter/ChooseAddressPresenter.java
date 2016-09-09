@@ -40,7 +40,7 @@ public class ChooseAddressPresenter implements ChooseAddressContract.ChooseAddre
             @Override
             public void onFailed(String string) {
                 chooseAddressView.closeProgress();
-                chooseAddressView.showfailMessage(string);
+                chooseAddressView.showMessage(string);
             }
         });
     }

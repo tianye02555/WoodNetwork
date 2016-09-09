@@ -7,8 +7,24 @@ import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
  */
 
 public interface WoodInfoModelInterface {
+    /**
+     * 获取商品详情接口
+     * @param object
+     * @param onServiceBaceInterface
+     */
     void getWoodData(Object object, OnServiceBaceInterface onServiceBaceInterface);
+
+    /**
+     * 添加到购物车接口
+     * @param object
+     * @param onServiceBaceInterface
+     */
     void addToShoppingCart(Object object, OnServiceBaceInterface onServiceBaceInterface);
-    void buy(Object object, OnServiceBaceInterface onServiceBaceInterface);
-    void toShoppingCart(Object object, OnServiceBaceInterface onServiceBaceInterface);
+    /**
+     * 获取商品详情接口(我的商品详情页)
+     * @param object
+     * @param onServiceBaceInterface
+     */
+    void getWoodDataOther(Object object, OnServiceBaceInterface onServiceBaceInterface);
+
 }

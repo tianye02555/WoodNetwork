@@ -70,6 +70,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_address);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         textTitle.setText("地址选择");
         imageTitleRight.setVisibility(View.GONE);
@@ -196,7 +197,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 

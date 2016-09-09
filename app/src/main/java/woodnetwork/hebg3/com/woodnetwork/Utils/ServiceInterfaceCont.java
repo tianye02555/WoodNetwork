@@ -51,9 +51,61 @@ public class ServiceInterfaceCont {
     //获取求购列表接口
     public static final String DEMANDLIST="/demand/list?param=";
 
+    //3.4添加购物车接口
+    public static final String SHOPCARADD="/shopcar/add";
+
     //11.1获取求购详情接口
     public static final String DEMANDINFO="/demand/info?param=";
 
     //11.2保存报价接口
     public static final String QUOTATIONADD="/quotation/add";
+
+    //12.1获取轮播图接口
+    public static final String BANNERLIST="/banner/list?param=";
+
+    //12.2获取新闻分类列表接口
+    public static final String CATEGORYLIST="/category/list?param=";
+
+    //13.1获取新闻列表接口
+    public static final String ARTICLELIST="/article/list?param=";
+
+    //14.1获取新闻详情接口
+    public static final String ARTICLEWEBINFO="/article/web/info?param=";
+
+    //15.1获取个人信息接口
+    public static final String USERINFO="/user/info?param=";
+
+    //21.1获取我的求购信息列表接口
+    public static final String DEMANDBUYERLIST="/demand/buyer/list?param=";
+
+    //22.1获取我的求购详情接口
+    public static final String DEMANDBUYERINFO="/demand/buyer/info?param=";
+
+    //24.1获取我的店铺详情接口
+    public static final String SHOPINFO="/shop/info?param=";
+
+    //25.1获取我的商品列表接口
+    public static final String PRODUCTSELLERLIST="/product/seller/list?param=";
+
+    //25.2获取我的商品详情接口
+    public static final String PRODUCTSELLERINFO="/product/seller/info?param=";
+
+    //28.1获取统计详情接口
+    public static final String REPORTSINFO="/reports/info?param=";
+
+    //29.1获取报价列表接口
+    public static final String QUOTATIONLIST="/quotation/list?param=";
+
+    //30.1获取报价详情接口
+    public static final String QUOTATIONINFO="/quotation/info?param=";
+
+    //31.1获取意见反馈分类接口
+    public static final String GUESTBOOKTYPELIST="/guestbook/type/list?param=";
+
+    //31.2保存意见反馈接口
+    public static final String GUESTBOOKADD="/guestbook/add";
+
+    //32.1获取版本接口
+    public static final String VERSIONINFO="/version/info?param=";
+
 }

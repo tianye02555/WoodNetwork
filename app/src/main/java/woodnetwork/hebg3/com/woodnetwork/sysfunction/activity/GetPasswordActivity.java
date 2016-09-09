@@ -49,6 +49,7 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_password);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         imageTitleRight.setVisibility(View.GONE);
         textTitle.setText("找回密码");
@@ -133,7 +134,7 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 

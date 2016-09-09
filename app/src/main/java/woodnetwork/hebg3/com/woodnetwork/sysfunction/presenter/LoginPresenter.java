@@ -65,12 +65,18 @@ public class LoginPresenter implements LoginContract.Presenter {
             @Override
             public void onFailed(String string) {
                 mLoginView.closeProgress();
-                mLoginView.showfailMessage(string);
+                mLoginView.showMessage(string);
             }
         });
     }
     public void putUserInfo2Shareprefermence(User user) {
         SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils((Activity)mLoginView);
         sharePreferencesUtils.saveData("userid",user.id);
+        sharePreferencesUtils.saveData("login_name",user.login_name);
+        sharePreferencesUtils.saveData("company_flag",user.company_flag);
+        sharePreferencesUtils.saveData("seller_flag",user.seller_flag);
+        sharePreferencesUtils.saveData("status",user.status);
+        sharePreferencesUtils.saveData("user_name",user.user_name);
+        sharePreferencesUtils.saveData("password",user.password);
     }
 }

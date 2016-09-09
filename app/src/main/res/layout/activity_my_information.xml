@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_my_information"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.MyInformationActivity">
+
+    <include layout="@layout/layout_title">
+
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dise"
+                android:padding="@dimen/distance_normal"
+                android:text="@string/gerenxinxi"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/activity_my_information_text_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/back_left"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="用  户  名 "
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:id="@+id/activity_my_information_text_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/back_left"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="手机号码"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:id="@+id/activity_my_information_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/back_left"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="联系邮箱"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:background="@color/dise"
+                android:padding="@dimen/distance_normal"
+                android:text="@string/zizhixinxi"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/activity_my_information_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/back_left"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="企业名称"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:id="@+id/activity_my_information_text_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_short"
+                android:drawableRight="@drawable/back_left"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/distance_longest"
+                android:paddingRight="@dimen/distance_longest"
+                android:text="企业地址"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginLeft="@dimen/distance_normal"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:background="@color/dise"
+                android:padding="@dimen/distance_normal"
+                android:text="@string/zhengjianzhaopian"
+                android:textColor="@android:color/black" />
+            <woodnetwork.hebg3.com.woodnetwork.view.MyGridView
+                android:id="@+id/activity_my_information_mygridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="3"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center"
+                ></woodnetwork.hebg3.com.woodnetwork.view.MyGridView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/distance_short"
+                android:background="@color/dise"></View>
+
+            <Button
+                android:id="@+id/activity_my_information_btn_xiugaimima"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginRight="@dimen/distance_longest"
+                android:layout_marginTop="@dimen/distance_longest"
+                android:text="@string/xiugaimima" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -35,14 +35,27 @@ public class WoYaoBaoJiaPresenter implements WoYaoBaoJiaContract.WoYaoBaoJiaPres
             @Override
             public void onFailed(String string) {
                 woYaoBaoJiaView.closeProgress();
-                woYaoBaoJiaView.showfailMessage(string);
+                woYaoBaoJiaView.showMessage(string);
             }
         });
     }
 
     @Override
     public void saveWoDeBaoJia(MyRequestInfo myRequestInfo) {
+        woYaoBaoJiaView.showProgress();
+        woYaoBaoJiaModel.saveWoDeBaoJia(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                woYaoBaoJiaView.closeProgress();
 
+            }
+
+            @Override
+            public void onFailed(String string) {
+                woYaoBaoJiaView.closeProgress();
+                woYaoBaoJiaView.showMessage(string);
+            }
+        });
     }
 
     @Override

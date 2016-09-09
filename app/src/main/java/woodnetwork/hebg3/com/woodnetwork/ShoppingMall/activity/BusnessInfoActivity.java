@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.BusnessInfoContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.BusnessInfoPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
@@ -44,12 +45,19 @@ public class BusnessInfoActivity extends AppCompatActivity implements BusnessInf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busness_info);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         imageTitleRight.setVisibility(View.GONE);
         textTitle.setText("商家信息");
         sid = getIntent().getStringExtra("sid");
         new BusnessInfoPresenter(this);
-        presenter.getBussnessInfo(sid);
+        if("BusnessInfoListActivity".equals(getIntent().getStringExtra("from"))){
+            sid = getIntent().getStringExtra("sid");
+            presenter.getBussnessInfo(sid);
+        }else if("MyFragment".equals(getIntent().getStringExtra("from"))){
+            presenter.getSellerBussnessInfo();
+        }
+
     }
 
     @Override
@@ -64,6 +72,15 @@ public class BusnessInfoActivity extends AppCompatActivity implements BusnessInf
         text_email.setText("联系邮箱："+busnessInfo.mail);
         text_phone.setText("手机号码："+busnessInfo.phone);
         text_description.setText("商家简介："+busnessInfo.description);
+    }
+
+    @Override
+    public void showSellerBusnessData(ShopInfo shopInfo) {
+        image_head.setImageURI(Uri.parse(shopInfo.img));
+        text_name.setText("商家名称："+shopInfo.name);
+        text_email.setText("联系邮箱："+shopInfo.mail);
+        text_phone.setText("手机号码："+shopInfo.phone);
+        text_description.setText("商家简介："+shopInfo.content);
     }
 
     @Override
@@ -85,7 +102,7 @@ public class BusnessInfoActivity extends AppCompatActivity implements BusnessInf
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this,string);
     }
 

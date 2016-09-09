@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/distance_normal"
+    android:id="@+id/adapter_myquotation_layout"
+    >
+
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_faburen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发布人："
+        android:textSize="@dimen/font_small"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/adapter_myquotation_layout_text_jiage"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_pingming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="品   名："
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/adapter_myquotation_layout_text_jiage"
+        android:layout_below="@+id/adapter_myquotation_layout_text_faburen"
+        android:layout_marginTop="@dimen/distance_normal" />
+
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_shuliang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数   量："
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/adapter_myquotation_layout_text_jiage"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/adapter_myquotation_layout_text_pingming"
+        android:layout_marginTop="@dimen/distance_normal" />
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_shouhuodi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收货地："
+        android:textSize="@dimen/font_small"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/adapter_myquotation_layout_text_jiage"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/adapter_myquotation_layout_text_shuliang"
+        android:layout_marginTop="@dimen/distance_normal" />
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_fahuodi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发货地："
+        android:textSize="@dimen/font_small"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/adapter_myquotation_layout_text_jiage"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/adapter_myquotation_layout_text_shouhuodi"
+        android:layout_marginTop="@dimen/distance_normal" />
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_baojia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="报价中"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="@dimen/distance_short"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp" />
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_yuanmeilifang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="元/方"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_myquotation_layout_text_baojia"
+        android:layout_marginTop="@dimen/distance_normal" />
+    <TextView
+        android:id="@+id/adapter_myquotation_layout_text_jiage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:layout_marginRight="@dimen/distance_short"
+        android:layout_toLeftOf="@+id/adapter_myquotation_layout_text_yuanmeilifang"
+        android:textSize="@dimen/font_small"
+        android:textColor="@android:color/black"
+        android:layout_alignBaseline="@+id/adapter_myquotation_layout_text_yuanmeilifang"
+        android:layout_marginTop="5dp" />
+
+</RelativeLayout>

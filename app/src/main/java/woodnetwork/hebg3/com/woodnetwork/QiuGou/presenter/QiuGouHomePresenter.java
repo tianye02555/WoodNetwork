@@ -35,7 +35,7 @@ public class QiuGouHomePresenter implements QiuGouHomeContract.QiuGouHomePresent
             @Override
             public void onFailed(String string) {
                 qiuGouHomeView.closeProgress();
-                qiuGouHomeView.showfailMessage(string);
+                qiuGouHomeView.showMessage(string);
             }
         });
     }

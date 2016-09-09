@@ -3,5 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="dise">#f1f1f1</color>
+    <color name="dise">#ededed</color>
+    <color name="title">#06ad02</color>
+    <color name="huiseziti">#999999</color>
 </resources>

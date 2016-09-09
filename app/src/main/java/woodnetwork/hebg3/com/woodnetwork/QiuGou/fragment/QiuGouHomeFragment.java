@@ -65,7 +65,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
     public void showQiuGouInfo(DemandList demandList) {
         QiuGouHomeAdapter qiuGouHomeAdapter=new QiuGouHomeAdapter(getActivity(),demandList.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL,5));
         recyclerView.setAdapter(qiuGouHomeAdapter);
     }
 
@@ -87,7 +87,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(getActivity(),string);
     }
 }

@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/reltivelayout"
         android:text="杉木"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
 
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_company"
@@ -45,7 +45,7 @@
         android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_stock"
         android:text="万达实业有限公司"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
 
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_productarea"
@@ -56,7 +56,7 @@
         android:layout_toRightOf="@+id/reltivelayout"
         android:text="发货地：新西兰"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_danjia"
         android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
         android:text="@string/danjia"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_price"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_price"
         android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
         android:text="50000000"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_yuanmeifang"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_yuanmeifang"
         android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
         android:layout_marginRight="@dimen/distance_short"
         android:layout_alignParentRight="true"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
 
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_stock"
@@ -96,7 +96,7 @@
         android:textColor="@android:color/black"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_edit_stock"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
     <EditText
         android:id="@+id/shopppingcart_adapter_edit_stock"
         android:layout_width="50dp"
@@ -114,12 +114,12 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
     <View
         android:id="@+id/lin"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/background_dark"
+        android:layout_height="2dp"
+        android:background="@color/dise"
         android:layout_marginTop="@dimen/distance_long"
         android:layout_below="@+id/shopppingcart_adapter_txt_productarea"></View>
     <Button
@@ -128,6 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lin"
         android:layout_marginLeft="@dimen/distance_long"
+        android:background="@drawable/shape"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_longest"
         android:layout_marginTop="@dimen/distance_short"
@@ -138,6 +139,7 @@
         android:id="@+id/shopppingcart_adapter_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/font_small"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
         android:text="@string/xuanzhong"
         android:layout_below="@+id/lin"/>
@@ -161,7 +163,7 @@
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
         android:layout_toRightOf="@+id/shopppingcart_adapter_txt_xiaoji"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_small" />
+        android:textSize="@dimen/font_normal" />
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_yuan"
         android:layout_width="wrap_content"

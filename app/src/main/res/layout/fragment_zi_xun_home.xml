@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.ZiXun.fragment.ZiXunHomeFragment">
+
+    <include
+        android:id="@+id/includ_title"
+        layout="@layout/layout_title"></include>
+    <!-- 轮播图 -->
+    <RelativeLayout
+        android:id="@+id/home_rl_tp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/includ_title"
+        android:gravity="center">
+
+        <woodnetwork.hebg3.com.woodnetwork.view.MyGallery
+            android:id="@+id/home_customgallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/home_ll_dot_container"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"></LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_zi_xun_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/distance_normal"
+        android:layout_below="@+id/home_rl_tp"></android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

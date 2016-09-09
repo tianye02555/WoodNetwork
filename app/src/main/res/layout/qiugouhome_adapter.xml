@@ -67,6 +67,7 @@
         android:layout_marginLeft="@dimen/distance_long"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_longest"
+        android:background="@drawable/shape"
         android:layout_marginTop="@dimen/distance_short"
         android:text="@string/woyaobaojia"
         />

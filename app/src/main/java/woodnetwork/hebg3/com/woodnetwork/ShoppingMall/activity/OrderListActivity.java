@@ -64,6 +64,7 @@ public class OrderListActivity extends AppCompatActivity implements OrderListCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         new OrderListPresenter(this);
         showOrderData((OrderAdd) getIntent().getSerializableExtra("orderadd"));
@@ -140,7 +141,7 @@ public class OrderListActivity extends AppCompatActivity implements OrderListCon
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 }

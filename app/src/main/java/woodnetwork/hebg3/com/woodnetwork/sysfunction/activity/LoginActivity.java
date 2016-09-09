@@ -1,9 +1,12 @@
 package woodnetwork.hebg3.com.woodnetwork.sysfunction.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         imageTitleRight.setVisibility(View.GONE);
         imgeTitleLeft.setVisibility(View.GONE);
@@ -101,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 
@@ -119,6 +123,40 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 jumpActivity(GetPasswordActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            showTips();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private void showTips() {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle("提醒")
+                .setMessage("是否退出程序")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        CommonUtils.removeActivity();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+
+                }).setNegativeButton("取消",
+
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        }).create(); // 创建对话框
+        alertDialog.show(); // 显示对话框
     }
 
 }

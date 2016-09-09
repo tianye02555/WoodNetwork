@@ -15,13 +15,20 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.WoodInfoAdapter;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.WoodInfoOtherAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.WoodInfoContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.WoodInfoPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.ProductSellerInfo;
 import woodnetwork.hebg3.com.woodnetwork.view.MyGallery;
+import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
+/**
+ * 商品详情页
+ */
 public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContrac.WoodInfoViewInterFace {
 
 
@@ -53,47 +60,98 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
     TextView shangpingguige;
     @Bind(R.id.activity_wood_info_txt)
     TextView activityWoodInfoTxt;
-    @Bind(R.id.activity_wood_info_txt_dengji)
-    TextView dengJi;
-    @Bind(R.id.activity_wood_info_txt_gongyinshang)
-    TextView seller;
-    @Bind(R.id.activity_wood_info_txt_jingjiduan)
-    TextView jinJiDuan;
-    @Bind(R.id.activity_wood_info_txt_shuzhong)
-    TextView shuZhong;
     @Bind(R.id.activity_wood_info_btn_lijigoumai)
     Button buy;
     @Bind(R.id.activity_wood_info_btn_jiarugouwuche)
     Button addToShoppingCart;
+    @Bind(R.id.activity_wood_info_listview)
+    MyListView listview;
+    @Bind(R.id.line)
+    View line;
+    @Bind(R.id.activity_wood_info)
+    RelativeLayout activityWoodInfo;
     private WoodInfoContrac.WoodInfoPresenterInterface presenter;
     private String pid;
+    private WoodInfoAdapter adapter;
+    private WoodInfoOtherAdapter adapterOther;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wood_info);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
 
         if (null != getIntent()) {
             pid = getIntent().getStringExtra("pid");
+            if (!getIntent().getBooleanExtra("isShowButton", true)) {
+                buy.setVisibility(View.GONE);
+                addToShoppingCart.setVisibility(View.GONE);
+                line.setVisibility(View.GONE);
+                imageTitleRight.setVisibility(View.GONE);
+            }
         }
 
         new WoodInfoPresenter(this);
-        presenter.getWoodInfo(pid);
+        if (null != getIntent()) {
+            if (!getIntent().getBooleanExtra("isShowButton", true)) {
+                presenter.getWoodInfoOther(pid);
+            }else{
+                presenter.getWoodInfo(pid);
+            }
+        }
+
 
 
     }
 
     @Override
-    public void showWoodData(ProductInfo productInfo) {
-        // 设置轮播图的 宽高比 为2:1 宽为屏幕宽度
-        WindowManager manager = getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        RelativeLayout.LayoutParams lay = new RelativeLayout.LayoutParams(
-                outMetrics.widthPixels, outMetrics.widthPixels / 2);
-        lay.addRule(RelativeLayout.BELOW,R.id.includ_title);
-        homeRlTp.setLayoutParams(lay);
+    public void showWoodData(Object object) {
+        if (null != getIntent()) {
+            if (!getIntent().getBooleanExtra("isShowButton", true)) {
+                ProductSellerInfo productSellerInfo=(ProductSellerInfo)object;
+                textTitle.setText(productSellerInfo.pname);
+                name.setText("名        称：" + productSellerInfo.pname);
+                price.setText("价        格：" + productSellerInfo.price + "元/方");
+                stock.setText("库  存  量：" + productSellerInfo.stock + "方");
+                address.setText("出  库  地：" + productSellerInfo.delivery);
+                if (1==productSellerInfo.type) {
+                    kind.setText("产品类型： 现货");
+                }else{
+                    kind.setText("产品类型： 期货");
+                }
+                state.setText("卖        家：" + productSellerInfo.seller);
+
+                adapterOther = new WoodInfoOtherAdapter(this, productSellerInfo.attribute);
+                listview.setAdapter(adapterOther);
+            }else {
+                ProductInfo productInfo=(ProductInfo)object;
+                textTitle.setText(productInfo.pname);
+                name.setText("名        称：" + productInfo.pname);
+                price.setText("价        格：" + productInfo.price + "元/方");
+                stock.setText("库  存  量：" + productInfo.stock + "方");
+                address.setText("出  库  地：" + productInfo.delivery);
+                if (1==productInfo.type) {
+                    kind.setText("产品类型： 现货");
+                }else{
+                    kind.setText("产品类型： 期货");
+                }
+                state.setText("卖        家：" + productInfo.seller);
+
+                adapter = new WoodInfoAdapter(this, productInfo.attribute);
+                listview.setAdapter(adapter);
+            }
+        }
+
+
+//        // 设置轮播图的 宽高比 为2:1 宽为屏幕宽度
+//        WindowManager manager = getWindowManager();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        manager.getDefaultDisplay().getMetrics(outMetrics);
+//        RelativeLayout.LayoutParams lay = new RelativeLayout.LayoutParams(
+//                outMetrics.widthPixels, 1000);
+//        lay.addRule(RelativeLayout.BELOW, R.id.includ_title);
+//        homeRlTp.setLayoutParams(lay);
         String[] pictures = new String[3];
         pictures[0] = "http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg";
         pictures[1] = "http://img0.imgtn.bdimg.com/it/u=638420455,3521255219&fm=206&gp=0.jpg";
@@ -101,20 +159,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
         gallery.start(this, pictures, 3000,
                 DotContainer, R.drawable.dot_onn,
                 R.drawable.dot_offf);
-        textTitle.setText(productInfo.pname);
-        name.setText("名        称："+productInfo.pname);
-        price.setText("价        格："+productInfo.price+"元/方");
-                stock.setText("库  存  量："+productInfo.stock+"方");
-        address.setText("出  库  地："+productInfo.address);
-        if("1".equals(productInfo.type)){
-            kind.setText("产品类型： 现货");
-        }
-        kind.setText(productInfo.stock);
-//        state.setText(productInfo.stock);
-        dengJi.setText("等级："+productInfo.attribute.get(0).value);
-        seller.setText("供应商："+productInfo.attribute.get(1).value);
-//        jinJiDuan.setText("径级段："+productInfo.stock);
-//        shuZhong.setText("树种："+productInfo.stock);
+
 
     }
 
@@ -136,16 +181,19 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 
-    @OnClick({R.id.activity_wood_info_btn_lijigoumai, R.id.activity_wood_info_btn_jiarugouwuche})
+    @OnClick({R.id.activity_wood_info_btn_lijigoumai, R.id.activity_wood_info_btn_jiarugouwuche,R.id.imge_title_left})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_wood_info_btn_lijigoumai:
                 break;
             case R.id.activity_wood_info_btn_jiarugouwuche:
+                break;
+            case R.id.imge_title_left:
+                finish();
                 break;
         }
     }

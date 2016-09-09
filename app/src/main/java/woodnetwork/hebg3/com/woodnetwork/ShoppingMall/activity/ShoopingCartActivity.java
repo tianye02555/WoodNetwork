@@ -64,6 +64,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shooping_cart);
+        CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         textTitle.setText("购物车");
         imageTitleRight.setVisibility(View.GONE);
@@ -124,7 +125,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         this.shopcarList = shopcarList;
         adapter = new ShoopingCartAdapter(this, shopcarList.list);
         shoppingCartRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        shoppingCartRecyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        shoppingCartRecyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL,5));
         shoppingCartRecyclerview.setAdapter(adapter);
 
     }
@@ -174,7 +175,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     }
 
     @Override
-    public void showfailMessage(String string) {
+    public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
 }

@@ -79,6 +79,7 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
                 public void onClick(View view) {
                     Intent intent=new Intent(context,BusnessInfoActivity.class);
                     intent.putExtra("sid",list.get(getAdapterPosition()).id);
+                    intent.putExtra("from","BusnessInfoListActivity");
                     context.startActivity(intent);
                 }
             });

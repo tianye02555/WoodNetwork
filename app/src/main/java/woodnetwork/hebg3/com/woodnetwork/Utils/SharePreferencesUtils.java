@@ -91,4 +91,8 @@ public class SharePreferencesUtils {
 
         return null;
     }
+    public  void clearData(){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+    }
 }

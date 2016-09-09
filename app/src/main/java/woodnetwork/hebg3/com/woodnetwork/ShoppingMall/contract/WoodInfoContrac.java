@@ -10,13 +10,30 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductInfo;
 
 public interface WoodInfoContrac {
     interface WoodInfoViewInterFace extends BaseView<WoodInfoPresenterInterface>{
-        void showWoodData(ProductInfo productInfo);
+        /**
+         * 显示商品信息
+         * @param
+         */
+        void showWoodData(Object object);
+
 
     }
     interface WoodInfoPresenterInterface extends BasePresenter{
+        /**
+         * 添加到购物车
+         */
         void addToShoppingCart();
-        void buy();
-        void toShoppingCart();
+
+        /**
+         * 获取商品信息
+         * @param pid
+         */
         void getWoodInfo(String pid);
+        /**
+         * 获取商品信息（我的商品详情页）
+         * @param pid
+         */
+        void getWoodInfoOther(String pid);
+
     }
 }

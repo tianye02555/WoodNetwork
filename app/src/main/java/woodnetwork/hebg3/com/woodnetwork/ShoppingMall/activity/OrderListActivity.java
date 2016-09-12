@@ -113,9 +113,9 @@ public class OrderListActivity extends AppCompatActivity implements OrderListCon
         orderTime.setText("下单时间："+orderAdd.creat_time);
         yingFuFinge.setText(String.valueOf(orderAdd.total));
 
-        ConfirmOrderAdapter adapter=new ConfirmOrderAdapter(this,orderAdd.products);
+//        ConfirmOrderAdapter adapter=new ConfirmOrderAdapter(this,orderAdd.products);
 
-        listView.setAdapter(adapter);
+//        listView.setAdapter(adapter);
     }
 
     @Override

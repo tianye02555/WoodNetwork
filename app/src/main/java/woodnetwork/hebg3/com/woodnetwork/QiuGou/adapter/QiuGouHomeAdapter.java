@@ -61,12 +61,12 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            jiaoHuoDiDian = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_name);
-            yiXiangChanPin = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_company);
-            gouMaiShuLiang = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_productarea);
-            maiJia = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_price);
-            lianXiDianHua = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_stock);
-            woYaoBaoJia = (Button) itemView.findViewById(R.id.shopppingmalladapter_btn_shoppingcart);
+            jiaoHuoDiDian = (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_jiaohuodidian);
+            yiXiangChanPin = (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_yixiangchanping);
+            maiJia = (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_maijia);
+            gouMaiShuLiang = (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_goumaishuliang);
+            lianXiDianHua= (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_lianxidianhua);
+            woYaoBaoJia = (Button) itemView.findViewById(R.id.qiugouhome_adapter_btn_woyaobaojia);
             woYaoBaoJia.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

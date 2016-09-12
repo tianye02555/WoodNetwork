@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,19 +47,25 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     RecyclerView shoppingCartRecyclerview;
     @Bind(R.id.activity_shopping_cart_checkbox)
     CheckBox checkbox_quanXuan;
-    @Bind(R.id.activity_shopping_cart_text_shuliang)
-    TextView activityShoppingCartTextShuliang;
     @Bind(R.id.activity_shopping_cart_text_jinge)
-    TextView activityShoppingCartTextJinge;
+    TextView jingE;
     @Bind(R.id.activity_shopping_cart_btn_jiesuan)
     Button jieSuan;
     @Bind(R.id.activity_shopping_cart_btn_shanchu)
     Button shanChu;
     public ShoopingCartContract.ShoopingCartPresenterInterface presenter;
-    private List<String> deleteSid = new ArrayList<String>();
-    private List<String> deletePosition = new ArrayList<String>();
+    /**
+     * g购物车列表集合
+     */
     private ShopcarList shopcarList;
+    /**
+     * 购物车适配器
+     */
     private ShoopingCartAdapter adapter;
+    /**
+     * 选中的商品的集合
+     */
+    private ArrayList<String> sidList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,25 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         ButterKnife.bind(this);
         textTitle.setText("购物车");
         imageTitleRight.setVisibility(View.GONE);
+        checkbox_quanXuan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    for(ShopcarList_listItem shopcarList_listItem:shopcarList.list){
+                        if(!shopcarList_listItem.checkbox){
+                            shopcarList_listItem.checkbox=true;
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                }else{
+                    for(ShopcarList_listItem shopcarList_listItem:shopcarList.list){
+                        shopcarList_listItem.checkbox=false;
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+                showTitlePrice();
+            }
+        });
         new ShoopingCartPresenter(this);
         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         Request_getAttribute request_getAttribute = new Request_getAttribute();
@@ -91,6 +117,16 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
             case R.id.activity_shopping_cart_btn_jiesuan://结算按钮
                 break;
             case R.id.activity_shopping_cart_btn_shanchu://删除按钮
+                sidList = new ArrayList<String>();
+//                for (ShopcarList_listItem item : adapter.getShoopingCarList()) {
+//                    if (item.checkbox) {
+//                        sidList.add(item.sid);
+//                    }
+//                }
+//                if(0==sidList.size()){
+//                    showMessage("请选择需要删除的商品");
+//                    return;
+//                }
                 DialogUtils.showDialog(ShoopingCartActivity.this, "提示信息", "确认删除该商品吗？", "", "", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -99,13 +135,10 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
                         Request_getAttribute request_getAttribute = new Request_getAttribute();
                         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
                         //选中的商品的sid集合
-                        ArrayList<String> sidList = new ArrayList<String>();
-                        for (ShopcarList_listItem item : adapter.getShoopingCarList()) {
-                            if (item.checkbox) {
-                                sidList.add(item.sid);
-                            }
-                        }
 
+                        sidList.add("1234");
+                        sidList.add("2234");
+                        sidList.add("3234");
                         Request_shopcar_delete request_shopcar_delete = new Request_shopcar_delete();
                         request_shopcar_delete.sid = sidList;
 
@@ -123,7 +156,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     @Override
     public void showShoopingCartInfo(ShopcarList shopcarList) {
         this.shopcarList = shopcarList;
-        adapter = new ShoopingCartAdapter(this, shopcarList.list);
+        adapter = new ShoopingCartAdapter(this, this.shopcarList.list);
         shoppingCartRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         shoppingCartRecyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL,5));
         shoppingCartRecyclerview.setAdapter(adapter);
@@ -138,6 +171,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
             }
         }
         adapter.notifyDataSetChanged();
+        showTitlePrice();
     }
 
     @Override
@@ -155,6 +189,18 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     @Override
     public void changeNumber() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showTitlePrice() {
+        double titlePrice=0;
+        for(ShopcarList_listItem shopcarList_listItem:adapter.getShoopingCarList()){
+            if(shopcarList_listItem.checkbox){
+                titlePrice+=shopcarList_listItem.xiaoJi;
+            }
+        }
+        jingE.setText(String.valueOf(titlePrice));
+
     }
 
     @Override
@@ -178,4 +224,6 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
+
+
 }

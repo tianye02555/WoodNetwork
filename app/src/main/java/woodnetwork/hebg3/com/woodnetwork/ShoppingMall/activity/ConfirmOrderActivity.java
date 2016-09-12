@@ -24,10 +24,12 @@ import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderAdd;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderAdd_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.OrderAdd;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.ConfirmOrderContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.ConfirmOrderPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
 public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOrderContrac.ConfirmOrderViewInterface {
@@ -62,6 +64,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     MyListView listView;
     private int extractTypeNumber;
     private ConfirmOrderContrac.ConfirmOrderPresenterInterface presenter;
+    private SharePreferencesUtils sharePreferencesUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
         setContentView(R.layout.activity_confirm_order);
         CommonUtils.addActivity(this);
         ButterKnife.bind(this);
+        sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
 
         imgeTitleLeft.setVisibility(View.GONE);
         textTitle.setText("确认订单");
@@ -76,7 +80,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
         new ConfirmOrderPresenter(this);
 
-        showOrderData((ShopcarList)getIntent().getSerializableExtra("shopcarList"));
+        showOrderData((ShopcarList) getIntent().getSerializableExtra("shopcarList"));
 
         final String[] extractArray = getResources().getStringArray(R.array.tiqufangshi);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, extractArray);
@@ -108,7 +112,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     }
 
-    @OnClick({R.id.activity_confirm_order_btn_querenxiadan, R.id.activity_confirm_order_btn_quxiao,R.id.simpleDraweeView})
+    @OnClick({R.id.activity_confirm_order_btn_querenxiadan, R.id.activity_confirm_order_btn_quxiao, R.id.simpleDraweeView})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_confirm_order_btn_querenxiadan://确认下单
@@ -130,7 +134,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                 stringList.add("2");
                 request_orderAdd.shopcar_ids = stringList;
                 request_orderAdd.receive_area = "历下街250号";
-                request_orderAdd.type=1;
+                request_orderAdd.type = 1;
                 //添加属性
                 presenter.saveOrder(request_orderAdd);
                 break;
@@ -138,21 +142,22 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                 finish();
                 break;
             case R.id.simpleDraweeView:
-                startActivity(new Intent(this,ChooseAddressActivity.class));
+                startActivityForResult(new Intent(this, ChooseAddressActivity.class),0);
                 break;
         }
     }
 
     @Override
     public void showOrderData(ShopcarList shopcarList) {
-//        sellerName.setText(shopcarList.);
-//        buyerName.setText(orderAdd.buyer);
-//        if (0 == orderAdd.type) {// 0表示求购订单，1表示销售订单
-//            orderType.setText("求购订单");
-//        } else if (1 == orderAdd.type) {
-//            orderType.setText("销售订单");
-//        }
-////        yingFuJinge.setText(orderAdd.total);
+        sellerName.setText(shopcarList.list.get(0).seller.sname);
+        buyerName.setText((String) sharePreferencesUtils.getData("user_name", ""));
+        orderType.setText("销售订单");
+        //计算总价格
+        double totlePrice = 0;
+        for (ShopcarList_listItem shopcarList_listItem : shopcarList.list) {
+            totlePrice += shopcarList_listItem.zongJia;
+        }
+        yingFuJinge.setText(String.valueOf(totlePrice));
 
     }
 

@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
 import woodnetwork.hebg3.com.woodnetwork.R;
-import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.OrderAdd_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.view.MyGridView;
 
@@ -19,14 +17,14 @@ import woodnetwork.hebg3.com.woodnetwork.view.MyGridView;
  * Created by ty on 2016/8/27 0027.
  */
 
-public class ConfirmOrderAdapter extends BaseAdapter {
+public class OrderListAdapter extends BaseAdapter {
 
     private Context context;
     private List<ShopcarList_listItem> list;
     private ConfirmOrderAdapter_myGridViewAdapter adapter_myGridViewAdapter;
 
 
-    public ConfirmOrderAdapter(Context context, List<ShopcarList_listItem> list) {
+    public OrderListAdapter(Context context, List<ShopcarList_listItem> list) {
         this.context = context;
         this.list = list;
     }

@@ -18,6 +18,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.ShoppingMallFragment;
 
 
 /**
@@ -27,10 +28,12 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_pro
 public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.ViewHolder> {
     private Context context;
     private List<ProductFilterList_productsItem> productInfoList;
+    private ShoppingMallFragment shoppingMallFragment;
 
-    public ShoppingMalAdapter(Context context, List<ProductFilterList_productsItem> productInfoList) {
+    public ShoppingMalAdapter(Context context, List<ProductFilterList_productsItem> productInfoList, ShoppingMallFragment shoppingMallFragment) {
         this.context = context;
         this.productInfoList = productInfoList;
+        this.shoppingMallFragment=shoppingMallFragment;
     }
 
     @Override
@@ -42,12 +45,13 @@ public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.
     public void onBindViewHolder(ShoppingMalAdapter.ViewHolder holder, int position) {
         holder.head.setImageURI(Uri.parse(productInfoList.get(position).pimg));
         holder.name.setText(productInfoList.get(position).pname);
-        holder.price.setText(productInfoList.get(position).price + "元/方");
+        holder.price.setText(String.valueOf(productInfoList.get(position).price));
         holder.stock.setText("库存：" + productInfoList.get(position).stock + "方");
-        holder.producingArea.setText("产地：" + productInfoList.get(position).attributes.get(0).attr_value);
         holder.company.setText(productInfoList.get(position).seller);
-        if ("0".equals(productInfoList.get(position).type)) {//0：期货；1：现货；2：板材
-            holder.qiHuo.setVisibility(View.GONE);
+        if (0==productInfoList.get(position).type) {//0：期货；1：现货；2：板材
+            holder.qiHuo.setText("期货");
+        }else if(1==productInfoList.get(position).type){
+            holder.qiHuo.setText("现货");
         }
 
     }
@@ -64,7 +68,6 @@ public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.
         private SimpleDraweeView head;//木材头像
         private TextView name;//木材名字
         private TextView company;//木材所属公司
-        private TextView producingArea;//木材产地
         private TextView price;//单价
         private TextView stock;//库存
         private Button putShoppingCart;//加入购物车按钮
@@ -76,11 +79,22 @@ public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.
             head = (SimpleDraweeView) itemView.findViewById(R.id.shopppingmalladapter_simpledraweeview_head);
             name = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_name);
             company = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_company);
-            producingArea = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_productarea);
             price = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_price);
             stock = (TextView) itemView.findViewById(R.id.shopppingmalladapter_txt_stock);
+            buy = (Button) itemView.findViewById(R.id.shopppingmalladapter_btn_buy);
+            buy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    shoppingMallFragment.showNumberDialog(view.getId(),getAdapterPosition());
+                }
+            });
             putShoppingCart = (Button) itemView.findViewById(R.id.shopppingmalladapter_btn_shoppingcart);
-            buy = (Button) itemView.findViewById(R.id.shopppingmalladapter_btn_shoppingcart);
+            putShoppingCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    shoppingMallFragment.showNumberDialog(view.getId(),getAdapterPosition());
+                }
+            });
             qiHuo = (TextView) itemView.findViewById(R.id.shopppingmalladapter_text_qihuo);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

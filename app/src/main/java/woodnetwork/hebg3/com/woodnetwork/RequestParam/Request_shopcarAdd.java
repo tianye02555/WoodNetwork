@@ -6,5 +6,5 @@ package woodnetwork.hebg3.com.woodnetwork.RequestParam;
 
 public class Request_shopcarAdd {
     public String pid;
-    public String number;
+    public Integer number;
 }

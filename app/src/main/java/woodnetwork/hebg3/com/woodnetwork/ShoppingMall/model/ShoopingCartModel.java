@@ -57,7 +57,7 @@ public class ShoopingCartModel implements ShoopingCartModelInterface {
         params.getMethod = ServiceInterfaceCont.SHOPCARLIST;
         params.GETTYPE = "1";
         params.params = CommonUtils.getParamString(param);
-        new NetTask(handler.obtainMessage(), params, ShopcarList.class).execute();
+        new NetTask(handler.obtainMessage(0), params, ShopcarList.class).execute();
 
     }
 
@@ -68,7 +68,7 @@ public class ShoopingCartModel implements ShoopingCartModelInterface {
         params.http_method = ClientParams.HTTP_POST;
         params.getMethod = ServiceInterfaceCont.SHOPCARUPDATE;
         params.params = CommonUtils.getParamString(param);
-        new NetTask(handler.obtainMessage(), params).execute();
+        new NetTask(handler.obtainMessage(1), params).execute();
 
     }
 
@@ -79,7 +79,7 @@ public class ShoopingCartModel implements ShoopingCartModelInterface {
         params.http_method = ClientParams.HTTP_POST;
         params.getMethod = ServiceInterfaceCont.SHOPCARDELETE;
         params.params = CommonUtils.getParamString(param);
-        new NetTask(handler.obtainMessage(), params).execute();
+        new NetTask(handler.obtainMessage(2), params).execute();
 
     }
 }

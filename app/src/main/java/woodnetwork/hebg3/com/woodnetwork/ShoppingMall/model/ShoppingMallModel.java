@@ -22,7 +22,7 @@ import woodnetwork.hebg3.com.woodnetwork.sysfunction.bean.User;
 public class ShoppingMallModel implements ShoppingMallModelInterface {
     private OnServiceBaceInterface onServiceBaceInterface_spinner;
     private OnServiceBaceInterface onServiceBaceInterface_goods;
-    private OnServiceBaceInterface onServiceBaceInterface_Business;
+    private OnServiceBaceInterface onServiceBaceInterface_getShopcarAdd;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -42,11 +42,11 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
                         onServiceBaceInterface_goods.onFailed(body.base.msg);
                     }
                     break;
-                case 2://获取推荐商家列表接口
+                case 2://加入购物车接口
                     if ("0".equals(body.base.code)) {//成功
-                        onServiceBaceInterface_Business.onSuccess(body);
+                        onServiceBaceInterface_getShopcarAdd.onSuccess(body);
                     } else if ("1".equals(body.base.code)) {//失败
-                        onServiceBaceInterface_Business.onFailed(body.base.msg);
+                        onServiceBaceInterface_getShopcarAdd.onFailed(body.base.msg);
                     }
                     break;
             }
@@ -60,7 +60,6 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
         params.getMethod = ServiceInterfaceCont.ATTRIBUTEFILTER;
         params.GETTYPE="1";
         params.params = CommonUtils.getParamString(param);
-        Log.e("11111",params.params);
         new NetTask(handler.obtainMessage(0), params,WoodFilterAttribute.class).execute();
     }
 
@@ -75,13 +74,23 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
     }
 
     @Override
-    public void getBusinessData(Object param, final OnServiceBaceInterface onServiceBaceInterface) {
-        this.onServiceBaceInterface_Business = onServiceBaceInterface;
+    public void getShopcarAdd(Object param, OnServiceBaceInterface onServiceBaceInterface) {
+        this.onServiceBaceInterface_getShopcarAdd = onServiceBaceInterface;
         ClientParams params = new ClientParams();
-        params.http_method =ClientParams.HTTP_GET;
-        params.getMethod = ServiceInterfaceCont.SELLERFEATURED;
-        params.GETTYPE="1";
+        params.http_method =ClientParams.HTTP_POST;
+        params.getMethod = ServiceInterfaceCont.SHOPCARADD;
         params.params = CommonUtils.getParamString(param);
-        new NetTask(handler.obtainMessage(2), params, BusnessListInfo.class).execute();
+        new NetTask(handler.obtainMessage(2), params).execute();
     }
+
+//    @Override
+//    public void getBusinessData(Object param, final OnServiceBaceInterface onServiceBaceInterface) {
+//        this.onServiceBaceInterface_Business = onServiceBaceInterface;
+//        ClientParams params = new ClientParams();
+//        params.http_method =ClientParams.HTTP_GET;
+//        params.getMethod = ServiceInterfaceCont.SELLERFEATURED;
+//        params.GETTYPE="1";
+//        params.params = CommonUtils.getParamString(param);
+//        new NetTask(handler.obtainMessage(2), params, BusnessListInfo.class).execute();
+//    }
 }

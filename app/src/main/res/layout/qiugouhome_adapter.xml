@@ -42,7 +42,7 @@
         android:textSize="@dimen/font_small" />
 
     <TextView
-        android:id="@+id/shopppingcart_adapter_txt_fang"
+        android:id="@+id/qiugouhome_adapter_txt_maijia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/distance_short"
@@ -56,7 +56,7 @@
         android:id="@+id/lin"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/background_dark"
+        android:background="@color/dise"
         android:layout_marginTop="@dimen/distance_long"
         android:layout_below="@+id/qiugouhome_adapter_txt_goumaishuliang"></View>
     <Button
@@ -67,7 +67,8 @@
         android:layout_marginLeft="@dimen/distance_long"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_longest"
-        android:background="@drawable/shape"
+        android:background="@null"
+        android:textColor="@android:color/holo_blue_bright"
         android:layout_marginTop="@dimen/distance_short"
         android:text="@string/woyaobaojia"
         />

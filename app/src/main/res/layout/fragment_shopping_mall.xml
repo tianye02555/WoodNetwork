@@ -1,10 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dise"
+    android:background="@android:color/white"
     tools:context=".ShoppingMall.fragment.ShoppingMallFragment">
+
     <RelativeLayout
         android:id="@+id/rel"
         android:layout_width="match_parent"
@@ -28,10 +29,11 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/image_title_shaixuan"
             android:layout_marginRight="@dimen/distance_short"
+            android:layout_toLeftOf="@+id/image_title_shaixuan"
             android:scaleType="fitXY"
             android:src="@drawable/shooppingcart" />
+
         <ImageView
             android:id="@+id/image_title_shaixuan"
             android:layout_width="35dp"
@@ -49,5 +51,50 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rel"
         android:background="@android:color/white"
-        ></android.support.v7.widget.RecyclerView>
+        android:visibility="visible"></android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rel_shaixuan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel"
+        android:visibility="gone">
+
+        <ListView
+            android:id="@+id/mylistview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/hengxian"
+            android:divider="@color/dise"
+            android:dividerHeight="1dp"></ListView>
+
+        <View
+            android:id="@+id/hengxian"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_height="1dp"
+            android:layout_above="@+id/text_chongzhi"
+            android:background="@color/dise"></View>
+
+        <TextView
+            android:id="@+id/text_chongzhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/distance_longest"
+            android:text="重置"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/text_queding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/distance_longest"
+            android:text="@string/queding"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="@dimen/font_normal" />
+    </RelativeLayout>
 </RelativeLayout>

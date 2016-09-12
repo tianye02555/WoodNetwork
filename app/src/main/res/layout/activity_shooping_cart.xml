@@ -37,38 +37,7 @@
             android:layout_marginTop="@dimen/distance_short"
             android:layout_below="@+id/activity_shopping_cart_btn_shanchu"
             android:background="@color/dise"></View>
-        <TextView
-            android:id="@+id/activity_shopping_cart_text_yixuanshangping"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yixuanshangping"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="@dimen/distance_normal"
-            android:layout_below="@+id/view"
-            android:layout_marginTop="@dimen/distance_short"
-            android:textSize="@dimen/font_normal"/>
-        <TextView
-            android:id="@+id/activity_shopping_cart_text_shuliang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_below="@+id/view"
-            android:layout_marginLeft="@dimen/distance_shortest"
-            android:text="1"
-            android:layout_toRightOf="@+id/activity_shopping_cart_text_yixuanshangping"
-            android:layout_marginTop="@dimen/distance_short"
-            android:textSize="@dimen/font_normal"/>
-        <TextView
-            android:id="@+id/activity_shopping_cart_text_jian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:layout_below="@+id/view"
-            android:text="@string/jian"
-            android:layout_marginLeft="@dimen/distance_shortest"
-            android:layout_toRightOf="@+id/activity_shopping_cart_text_shuliang"
-            android:layout_marginTop="@dimen/distance_short"
-            android:textSize="@dimen/font_normal"/>
+
         <TextView
             android:id="@+id/activity_shopping_cart_text_heji"
             android:layout_width="wrap_content"
@@ -77,16 +46,16 @@
             android:layout_below="@+id/view"
             android:text="@string/heji"
             android:layout_marginLeft="@dimen/distance_shortest"
-            android:layout_toRightOf="@+id/activity_shopping_cart_text_jian"
+
             android:layout_marginTop="@dimen/distance_short"
             android:textSize="@dimen/font_normal"/>
         <TextView
             android:id="@+id/activity_shopping_cart_text_jinge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="@color/jiage"
             android:layout_below="@+id/view"
-            android:text="5000"
+            android:text="50000000"
             android:layout_marginLeft="@dimen/distance_shortest"
             android:layout_toRightOf="@+id/activity_shopping_cart_text_heji"
             android:layout_marginTop="@dimen/distance_short"
@@ -108,6 +77,8 @@
             android:layout_height="wrap_content"
             android:text="@string/jiesuan"
             android:textSize="@dimen/font_normal"
+            android:background="@null"
+            android:textColor="@android:color/holo_blue_bright"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_below="@+id/activity_shopping_cart_text_yuan" />
@@ -118,6 +89,8 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_normal"
             android:text="@string/shanchu"
+            android:background="@null"
+            android:textColor="@android:color/holo_blue_bright"
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"

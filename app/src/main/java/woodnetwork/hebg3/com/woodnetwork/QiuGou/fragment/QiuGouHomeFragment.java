@@ -18,9 +18,15 @@ import woodnetwork.hebg3.com.woodnetwork.QiuGou.bean.DemandList;
 import woodnetwork.hebg3.com.woodnetwork.QiuGou.contract.QiuGouHomeContract;
 import woodnetwork.hebg3.com.woodnetwork.QiuGou.presenter.QiuGouHomePresenter;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_DemandList;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_demandBuyerList;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_demandInfo;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.DividerItemDecoration;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
 
 public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface{
@@ -51,6 +57,19 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
         imageTitleRight.setVisibility(View.GONE);
 
         new QiuGouHomePresenter(this);
+        SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
+        Request_getAttribute request_getAttribute = new Request_getAttribute();
+        request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
+
+
+        Request_DemandList request_demandList = new Request_DemandList();
+//        request_demandInfo.did=(String)getIntent().getStringExtra("did");//正确代码，下为测试
+        request_demandList.page_no = 1;
+        request_demandList.page_size=10;
+        MyRequestInfo myRequestInfo = new MyRequestInfo();
+        myRequestInfo.req = request_demandList;
+        myRequestInfo.req_meta = request_getAttribute;
+        presenter.getQiuGouData(myRequestInfo);
         return view;
     }
 

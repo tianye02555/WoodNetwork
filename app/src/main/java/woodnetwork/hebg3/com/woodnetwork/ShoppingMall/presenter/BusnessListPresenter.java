@@ -30,7 +30,7 @@ public class BusnessListPresenter implements BusnessListContrac.BusnessListPrese
     }
     @Override
     public void start() {
-        mBusnessListView.showProgress();
+
         SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(((Fragment)mBusnessListView).getActivity());
         Request_getAttribute request_getAttribute=new Request_getAttribute();
         request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
@@ -41,12 +41,12 @@ public class BusnessListPresenter implements BusnessListContrac.BusnessListPrese
         busnessListModel.getBusnessListData(CommonUtils.getRequestInfo(request_busnessList,request_getAttribute), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                mBusnessListView.closeProgress();
+
                 mBusnessListView.showBusnessListData(((BusnessListInfo)((ResponseBody)object).obj).seller_list);
             }
             @Override
             public void onFailed(String string) {
-                mBusnessListView.closeProgress();
+
                 mBusnessListView.showMessage(string);
             }
         });

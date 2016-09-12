@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/adapter_confirm_order_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="供应商："
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:gravity="left"/>
+    <TextView
+        android:id="@+id/adapter_confirm_order_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="fasfsfasf"
+        android:layout_toRightOf="@+id/adapter_confirm_order_name"
+        android:layout_alignBaseline="@+id/adapter_confirm_order_name"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/black"
+        android:gravity="left"/>
+
+</RelativeLayout>

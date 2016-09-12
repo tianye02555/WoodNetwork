@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
+import woodnetwork.hebg3.com.woodnetwork.R;
+
 /**
  * Created by ty on 2016/8/22 0022.
  */
@@ -49,7 +51,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
         this.mItemSize = (int) TypedValue.applyDimension(mItemSize, TypedValue.COMPLEX_UNIT_DIP,context.getResources().getDisplayMetrics());
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG) ;
-        mPaint.setColor(Color.GRAY);
+        mPaint.setColor(context.getResources().getColor(R.color.dise));
          /*设置填充*/
         mPaint.setStyle(Paint.Style.FILL);
     }

@@ -41,17 +41,17 @@ public class ZiXunHomePresenter implements ZiXunHomeContract.ZiXunHomePresenterI
 
     @Override
     public void getCategoryListData(MyRequestInfo myRequestInfo) {
-        ziXunHomeView.showProgress();
+
         ziXunHomeModel.getCategoryListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                ziXunHomeView.closeProgress();
+
                 ziXunHomeView.setCategoryListInfo((CategoryList) ((ResponseBody)object).obj);
             }
 
             @Override
             public void onFailed(String string) {
-                ziXunHomeView.closeProgress();
+
                 ziXunHomeView.showMessage(string);
             }
         });

@@ -27,9 +27,15 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public String pimg;
     @Expose
-    public Boolean checkbox;
+    public Boolean checkbox=true;
     @Expose
-    public String xiaoJi;
+    public Double xiaoJi;
+    @Expose
+    public Double shuLiang;
+    @Expose
+    public Double zongJia;
+    @Expose
+    public String delivery;
     @Expose
     public List<ShopcarList_listItem_attributeItem> attribute;
 

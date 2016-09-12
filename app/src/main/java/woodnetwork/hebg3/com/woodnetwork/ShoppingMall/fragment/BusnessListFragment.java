@@ -1,7 +1,5 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,7 +23,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.BusnessListPrese
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 
-public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface{
+public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface {
 
     @Bind(R.id.text_title)
     TextView textTitle;
@@ -33,13 +31,16 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
     ImageView imageTitleRight;
     @Bind(R.id.activity_busness_list_recyclerview)
     RecyclerView recyclerview;
+    @Bind(R.id.imge_title_left)
+    ImageView imgeTitleLeft;
     private BusnessListContrac.BusnessListPresenterInterface presenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_busness_list, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
+        imgeTitleLeft.setVisibility(View.GONE);
         imageTitleRight.setVisibility(View.GONE);
         textTitle.setText("商家信息");
         new BusnessListPresenter(this);
@@ -50,22 +51,22 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
     @Override
     public void showBusnessListData(List<BusnessInfo> list) {
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL,5));
-        BusnessListAdapter adapter=new BusnessListAdapter(getActivity(),list);
+        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
+        BusnessListAdapter adapter = new BusnessListAdapter(getActivity(), list);
         recyclerview.setAdapter(adapter);
 
     }
 
     @Override
     public void setPresenter(BusnessListContrac.BusnessListPresenterInterface presenter) {
-        if(null!=presenter){
-            this.presenter=presenter;
+        if (null != presenter) {
+            this.presenter = presenter;
         }
 
     }
 
     @Override
-    public void showProgress( ) {
+    public void showProgress() {
         ProgressUtils.show(getActivity(), "请稍后……");
     }
 
@@ -76,8 +77,13 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
 
     @Override
     public void showMessage(String string) {
-        CommonUtils.showToast(getActivity(),string);
+        CommonUtils.showToast(getActivity(), string);
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

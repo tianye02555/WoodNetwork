@@ -21,16 +21,17 @@
     <string name="jiarugouwuche">加入购物车</string>
     <string name="lijigoumai">立即购买</string>
     <string name="tuijianshangjia">推荐商家</string>
-    <string name="gengduo">更多……</string>
     <string name="qihuo">期货</string>
     <!-- 确认下单页-->
-    <string name="gegnduoshuxing">更多属性</string>
+    <string name="gegnduoshuxing">更多属性﹀</string>
     <string name="danjia">单价：</string>
     <string name="jinge">金额：</string>
-    <string name="shuliang">数量：</string>
+    <string name="shuliang">数   量：</string>
     <string name="quxiao">取消</string>
     <string name="querenxiadan">确认下单</string>
     <string name="yingfujinge">应付金额：</string>
+    <string name="shouqi">收起︿
+    </string>
     <array name="tiqufangshi">
         <item>自提</item>
         <item>送货</item>
@@ -45,6 +46,7 @@
     <string name="yixuanshangping">已选商品</string>
     <string name="jian">件</string>
     <string name="shanchu">删除</string>
+    <string name="baocun">保存</string>
     <string name="jiesuan">结算</string>
     <string name="heji">合计</string>
     <string name="yuan">元</string>

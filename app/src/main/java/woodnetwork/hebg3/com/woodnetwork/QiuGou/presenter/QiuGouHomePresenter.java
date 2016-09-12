@@ -24,17 +24,17 @@ public class QiuGouHomePresenter implements QiuGouHomeContract.QiuGouHomePresent
     }
     @Override
     public void getQiuGouData(MyRequestInfo myRequestInfo) {
-        qiuGouHomeView.showProgress();
+
         qiuGouHomeModel.getQiuGouData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                qiuGouHomeView.closeProgress();
+
                 qiuGouHomeView.showQiuGouInfo((DemandList) ((ResponseBody)object).obj);
             }
 
             @Override
             public void onFailed(String string) {
-                qiuGouHomeView.closeProgress();
+
                 qiuGouHomeView.showMessage(string);
             }
         });

@@ -112,6 +112,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
     public void showNewSpinner(final AreaList areaList) {
         //获取服务器数据中的value
         final ArrayList<String> stringArrayList = new ArrayList<String>();
+        stringArrayList.add("选择");
         for (AreaList_listItem value : areaList.list) {
             stringArrayList.add(value.name);
         }
@@ -142,6 +143,9 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(0==i){
+                    return;
+                }
                 boolean isDelet = false;
                 for (Integer key : spinnerList) {
                     if (isDelet) {

@@ -31,7 +31,7 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public Double xiaoJi;
     @Expose
-    public Double shuLiang;
+    public Boolean gridView=false;
     @Expose
     public Double zongJia;
     @Expose

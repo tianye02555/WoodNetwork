@@ -3,6 +3,7 @@ package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderAdd;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderAdd_productsItem;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.ConfirmOrderAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.OrderAdd;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
@@ -65,6 +67,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     private int extractTypeNumber;
     private ConfirmOrderContrac.ConfirmOrderPresenterInterface presenter;
     private SharePreferencesUtils sharePreferencesUtils;
+    private ConfirmOrderAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,6 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
         ButterKnife.bind(this);
         sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
 
-        imgeTitleLeft.setVisibility(View.GONE);
         textTitle.setText("确认订单");
         imageTitleRight.setVisibility(View.GONE);
 
@@ -92,14 +94,10 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                 if ("自提".equals(extractArray[i])) {//0表示自提，1表示送货
                     extractTypeNumber = 0;
                     address.setEnabled(false);
-                    address.setFocusable(false);
                     harvestPlace.setEnabled(false);
-                    harvestPlace.setFocusable(false);
+                    address.setText("");
                 } else if ("送货".equals(extractArray[i])) {
                     address.setEnabled(true);
-                    address.setFocusable(true);
-                    harvestPlace.setEnabled(true);
-                    harvestPlace.setFocusable(true);
                     extractTypeNumber = 1;
                 }
             }
@@ -112,7 +110,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     }
 
-    @OnClick({R.id.activity_confirm_order_btn_querenxiadan, R.id.activity_confirm_order_btn_quxiao, R.id.simpleDraweeView})
+    @OnClick({R.id.activity_confirm_order_btn_querenxiadan, R.id.activity_confirm_order_btn_quxiao, R.id.simpleDraweeView,R.id.imge_title_left})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_confirm_order_btn_querenxiadan://确认下单
@@ -144,20 +142,25 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
             case R.id.simpleDraweeView:
                 startActivityForResult(new Intent(this, ChooseAddressActivity.class),0);
                 break;
+            case R.id.imge_title_left:
+                finish();
+                break;
         }
     }
 
     @Override
     public void showOrderData(ShopcarList shopcarList) {
-        sellerName.setText(shopcarList.list.get(0).seller.sname);
-        buyerName.setText((String) sharePreferencesUtils.getData("user_name", ""));
-        orderType.setText("销售订单");
+        sellerName.setText("卖家名称："+shopcarList.list.get(0).seller.sname);
+        buyerName.setText("买家名称："+(String) sharePreferencesUtils.getData("user_name", ""));
+        orderType.setText("订单类型：销售订单");
         //计算总价格
         double totlePrice = 0;
         for (ShopcarList_listItem shopcarList_listItem : shopcarList.list) {
-            totlePrice += shopcarList_listItem.zongJia;
+            totlePrice += shopcarList_listItem.xiaoJi;
         }
         yingFuJinge.setText(String.valueOf(totlePrice));
+        adapter=new ConfirmOrderAdapter(this,shopcarList.list);
+        listView.setAdapter(adapter);
 
     }
 

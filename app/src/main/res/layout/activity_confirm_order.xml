@@ -12,8 +12,10 @@
         layout="@layout/layout_title"></include>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/rel"
         android:layout_below="@id/includ_title">
 
         <RelativeLayout
@@ -193,10 +195,10 @@
     </ScrollView>
 
     <RelativeLayout
+        android:id="@+id/rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/activity_confirm_order_listview">
+        android:layout_alignParentBottom="true">
 
         <View
             android:id="@+id/line1"
@@ -212,9 +214,10 @@
             android:layout_below="@+id/activity_confirm_order_text_yingfujinge"
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_marginTop="@dimen/distance_normal"
+            android:background="@null"
             android:gravity="center"
             android:text="@string/querenxiadan"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="@dimen/font_normal" />
 
         <Button
@@ -225,9 +228,10 @@
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_marginTop="@dimen/distance_normal"
             android:layout_toLeftOf="@+id/activity_confirm_order_btn_querenxiadan"
+            android:background="@null"
             android:gravity="center"
             android:text="@string/quxiao"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="@dimen/font_normal" />
 
         <TextView
@@ -250,6 +254,18 @@
             android:layout_marginTop="@dimen/distance_normal"
             android:layout_toRightOf="@+id/activity_confirm_order_text_yingfujinge0"
             android:text="5000元"
+            android:textColor="@color/jiage"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/activity_confirm_order_text_yuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:layout_marginLeft="@dimen/distance_normal"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:layout_toRightOf="@+id/activity_confirm_order_text_yingfujinge"
+            android:text="元"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_normal" />
     </RelativeLayout>

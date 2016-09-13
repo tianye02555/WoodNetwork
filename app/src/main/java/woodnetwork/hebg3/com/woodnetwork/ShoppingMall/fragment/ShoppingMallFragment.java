@@ -243,7 +243,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
                             shopcarList_listItem.seller = shopcarList_listItem_seller;
                             shopcarList_listItem.pname = list.get(position).pname;
                             shopcarList_listItem.price = list.get(position).price;
-                            shopcarList_listItem.shuLiang = Double.parseDouble(number.getText().toString().trim());
+                            shopcarList_listItem.stock = Double.parseDouble(number.getText().toString().trim());
                             shopcarList_listItem.zongJia = (list.get(position).price) * (Double.parseDouble(number.getText().toString().trim()));
                             shopcarList_listItem_list.add(shopcarList_listItem);
 

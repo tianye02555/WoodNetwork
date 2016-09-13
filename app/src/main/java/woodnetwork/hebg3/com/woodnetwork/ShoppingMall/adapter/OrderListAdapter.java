@@ -66,7 +66,7 @@ public class OrderListAdapter extends BaseAdapter {
         holder.name.setText("商   品：" + list.get(position).pname);
         holder.jingE.setText(String.valueOf(list.get(position).xiaoJi));
         holder.price.setText(String.valueOf(list.get(position).price));
-        holder.shuLiang.setText(String.valueOf(list.get(position).shuLiang));
+        holder.shuLiang.setText(String.valueOf(list.get(position).stock));
         holder.gridView.setAdapter(adapter_myGridViewAdapter);
         return contentView;
     }

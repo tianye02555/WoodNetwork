@@ -50,7 +50,7 @@ public class ConfirmOrderAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View contentView, ViewGroup viewGroup) {
+    public View getView(final int position, View contentView, ViewGroup viewGroup) {
         MyViewHolder holder;
         if (null == contentView) {
             holder = new MyViewHolder();
@@ -59,6 +59,8 @@ public class ConfirmOrderAdapter extends BaseAdapter {
             holder.jingE = (TextView) contentView.findViewById(R.id.confirm_order_adapter_text_jinge);
             holder.price = (TextView) contentView.findViewById(R.id.confirm_order_adapter_text_price);
             holder.shuLiang = (TextView) contentView.findViewById(R.id.confirm_order_adapter_text_shuliang);
+            holder.gengDuo = (TextView) contentView.findViewById(R.id.confirm_order_adapter_text_more);
+
             holder.gridView = (MyGridView) contentView.findViewById(R.id.confirm_order_adapter_gridview);
             adapter_myGridViewAdapter = new ConfirmOrderAdapter_myGridViewAdapter(context, list.get(position).attribute);
             contentView.setTag(holder);
@@ -68,8 +70,28 @@ public class ConfirmOrderAdapter extends BaseAdapter {
         holder.name.setText("商   品：" + list.get(position).pname);
         holder.jingE.setText(String.valueOf(list.get(position).xiaoJi));
         holder.price.setText(String.valueOf(list.get(position).price));
-        holder.shuLiang.setText(String.valueOf(list.get(position).shuLiang));
+        holder.shuLiang.setText(String.valueOf(list.get(position).stock));
+        if (list.get(position).gridView) {
+            holder.gridView.setVisibility(View.VISIBLE);
+        }else{
+            holder.gridView.setVisibility(View.GONE);
+        }
         holder.gridView.setAdapter(adapter_myGridViewAdapter);
+        holder.gengDuo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (context.getResources().getString(R.string.gegnduoshuxing).equals(((TextView) view).getText())) {
+                    ((TextView) view).setText(context.getResources().getString(R.string.shouqi));
+                    list.get(position).gridView = true;
+
+                } else {
+                    ((TextView) view).setText(context.getResources().getString(R.string.gegnduoshuxing));
+                    list.get(position).gridView = false;
+
+                }
+
+            }
+        });
         return contentView;
     }
 
@@ -79,6 +101,7 @@ public class ConfirmOrderAdapter extends BaseAdapter {
         TextView price;
         TextView shuLiang;
         TextView jingE;
+        TextView gengDuo;
         MyGridView gridView;
     }
 }

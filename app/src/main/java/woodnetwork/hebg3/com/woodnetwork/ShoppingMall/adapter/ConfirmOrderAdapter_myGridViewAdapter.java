@@ -95,11 +95,11 @@ public class ConfirmOrderAdapter_myGridViewAdapter extends BaseAdapter {
         }
         switch (type) {
             case left:
-                holder_left.name_left.setText(list.get(position).name);
+                holder_left.name_left.setText(list.get(position).name+":");
                 holder_left.value_left.setText(list.get(position).value);
                 break;
             case right:
-                holder_right.name_right.setText(list.get(position).name);
+                holder_right.name_right.setText(list.get(position).name+":");
                 holder_right.value_right.setText(list.get(position).value);
                 break;
         }

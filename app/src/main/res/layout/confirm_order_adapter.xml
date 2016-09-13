@@ -99,6 +99,7 @@
         android:numColumns="2"
         android:verticalSpacing="@dimen/distance_normal"
         android:horizontalSpacing="@dimen/distance_normal"
+        android:visibility="gone"
         android:layout_below="@+id/confirm_order_adapter_text_more"
         ></woodnetwork.hebg3.com.woodnetwork.view.MyGridView>
 

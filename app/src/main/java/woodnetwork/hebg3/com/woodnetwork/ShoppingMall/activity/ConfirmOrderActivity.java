@@ -95,10 +95,12 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                     extractTypeNumber = 0;
                     address.setEnabled(false);
                     harvestPlace.setEnabled(false);
+                    simpleDraweeView.setVisibility(View.INVISIBLE);
                     address.setText("");
                 } else if ("送货".equals(extractArray[i])) {
                     address.setEnabled(true);
                     extractTypeNumber = 1;
+                    simpleDraweeView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -210,5 +212,13 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     @OnClick(R.id.simpleDraweeView)
     public void onClick() {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode==RESULT_OK){
+            harvestPlace.setText(data.getStringExtra("address"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -40,6 +40,10 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
         holder.gouMaiShuLiang.setText("购买数量：" + demandList.get(position).number);
         holder.maiJia.setText("买家" + demandList.get(position).buyer);
         holder.lianXiDianHua.setText("联系电话："+demandList.get(position).phone);
+        if(1==demandList.get(position).qtype){
+            holder.woYaoBaoJia.setText("已报价");
+            holder.woYaoBaoJia.setEnabled(false);
+        }
 
     }
 

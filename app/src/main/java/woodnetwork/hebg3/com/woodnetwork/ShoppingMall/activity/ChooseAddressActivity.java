@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.Bind;
@@ -64,7 +66,10 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
     /**
      * 存储选择的地址
      */
-    private HashMap<Integer, String> addressMap = new HashMap<Integer, String>();
+    private ConcurrentHashMap<Integer, String> addressMap = new ConcurrentHashMap<Integer, String>();
+    private  AreaList areaListNew;
+
+    private  ArrayList<String> stringArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +109,24 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
                 }
                 intent.putExtra("address", address.toString());
                 setResult(RESULT_OK, intent);
+                finish();
                 break;
         }
     }
 
     @Override
     public void showNewSpinner(final AreaList areaList) {
+        areaListNew=new AreaList();
+        AreaList_listItem areaList_listItem=new AreaList_listItem();
+        areaList_listItem.id="1";
+        areaList_listItem.name="请选择地址";
+        ArrayList<AreaList_listItem>  list=new ArrayList<AreaList_listItem>();
+        list.add(areaList_listItem);
+        list.addAll(areaList.list);
+        areaListNew.list=list;
         //获取服务器数据中的value
-        final ArrayList<String> stringArrayList = new ArrayList<String>();
-        stringArrayList.add("选择");
-        for (AreaList_listItem value : areaList.list) {
+        stringArrayList = new ArrayList<String>();
+        for (AreaList_listItem value : areaListNew.list) {
             stringArrayList.add(value.name);
         }
 //        //第一个spinner或者当前控件灭有子控件，生成新spinner
@@ -122,7 +135,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
 //            if(null!=spinnerMap.get(spinnerID)) {
 //                spinnerMap.put(spinnerID, true);
 //            }
-        final Spinner spinner = new Spinner(this);
+       final Spinner spinner = new Spinner(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(200, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         layoutParams.addRule(RelativeLayout.BELOW, nowView);
@@ -134,6 +147,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
             spinnerID = generateViewId();
         }
         spinner.setId(spinnerID);
+        CommonUtils.showToast(this,String.valueOf(spinnerID));
         spinnerList.add(spinnerID);
         rootLayout.addView(spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stringArrayList);
@@ -147,19 +161,21 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
                     return;
                 }
                 boolean isDelet = false;
-                for (Integer key : spinnerList) {
+                for (int j=0;j<spinnerList.size();j++) {
                     if (isDelet) {
-                        Spinner spinner = (Spinner) ChooseAddressActivity.this.findViewById(key);
+                        Spinner spinner = (Spinner) ChooseAddressActivity.this.findViewById(spinnerList.get(j));
                         rootLayout.removeView(spinner);
-                        spinnerList.remove(key);
+                        spinnerList.remove(spinnerList.get(j));
+                        j-=1;//spinnerList的size 是变化的
                     }
-                    if (key == spinner.getId()) {
+                    if (spinnerList.get(j) == spinner.getId()) {
+                        nowView=spinner.getId();
                         isDelet = true;
                     }
                 }
 
-                intent.putExtra("pid", areaList.list.get(i).id);//获取最后一个spinner的选中的项的id
-                addressMap.put(spinner.getId(), areaList.list.get(i).name);
+                intent.putExtra("pid", areaListNew.list.get(i).id);//获取最后一个spinner的选中的项的id
+                addressMap.put(spinner.getId(), areaListNew.list.get(i).name);
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(ChooseAddressActivity.this);
                 Request_getAttribute request_getAttribute = new Request_getAttribute();
                 request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");

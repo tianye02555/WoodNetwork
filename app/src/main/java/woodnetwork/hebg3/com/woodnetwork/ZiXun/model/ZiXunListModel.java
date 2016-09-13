@@ -6,6 +6,7 @@ import android.os.Message;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ServiceInterfaceCont;
+import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.ArticleList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.net.ClientParams;
 import woodnetwork.hebg3.com.woodnetwork.net.NetTask;
@@ -59,6 +60,6 @@ public class ZiXunListModel implements ZiXunListModelInterface {
         params.getMethod = ServiceInterfaceCont.ARTICLELIST;
         params.GETTYPE = "1";
         params.params = CommonUtils.getParamString(object);
-        new NetTask(handler.obtainMessage(1), params, CategoryList.class).execute();
+        new NetTask(handler.obtainMessage(1), params, ArticleList.class).execute();
     }
 }

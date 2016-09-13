@@ -14,11 +14,11 @@ public class DemandList_listItem {
     @Expose
     public String pname;
     @Expose
-    public int number;
+    public Double number;
     @Expose
     public String buyer;
     @Expose
-    public String qtype;
+    public Integer qtype;
     @Expose
     public String phone;
 }

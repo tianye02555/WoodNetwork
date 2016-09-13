@@ -1,6 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.ZiXun.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.ZiXun.activity.ZiXunXiangQingActivity;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.ArticleList_listItem;
 
 /**
@@ -62,14 +64,14 @@ public class ZiXunListAdapter extends RecyclerView.Adapter<ZiXunListAdapter.View
             newDate = (TextView) itemView.findViewById(R.id.adapter_zixunlist_txt_newsdate);
             imag = (SimpleDraweeView) itemView.findViewById(R.id.adapter_zixunlist_imag);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, WoodInfoActivity.class);
-//                    intent.putExtra("pid", productInfoList.get(getAdapterPosition()).pid);
-//                    context.startActivity(intent);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ZiXunXiangQingActivity.class);
+                    intent.putExtra("url", articleList.get(getAdapterPosition()).url);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

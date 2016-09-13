@@ -13,7 +13,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/includ_title">
+        android:layout_below="@+id/includ_title"
+        android:layout_above="@+id/activity_choose_address_btn_queding">
 
         <RelativeLayout
             android:id="@+id/activity_choose_address"
@@ -40,5 +41,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/distance_normal"
-        android:text="@string/queding" />
+        android:background="@color/title"
+        android:textColor="@android:color/white"
+        android:text="确      定" />
 </RelativeLayout>

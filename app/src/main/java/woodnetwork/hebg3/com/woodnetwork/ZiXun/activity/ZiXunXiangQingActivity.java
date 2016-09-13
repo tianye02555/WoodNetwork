@@ -47,22 +47,17 @@ public class ZiXunXiangQingActivity extends AppCompatActivity implements ZiXunXi
         CommonUtils.addActivity(this);
         ButterKnife.bind(this);
 
+
         textTitle.setText("资讯");
         imageTitleRight.setVisibility(View.GONE);
-        new ZiXunXiangQingPresenter(this);
-
-        SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
-        Request_getAttribute request_getAttribute = new Request_getAttribute();
-        request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
-
-        Request_article_web_info request_article_web_info=new Request_article_web_info();
-        request_article_web_info.aid="1234";
-        request_article_web_info.cid="1234";
-
-        MyRequestInfo myRequestInfo = new MyRequestInfo();
-        myRequestInfo.req =request_article_web_info ;
-        myRequestInfo.req_meta = request_getAttribute;
-        presenter.getWebViewUri(myRequestInfo);
+        webview.loadUrl("http://baidu.com");//getIntent().getStringExtra("url");
+        webview.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl("http://baidu.com");
+                return true;
+            }
+        });
     }
 
     @OnClick(R.id.imge_title_left)
@@ -95,13 +90,6 @@ public class ZiXunXiangQingActivity extends AppCompatActivity implements ZiXunXi
 
     @Override
     public void showWebViewUri(ArticleWebInfo articleWebInfo) {
-        webview.loadUrl("http://baidu.com");
-        webview.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl("http://baidu.com");
-                return true;
-            }
-        });
+
     }
 }

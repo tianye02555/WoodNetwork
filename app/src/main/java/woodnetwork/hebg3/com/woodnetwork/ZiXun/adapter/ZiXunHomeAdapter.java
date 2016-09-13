@@ -17,6 +17,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
+import woodnetwork.hebg3.com.woodnetwork.ZiXun.activity.ZiXunListActivity;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList_listItem;
 
@@ -63,8 +64,9 @@ public class ZiXunHomeAdapter extends RecyclerView.Adapter<ZiXunHomeAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, WoodInfoActivity.class);
+                    Intent intent = new Intent(context, ZiXunListActivity.class);
                     intent.putExtra("pid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("title", list.get(getAdapterPosition()).name);
                     context.startActivity(intent);
                 }
             });

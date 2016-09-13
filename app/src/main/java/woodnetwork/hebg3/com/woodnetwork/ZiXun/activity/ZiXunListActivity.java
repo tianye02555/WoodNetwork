@@ -60,6 +60,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
 
         imageTitleRight.setVisibility(View.GONE);
 //        textTitle.setText(getIntent().getStringExtra("title"));
+        textTitle.setText(getIntent().getStringExtra("title"));
 
         new ZiXunListPresenter(this);
 
@@ -78,6 +79,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
 
     @OnClick(R.id.imge_title_left)
     public void onClick() {
+        finish();
     }
 
     @Override
@@ -110,6 +112,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
             radiogroup.addView(rb, i, layoutParams);
 
         }
+        ((RadioButton)(radiogroup.getChildAt(0))).setChecked(true);
         radiogroup.invalidate();
     }
 

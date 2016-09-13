@@ -23,6 +23,7 @@ import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_demandInfo;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_quotation_add;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcarList;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ChooseAddressActivity;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
@@ -75,6 +76,10 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
 
         textTitle.setText("我要报价");
         imageTitleRight.setVisibility(View.GONE);
+
+        editShouHuoDi.setFocusable(false);
+        editShouHuoDi.setEnabled(false);
+
         new WoYaoBaoJiaPresenter(this);
         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         Request_getAttribute request_getAttribute = new Request_getAttribute();
@@ -91,11 +96,11 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
         this.presenter.getWoYaoBaoJiaData(myRequestInfo);
     }
 
-    @OnClick({R.id.activity_woyaobaojia_simpleDraweeView_shouhuodi, R.id.activity_woyaobaojia_btn_tijiao, R.id.activity_woyaobaojia_image_dianhua})
+    @OnClick({R.id.imge_title_left,R.id.activity_woyaobaojia_simpleDraweeView_shouhuodi, R.id.activity_woyaobaojia_btn_tijiao, R.id.activity_woyaobaojia_image_dianhua})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_woyaobaojia_simpleDraweeView_shouhuodi:
-//                startActivityForResult();
+                startActivityForResult(new Intent(this, ChooseAddressActivity.class),0);
                 break;
             case R.id.activity_woyaobaojia_btn_tijiao:
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
@@ -122,18 +127,21 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
                 intent.setData(Uri.parse("tel:" + this.phone));
                 startActivity(intent);
                 break;
+            case R.id.imge_title_left:
+                finish();
+                break;
         }
     }
 
     @Override
     public void showWoYaoBaoJiaInfo(DemandInfo demandInfo) {
-        maiJia.setText(demandInfo.buyer);
-        chanPinYiXiang.setText(demandInfo.pname);
-        gouMaiShuLiang.setText(demandInfo.number);
-        qiTaXuQiu.setText(demandInfo.remarks);
-        faBuYu.setText(demandInfo.create_time);
-        jiaoHuoDiDian.setText(demandInfo.receive_area);
-        lianXiFangShi.setText(demandInfo.phone);
+        maiJia.setText("买        家："+demandInfo.buyer);
+        chanPinYiXiang.setText("意向产品："+demandInfo.pname);
+        gouMaiShuLiang.setText("购买数量："+String.valueOf(demandInfo.number)+"方");
+        qiTaXuQiu.setText("其他需求："+demandInfo.remarks);
+        faBuYu.setText("发  布  于："+demandInfo.create_time);
+        jiaoHuoDiDian.setText("交货地点："+demandInfo.receive_area);
+        lianXiFangShi.setText("联系方式："+demandInfo.phone);
         this.phone = demandInfo.phone;
 
     }
@@ -147,7 +155,7 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
 
     @Override
     public void showProgress() {
-        ProgressUtils.show(this, getResources().getString(R.string.chaxunyue));
+        ProgressUtils.show(this, getResources().getString(R.string.qingshaohou));
     }
 
     @Override
@@ -158,5 +166,12 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
     @Override
     public void showMessage(String string) {
         CommonUtils.showToast(this, string);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode==RESULT_OK){
+            editShouHuoDi.setText(data.getStringExtra("address"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -18,5 +18,7 @@ public class ArticleList_listItem {
     @Expose
     public String img;
     @Expose
+    public String url;
+    @Expose
     public int sort;
 }

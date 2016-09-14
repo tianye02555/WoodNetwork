@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.DemandBuyerListActivity;
@@ -78,7 +79,7 @@ public class MyFragment extends Fragment {
                 startActivity(MyInformationActivity.class);
                 break;
             case R.id.myfragment_text_wodedingdan:
-                startActivity(MyQuotationActivity.class);
+                startActivity(MyOrderActivity.class);
                 break;
             case R.id.myfragment_text_wodeqiugouxinxi:
                 startActivity(DemandBuyerListActivity.class);

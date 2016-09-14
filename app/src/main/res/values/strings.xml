@@ -95,4 +95,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- 我的订单页面-->
+    <string name="quanbudingdan">全部订单</string>
+    <string name="daifukuan">待付款</string>
+    <string name="daishouhuo">待收货</string>
+    <string name="yichangdindan">异常订单</string>
+    <string name="gongji">合计 </string>
+    <string name="jianshangping">件商品</string>
+    <string name="gong">共</string>
+    <string name="shenbaoyichang">异常申报</string>
+    <string name="guanbidingdan">关闭订单</string>
+    <string name="querenshouhuo">确认收货</string>
+    <string name="yichangdingdankuohao">（异常订单）</string>
 </resources>

@@ -194,9 +194,24 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
                 ShopcarList_listItemList.add(item);
             }
         }
+
         if(0==ShopcarList_listItemList.size()){
             showMessage("请选择需要的商品");
             return;
+        }
+        String company=ShopcarList_listItemList.get(0).seller.sname;
+        for(ShopcarList_listItem shopcarList_listItem:ShopcarList_listItemList){
+            if(!company.equals(shopcarList_listItem.seller.sname)){
+                showMessage("同一订单的发货人必须相同");
+                return;
+            }
+        }
+        String delivery=ShopcarList_listItemList.get(0).delivery;
+        for(ShopcarList_listItem shopcarList_listItem:ShopcarList_listItemList){
+            if(!delivery.equals(shopcarList_listItem.delivery)){
+                showMessage("同一订单的发货地必须相同");
+                return;
+            }
         }
         mShopcarList.list=ShopcarList_listItemList;
         intent.putExtra("shopcarList", mShopcarList);

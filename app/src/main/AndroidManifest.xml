@@ -12,7 +12,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".sysfunction.activity.LoginActivity" />
         <activity android:name=".sysfunction.activity.GetPasswordActivity" />
-        <activity android:name=".ShoppingMall.activity.ShoppingMallActivity" >
+        <activity android:name=".ShoppingMall.activity.ShoppingMallActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,11 +35,10 @@
         <activity android:name=".WoDe.activity.MyQuotationActivity" />
         <activity android:name=".WoDe.activity.QuotationInfoActivity" />
         <activity android:name=".WoDe.activity.ReportsActivity" />
-        <activity android:name=".WoDe.activity.ProductSellerListActivity"></activity>
-        <activity android:name=".WoDe.activity.DemandBuyerInfoActivity">
-
-        </activity>
-        <activity android:name=".WoDe.activity.DemandBuyerListActivity"></activity>
+        <activity android:name=".WoDe.activity.ProductSellerListActivity" />
+        <activity android:name=".WoDe.activity.DemandBuyerInfoActivity"></activity>
+        <activity android:name=".WoDe.activity.DemandBuyerListActivity" />
+        <activity android:name=".DingDanGuanLi.activity.MyOrderActivity"></activity>
     </application>
 
 </manifest>

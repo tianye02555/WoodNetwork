@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/adapter_myorder_line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/adapter_myorder_image_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/adapter_myorder_line1"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        fresco:placeholderImage="@drawable/defaultimg" />
+
+    <TextView
+        android:id="@+id/adapter_myorder_text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_myorder_line1"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/adapter_myorder_image_img"
+        android:text="优质辐射木"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_myorder_text_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_myorder_line1"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="1500元"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_myorder_text_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/adapter_myorder_image_img"
+        android:layout_below="@+id/adapter_myorder_text_name"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/adapter_myorder_image_img"
+        android:text="公司"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_myorder_text_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/adapter_myorder_image_img"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_myorder_text_name"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="500方"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <View
+        android:id="@+id/adapter_myorder_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/adapter_myorder_text_company"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+</RelativeLayout>

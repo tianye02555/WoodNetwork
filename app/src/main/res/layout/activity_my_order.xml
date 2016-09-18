@@ -57,6 +57,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:textColor="@drawable/selector_color"
             android:text="@string/daifukuan" />
 
         <View
@@ -71,6 +72,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:textColor="@drawable/selector_color"
             android:text="@string/daishouhuo" />
 
         <View
@@ -85,6 +87,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
+            android:textColor="@drawable/selector_color"
             android:text="@string/yichangdindan" />
 
         <View

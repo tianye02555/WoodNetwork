@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_order_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity">
+
+    <include
+        android:id="@+id/activity_order_details_include"
+        layout="@layout/layout_title"></include>
+
+    <View
+        android:id="@+id/activity_order_details_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/activity_order_details_include"
+        android:background="@color/dise"
+        ></View>
+
+    <TextView
+        android:id="@+id/activity_order_details_text_maijiaxinxi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_details_view"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="买家信息:"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_details_shouhuodizhitou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_details_text_maijiaxinxi"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="收货地址："
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_details_shouhuodizhi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_order_details_shouhuodizhitou"
+        android:layout_below="@+id/activity_order_details_text_maijiaxinxi"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/activity_order_details_shouhuodizhitou"
+        android:text="河北省 石家庄市 长安区 河东街道华清南街16号"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_details_fahuodizhitou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_details_shouhuodizhi"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="发货地址:"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_details_fahuodizhi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/activity_order_details_fahuodizhitou"
+        android:layout_below="@+id/activity_order_details_shouhuodizhi"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/activity_order_details_fahuodizhitou"
+        android:text="河北省 石家庄市 长安区 河东街道华清南街16号"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <View
+        android:id="@+id/activity_order_details_view1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/activity_order_details_fahuodizhi"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_dingdanhao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/activity_order_details_view1"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="订单号：4654564564"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/activity_order_details_view1"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="1987-02-30"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <woodnetwork.hebg3.com.woodnetwork.view.MyListView
+        android:id="@+id/adapter_order_details_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_order_details_text_dingdanhao"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:listSelector="#00000000"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_order_details_listview"
+        android:layout_marginLeft="@dimen/distance_shortest"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="1500元"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_jianshangping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_order_details_listview"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_gongji"
+        android:text="@string/jianshangping"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_jian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_order_details_listview"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_jianshangping"
+        android:text="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_order_details_listview"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_jian"
+        android:text="@string/gong"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_gongji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/adapter_order_details_text_price"
+        android:layout_alignBottom="@+id/adapter_order_details_text_price"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_price"
+        android:layout_toStartOf="@+id/adapter_order_details_text_price"
+        android:text="@string/gongji"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_dingdanzhuangtai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_order_details_text_gongji"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="待收货"
+        android:textColor="@color/huiseziti"
+        android:textSize="@dimen/font_normal" />
+
+    <Button
+        android:id="@+id/adapter_order_details_btn_querenshouhuo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/adapter_order_details_text_dingdanzhuangtai"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_order_details_text_gongji"
+        android:background="@null"
+        android:text="@string/querenshouhuo"
+        android:textColor="@android:color/holo_blue_bright" />
+
+    <Button
+        android:id="@+id/adapter_order_details_btn_guanbidingdan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/adapter_order_details_text_dingdanzhuangtai"
+        android:layout_below="@+id/adapter_order_details_text_gongji"
+        android:layout_toLeftOf="@+id/adapter_order_details_btn_querenshouhuo"
+        android:background="@null"
+        android:text="@string/shenbaoyichang"
+        android:textColor="@android:color/holo_blue_bright" />
+
+
+</RelativeLayout>

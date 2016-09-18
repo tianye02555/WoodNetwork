@@ -83,9 +83,13 @@ public class ServiceInterfaceCont {
 
     //16.3获取异常订单列表接口
     public static final String ORDERBUYERPROEXCEPTIONLIST = "/order/buyer/pro/exception/list?param=";
+    //16.3获取异常订单列表接口
+    public static final String EXCEPTIONADD = "/exception/add";
 
     //16.4关闭订单接口
     public static final String ORDERBUYERCLOSE = "/order/buyer/close?param=";
+    //17.1获取订单详情接口
+    public static final String ORDERBUYERINFO = "/order/buyer/info?param=";
 
     //21.1获取我的求购信息列表接口
     public static final String DEMANDBUYERLIST = "/demand/buyer/list?param=";

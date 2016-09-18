@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_order_receive"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderReceiveActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_order_exception_relative"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/title">
+
+        <ImageView
+            android:id="@+id/imge_title_left"
+            android:layout_width="15dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/back_left" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="订单异常处理"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_bigest" />
+
+        <Button
+            android:id="@+id/image_title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:text="添加异常"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/font_normal" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_dinDanBianHao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_relative"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="订单编号"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_text_dinDanBianHao"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="创建时间"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_maiJiaXinXi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_text_date"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="卖家信息"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_text_maiJiaXinXi"
+        android:layout_marginLeft="@dimen/distance_shortest"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/activity_order_exception_text_gongji"
+        android:text="1500元"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_jianshangping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_text_maiJiaXinXi"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/activity_order_exception_text_jian"
+        android:text="@string/jianshangping"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_jian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_text_maiJiaXinXi"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/gong"
+        android:text="1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/gong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/activity_order_exception_text_maiJiaXinXi"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:text="@string/gong"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_gongji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/activity_order_exception_text_maiJiaXinXi"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toRightOf="@+id/activity_order_exception_text_jianshangping"
+        android:text="@string/gongji"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_yichangxinxitou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gong"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"
+        android:padding="@dimen/distance_normal"
+        android:text="异常信息:" />
+
+    <woodnetwork.hebg3.com.woodnetwork.view.MyListView
+        android:id="@+id/activity_order_exception_listview_yichangxinxi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_below="@+id/activity_order_exception_text_yichangxinxitou"
+        android:listSelector="#00000000"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
+
+    <TextView
+        android:id="@+id/activity_order_exception_text_yichangchulitou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_order_exception_listview_yichangxinxi"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"
+        android:padding="@dimen/distance_normal"
+        android:text="异常处理:" />
+
+    <woodnetwork.hebg3.com.woodnetwork.view.MyListView
+        android:id="@+id/activity_order_exception_listview_yichangchuli"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_below="@+id/activity_order_exception_text_yichangchulitou"
+        android:listSelector="#00000000"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
+</RelativeLayout>

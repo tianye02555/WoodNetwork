@@ -36,9 +36,13 @@
         <activity android:name=".WoDe.activity.QuotationInfoActivity" />
         <activity android:name=".WoDe.activity.ReportsActivity" />
         <activity android:name=".WoDe.activity.ProductSellerListActivity" />
-        <activity android:name=".WoDe.activity.DemandBuyerInfoActivity"></activity>
+        <activity android:name=".WoDe.activity.DemandBuyerInfoActivity" />
         <activity android:name=".WoDe.activity.DemandBuyerListActivity" />
-        <activity android:name=".DingDanGuanLi.activity.MyOrderActivity"></activity>
+        <activity android:name=".DingDanGuanLi.activity.MyOrderActivity" />
+        <activity android:name=".DingDanGuanLi.activity.OrderDetailsActivity" />
+        <activity android:name=".DingDanGuanLi.activity.OrderExceptionActivity" />
+        <activity android:name=".DingDanGuanLi.activity.OrderReceiveActivity" />
+        <activity android:name=".DingDanGuanLi.activity.ExceptionAddActivity"></activity>
     </application>
 
 </manifest>

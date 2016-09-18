@@ -90,6 +90,7 @@ public class MyOrderPresenter implements MyOrderContract.MyOrderPresenterInterfa
 
             @Override
             public void onFailed(String string) {
+                myOrderView.closeProgress();
                 myOrderView.showMessage(string);
             }
         });

@@ -17,7 +17,7 @@ public class ProgressUtils {
 			pd = CustomProgressDialog.createDialog(context);
 			if (!TextUtils.isEmpty(msg))
 				pd.setMessage(msg);
-			pd.setCancelable(false);
+			pd.setCancelable(true);
 			pd.show();
 		}
 	}

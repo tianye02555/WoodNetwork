@@ -19,6 +19,7 @@ public class OrderBuyerInfoPresenter implements OrderBuyerInfoContract.OrderBuye
         if(null!=orderBuyerInfoView){
             this.orderBuyerInfoView=orderBuyerInfoView;
         }
+        this.orderBuyerInfoView.setPresenter(this);
         this.orderBuyerInfoModel=new OrderBuyerInfoModel();
     }
 

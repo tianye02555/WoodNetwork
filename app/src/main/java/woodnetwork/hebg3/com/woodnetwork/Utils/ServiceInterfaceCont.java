@@ -82,7 +82,7 @@ public class ServiceInterfaceCont {
     public static final String ORDERBUYERPROFILTER = "/order/buyer/pro/filter/list?param=";
 
     //16.3获取异常订单列表接口
-    public static final String ORDERBUYERPROEXCEPTIONLIST = "/order/buyer/pro/exception/list?param=";
+    public static final String ORDERBUYERPROEXCEPTIONLIST = "/exception/list?param=";
     //16.3获取异常订单列表接口
     public static final String EXCEPTIONADD = "/exception/add";
 

@@ -33,8 +33,6 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public Boolean gridView=false;
     @Expose
-    public Double zongJia;
-    @Expose
     public String delivery;
     @Expose
     public List<ShopcarList_listItem_attributeItem> attribute;

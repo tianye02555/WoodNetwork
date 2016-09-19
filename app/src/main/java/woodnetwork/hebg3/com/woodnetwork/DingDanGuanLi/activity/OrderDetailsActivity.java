@@ -87,7 +87,7 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     public void showOrderInfo(OrderBuyerInfo orderBuyerInfo) {
         this.orderBuyerInfo=orderBuyerInfo;
         SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(this);
-        text_maiJia.setText((String)sharePreferencesUtils.getData("user_name",""));
+        text_maiJia.setText("买家信息:"+(String)sharePreferencesUtils.getData("user_name",""));
         text_shouHuoDiZhi.setText(orderBuyerInfo.receive_area);
         text_faHuoDiZhi.setText(orderBuyerInfo.delivery_area);
                 text_dingDanHao.setText(orderBuyerInfo.number);

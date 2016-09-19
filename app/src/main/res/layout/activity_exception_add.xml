@@ -4,6 +4,7 @@
     android:id="@+id/activity_exception_add"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.ExceptionAddActivity">
 
     <include
@@ -18,7 +19,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
 
             <TextView
                 android:id="@+id/activity_order_exceptionadd_text_dinDanBianHao"
@@ -136,6 +140,7 @@
                 android:id="@+id/activity_order_exceptionadd_edit_yiChangYuanYin"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:gravity="start"
                 android:layout_below="@+id/activity_order_exceptionadd_text_yiChangYuanYin"
                 android:layout_margin="@dimen/distance_normal" />
 

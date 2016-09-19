@@ -48,6 +48,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
+import woodnetwork.hebg3.com.woodnetwork.sysfunction.activity.LoginActivity;
 import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
 
@@ -99,6 +100,10 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         ButterKnife.bind(this, view);
 
         textTitle.setText("木联网");
+        sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
+        if("null".equals(sharePreferencesUtils.getData("userid","null"))){
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
 
 
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -119,7 +124,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
 
         new ShoppingMallPresenter(this);
-        sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
+
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
         myRequestInfo = new MyRequestInfo();
@@ -244,7 +249,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
                             shopcarList_listItem.pname = list.get(position).pname;
                             shopcarList_listItem.price = list.get(position).price;
                             shopcarList_listItem.stock = Double.parseDouble(number.getText().toString().trim());
-                            shopcarList_listItem.zongJia = (list.get(position).price) * (Double.parseDouble(number.getText().toString().trim()));
+                            shopcarList_listItem.xiaoJi = (list.get(position).price) * (Double.parseDouble(number.getText().toString().trim()));
                             shopcarList_listItem_list.add(shopcarList_listItem);
 
                             shopcarList.list = shopcarList_listItem_list;

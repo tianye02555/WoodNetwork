@@ -1,6 +1,13 @@
 package woodnetwork.hebg3.com.woodnetwork.Utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
@@ -42,6 +50,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.ShowNetPictureActivity;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.SettingActivity;
 
 /** 工具类 */
@@ -565,5 +574,24 @@ public static void log(String msg) {
 
 		}
 	}
-    
+
+	/*
+         * 调用图片预览界面
+         *
+         * @param Activity activity调用者活动
+         *
+         * @param List<String> listPictureUrl照片文件的路径的集合
+         *
+         * @param int imgPosition 界面最初显示是哪张图片
+         */
+	public static void launchNetPictureShow(Context context, List<String> listPictureUrl, int imgPosition) {
+		if (!CommonUtils.isExistSdcard()) {
+			CommonUtils.showToast(context, "sd卡不存在");
+			return;
+		}
+		Intent intent = new Intent(context, ShowNetPictureActivity.class);
+		intent.putExtra(ShowNetPictureActivity.LS_PHOTOFILEPATH, (Serializable) listPictureUrl);
+		intent.putExtra(ShowNetPictureActivity.IMG_POSITION, imgPosition);
+		context.startActivity(intent);
+	}
 }

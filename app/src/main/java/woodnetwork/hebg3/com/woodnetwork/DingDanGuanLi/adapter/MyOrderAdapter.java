@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessInfoActivity;
@@ -57,7 +59,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
     public void onBindViewHolder(BusnessHolder holder, int position) {
 
         holder.text_id.setText("订单编号："+list.get(position).number);
-        holder.text_date.setText(list.get(position).creat_time);
+        holder.text_date.setText("下单时间："+list.get(position).creat_time);
         holder.text_jian.setText(String.valueOf(list.get(position).products.size()));
         holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price)+"元");
         if(0==list.get(position).status){ // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
@@ -122,7 +124,17 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context,BusnessInfoActivity.class);
+                    Intent intent=new Intent(context,OrderDetailsActivity.class);
+                    intent.putExtra("sid",list.get(getAdapterPosition()).id);
+                    intent.putExtra("from","BusnessInfoListActivity");
+                    context.startActivity(intent);
+                }
+            });
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent=new Intent(context,OrderDetailsActivity.class);
                     intent.putExtra("sid",list.get(getAdapterPosition()).id);
                     intent.putExtra("from","BusnessInfoListActivity");
                     context.startActivity(intent);

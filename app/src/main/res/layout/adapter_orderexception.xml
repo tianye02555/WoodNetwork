@@ -16,6 +16,8 @@
         android:id="@+id/activity_order_exception_gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:verticalSpacing="@dimen/distance_normal"
+        android:horizontalSpacing="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:numColumns="4"></woodnetwork.hebg3.com.woodnetwork.view.MyGridView>
 </LinearLayout>

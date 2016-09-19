@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/adapter_myorder_root"
     android:orientation="vertical">
 
     <TextView
@@ -31,9 +32,10 @@
         android:id="@+id/adapter_myorder_text_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_myorder_text_id"
         android:layout_marginRight="@dimen/distance_normal"
-        android:layout_marginTop="@dimen/distance_longest"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_marginLeft="@dimen/distance_normal"
         android:text="1987-02-30"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />

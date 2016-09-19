@@ -3,12 +3,15 @@
     package="woodnetwork.hebg3.com.woodnetwork">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:name=".WoodNetworkApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:hardwareAccelerated="false"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".sysfunction.activity.LoginActivity" />
         <activity android:name=".sysfunction.activity.GetPasswordActivity" />
@@ -43,6 +46,7 @@
         <activity android:name=".DingDanGuanLi.activity.OrderExceptionActivity" />
         <activity android:name=".DingDanGuanLi.activity.OrderReceiveActivity" />
         <activity android:name=".DingDanGuanLi.activity.ExceptionAddActivity"></activity>
+        <activity android:name=".DingDanGuanLi.activity.ShowNetPictureActivity"></activity>
     </application>
 
 </manifest>

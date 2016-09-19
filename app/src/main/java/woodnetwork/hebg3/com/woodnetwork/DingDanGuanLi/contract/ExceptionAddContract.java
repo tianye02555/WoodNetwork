@@ -1,5 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract;
 
+import android.view.View;
+
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
@@ -23,7 +25,7 @@ public interface ExceptionAddContract {
         /**
          * 添加异常图片
          */
-        void addExceptionPicture();
+        void addExceptionPicture(View view);
 
     }
     interface ExceptionAddPresenterInterface extends BasePresenter{

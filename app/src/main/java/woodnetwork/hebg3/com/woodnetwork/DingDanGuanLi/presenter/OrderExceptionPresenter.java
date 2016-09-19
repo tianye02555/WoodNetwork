@@ -19,6 +19,7 @@ public class OrderExceptionPresenter implements OrderExceptionContract.OrderExce
         if(null!=orderExceptionView){
             this.orderExceptionView=orderExceptionView;
         }
+        this.orderExceptionView.setPresenter(this);
         orderExceptionModel=new OrderExceptionModel();
     }
 

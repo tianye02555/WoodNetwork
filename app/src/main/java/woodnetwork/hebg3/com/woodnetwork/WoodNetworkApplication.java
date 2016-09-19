@@ -14,8 +14,6 @@ public class WoodNetworkApplication extends Application {
         super.onCreate();
         //初始化fresco
         Fresco.initialize(this);
-
-
     }
 
 }

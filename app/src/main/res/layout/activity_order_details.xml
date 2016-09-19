@@ -49,7 +49,6 @@
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/activity_order_details_shouhuodizhitou"
-        android:text="河北省 石家庄市 长安区 河东街道华清南街16号"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -73,7 +72,6 @@
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/activity_order_details_fahuodizhitou"
-        android:text="河北省 石家庄市 长安区 河东街道华清南街16号"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -93,7 +91,6 @@
         android:layout_below="@+id/activity_order_details_view1"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="订单号：4654564564"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -106,7 +103,6 @@
         android:layout_below="@+id/activity_order_details_view1"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="1987-02-30"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -127,7 +123,6 @@
         android:layout_marginLeft="@dimen/distance_shortest"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="1500元"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -149,7 +144,6 @@
         android:layout_below="@+id/adapter_order_details_listview"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toLeftOf="@+id/adapter_order_details_text_jianshangping"
-        android:text="1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -183,7 +177,6 @@
         android:layout_below="@+id/adapter_order_details_text_gongji"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="待收货"
         android:textColor="@color/huiseziti"
         android:textSize="@dimen/font_normal" />
 

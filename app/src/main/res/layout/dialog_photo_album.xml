@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#50000000" 
+   >
+
+    <TextView
+        android:id="@+id/dialogquxiao"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_shape_white"
+        android:gravity="center"
+        android:text="取消"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="1dp"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/dialog_xiangce"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_above="@+id/dialogquxiao"
+        android:background="@drawable/button_shape_white"
+        android:gravity="center"
+        android:text="相册"
+        android:layout_marginTop="1dp"
+        android:textColor="@android:color/black"
+        
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/dialog_xiangji"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_above="@+id/dialog_xiangce"
+        android:background="@drawable/button_shape_white"
+        android:gravity="center"
+        android:text="相机"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+</RelativeLayout>

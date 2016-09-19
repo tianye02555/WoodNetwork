@@ -1,6 +1,8 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +12,16 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList_exceptionItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 
 /**
  * Created by ty on 2016/9/6 0006.
@@ -23,7 +30,7 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
     private Context context;
     private List<String> list;
-
+    String pictureName;
     public OrderException_yiChangXinXi_gridAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
@@ -48,7 +55,7 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View contentView, ViewGroup viewGroup) {
+    public View getView(final int position, View contentView, ViewGroup viewGroup) {
         ViewHodler holder = null;
         if (null == contentView) {
             holder = new ViewHodler();
@@ -59,10 +66,17 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
             holder = (ViewHodler) contentView.getTag();
         }
         holder.image.setImageURI(Uri.parse(list.get(position)));
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+CommonUtils.launchNetPictureShow(context,list,position);
+            }
+        });
         return contentView;
     }
 
     class ViewHodler {
         private SimpleDraweeView image;
     }
+
 }

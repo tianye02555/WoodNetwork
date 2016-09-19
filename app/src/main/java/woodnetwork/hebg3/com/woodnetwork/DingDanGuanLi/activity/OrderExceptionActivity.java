@@ -87,11 +87,15 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
 
     @Override
     public void showOrderExceptionInfo(ExceptionList exceptionList) {
-        date.setText(exceptionList.creat_time);
-        maiJiaXinXi.setText(orderBuyerInfo.seller);
-        price.setText(String.valueOf(exceptionList.total_price));
+        date.setText("下单日期："+exceptionList.creat_time);
+        maiJiaXinXi.setText("卖家信息："+orderBuyerInfo.seller);
+        price.setText(exceptionList.total_price+"元");
         jian.setText(String.valueOf(orderBuyerInfo.products.size()));
-        dinDanBianHao.setText(exceptionList.number);
+        dinDanBianHao.setText("订单编号："+exceptionList.number);
+
+        exceptionList.exception.get(0).imgs.add("http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg");
+        exceptionList.exception.get(0).imgs.add("http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg");
+        exceptionList.exception.get(0).imgs.add("http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg");
 
         listAdapter_yiChangXinXi = new OrderException_yiChangXinXi_listAdapter(this, exceptionList.exception);
         listview_yichangxinxi.setAdapter(listAdapter_yiChangXinXi);

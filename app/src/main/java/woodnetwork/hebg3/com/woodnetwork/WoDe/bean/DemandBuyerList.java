@@ -14,5 +14,7 @@ public class DemandBuyerList {
     @Expose
     public Integer page_no;
     @Expose
+    public Integer total_page;
+    @Expose
     public List<DemandBuyerList_listItem> list;
 }

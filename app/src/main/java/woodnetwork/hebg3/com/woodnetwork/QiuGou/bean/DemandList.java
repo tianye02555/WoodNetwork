@@ -10,9 +10,11 @@ import java.util.List;
 
 public class DemandList {
     @Expose
-    public int page_size;
+    public Integer page_size;
     @Expose
-    public int page_no;
+    public Integer page_no;
+    @Expose
+    public Integer total_page;
     @Expose
     public List<DemandList_listItem> list;
 }

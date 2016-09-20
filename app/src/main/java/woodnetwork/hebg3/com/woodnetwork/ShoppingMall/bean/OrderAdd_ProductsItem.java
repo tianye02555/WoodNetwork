@@ -13,13 +13,13 @@ public class OrderAdd_productsItem implements Serializable{
     @Expose
     public String name;
     @Expose
-    public double price;
+    public Double price;
     @Expose
-    public double number;
+    public Double number;
     @Expose
-    public double total_price;
+    public Double total_price;
     @Expose
-    public int type;
+    public Integer type;
     @Expose
     public List<OrderAdd_ProductsItem_priceItem> attributes;
 

@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/adapter_exceptionadd_image"
+        android:id="@+id/adapter_upload_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         fresco:placeholderImage="@drawable/defaultimg" />
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/adapter_exceptionadd_cancel"
+        android:id="@+id/adapter_upload_cancel"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"

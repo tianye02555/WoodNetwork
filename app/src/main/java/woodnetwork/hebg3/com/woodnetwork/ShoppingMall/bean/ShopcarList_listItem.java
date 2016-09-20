@@ -23,7 +23,7 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public ShopcarList_listItem_seller seller;
     @Expose
-    public int type;
+    public Integer type;
     @Expose
     public String pimg;
     @Expose

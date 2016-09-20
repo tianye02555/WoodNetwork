@@ -25,7 +25,7 @@ public class ProductFilterList_productsItem implements Serializable{
     @Expose
     public Double stock;
     @Expose
-    public int type;
+    public Integer type;
     @Expose
     public String delivery;
     @Expose

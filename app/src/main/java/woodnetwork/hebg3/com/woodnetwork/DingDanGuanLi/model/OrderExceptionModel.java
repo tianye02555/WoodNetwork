@@ -39,7 +39,7 @@ public class OrderExceptionModel implements OrderExceptionModelInterface {
         this.onServiceBaceInterface = onServiceBaceInterface;
         ClientParams params = new ClientParams();
         params.http_method = ClientParams.HTTP_GET;
-        params.getMethod = ServiceInterfaceCont.ORDERBUYERPROEXCEPTIONLIST;
+        params.getMethod = ServiceInterfaceCont.EXCEPTIONLIST;
         params.params = CommonUtils.getParamString(object);
         new NetTask(handler.obtainMessage(0),params,ExceptionList.class).execute();
     }

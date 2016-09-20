@@ -143,7 +143,11 @@
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
-
+<LinearLayout
+    android:id="@+id/linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -257,7 +261,7 @@
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
-
+</LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

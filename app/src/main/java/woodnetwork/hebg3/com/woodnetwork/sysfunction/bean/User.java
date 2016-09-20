@@ -14,24 +14,12 @@ public class User {
     @Expose
     public String password;
     @Expose
-    public String company_flag;
+    public Integer company_flag;
     @Expose
-    public String seller_flag;
+    public Integer seller_flag;
     @Expose
-    public String status;
+    public Integer status;
     @Expose
     public String user_name;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", login_name='" + login_name + '\'' +
-                ", password='" + password + '\'' +
-                ", company_flag='" + company_flag + '\'' +
-                ", seller_flag='" + seller_flag + '\'' +
-                ", status='" + status + '\'' +
-                ", user_name='" + user_name + '\'' +
-                '}';
-    }
 }

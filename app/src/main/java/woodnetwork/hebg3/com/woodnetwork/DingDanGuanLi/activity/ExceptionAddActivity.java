@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -31,15 +30,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.ExceptionAddAdapter;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.UploadPictureAdapter;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.ExceptionAddContract;
-import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.MyOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter.ExceptionAddPresenter;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.DividerItemDecoration;
@@ -73,14 +71,14 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     Button btn_tiJiao;
     @Bind(R.id.activity_exception_add)
     RelativeLayout relativeLayout;
-    private ExceptionAddAdapter addAdapter;
+    private UploadPictureAdapter addAdapter;
     private List<Bitmap> list;
     private final int TAKE_PHOTO = 1;// 拍照
     private final int ALBUM = 2;// 相册
-    private final int CROP = 3;// 相册
+    private final int CROP = 3;// 剪切
     private String m_strAvatar;
     private ExceptionAddContract.ExceptionAddPresenterInterface presenter;
-
+    private OrderBuyerInfo orderBuyerInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +88,11 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
 
         textTitle.setText("添加订单异常");
         imageTitleRight.setVisibility(View.GONE);
-
+        orderBuyerInfo = (OrderBuyerInfo) getIntent().getSerializableExtra("OrderBuyerInfo");
+        showOrderExceptionInfo(orderBuyerInfo);
         list = new ArrayList<Bitmap>();
         list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
-        addAdapter = new ExceptionAddAdapter(this, list);
+        addAdapter = new UploadPictureAdapter(this, list,0);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 2));
         recyclerview.setAdapter(addAdapter);
@@ -111,13 +110,18 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     }
 
     @Override
-    public void getYiChangYuanYin() {
+    public String getYiChangYuanYin() {
+        return edit_yiChangYuanYin.getText().toString().trim();
 
     }
 
     @Override
-    public void showOrderExceptionInfo() {
-
+    public void showOrderExceptionInfo(OrderBuyerInfo orderBuyerInfo) {
+        text_dinDanBianHao.setText("订单编号：" + orderBuyerInfo.number);
+        text_date.setText("下单日期：" + orderBuyerInfo.creat_time);
+        text_maiJiaXinXi.setText("卖家信息：" + orderBuyerInfo.seller);
+        text_price.setText(String.valueOf(orderBuyerInfo.total_price));
+        text_jian.setText(String.valueOf(orderBuyerInfo.products.size()));
     }
 
     @Override
@@ -189,7 +193,7 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
             }
 
         });
-        // 拍照
+        // 相册
         TextView fromAlbum = (TextView) contentView
                 .findViewById(R.id.dialog_xiangce);
         fromAlbum.setOnClickListener(new View.OnClickListener() {
@@ -256,14 +260,13 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                         Bundle extras = data.getExtras();
                         if (extras != null) {
                             Bitmap photo = extras.getParcelable("data");
-                            m_strAvatar = saveBitmapToFile(photo);
+//                            m_strAvatar = saveBitmapToFile(photo);
                             list = addAdapter.getList();
                             list.remove(list.size() - 1);
                             list.add(photo);
                             list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
                             addAdapter.setList(list);
-                            addAdapter.notifyDataSetChanged();
-//                            head.setImageBitmap(photo);
+                            addAdapter.notifyItemRangeChanged(list.size()-2,list.size()-1);
                         }
                     }
 //                    if (!TextUtils.isEmpty(m_strAvatar)) {

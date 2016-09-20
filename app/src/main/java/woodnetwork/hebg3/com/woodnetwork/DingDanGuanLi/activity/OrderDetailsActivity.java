@@ -67,6 +67,12 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
         textTitle.setText("订单详情");
         imageTitleRight.setVisibility(View.GONE);
 
+        if(null!=getIntent()){
+            if("1".equals(getIntent().getStringExtra("flag"))){
+                btn_queRenShouHuo.setText("发货");
+            }
+        }
+
         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
@@ -153,9 +159,14 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
             case R.id.adapter_order_details_btn_querenshouhuo:
                 Intent intent_receive =new Intent(OrderDetailsActivity.this,OrderReceiveActivity.class);
                 intent_receive.putExtra("OrderBuyerInfo",this.orderBuyerInfo);
+                if(null!=getIntent()){
+                    if("1".equals(getIntent().getStringExtra("flag"))){
+                        intent_receive.putExtra("flag","1");
+                    }
+                }
                 startActivity(intent_receive);
                 break;
-            case R.id.adapter_order_details_btn_guanbidingdan:
+            case R.id.adapter_order_details_btn_guanbidingdan://异常申报
                 Intent intent_exception =new Intent(OrderDetailsActivity.this,OrderExceptionActivity.class);
                 intent_exception.putExtra("OrderBuyerInfo",this.orderBuyerInfo);
                 startActivity(intent_exception);

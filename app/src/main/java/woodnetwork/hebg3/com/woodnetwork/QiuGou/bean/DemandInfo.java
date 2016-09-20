@@ -16,9 +16,9 @@ public class DemandInfo {
     @Expose
     public String pname;
     @Expose
-    public int ptype;
+    public Integer ptype;
     @Expose
-    public int number;
+    public Integer number;
     @Expose
     public String buyer;
     @Expose

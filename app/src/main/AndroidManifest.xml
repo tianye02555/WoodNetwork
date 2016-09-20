@@ -47,6 +47,8 @@
         <activity android:name=".DingDanGuanLi.activity.OrderReceiveActivity" />
         <activity android:name=".DingDanGuanLi.activity.ExceptionAddActivity"></activity>
         <activity android:name=".DingDanGuanLi.activity.ShowNetPictureActivity"></activity>
+        <activity android:name=".DingDanGuanLi.activity.DemOrderActivity"></activity>
+        <activity android:name=".DingDanGuanLi.activity.SellerOrderActivity"></activity>
     </application>
 
 </manifest>

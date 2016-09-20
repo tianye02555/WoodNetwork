@@ -14,5 +14,5 @@ public class BannerList_listItem {
     @Expose
     public String img;
     @Expose
-    public int sort;
+    public Integer sort;
 }

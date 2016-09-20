@@ -11,9 +11,11 @@ import java.util.List;
 
 public class ShopcarList implements Serializable{
     @Expose
-    public int page_size;
+    public Integer page_size;
     @Expose
-    public int page_no;
+    public Integer page_no;
+    @Expose
+    public Integer total_page;
     @Expose
     public List<ShopcarList_listItem> list;
 }

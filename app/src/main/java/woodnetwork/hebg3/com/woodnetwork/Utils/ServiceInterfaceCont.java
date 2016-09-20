@@ -82,20 +82,37 @@ public class ServiceInterfaceCont {
     public static final String ORDERBUYERPROFILTER = "/order/buyer/pro/filter/list?param=";
 
     //16.3获取异常订单列表接口
-    public static final String ORDERBUYERPROEXCEPTIONLIST = "/exception/list?param=";
-    //16.3获取异常订单列表接口
-    public static final String EXCEPTIONADD = "/exception/add";
+    public static final String ORDERBUYERPROEXCEPTIONLIST = "/order/buyer/pro/exception/list?param=";
 
     //16.4关闭订单接口
     public static final String ORDERBUYERCLOSE = "/order/buyer/close?param=";
+
     //17.1获取订单详情接口
     public static final String ORDERBUYERINFO = "/order/buyer/info?param=";
+
+    //18.1获取订单异常列表
+    public static final String EXCEPTIONLIST = "/exception/list?param=";
+
+    //19.1异常添加接口
+    public static final String EXCEPTIONADD = "/exception/add";
+
+    //20.1确认收货接口
+    public static final String ORDERRECEIVE = "/order/receive";
 
     //21.1获取我的求购信息列表接口
     public static final String DEMANDBUYERLIST = "/demand/buyer/list?param=";
 
     //22.1获取我的求购详情接口
     public static final String DEMANDBUYERINFO = "/demand/buyer/info?param=";
+
+    //23.1获取全部求购订单列表
+    public static final String ORDERBUYERDEMLIST = "/order/buyer/dem/list?param=";
+
+    //23.2根据订单类型获取求购订单列表接口
+    public static final String ORDERBUYERDEMFILTERLIST = "/order/buyer/dem/filter/list?param=";
+
+    //23.3获取异常求购订单列表接口
+    public static final String ORDERBUYERDEMEXCEPTIONLIST = "/order/buyer/dem/exception/list?param=";
 
     //24.1获取我的店铺详情接口
     public static final String SHOPINFO = "/shop/info?param=";
@@ -105,6 +122,18 @@ public class ServiceInterfaceCont {
 
     //25.2获取我的商品详情接口
     public static final String PRODUCTSELLERINFO = "/product/seller/info?param=";
+
+    //26.1获取卖家订单列表接口
+    public static final String ORDERSELLERLIST = "/order/seller/list?param=";
+
+    //26.2根据订单类型获取卖家订单列表接口
+    public static final String ORDERSELLERFILTERLIST = "/order/seller/filter/list?param=";
+
+    //26.3获取卖家异常订单列表接口
+    public static final String ORDERSELLEREXCEPTIONLIST = "/order/seller/exception/list?param=";
+
+    //26.4卖家关闭订单接口
+    public static final String ORDERSELLERCLOSE = "/order/seller/close?param=";
 
     //28.1获取统计详情接口
     public static final String REPORTSINFO = "/reports/info?param=";

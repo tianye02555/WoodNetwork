@@ -10,9 +10,11 @@ import java.util.List;
 
 public class ProductFilterList {
     @Expose
-    public String page_size;
+    public Integer page_size;
     @Expose
-    public String page_no;
+    public Integer page_no;
+    @Expose
+    public Integer total_page;
     @Expose
     public List<ProductFilterList_productsItem> products;
 

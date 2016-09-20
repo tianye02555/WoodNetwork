@@ -8,14 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.DemOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.SellerOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessInfoActivity;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.DemandBuyerListActivity;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.MyInformationActivity;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.MyQuotationActivity;
@@ -50,7 +54,9 @@ public class MyFragment extends Fragment {
     TextView tongJiChaXun;
     @Bind(R.id.myfragment_text_wodebaojia)
     TextView woDeBaoJia;
-
+    @Bind(R.id.linearlayout)
+    LinearLayout maiJiaZhongXin;
+    private SharePreferencesUtils sharePreferencesUtils;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +65,10 @@ public class MyFragment extends Fragment {
         ButterKnife.bind(this, view);
         imgeTitleLeft.setVisibility(View.GONE);
         textTitle.setText("个人首页");
-
+        sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(getActivity());
+//        if(0==(Integer) sharePreferencesUtils.getData("seller_flag",1)){
+//            maiJiaZhongXin.setVisibility(View.GONE);
+//        }
         return view;
     }
 
@@ -85,7 +94,7 @@ public class MyFragment extends Fragment {
                 startActivity(DemandBuyerListActivity.class);
                 break;
             case R.id.myfragment_text_qiugoudindan:
-                startActivity(MyQuotationActivity.class);
+                startActivity(DemOrderActivity.class);
                 break;
             case R.id.myfragment_text_wodeshangpu:
                 Intent intent=new Intent(getActivity(),BusnessInfoActivity.class);
@@ -96,7 +105,7 @@ public class MyFragment extends Fragment {
                 startActivity(ProductSellerListActivity.class);
                 break;
             case R.id.myfragment_text_dingdanliebiao:
-                startActivity(MyQuotationActivity.class);
+                startActivity(SellerOrderActivity.class);
                 break;
             case R.id.myfragment_text_tongjichaxun:
                 startActivity(ReportsActivity.class);

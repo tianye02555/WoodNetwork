@@ -19,9 +19,9 @@ public class OrderAdd implements Serializable {
     @Expose
     public String creat_time;
     @Expose
-    public int type;
+    public Integer type;
     @Expose
-    public int status;
+    public Integer status;
     @Expose
     public String buyer;
     @Expose
@@ -31,9 +31,9 @@ public class OrderAdd implements Serializable {
     @Expose
     public String receive_area;
     @Expose
-    public int receive_type;
+    public Integer receive_type;
     @Expose
-    public double total;
+    public Double total;
     @Expose
     public ArrayList <OrderAdd_productsItem> products;
 

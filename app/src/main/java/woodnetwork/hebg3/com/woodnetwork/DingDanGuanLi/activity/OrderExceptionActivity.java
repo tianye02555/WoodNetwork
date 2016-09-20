@@ -80,6 +80,7 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
                 break;
             case R.id.image_title_right:
                 Intent intent = new Intent(OrderExceptionActivity.this, ExceptionAddActivity.class);
+                intent.putExtra("OrderBuyerInfo",this.orderBuyerInfo);
                 startActivity(intent);
                 break;
         }
@@ -89,7 +90,7 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
     public void showOrderExceptionInfo(ExceptionList exceptionList) {
         date.setText("下单日期："+exceptionList.creat_time);
         maiJiaXinXi.setText("卖家信息："+orderBuyerInfo.seller);
-        price.setText(exceptionList.total_price+"元");
+        price.setText(String.valueOf(exceptionList.total_price));
         jian.setText(String.valueOf(orderBuyerInfo.products.size()));
         dinDanBianHao.setText("订单编号："+exceptionList.number);
 

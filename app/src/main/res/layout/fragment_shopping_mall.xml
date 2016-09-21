@@ -45,13 +45,13 @@
             android:src="@drawable/shaixuan" />
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/fragment_shopping_mall_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rel"
         android:background="@android:color/white"
-        android:visibility="visible"></android.support.v7.widget.RecyclerView>
+        android:visibility="visible"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
     <RelativeLayout
         android:id="@+id/rel_shaixuan"

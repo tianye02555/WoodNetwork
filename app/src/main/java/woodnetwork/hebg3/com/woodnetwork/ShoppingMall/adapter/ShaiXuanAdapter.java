@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -88,10 +89,21 @@ public class ShaiXuanAdapter extends BaseAdapter {
         for (int i = 0; i < list.get(position).value.size(); i++) {
             //根据xml  获取radiobutton
             radioButton = (RadioButton) LayoutInflater.from(context).inflate(R.layout.radiobutton, null);
+            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(150,100);
+            layoutParams.setMargins(10,10,10,10);
+            radioButton.setLayoutParams(layoutParams);
             radioButton.setGravity(Gravity.CENTER);
-            radioButton.setBackgroundResource(R.drawable.defaultimg);
+            radioButton.setBackgroundResource(R.drawable.selector_shaixuan_drawable);
             radioButton.setText(list.get(position).value.get(i).value_name);
             radioButton.setId(Integer.parseInt(list.get(position).value.get(i).value_id, 10));
+//            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                    if(b){
+//                        compoundButton.setBackgroundColor(context.getResources().getColor(R.color.title));
+//                    }
+//                }
+//            });
             holder.radioGroup.addView(radioButton, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         }
         holder.textView.setText(list.get(position).name);

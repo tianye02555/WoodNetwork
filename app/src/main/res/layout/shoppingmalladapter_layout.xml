@@ -4,26 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white">
-<RelativeLayout
-    android:id="@+id/reltivelayout"
-    android:layout_width="70dp"
-    android:layout_height="70dp"
-    android:layout_margin="@dimen/distance_normal">
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/shopppingmalladapter_simpledraweeview_head"
+
+    <RelativeLayout
+        android:id="@+id/reltivelayout"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        fresco:placeholderImage="@drawable/defaultimg" />
-    <TextView
-        android:id="@+id/shopppingmalladapter_text_qihuo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/font_normal"
-        android:text="@string/qihuo"
-        android:textColor="@android:color/holo_red_light"
-        android:layout_alignParentRight="true"
-        />
-</RelativeLayout>
+        android:layout_margin="@dimen/distance_normal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/shopppingmalladapter_simpledraweeview_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            fresco:placeholderImage="@drawable/defaultimg" />
+
+        <TextView
+            android:id="@+id/shopppingmalladapter_text_qihuo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/qihuo"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/font_normal" />
+    </RelativeLayout>
 
 
     <TextView
@@ -38,81 +40,89 @@
         android:textSize="@dimen/font_normal" />
 
     <TextView
-    android:id="@+id/shopppingmalladapter_txt_yuan"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/reltivelayout"
-    android:layout_alignBaseline="@+id/shopppingmalladapter_txt_name"
-    android:layout_alignParentRight="true"
-    android:layout_marginRight="@dimen/distance_normal"
-    android:text="元/立方"
-    android:textColor="@android:color/black"
-    android:textSize="@dimen/font_normal" />
+        android:id="@+id/shopppingmalladapter_txt_yuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shopppingmalladapter_txt_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/reltivelayout"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:text="元/立方"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/shopppingmalladapter_txt_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/reltivelayout"
         android:layout_alignBaseline="@+id/shopppingmalladapter_txt_name"
+        android:layout_alignTop="@+id/reltivelayout"
         android:layout_marginRight="@dimen/distance_shortest"
-        android:text="4500"
         android:layout_toLeftOf="@+id/shopppingmalladapter_txt_yuan"
+        android:text="4500"
         android:textColor="@color/jiage"
         android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/shopppingmalladapter_txt_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/shopppingmalladapter_txt_company"
-        android:layout_marginTop="@dimen/distance_short"
-        android:text="库存：500方"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_short"
+        android:text="库存：500方"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+
     <View
         android:id="@+id/lin"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/dise"
+        android:layout_below="@+id/shopppingmalladapter_txt_company"
         android:layout_marginTop="@dimen/distance_normal"
-        android:layout_below="@+id/shopppingmalladapter_txt_company"></View>
+        android:background="@color/dise"></View>
+
     <Button
         android:id="@+id/shopppingmalladapter_btn_buy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/lin"
         android:layout_marginLeft="@dimen/distance_long"
-        android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_longest"
-        android:textSize="@dimen/font_normal"
         android:background="@null"
-        android:textColor="@android:color/holo_blue_bright"
         android:text="@string/lijigoumai"
-        />
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="@dimen/font_normal" />
+
     <Button
         android:id="@+id/shopppingmalladapter_btn_shoppingcart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lin"
-        android:background="@null"
-        android:textSize="@dimen/font_normal"
-        android:textColor="@android:color/holo_blue_bright"
         android:layout_toLeftOf="@+id/shopppingmalladapter_btn_buy"
+        android:background="@null"
         android:text="@string/jiarugouwuche"
-        />
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="@dimen/font_normal" />
 
     <TextView
         android:id="@+id/shopppingmalladapter_txt_company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="万达实业有限公司"
+        android:layout_below="@+id/shopppingmalladapter_txt_name"
         android:layout_marginBottom="@dimen/distance_normal"
-        android:textColor="@android:color/black"
         android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toEndOf="@+id/reltivelayout"
         android:layout_toLeftOf="@+id/shopppingmalladapter_txt_stock"
-        android:textSize="@dimen/font_normal"
-android:layout_below="@+id/shopppingmalladapter_txt_name"
         android:layout_toRightOf="@+id/reltivelayout"
-        android:layout_toEndOf="@+id/reltivelayout" />
+        android:text="万达实业有限公司"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+    <View
+        android:layout_below="@+id/shopppingmalladapter_btn_shoppingcart"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/dise"></View>
 </RelativeLayout>

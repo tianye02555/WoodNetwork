@@ -50,7 +50,7 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/busnesslistadapterlayout_image_phone"
-        fresco:placeholderImage="@drawable/defaultimg"
+        fresco:placeholderImage="@drawable/dianhua"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignTop="@id/busnesslistadapterlayout_text_company"
@@ -59,4 +59,10 @@
         android:layout_marginRight="26dp"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_marginStart="26dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@+id/busnesslistadapterlayout_text_phone"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_height="5dp"
+        android:background="@color/dise"></View>
 </RelativeLayout>

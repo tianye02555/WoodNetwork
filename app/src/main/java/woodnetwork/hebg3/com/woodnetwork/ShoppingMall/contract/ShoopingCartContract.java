@@ -1,8 +1,13 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract;
 
+import java.util.List;
+
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 
 /**
@@ -37,6 +42,14 @@ public interface ShoopingCartContract {
          * 显示总价
          */
         void showTitlePrice();
+        /**
+         * 加载更多
+         */
+        void loadMore(List<ShopcarList_listItem> list);
+        /**
+         * 更新
+         */
+        void refresh(ShopcarList shopcarList);
 
     }
 
@@ -46,7 +59,7 @@ public interface ShoopingCartContract {
          *
          * @param myRequestInfo
          */
-        void getShoopingCartData(MyRequestInfo myRequestInfo);
+        void getShoopingCartData(MyRequestInfo myRequestInfo,int flag);
 
         /**
          * 改变商品数量接口

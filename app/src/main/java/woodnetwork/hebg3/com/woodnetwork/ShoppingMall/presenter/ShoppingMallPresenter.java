@@ -25,28 +25,37 @@ import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
 public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallPresenter {
     private ShoppingMallContract.ShoppingMallView shoppingMallView;
     private ShoppingMallModel shoppingMallModel;
-    public ShoppingMallPresenter(ShoppingMallContract.ShoppingMallView view){
-        if(null==view){
+
+    public ShoppingMallPresenter(ShoppingMallContract.ShoppingMallView view) {
+        if (null == view) {
             return;
         }
-        this.shoppingMallView=view;
+        this.shoppingMallView = view;
         this.shoppingMallView.setPresenter(this);
-        shoppingMallModel=new ShoppingMallModel();
+        shoppingMallModel = new ShoppingMallModel();
 
     }
 
     @Override
-    public void getWoodsList(Request_shoppingMall_woodsList request_shoppingMall_woodsList) {
-        shoppingMallView.showProgress();
-        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(((Fragment)shoppingMallView).getActivity());
-        Request_getAttribute request_getAttribute=new Request_getAttribute();
-        request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
+    public void getWoodsList(Request_shoppingMall_woodsList request_shoppingMall_woodsList, final int falg) {
+        if (0 == falg) {
+            shoppingMallView.showProgress();
+        }
+        SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(((Fragment) shoppingMallView).getActivity());
+        Request_getAttribute request_getAttribute = new Request_getAttribute();
+        request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
         shoppingMallModel.getGoodsData(CommonUtils.getRequestInfo(request_shoppingMall_woodsList, request_getAttribute), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
+                if (0 == falg) {
+                    shoppingMallView.showGoodsData(((ProductFilterList) ((ResponseBody) object).obj));
+                } else if (1 == falg) {
+                    shoppingMallView.refresh(((ProductFilterList) ((ResponseBody) object).obj));
+                } else if (2 == falg) {
+                    shoppingMallView.loadMore(((ProductFilterList) ((ResponseBody) object).obj).products);
+                }
 
-                shoppingMallView.showGoodsData(((ProductFilterList)((ResponseBody)object).obj).products);
             }
 
             @Override
@@ -64,7 +73,7 @@ public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallP
         shoppingMallModel.getSpinnerData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                shoppingMallView.showAttributeFilterListInfo((WoodFilterAttribute) ((ResponseBody)object).obj);
+                shoppingMallView.showAttributeFilterListInfo((WoodFilterAttribute) ((ResponseBody) object).obj);
             }
 
             @Override
@@ -76,17 +85,17 @@ public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallP
 
     @Override
     public void shopcarAdd(MyRequestInfo myRequestInfo) {
-            shoppingMallModel.getShopcarAdd(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
-                @Override
-                public void onSuccess(Object object) {
-                    shoppingMallView.showMessage(((ResponseBody)object).base.msg);
-                }
+        shoppingMallModel.getShopcarAdd(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                shoppingMallView.showMessage(((ResponseBody) object).base.msg);
+            }
 
-                @Override
-                public void onFailed(String string) {
-                    shoppingMallView.showMessage(string);
-                }
-            });
+            @Override
+            public void onFailed(String string) {
+                shoppingMallView.showMessage(string);
+            }
+        });
     }
 
     @Override

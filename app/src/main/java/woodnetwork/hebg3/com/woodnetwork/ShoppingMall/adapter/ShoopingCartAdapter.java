@@ -44,6 +44,14 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         this.list = list;
     }
 
+    public List<ShopcarList_listItem> getList() {
+        return list;
+    }
+
+    public void setList(List<ShopcarList_listItem> list) {
+        this.list = list;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.shoopingcart_adapter, parent, false);

@@ -8,6 +8,7 @@ import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shoppingMall_woodsList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterInfo;
@@ -27,9 +28,9 @@ public interface ShoppingMallContract {
 
         /**
          * 显示商品信息
-         * @param list
+         * @param
          */
-        void showGoodsData(List<ProductFilterList_productsItem> list);
+        void showGoodsData(ProductFilterList productFilterList);
 
         /**
          * 设置筛选内容
@@ -44,13 +45,22 @@ public interface ShoppingMallContract {
          * pid  点击的项的商品id
          */
         void showNumberDialog(int id,int position);
+
+        /**
+         * 加载更多
+         */
+        void loadMore(List<ProductFilterList_productsItem> newList);
+        /**
+         * 更新
+         */
+        void refresh(ProductFilterList newList);
     }
     interface ShoppingMallPresenter extends BasePresenter{
         /**
          * 获取商品信息
          * @param request_shoppingMall_woodsList
          */
-        void getWoodsList(Request_shoppingMall_woodsList request_shoppingMall_woodsList);
+        void getWoodsList(Request_shoppingMall_woodsList request_shoppingMall_woodsList,int falg);
 
         /**
          * 获取筛选列表

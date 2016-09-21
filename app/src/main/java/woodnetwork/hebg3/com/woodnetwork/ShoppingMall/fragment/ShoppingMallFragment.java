@@ -19,6 +19,8 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ConfirmOrderActiv
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ShoopingCartActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.ShaiXuanAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.ShoppingMalAdapter;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem_attributesItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
@@ -56,7 +59,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
 
     @Bind(R.id.fragment_shopping_mall_recyclerview)
-    RecyclerView recyclerview;
+    XRecyclerView recyclerview;
     @Bind(R.id.text_title)
     TextView textTitle;
     @Bind(R.id.image_title_gouwuche)
@@ -90,6 +93,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
     private MyRequestInfo myRequestInfo;
     private List<ProductFilterList_productsItem> list;
     private EditText number;
+    private int page_no = 1;
 
 
     @Override
@@ -101,13 +105,13 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
         textTitle.setText("木联网");
         sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
-        if("null".equals(sharePreferencesUtils.getData("userid","null"))){
+        if ("null".equals(sharePreferencesUtils.getData("userid", "null"))) {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }
 
-
+        recyclerview.setHasFixedSize(true);
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
+//        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
 
         Request_spinnerInfo request_spinnerInfo = new Request_spinnerInfo();
         request_spinnerInfo.attr_vaule_id = "111";
@@ -131,7 +135,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         myRequestInfo.req = new Object();
         myRequestInfo.req_meta = request_getAttribute;
         shoppingMallPresenter.getAttributeFilterListData(myRequestInfo);
-        shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList);
+        shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
 
         return view;
     }
@@ -143,11 +147,57 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
 
     @Override
-    public void showGoodsData(List<ProductFilterList_productsItem> list) {
-        this.list = list;
+    public void showGoodsData(final ProductFilterList productFilterList) {
+        this.list = productFilterList.products;
         shoppingMalAdapter = new ShoppingMalAdapter(getActivity(), list, this);
+
+        recyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page_no = 1;
+                request_shoppingMall_woodsList.page_no = page_no;
+                shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 1);
+            }
+
+            @Override
+            public void onLoadMore() {
+                page_no++;
+                if (page_no >= productFilterList.total_page) {//判断是否为最后一页
+                    recyclerview.setIsnomore(true);//底部显示没有更多数据
+                }
+                request_shoppingMall_woodsList.page_no = page_no;
+                shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 2);
+
+
+            }
+        });
+        if (1 == productFilterList.total_page) {//如果总页数一共就一页，关闭加载更多功能
+            recyclerview.setLoadingMoreEnabled(false);
+        }
         recyclerview.setAdapter(shoppingMalAdapter);
         closeProgress();
+    }
+
+    @Override
+    public void loadMore(List<ProductFilterList_productsItem> newList) {
+
+        recyclerview.loadMoreComplete();
+        list = shoppingMalAdapter.getProductInfoList();
+        list.addAll(newList);
+        shoppingMalAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void refresh(ProductFilterList productFilterList) {
+        recyclerview.refreshComplete();
+        if (1 < productFilterList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            recyclerview.setLoadingMoreEnabled(true);
+        }
+        list = productFilterList.products;
+        shoppingMalAdapter.setProductInfoList(list);
+        shoppingMalAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -336,7 +386,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
                 relShaixuan.setVisibility(View.GONE);
                 recyclerview.setVisibility(View.VISIBLE);
                 request_shoppingMall_woodsList.attribute = shaiXuanAdapter.getShaiXuanList();
-                shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList);
+                shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
                 break;
         }
     }

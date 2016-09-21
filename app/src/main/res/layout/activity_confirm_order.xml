@@ -95,7 +95,7 @@
                     android:layout_toEndOf="@+id/activity_confirm_order_edit_harvestplace"
                     android:layout_toRightOf="@+id/activity_confirm_order_edit_harvestplace"
                     android:layout_weight="1"
-                    fresco:placeholderImage="@drawable/defaultimg" />
+                    fresco:placeholderImage="@drawable/dizhi" />
             </LinearLayout>
 
             <LinearLayout

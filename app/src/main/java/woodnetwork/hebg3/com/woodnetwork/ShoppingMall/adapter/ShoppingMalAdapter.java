@@ -36,6 +36,14 @@ public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.
         this.shoppingMallFragment=shoppingMallFragment;
     }
 
+    public List<ProductFilterList_productsItem> getProductInfoList() {
+        return productInfoList;
+    }
+
+    public void setProductInfoList(List<ProductFilterList_productsItem> productInfoList) {
+        this.productInfoList = productInfoList;
+    }
+
     @Override
     public ShoppingMalAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.shoppingmalladapter_layout, parent, false));

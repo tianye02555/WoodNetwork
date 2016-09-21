@@ -13,6 +13,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +22,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_busnessList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcarList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcar_delete;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.ShoopingCartAdapter;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.ShoopingCartContract;
@@ -44,7 +49,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     @Bind(R.id.image_title_right)
     ImageView imageTitleRight;
     @Bind(R.id.activity_shopping_cart_recyclerview)
-    RecyclerView shoppingCartRecyclerview;
+    XRecyclerView shoppingCartRecyclerview;
     @Bind(R.id.activity_shopping_cart_checkbox)
     CheckBox checkbox_quanXuan;
     @Bind(R.id.activity_shopping_cart_text_jinge)
@@ -71,7 +76,9 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
      *
      */
     private ArrayList<ShopcarList_listItem>  ShopcarList_listItemList;
-
+    private int page_no = 1;
+    private Request_shopcarList request_shopcarList;
+    private MyRequestInfo myRequestInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,13 +111,13 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
-        Request_shopcarList request_shopcarList = new Request_shopcarList();
+         request_shopcarList = new Request_shopcarList();
         request_shopcarList.page_no = 1;
         request_shopcarList.page_size = 10;
-        MyRequestInfo myRequestInfo = new MyRequestInfo();
+         myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_shopcarList;
         myRequestInfo.req_meta = request_getAttribute;
-        presenter.getShoopingCartData(myRequestInfo);
+        presenter.getShoopingCartData(myRequestInfo,0);
     }
 
     @OnClick({R.id.imge_title_left, R.id.activity_shopping_cart_btn_jiesuan, R.id.activity_shopping_cart_btn_shanchu})
@@ -162,15 +169,60 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     }
 
     @Override
-    public void showShoopingCartInfo(ShopcarList shopcarList) {
+    public void showShoopingCartInfo(final  ShopcarList shopcarList) {
         this.shopcarList = shopcarList;
         adapter = new ShoopingCartAdapter(this, this.shopcarList.list);
         shoppingCartRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        shoppingCartRecyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 5));
+//        shoppingCartRecyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 5));
+        shoppingCartRecyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page_no = 1;
+                request_shopcarList.page_no = page_no;
+                myRequestInfo.req = request_shopcarList;
+                presenter.getShoopingCartData(myRequestInfo, 1);
+            }
+
+            @Override
+            public void onLoadMore() {
+                page_no++;
+                if (page_no >= shopcarList.total_page) {//判断是否为最后一页
+                    shoppingCartRecyclerview.setIsnomore(true);//底部显示没有更多数据
+                }
+                request_shopcarList.page_no = page_no;
+                myRequestInfo.req = request_shopcarList;
+                presenter.getShoopingCartData(myRequestInfo,2);
+
+
+            }
+        });
+        if (1 == shopcarList.total_page) {//如果总页数一共就一页，关闭加载更多功能
+            shoppingCartRecyclerview.setLoadingMoreEnabled(false);
+        }
         shoppingCartRecyclerview.setAdapter(adapter);
 
     }
+    @Override
+    public void loadMore(List<ShopcarList_listItem> list) {
 
+        shoppingCartRecyclerview.loadMoreComplete();//停止加载更多动画
+        shopcarList.list = adapter.getList();
+        shopcarList.list.addAll(list);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void refresh(ShopcarList shopcarList) {
+        shoppingCartRecyclerview.refreshComplete();//停止更新动画
+        if (1 < shopcarList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            shoppingCartRecyclerview.setLoadingMoreEnabled(true);
+        }
+        this.shopcarList.list = shopcarList.list;
+        adapter.setList(shopcarList.list);
+        adapter.notifyDataSetChanged();
+
+    }
     @Override
     public void deleteGoods() {
         shopcarList.list=adapter.getShoopingCarList();

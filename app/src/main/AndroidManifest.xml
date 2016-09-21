@@ -6,21 +6,25 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!--添加可以向外拨打电话的权限  -->
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <application
         android:name=".WoodNetworkApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:hardwareAccelerated="false"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".sysfunction.activity.LoginActivity" />
-        <activity android:name=".sysfunction.activity.GetPasswordActivity" />
-        <activity android:name=".ShoppingMall.activity.ShoppingMallActivity">
+        <activity android:name=".sysfunction.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".sysfunction.activity.GetPasswordActivity" />
+        <activity android:name=".ShoppingMall.activity.ShoppingMallActivity">
+
         </activity>
         <activity android:name=".ShoppingMall.activity.BusnessInfoActivity" />
         <activity android:name=".ShoppingMall.activity.WoodInfoActivity" />

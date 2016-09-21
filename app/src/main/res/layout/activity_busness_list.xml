@@ -11,9 +11,9 @@
         android:id="@+id/includ_title"
         layout="@layout/layout_title"></include>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/activity_busness_list_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/includ_title"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@id/includ_title"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </RelativeLayout>

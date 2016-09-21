@@ -29,7 +29,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 /**
  * 商家列表页
  */
-public class BusnessListActivity extends Fragment implements BusnessListContrac.BusnessListViewInterface{
+public class BusnessListActivity extends Fragment {
 
     @Bind(R.id.text_title)
     TextView textTitle;
@@ -46,40 +46,40 @@ public class BusnessListActivity extends Fragment implements BusnessListContrac.
         ButterKnife.bind(this,view);
         imageTitleRight.setVisibility(View.GONE);
         textTitle.setText("商家信息");
-        new BusnessListPresenter(this);
-        presenter.start();
+//        new BusnessListPresenter(this);
+//        presenter.start();
         return view;
     }
 
-    @Override
-    public void showBusnessListData(List<BusnessInfo> list) {
-        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL,5));
-        BusnessListAdapter adapter=new BusnessListAdapter(getActivity(),list);
-        recyclerview.setAdapter(adapter);
-
-    }
-
-    @Override
-    public void setPresenter(BusnessListContrac.BusnessListPresenterInterface presenter) {
-        if(null!=presenter){
-            this.presenter=presenter;
-        }
-
-    }
-
-    @Override
-    public void showProgress( ) {
-        ProgressUtils.show(getActivity(), "请稍后……");
-    }
-
-    @Override
-    public void closeProgress() {
-        ProgressUtils.hide();
-    }
-
-    @Override
-    public void showMessage(String string) {
-        CommonUtils.showToast(getActivity(),string);
-    }
+//    @Override
+//    public void showBusnessListData(List<BusnessInfo> list) {
+//        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL,5));
+//        BusnessListAdapter adapter=new BusnessListAdapter(getActivity(),list);
+//        recyclerview.setAdapter(adapter);
+//
+//    }
+//
+//    @Override
+//    public void setPresenter(BusnessListContrac.BusnessListPresenterInterface presenter) {
+//        if(null!=presenter){
+//            this.presenter=presenter;
+//        }
+//
+//    }
+//
+//    @Override
+//    public void showProgress( ) {
+//        ProgressUtils.show(getActivity(), "请稍后……");
+//    }
+//
+//    @Override
+//    public void closeProgress() {
+//        ProgressUtils.hide();
+//    }
+//
+//    @Override
+//    public void showMessage(String string) {
+//        CommonUtils.showToast(getActivity(),string);
+//    }
 }

@@ -11,17 +11,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_busnessList;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.BusnessListAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.BusnessListContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.BusnessListPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
 public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface {
 
@@ -30,9 +39,15 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
     @Bind(R.id.image_title_right)
     ImageView imageTitleRight;
     @Bind(R.id.activity_busness_list_recyclerview)
-    RecyclerView recyclerview;
+    XRecyclerView recyclerview;
     @Bind(R.id.imge_title_left)
     ImageView imgeTitleLeft;
+    private int page_no = 1;
+    private Request_busnessList request_busnessList;
+    private MyRequestInfo myRequestInfo;
+    private BusnessListAdapter adapter;
+    private List<BusnessInfo> list;
+
     private BusnessListContrac.BusnessListPresenterInterface presenter;
 
     @Nullable
@@ -44,16 +59,74 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
         imageTitleRight.setVisibility(View.GONE);
         textTitle.setText("商家信息");
         new BusnessListPresenter(this);
-        presenter.start();
+        SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
+        Request_getAttribute request_getAttribute = new Request_getAttribute();
+        request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
+
+        request_busnessList = new Request_busnessList();
+        request_busnessList.page_size = 10;
+        request_busnessList.page_no = 1;
+        myRequestInfo = new MyRequestInfo();
+        myRequestInfo.req_meta = request_getAttribute;
+        myRequestInfo.req = request_busnessList;
+        presenter.getBusnessListData(myRequestInfo, 0);
         return view;
     }
 
     @Override
-    public void showBusnessListData(List<BusnessInfo> list) {
+    public void showBusnessListData(final BusnessListInfo busnessListInfo) {
+        list = busnessListInfo.seller_list;
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
-        BusnessListAdapter adapter = new BusnessListAdapter(getActivity(), list);
+//        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
+        adapter = new BusnessListAdapter(getActivity(), busnessListInfo.seller_list);
+        recyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page_no = 1;
+                request_busnessList.page_no = page_no;
+                myRequestInfo.req = request_busnessList;
+                presenter.getBusnessListData(myRequestInfo, 1);
+            }
+
+            @Override
+            public void onLoadMore() {
+                page_no++;
+                if (page_no >= busnessListInfo.total_page) {//判断是否为最后一页
+                    recyclerview.setIsnomore(true);//底部显示没有更多数据
+                }
+                request_busnessList.page_no = page_no;
+                myRequestInfo.req = request_busnessList;
+                presenter.getBusnessListData(myRequestInfo,2);
+
+
+            }
+        });
+        if (1 == busnessListInfo.total_page) {//如果总页数一共就一页，关闭加载更多功能
+            recyclerview.setLoadingMoreEnabled(false);
+        }
         recyclerview.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void loadMore(List<BusnessInfo> newList) {
+
+        recyclerview.loadMoreComplete();
+        list = adapter.getList();
+        list.addAll(newList);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void refresh(BusnessListInfo busnessListInfo) {
+        recyclerview.refreshComplete();
+        if (1 < busnessListInfo.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            recyclerview.setLoadingMoreEnabled(true);
+        }
+        list = busnessListInfo.seller_list;
+        adapter.setList(list);
+        adapter.notifyDataSetChanged();
 
     }
 

@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         CommonUtils.addActivity(this);
+        button.setText("登录");
 //        imageTitleRight.setVisibility(View.GONE);
 //        imgeTitleLeft.setVisibility(View.GONE);
         new LoginPresenter(this);

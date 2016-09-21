@@ -10,12 +10,22 @@
         android:id="@+id/includ_title"
         layout="@layout/layout_title"></include>
     <!-- 轮播图 -->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_zi_xun_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/distance_normal"
+        android:layout_below="@+id/home_rl_tp"></android.support.v7.widget.RecyclerView>
+
     <RelativeLayout
         android:id="@+id/home_rl_tp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
+        android:gravity="center"
         android:layout_below="@+id/includ_title"
-        android:gravity="center">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <woodnetwork.hebg3.com.woodnetwork.view.MyGallery
             android:id="@+id/home_customgallery"
@@ -31,12 +41,5 @@
             android:gravity="center"
             android:orientation="horizontal"></LinearLayout>
     </RelativeLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_zi_xun_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/distance_normal"
-        android:layout_below="@+id/home_rl_tp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

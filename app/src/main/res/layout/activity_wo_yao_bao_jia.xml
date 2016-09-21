@@ -170,7 +170,9 @@
                 android:layout_alignBottom="@+id/activity_woyaobaojia_edit_shouhuodi"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/distance_normal"
-                fresco:placeholderImage="@drawable/defaultimg" />
+                fresco:placeholderImage="@drawable/dizhi"
+                android:layout_toRightOf="@+id/activity_woyaobaojia_edit_xiangxidizhi"
+                android:layout_toEndOf="@+id/activity_woyaobaojia_edit_xiangxidizhi" />
 
             <View
                 android:id="@+id/view_nindebaojia"
@@ -220,7 +222,7 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                fresco:placeholderImage="@drawable/defaultimg"
+                fresco:placeholderImage="@drawable/dianhua"
                 android:id="@+id/activity_woyaobaojia_image_dianhua"
                 android:layout_marginLeft="@dimen/distance_longest"
                 android:layout_alignBottom="@+id/activity_woyaobaojia_text_lianxifangshi"

@@ -186,4 +186,10 @@
         android:layout_toRightOf="@+id/shopppingcart_adapter_txt_xiaojijinge"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_small" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="@dimen/distance_short"
+        android:layout_below="@+id/shopppingcart_adapter_btn_baocun"
+        android:background="@color/dise"></View>
 </RelativeLayout>

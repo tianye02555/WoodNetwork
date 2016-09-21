@@ -37,6 +37,14 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
         this.list = list;
     }
 
+    public static List<BusnessInfo> getList() {
+        return list;
+    }
+
+    public static void setList(List<BusnessInfo> list) {
+        BusnessListAdapter.list = list;
+    }
+
     @Override
     public BusnessHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -74,6 +82,14 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
         public BusnessHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            image_phone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+list.get(getAdapterPosition()).phone));
+                    context.startActivity(intent);
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

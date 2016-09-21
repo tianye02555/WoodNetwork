@@ -5,7 +5,7 @@
     android:textSize="@dimen/font_normal"
     android:background="@null"
     android:layout_margin="@dimen/distance_normal"
-    android:textColor="@drawable/selector_zixun"
+    android:textColor="@drawable/selector_shaixuan_zi"
     android:button="@null" >
 
 </RadioButton>

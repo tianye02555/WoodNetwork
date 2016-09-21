@@ -8,14 +8,14 @@
         android:id="@+id/includ_title"
         layout="@layout/layout_title"></include>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/activity_shopping_cart_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/includ_title"
         android:background="@android:color/white"
         android:layout_above="@+id/activity_shopping_cart_relative"
-        ></android.support.v7.widget.RecyclerView>
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
     <RelativeLayout
         android:id="@+id/activity_shopping_cart_relative"
         android:layout_width="match_parent"

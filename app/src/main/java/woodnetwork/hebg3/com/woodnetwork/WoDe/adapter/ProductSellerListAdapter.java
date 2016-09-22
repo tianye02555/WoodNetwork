@@ -33,6 +33,14 @@ public class ProductSellerListAdapter extends RecyclerView.Adapter<ProductSeller
         this.productInfoList = productInfoList;
     }
 
+    public List<ProductSellerList_productsItem> getProductInfoList() {
+        return productInfoList;
+    }
+
+    public void setProductInfoList(List<ProductSellerList_productsItem> productInfoList) {
+        this.productInfoList = productInfoList;
+    }
+
     @Override
     public ProductSellerListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_productsellerlist,null));

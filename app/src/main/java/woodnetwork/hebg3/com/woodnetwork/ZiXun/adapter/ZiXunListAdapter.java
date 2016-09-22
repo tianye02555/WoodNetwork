@@ -29,6 +29,14 @@ public class ZiXunListAdapter extends RecyclerView.Adapter<ZiXunListAdapter.View
         this.articleList = articleList;
     }
 
+    public List<ArticleList_listItem> getArticleList() {
+        return articleList;
+    }
+
+    public void setArticleList(List<ArticleList_listItem> articleList) {
+        this.articleList = articleList;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_zixunlist, parent, false));

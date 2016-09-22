@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="90dp">
     <RelativeLayout
         android:id="@+id/reltivelayout"
@@ -60,5 +61,10 @@
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
         android:textSize="@dimen/font_normal" />
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/dise"
+    android:layout_below="@+id/adapter_zixunlist_txt_newsfrom"
+    android:layout_marginTop="@dimen/distance_normal"></View>
 </RelativeLayout>

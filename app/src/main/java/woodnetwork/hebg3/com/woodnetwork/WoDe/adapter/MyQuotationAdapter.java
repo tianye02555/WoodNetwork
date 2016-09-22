@@ -31,6 +31,14 @@ public class MyQuotationAdapter extends RecyclerView.Adapter<MyQuotationAdapter.
         this.list = list;
     }
 
+    public List<QuotationList_quotationItem> getList() {
+        return list;
+    }
+
+    public void setList(List<QuotationList_quotationItem> list) {
+        this.list = list;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_myquotation, parent, false));

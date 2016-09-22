@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -285,7 +286,9 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
                 titlePrice += shopcarList_listItem.xiaoJi;
             }
         }
-        jingE.setText(String.valueOf(titlePrice));
+        DecimalFormat df   =     new DecimalFormat( "###############0.00 ");//   16位整数位，两小数位
+        String   temp     =   df.format(titlePrice);
+        jingE.setText(String.valueOf(temp));
 
     }
 

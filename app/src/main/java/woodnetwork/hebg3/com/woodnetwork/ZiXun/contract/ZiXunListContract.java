@@ -1,9 +1,14 @@
 package woodnetwork.hebg3.com.woodnetwork.ZiXun.contract;
 
+import java.util.List;
+
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.ArticleList;
+import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.ArticleList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList_listItem;
 
@@ -28,6 +33,14 @@ public interface ZiXunListContract {
          * @param articleList
          */
         void setArticleListInfo(ArticleList articleList);
+        /**
+         * 加载更多
+         */
+        void loadMore(List<ArticleList_listItem> list);
+        /**
+         * 更新
+         */
+        void refresh(ArticleList articleList);
 
     }
     interface ZiXunListPresenterInterface extends BasePresenter{
@@ -40,6 +53,6 @@ public interface ZiXunListContract {
          * 获取新闻列表
          * @param myRequestInfo
          */
-        void getArticleListData(MyRequestInfo myRequestInfo);
+        void getArticleListData(MyRequestInfo myRequestInfo,int flag);
     }
 }

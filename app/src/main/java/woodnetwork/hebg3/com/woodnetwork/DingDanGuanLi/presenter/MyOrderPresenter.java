@@ -6,6 +6,7 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.MyOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.model.MyOrderModel;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
@@ -17,26 +18,40 @@ import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
 public class MyOrderPresenter implements MyOrderContract.MyOrderPresenterInterface {
     private MyOrderContract.MyOrderViewInterface myOrderView;
     private MyOrderModel myOrderModel;
+
     public MyOrderPresenter(MyOrderContract.MyOrderViewInterface myOrderView) {
-        if(null!=myOrderView){
-            this.myOrderView=myOrderView;
+        if (null != myOrderView) {
+            this.myOrderView = myOrderView;
         }
         this.myOrderView.setPresenter(this);
-        myOrderModel=new MyOrderModel();
+        myOrderModel = new MyOrderModel();
     }
 
     @Override
-    public void getAllMyOrderData(MyRequestInfo myRequestInfo) {
-        myOrderView.showProgress();
+    public void getAllMyOrderData(MyRequestInfo myRequestInfo, final int flag) {
+        if (0 == flag) {
+            myOrderView.showProgress();
+        }
+
         myOrderModel.getAllMyOrderData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                myOrderView.closeProgress();
-                myOrderView.showMyOrderInfo((OrderBuyerProList)((((ResponseBody)object).obj)));
+                if (0 == flag) {
+                    myOrderView.closeProgress();
+                    myOrderView.showMyOrderInfo((OrderBuyerProList) ((((ResponseBody) object).obj)));
+                } else if (1 == flag) {
+                    myOrderView.refreshAll(((OrderBuyerProList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    myOrderView.loadMoreAll(((OrderBuyerProList) ((ResponseBody) object).obj).list);
+                }
+
+
             }
 
             @Override
             public void onFailed(String string) {
+                myOrderView.closeProgress();
                 myOrderView.showMessage(string);
             }
         });
@@ -44,34 +59,56 @@ public class MyOrderPresenter implements MyOrderContract.MyOrderPresenterInterfa
     }
 
     @Override
-    public void getorderBuyerProFilterListData(MyRequestInfo myRequestInfo) {
-        myOrderView.showProgress();
+    public void getorderBuyerProFilterListData(MyRequestInfo myRequestInfo, final int flag) {
+        if (0 == flag) {
+            myOrderView.showProgress();
+        }
         myOrderModel.getorderBuyerProFilterListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                myOrderView.closeProgress();
-                myOrderView.showMyOrderInfo((OrderBuyerProFilterList)((((ResponseBody)object).obj)));
+                if (0 == flag) {
+                    myOrderView.closeProgress();
+                    myOrderView.showMyOrderInfo((OrderBuyerProFilterList) ((((ResponseBody) object).obj)));
+                } else if (1 == flag) {
+                    myOrderView.refreshFilter(((OrderBuyerProFilterList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    myOrderView.loadMoreFilter(((OrderBuyerProFilterList) ((ResponseBody) object).obj).list);
+                }
             }
 
             @Override
             public void onFailed(String string) {
+                myOrderView.closeProgress();
                 myOrderView.showMessage(string);
             }
         });
     }
 
     @Override
-    public void getorderBuyerProExceptionListData(MyRequestInfo myRequestInfo) {
-        myOrderView.showProgress();
+    public void getorderBuyerProExceptionListData(MyRequestInfo myRequestInfo, final int flag) {
+        if (0 == flag) {
+            myOrderView.showProgress();
+        }
         myOrderModel.getorderBuyerProExceptionListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                myOrderView.closeProgress();
-                myOrderView.showMyOrderInfo((OrderBuyerProExceptionList)((((ResponseBody)object).obj)));
+                if (0 == flag) {
+                    myOrderView.closeProgress();
+                    myOrderView.showMyOrderInfo((OrderBuyerProExceptionList) ((((ResponseBody) object).obj)));
+                } else if (1 == flag) {
+                    myOrderView.refreshException(((OrderBuyerProExceptionList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    myOrderView.loadMoreException(((OrderBuyerProExceptionList) ((ResponseBody) object).obj).list);
+                }
+
+
             }
 
             @Override
             public void onFailed(String string) {
+                myOrderView.closeProgress();
                 myOrderView.showMessage(string);
             }
         });
@@ -84,7 +121,7 @@ public class MyOrderPresenter implements MyOrderContract.MyOrderPresenterInterfa
             @Override
             public void onSuccess(Object object) {
                 myOrderView.closeProgress();
-                myOrderView.showMessage(((((ResponseBody)object).base)).msg);
+                myOrderView.showMessage(((((ResponseBody) object).base)).msg);
                 myOrderView.refreshOrder();
             }
 

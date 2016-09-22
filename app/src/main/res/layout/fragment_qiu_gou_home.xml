@@ -6,8 +6,8 @@
     android:orientation="vertical"
     tools:context="woodnetwork.hebg3.com.woodnetwork.QiuGou.fragment.QiuGouHomeFragment">
     <include layout="@layout/layout_title"></include>
-<android.support.v7.widget.RecyclerView
+<com.jcodecraeer.xrecyclerview.XRecyclerView
     android:id="@+id/fragment_qiu_gou_recyclerview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </LinearLayout>

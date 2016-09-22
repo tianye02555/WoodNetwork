@@ -82,11 +82,11 @@
 
     </RadioGroup>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/activity_seller_order_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line2"
         android:layout_marginTop="@dimen/distance_long"
-        android:background="@android:color/white"></android.support.v7.widget.RecyclerView>
+        android:background="@android:color/white"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </RelativeLayout>

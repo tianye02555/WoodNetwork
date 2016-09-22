@@ -56,6 +56,7 @@
             android:textColor="@color/jiage"
             android:layout_below="@+id/view"
             android:layout_marginLeft="@dimen/distance_shortest"
+            android:text="0"
             android:layout_toRightOf="@+id/activity_shopping_cart_text_heji"
             android:layout_marginTop="@dimen/distance_short"
             android:textSize="@dimen/font_normal"/>

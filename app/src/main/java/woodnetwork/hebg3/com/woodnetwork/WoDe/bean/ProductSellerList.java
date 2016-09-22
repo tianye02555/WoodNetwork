@@ -14,5 +14,7 @@ public class ProductSellerList {
     @Expose
     public int page_no;
     @Expose
+    public int total_page;
+    @Expose
     public List<ProductSellerList_productsItem> products;
 }

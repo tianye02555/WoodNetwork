@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -62,17 +64,28 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
     @Bind(R.id.activity_dem_order_radiogroup)
     RadioGroup radiogroup;
     @Bind(R.id.activity_dem_order_recyclerview)
-    RecyclerView recyclerview;
+    XRecyclerView recyclerview;
     public DemOrderContract.DemOrderPresenterInterface presenter;
-    private  MyRequestInfo myRequestInfo;
+
     private DemOrderAdapter adapter;
     private DemOrder_filter_Adapter adapter_filter_weiFuKuan;
     private DemOrder_filter_Adapter adapter_filter_weiShouHuo;
     private DemOrder_exception_Adapter adapter_exception;
+
     private int closePosition;
-    private BaseAdapter baseAdapter;
-    private int nowPosition=0;//当前所展示的订单类型
-    private  Request_order_buyer_dem_filter_list request_order_buyer_dem_filter_list;
+    private int nowPosition = 0;//当前所展示的订单类型
+    private int page_no = 1;
+
+    private static Object object;
+
+    private List<OrderBuyerDemList_listItem> list_all;
+    private List<OrderBuyerDemFilterList_listItem> list_Filter;
+    private List<OrderBuyerDemExceptionList_listItem> list_Exception;
+
+    private MyRequestInfo myRequestInfo;
+    private Request_order_buyer_dem_filter_list request_order_buyer_dem_filter_list;
+    private Request_order_buyer_dem_list request_order_buyer_dem_list;
+    private Request_order_buyer_dem_exception_list request_order_buyer_dem_exception_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +101,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
 
-         myRequestInfo = new MyRequestInfo();
+        myRequestInfo = new MyRequestInfo();
 
         myRequestInfo.req_meta = request_getAttribute;
 
@@ -97,104 +110,263 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
         radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i){
+                switch (i) {
                     case R.id.activity_dem_order_radiobutton_quanbudingdan:
-                        Request_order_buyer_dem_list request_order_buyer_dem_list=new Request_order_buyer_dem_list();
-                        request_order_buyer_dem_list.page_no=1;
-                        request_order_buyer_dem_list.page_size=10;
+                        request_order_buyer_dem_list = new Request_order_buyer_dem_list();
+                        request_order_buyer_dem_list.page_no = 1;
+                        request_order_buyer_dem_list.page_size = 10;
                         myRequestInfo.req = request_order_buyer_dem_list;
-                        presenter.getAllDemOrderData(myRequestInfo);
-                        nowPosition=0;
+                        presenter.getAllDemOrderData(myRequestInfo,0);
+                        nowPosition = 0;
                         break;
                     case R.id.activity_dem_order_radiobutton_daifukuan:
-                        request_order_buyer_dem_filter_list=new Request_order_buyer_dem_filter_list();
-                        request_order_buyer_dem_filter_list.page_no=1;
-                        request_order_buyer_dem_filter_list.page_size=10;
-                        request_order_buyer_dem_filter_list.order_status=0;
+                        request_order_buyer_dem_filter_list = new Request_order_buyer_dem_filter_list();
+                        request_order_buyer_dem_filter_list.page_no = 1;
+                        request_order_buyer_dem_filter_list.page_size = 10;
+                        request_order_buyer_dem_filter_list.order_status = 0;
                         myRequestInfo.req = request_order_buyer_dem_filter_list;
-                        presenter.getorderBuyerProFilterListData(myRequestInfo);
-                        nowPosition=1;
+                        presenter.getorderBuyerDemFilterListData(myRequestInfo,0);
+                        nowPosition = 1;
                         break;
                     case R.id.activity_dem_order_radiobutton_daishouhuo:
-                        request_order_buyer_dem_filter_list.page_no=1;
-                        request_order_buyer_dem_filter_list.page_size=10;
-                        request_order_buyer_dem_filter_list.order_status=2;
+                        request_order_buyer_dem_filter_list.page_no = 1;
+                        request_order_buyer_dem_filter_list.page_size = 10;
+                        request_order_buyer_dem_filter_list.order_status = 2;
                         myRequestInfo.req = request_order_buyer_dem_filter_list;
-                        presenter.getorderBuyerProExceptionListData(myRequestInfo);
-                        nowPosition=2;
+                        presenter.getorderBuyerDemExceptionListData(myRequestInfo,0);
+                        nowPosition = 2;
                         break;
                     case R.id.activity_dem_order_radiobutton_yichangdindan:
-                        Request_order_buyer_dem_exception_list request_order_buyer_dem_exception_list=new Request_order_buyer_dem_exception_list();
-                        request_order_buyer_dem_exception_list.page_size=10;
-                        request_order_buyer_dem_exception_list.page_no=1;
+                        request_order_buyer_dem_exception_list = new Request_order_buyer_dem_exception_list();
+                        request_order_buyer_dem_exception_list.page_size = 10;
+                        request_order_buyer_dem_exception_list.page_no = 1;
                         myRequestInfo.req = request_order_buyer_dem_exception_list;
-                        presenter.getorderBuyerProClose(myRequestInfo);
-                        nowPosition=3;
+                        presenter.getorderBuyerDemClose(myRequestInfo);
+                        nowPosition = 3;
                         break;
                 }
 
             }
         });
-        ((RadioButton)(radiogroup.getChildAt(0))).setChecked(true);
+        ((RadioButton) (radiogroup.getChildAt(0))).setChecked(true);
     }
 
     @Override
     public void showDemOrderInfo(Object object) {
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 5));
-        if(object instanceof OrderBuyerDemList){//根据传入的参数，看属于哪个返回类型，加载哪个adapter
-            adapter = new DemOrderAdapter(this, ((OrderBuyerDemList)object).list);
+        recyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
+                                            @Override
+                                            public void onRefresh() {
+                                                page_no = 1;
+                                                switch (nowPosition) {
+                                                    case 0://全部订单
+                                                        request_order_buyer_dem_list.page_no = page_no;
+                                                        myRequestInfo.req = request_order_buyer_dem_list;
+                                                        presenter.getAllDemOrderData(myRequestInfo, 1);
+                                                        break;
+                                                    case 1://待付款订单
+                                                        request_order_buyer_dem_filter_list.page_no = page_no;
+                                                        request_order_buyer_dem_filter_list.order_status = 0;
+                                                        myRequestInfo.req = request_order_buyer_dem_filter_list;
+                                                        presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
+                                                        break;
+                                                    case 2://待收货订单
+                                                        request_order_buyer_dem_filter_list.page_no = page_no;
+                                                        request_order_buyer_dem_filter_list.order_status = 2;
+                                                        myRequestInfo.req = request_order_buyer_dem_filter_list;
+                                                        presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
+                                                        break;
+                                                    case 3://异常订单
+                                                        request_order_buyer_dem_exception_list.page_no = page_no;
+                                                        myRequestInfo.req = request_order_buyer_dem_exception_list;
+                                                        presenter.getorderBuyerDemExceptionListData(myRequestInfo, 1);
+                                                        break;
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onLoadMore() {
+                                                page_no++;
+                                                switch (nowPosition) {
+                                                    case 0://全部订单
+                                                        if (page_no >= ((OrderBuyerDemList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                            recyclerview.setIsnomore(true);//底部显示没有更多数据
+                                                        }
+                                                        request_order_buyer_dem_list.page_no = page_no;
+                                                        myRequestInfo.req = request_order_buyer_dem_list;
+                                                        presenter.getAllDemOrderData(myRequestInfo, 2);
+                                                        break;
+                                                    case 1://待付款订单
+                                                        if (page_no >= ((OrderBuyerDemFilterList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                            recyclerview.setIsnomore(true);//底部显示没有更多数据
+                                                        }
+                                                        request_order_buyer_dem_filter_list.page_no = page_no;
+                                                        request_order_buyer_dem_filter_list.order_status = 0;
+                                                        myRequestInfo.req = request_order_buyer_dem_filter_list;
+                                                        presenter.getorderBuyerDemFilterListData(myRequestInfo, 2);
+                                                        break;
+                                                    case 2://待收货订单
+                                                        if (page_no >= ((OrderBuyerDemFilterList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                            recyclerview.setIsnomore(true);//底部显示没有更多数据
+                                                        }
+                                                        request_order_buyer_dem_filter_list.page_no = page_no;
+                                                        request_order_buyer_dem_filter_list.order_status = 2;
+                                                        myRequestInfo.req = request_order_buyer_dem_filter_list;
+                                                        presenter.getorderBuyerDemFilterListData(myRequestInfo, 2);
+                                                        break;
+                                                    case 3://异常订单
+                                                        if (page_no >= ((OrderBuyerDemExceptionList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                            recyclerview.setIsnomore(true);//底部显示没有更多数据
+                                                        }
+                                                        request_order_buyer_dem_exception_list.page_no = page_no;
+                                                        myRequestInfo.req = request_order_buyer_dem_exception_list;
+                                                        presenter.getorderBuyerDemExceptionListData(myRequestInfo, 2);
+                                                        break;
+                                                }
+
+
+                                            }
+                                        }
+
+        );
+        if (object instanceof OrderBuyerDemList) {//根据传入的参数，看属于哪个返回类型，加载哪个adapter
+            adapter = new DemOrderAdapter(this, ((OrderBuyerDemList) object).list);
+            if (1 == ((OrderBuyerDemList) object).total_page)
+
+            {//如果总页数一共就一页，关闭加载更多功能
+                recyclerview.setLoadingMoreEnabled(false);
+            }
             recyclerview.setAdapter(adapter);
-        }else if (object instanceof OrderBuyerProFilterList){//0根据status 字段判断是待付款还是待收货
-            if( ((OrderBuyerProFilterList)object).list.get(0).status==0){
-                adapter_filter_weiFuKuan=new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList)object).list);
+        } else if (object instanceof OrderBuyerDemFilterList) {//0根据status 字段判断是待付款还是待收货
+            if (((OrderBuyerDemFilterList) object).list.get(0).status == 0) {
+                adapter_filter_weiFuKuan = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList) object).list);
+                if (1 == ((OrderBuyerDemFilterList) object).total_page)
+
+                {//如果总页数一共就一页，关闭加载更多功能
+                    recyclerview.setLoadingMoreEnabled(false);
+                }
                 recyclerview.setAdapter(adapter_filter_weiFuKuan);
-            }else if( ((OrderBuyerProFilterList)object).list.get(0).status==2){
-                adapter_filter_weiShouHuo = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList)object).list);
+            } else if (((OrderBuyerDemFilterList) object).list.get(0).status == 2) {
+                adapter_filter_weiShouHuo = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList) object).list);
+                if (1 == ((OrderBuyerDemFilterList) object).total_page)
+
+                {//如果总页数一共就一页，关闭加载更多功能
+                    recyclerview.setLoadingMoreEnabled(false);
+                }
                 recyclerview.setAdapter(adapter_filter_weiShouHuo);
             }
-        }else if (object instanceof OrderBuyerProExceptionList){
-            adapter_exception = new DemOrder_exception_Adapter(this, ((OrderBuyerDemExceptionList)object).list);
+        } else if (object instanceof OrderBuyerDemExceptionList) {
+            adapter_exception = new DemOrder_exception_Adapter(this, ((OrderBuyerDemExceptionList) object).list);
+            if (1 == ((OrderBuyerDemExceptionList) object).total_page)
+
+            {//如果总页数一共就一页，关闭加载更多功能
+                recyclerview.setLoadingMoreEnabled(false);
+            }
             recyclerview.setAdapter(adapter_exception);
         }
 
 
+    }
 
+    @Override
+    public void loadMoreAll(List<OrderBuyerDemList_listItem> list) {
+        recyclerview.loadMoreComplete();
+        list_all = adapter.getList();
+        list_all.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void refreshAll(OrderBuyerDemList OrderBuyerDemList) {
+        recyclerview.refreshComplete();
+        if (1 < OrderBuyerDemList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            recyclerview.setLoadingMoreEnabled(true);
+        }
+        list_all = OrderBuyerDemList.list;
+        adapter.setList(list_all);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void loadMoreFilter(List<OrderBuyerDemFilterList_listItem> list) {
+        recyclerview.loadMoreComplete();
+        if (list.get(0).status == 0) {//未付款
+            list_Filter = adapter_filter_weiFuKuan.getList();
+        } else if (list.get(0).status == 2) {//未收货
+            list_Filter = adapter_filter_weiShouHuo.getList();
+        }
+        list_Filter.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void refreshFilter(OrderBuyerDemFilterList orderBuyerDemFilterList) {
+        recyclerview.refreshComplete();
+        if (1 < orderBuyerDemFilterList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            recyclerview.setLoadingMoreEnabled(true);
+        }
+        list_Filter = orderBuyerDemFilterList.list;
+        if (orderBuyerDemFilterList.list.get(0).status == 0) {//未付款
+            adapter_filter_weiFuKuan.setList(list_Filter);
+            adapter_filter_weiFuKuan.notifyDataSetChanged();
+        } else if (orderBuyerDemFilterList.list.get(0).status == 2) {//未收货
+            adapter_filter_weiShouHuo.setList(list_Filter);
+            adapter_filter_weiShouHuo.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void loadMoreException(List<OrderBuyerDemExceptionList_listItem> list) {
+        recyclerview.loadMoreComplete();
+        list_Exception = adapter_exception.getList();
+        list_Exception.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void refreshException(OrderBuyerDemExceptionList orderBuyerDemExceptionList) {
+        recyclerview.refreshComplete();
+        if (1 < orderBuyerDemExceptionList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            recyclerview.setLoadingMoreEnabled(true);
+        }
+        list_Exception = orderBuyerDemExceptionList.list;
+        adapter_exception.setList(list_Exception);
+        adapter_exception.notifyDataSetChanged();
     }
 
     @Override
     public void closeOrder(String oid, int position) {
-        this.closePosition=position;
-        Request_orderBuyerClose request_orderBuyerClose=new Request_orderBuyerClose();
-        request_orderBuyerClose.oid=oid;
-        myRequestInfo.req=request_orderBuyerClose;
-        presenter.getorderBuyerProClose(myRequestInfo);
+        this.closePosition = position;
+        Request_orderBuyerClose request_orderBuyerClose = new Request_orderBuyerClose();
+        request_orderBuyerClose.oid = oid;
+        myRequestInfo.req = request_orderBuyerClose;
+        presenter.getorderBuyerDemClose(myRequestInfo);
     }
 
     @Override
     public void refreshOrder() {
-        switch (nowPosition){
+        switch (nowPosition) {
             case 0:
-                List<OrderBuyerDemList_listItem> list=adapter.getList();
-                list.get(closePosition).status=4;
+                List<OrderBuyerDemList_listItem> list = adapter.getList();
+                list.get(closePosition).status = 4;
                 adapter.setList(list);
                 adapter.notifyDataSetChanged();
                 break;
             case 1:
-                List<OrderBuyerDemFilterList_listItem> list_filter_weiFuKuan=adapter_filter_weiFuKuan.getList();
-                list_filter_weiFuKuan.get(closePosition).status=4;
+                List<OrderBuyerDemFilterList_listItem> list_filter_weiFuKuan = adapter_filter_weiFuKuan.getList();
+                list_filter_weiFuKuan.get(closePosition).status = 4;
                 adapter_filter_weiFuKuan.setList(list_filter_weiFuKuan);
                 adapter_filter_weiFuKuan.notifyDataSetChanged();
                 break;
             case 2:
-                List<OrderBuyerDemFilterList_listItem> list_filter_weiShouHuo=adapter_filter_weiShouHuo.getList();
-                list_filter_weiShouHuo.get(closePosition).status=4;
+                List<OrderBuyerDemFilterList_listItem> list_filter_weiShouHuo = adapter_filter_weiShouHuo.getList();
+                list_filter_weiShouHuo.get(closePosition).status = 4;
                 adapter_filter_weiShouHuo.setList(list_filter_weiShouHuo);
                 adapter_filter_weiShouHuo.notifyDataSetChanged();
                 break;
             case 3:
-                List<OrderBuyerDemExceptionList_listItem> list_exception=adapter_exception.getList();
-                list_exception.get(closePosition).status=4;
+                List<OrderBuyerDemExceptionList_listItem> list_exception = adapter_exception.getList();
+                list_exception.get(closePosition).status = 4;
                 adapter_exception.setList(list_exception);
                 adapter_exception.notifyDataSetChanged();
                 break;

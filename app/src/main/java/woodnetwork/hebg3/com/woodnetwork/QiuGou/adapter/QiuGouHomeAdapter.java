@@ -27,13 +27,21 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
         this.demandList = demandList;
     }
 
+    public List<DemandList_listItem> getDemandList() {
+        return demandList;
+    }
+
+    public void setDemandList(List<DemandList_listItem> demandList) {
+        this.demandList = demandList;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.qiugouhome_adapter, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.jiaoHuoDiDian.setText("交货地点："+demandList.get(position).receive_area);
         holder.yiXiangChanPin.setText("意向产品"+demandList.get(position).pname);
@@ -44,6 +52,14 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
             holder.woYaoBaoJia.setText("已报价");
             holder.woYaoBaoJia.setEnabled(false);
         }
+        holder.woYaoBaoJia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intet=new Intent(context, WoYaoBaoJiaActivity.class);
+                intet.putExtra("did",demandList.get(position).id);
+                context.startActivity(intet);
+            }
+        });
 
     }
 
@@ -71,14 +87,7 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
             gouMaiShuLiang = (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_goumaishuliang);
             lianXiDianHua= (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_lianxidianhua);
             woYaoBaoJia = (Button) itemView.findViewById(R.id.qiugouhome_adapter_btn_woyaobaojia);
-            woYaoBaoJia.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intet=new Intent(context, WoYaoBaoJiaActivity.class);
-                    intet.putExtra("did",demandList.get(getAdapterPosition()).id);
-                    context.startActivity(intet);
-                }
-            });
+
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {

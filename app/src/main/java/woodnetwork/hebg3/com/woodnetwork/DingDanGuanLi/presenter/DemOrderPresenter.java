@@ -31,11 +31,22 @@ public class DemOrderPresenter implements DemOrderContract.DemOrderPresenterInte
     }
 
     @Override
-    public void getAllDemOrderData(MyRequestInfo myRequestInfo) {
-        demOrderView.showProgress();
+    public void getAllDemOrderData(MyRequestInfo myRequestInfo,final int flag) {
+        if (0 == flag) {
+            demOrderView.showProgress();
+        }
         demOrderModel.getAllDemOrderData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
+                if (0 == flag) {
+                    demOrderView.closeProgress();
+                    demOrderView.showDemOrderInfo((OrderBuyerDemList)((((ResponseBody)object).obj)));
+                } else if (1 == flag) {
+                    demOrderView.refreshAll(((OrderBuyerDemList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    demOrderView.loadMoreAll(((OrderBuyerDemList) ((ResponseBody) object).obj).list);
+                }
                 demOrderView.closeProgress();
                 demOrderView.showDemOrderInfo((OrderBuyerDemList)((((ResponseBody)object).obj)));
             }
@@ -49,13 +60,22 @@ public class DemOrderPresenter implements DemOrderContract.DemOrderPresenterInte
     }
 
     @Override
-    public void getorderBuyerProFilterListData(MyRequestInfo myRequestInfo) {
-        demOrderView.showProgress();
+    public void getorderBuyerDemFilterListData(MyRequestInfo myRequestInfo,final int flag) {
+        if (0 == flag) {
+            demOrderView.showProgress();
+        }
         demOrderModel.getorderBuyerProFilterListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                demOrderView.closeProgress();
-                demOrderView.showDemOrderInfo((OrderBuyerDemFilterList)((((ResponseBody)object).obj)));
+                if (0 == flag) {
+                    demOrderView.closeProgress();
+                    demOrderView.showDemOrderInfo((OrderBuyerDemFilterList)((((ResponseBody)object).obj)));
+                } else if (1 == flag) {
+                    demOrderView.refreshFilter(((OrderBuyerDemFilterList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    demOrderView.loadMoreFilter(((OrderBuyerDemFilterList) ((ResponseBody) object).obj).list);
+                }
             }
 
             @Override
@@ -66,13 +86,23 @@ public class DemOrderPresenter implements DemOrderContract.DemOrderPresenterInte
     }
 
     @Override
-    public void getorderBuyerProExceptionListData(MyRequestInfo myRequestInfo) {
-        demOrderView.showProgress();
+    public void getorderBuyerDemExceptionListData(MyRequestInfo myRequestInfo,final int flag) {
+        if (0 == flag) {
+            demOrderView.showProgress();
+        }
         demOrderModel.getorderBuyerProExceptionListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                demOrderView.closeProgress();
-                demOrderView.showDemOrderInfo((OrderBuyerDemExceptionList)((((ResponseBody)object).obj)));
+                if (0 == flag) {
+                    demOrderView.closeProgress();
+                    demOrderView.showDemOrderInfo((OrderBuyerDemExceptionList)((((ResponseBody)object).obj)));
+                } else if (1 == flag) {
+                    demOrderView.refreshException(((OrderBuyerDemExceptionList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    demOrderView.loadMoreException(((OrderBuyerDemExceptionList) ((ResponseBody) object).obj).list);
+                }
+
             }
 
             @Override
@@ -83,7 +113,7 @@ public class DemOrderPresenter implements DemOrderContract.DemOrderPresenterInte
     }
 
     @Override
-    public void getorderBuyerProClose(MyRequestInfo myRequestInfo) {
+    public void getorderBuyerDemClose(MyRequestInfo myRequestInfo) {
         demOrderView.showProgress();
         demOrderModel.getorderBuyerProClose(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override

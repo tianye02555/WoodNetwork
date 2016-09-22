@@ -19,6 +19,7 @@ import android.util.Log;
 import com.google.gson.JsonSyntaxException;
 
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 
 /** 网络请求线程;用于获取网络json数据并转换成�?要的对象或集�? */
 public class NetTask extends AsyncTask<Void, Void, ResponseBody> {
@@ -54,6 +55,7 @@ public class NetTask extends AsyncTask<Void, Void, ResponseBody> {
 				}
 			}
 			body.base = entity;
+
 		}
 
 		@Override
@@ -61,6 +63,7 @@ public class NetTask extends AsyncTask<Void, Void, ResponseBody> {
 			if (body == null)
 				body = new ResponseBody();
 			body.base = entity;
+			ProgressUtils.hide();
 		}
 	};
 

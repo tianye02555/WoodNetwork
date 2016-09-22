@@ -1,6 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.WoDe.presenter;
 
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessListInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.DemandBuyerList;
@@ -25,13 +26,24 @@ public class DemanBuyerListPresenter implements DemanBuyerListContract.DemanBuye
     }
 
     @Override
-    public void getDemanBuyerListData(MyRequestInfo myRequestInfo) {
-        demanBuyerListView.showProgress();
+    public void getDemanBuyerListData(MyRequestInfo myRequestInfo, final int flag) {
+        if (0 == flag) {
+            demanBuyerListView.showProgress();
+        }
         demanBuyerListModel.getDemanBuyerListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                demanBuyerListView.closeProgress();
-                demanBuyerListView.setDemanBuyerListInfo((DemandBuyerList) ((ResponseBody) object).obj);
+                if (0 == flag) {
+                    demanBuyerListView.closeProgress();
+                    demanBuyerListView.setDemanBuyerListInfo((DemandBuyerList) ((ResponseBody) object).obj);
+                } else if (1 == flag) {
+                    demanBuyerListView.refresh(((DemandBuyerList) ((ResponseBody) object).obj));
+
+                } else if (2 == flag) {
+                    demanBuyerListView.loadMore(((DemandBuyerList) ((ResponseBody) object).obj).list);
+                }
+
+
             }
 
             @Override

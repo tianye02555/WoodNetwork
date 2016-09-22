@@ -32,6 +32,14 @@ public class DemanBuyerListAdapter extends RecyclerView.Adapter<DemanBuyerListAd
         this.list = list;
     }
 
+    public List<DemandBuyerList_listItem> getList() {
+        return list;
+    }
+
+    public void setList(List<DemandBuyerList_listItem> list) {
+        this.list = list;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_demandbuyerlist, parent, false));

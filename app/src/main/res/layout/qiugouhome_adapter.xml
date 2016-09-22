@@ -82,5 +82,10 @@
         android:layout_alignBaseline="@+id/qiugouhome_adapter_btn_woyaobaojia"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+    <View android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="@dimen/distance_short"
+        android:layout_below="@+id/qiugouhome_adapter_btn_woyaobaojia"
+        android:background="@color/dise"></View>
 
 </RelativeLayout>

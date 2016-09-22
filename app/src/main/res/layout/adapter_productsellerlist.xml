@@ -87,4 +87,10 @@
         android:layout_marginRight="@dimen/distance_normal"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dise"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_below="@+id/adapter_productsellerlist_txt_productarea"></View>
 </RelativeLayout>

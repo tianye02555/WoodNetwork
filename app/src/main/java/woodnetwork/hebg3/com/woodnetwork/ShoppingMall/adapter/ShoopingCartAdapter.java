@@ -2,6 +2,7 @@ package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -13,10 +14,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,9 @@ import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcar_delete;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcar_update;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcar_update_listItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ShoopingCartActivity;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
@@ -98,10 +103,11 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                         return;
                     }
                 }
-                if (Double.parseDouble(holder.number.getText().toString().trim()) <= 0) {
-                    new AlertDialog.Builder(context).setMessage("不能数量不能为负数").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                if (Double.parseDouble(holder.number.getText().toString().trim()) <= 1) {
+                    new AlertDialog.Builder(context).setMessage("数量不能小于1").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            holder.number.setText("1");
                             dialogInterface.dismiss();
                         }
                     }).show();
@@ -110,15 +116,19 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                 }
                 list.get(position).stock = Double.parseDouble(number);
 
-                String numberTitle = String.valueOf((list.get(position).stock) * (list.get(position).price));
-                if (numberTitle.contains(".")) {
-                    int index = numberTitle.indexOf(".");
-                    if (numberTitle.length() - 1 - index > 2) {
-                        numberTitle=numberTitle.substring(0, index + 3);
-                    }
-                }
-                list.get(position).xiaoJi =Double.parseDouble(numberTitle) ;
-                holder.xiaoJi.setText(numberTitle);
+                Double numberTitle = (list.get(position).stock) * (list.get(position).price);
+//                if (numberTitle.contains(".")) {
+//                    int index = numberTitle.indexOf(".");
+//                    if (numberTitle.length() - 1 - index > 2) {
+//                        numberTitle=numberTitle.substring(0, index + 3);
+//                    }
+//                }
+//                numberTitle=(double)Math.round(numberTitle*100)/100;
+
+                DecimalFormat   df   =     new DecimalFormat( "###############0.00 ");//   16位整数位，两小数位
+                String   temp     =   df.format(numberTitle);
+                holder.xiaoJi.setText(String.valueOf(temp));
+                list.get(position).xiaoJi =Double.parseDouble(temp) ;
                 ((ShoopingCartActivity) context).showTitlePrice();
             }
         });
@@ -150,6 +160,27 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
             }
         });
+        holder.xuanZhong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                    if(b){
+//
+//                        ((ShoopingCartActivity)context).setDeleteSid(list.get(getAdapterPosition()).sid,String.valueOf(getAdapterPosition()));
+//                    }else{
+//                        ((ShoopingCartActivity)context).setDeleteSid(list.get(getAdapterPosition()).sid,String.valueOf(getAdapterPosition()));
+//                    }
+                list.get(position).checkbox = b;
+                ((ShoopingCartActivity) context).showTitlePrice();
+            }
+        });
+        holder.rel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, WoodInfoActivity.class);
+                intent.putExtra("pid",list.get(position).pid);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -172,6 +203,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         private CheckBox xuanZhong;//选中按钮
         private TextView xiaoJi;//小计
         private EditText number;//数量
+        private RelativeLayout rel;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -186,7 +218,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             xuanZhong = (CheckBox) itemView.findViewById(R.id.shopppingcart_adapter_checkbox);
             xiaoJi = (TextView) itemView.findViewById(R.id.shopppingcart_adapter_txt_xiaojijinge);
             number = (EditText) itemView.findViewById(R.id.shopppingcart_adapter_edit_stock);
-
+rel=(RelativeLayout) itemView.findViewById(R.id.shoppingcar_rel);
 
             shanChu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -210,19 +242,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
                 }
             });
-            xuanZhong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                    if(b){
-//
-//                        ((ShoopingCartActivity)context).setDeleteSid(list.get(getAdapterPosition()).sid,String.valueOf(getAdapterPosition()));
-//                    }else{
-//                        ((ShoopingCartActivity)context).setDeleteSid(list.get(getAdapterPosition()).sid,String.valueOf(getAdapterPosition()));
-//                    }
-                    list.get(getAdapterPosition()).checkbox = b;
-                    ((ShoopingCartActivity) context).showTitlePrice();
-                }
-            });
+
 
 //            itemVw.setOnClickListener(new View.OnClickListener() {
 //                @Override

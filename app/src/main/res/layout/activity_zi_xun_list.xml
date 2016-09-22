@@ -28,11 +28,11 @@
         android:layout_height="2dp"
         android:background="@color/dise"></View>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/activity_zi_xun_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/distance_normal"></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="@dimen/distance_normal"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 
     <RadioGroup
         android:id="@+id/radiogroup1"

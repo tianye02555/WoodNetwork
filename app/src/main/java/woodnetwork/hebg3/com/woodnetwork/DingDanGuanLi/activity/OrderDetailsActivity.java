@@ -12,7 +12,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.OrderDetailsAdapter;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.SellerOrderDetailsAdapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderSellerInfo;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.OrderBuyerInfoContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter.OrderBuyerInfoPresenter;
 import woodnetwork.hebg3.com.woodnetwork.R;
@@ -59,8 +61,10 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     private MyRequestInfo myRequestInfo;
     private OrderDetailsAdapter adapter;
     private OrderBuyerInfo orderBuyerInfo;
+    private OrderSellerInfo orderSellerInfo;
+    private SellerOrderDetailsAdapter adapter_seller;
     private String oid="";
-    private String flag="";//判断是不是卖家
+    private String flag="";//判断s
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,18 +98,11 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     }
 
     @Override
-    public void showOrderInfo(Object object) {
-        if("1".equals(flag)){
-
-        }else{
-
-        }
+    public void showOrderInfo(OrderBuyerInfo orderBuyerInfo) {
         this.orderBuyerInfo=orderBuyerInfo;
-        if("1".equals(flag)){
-            text_maiJia.setText("买家信息:"+orderBuyerInfo.seller);
-        }else{
+
             text_maiJia.setText("卖家信息:"+orderBuyerInfo.seller);
-        }
+
 
         text_shouHuoDiZhi.setText(orderBuyerInfo.receive_area);
         text_faHuoDiZhi.setText(orderBuyerInfo.delivery_area);
@@ -131,6 +128,41 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 break;
         }
         adapter=new OrderDetailsAdapter(this,orderBuyerInfo.products);
+        listView.setAdapter(adapter);
+
+
+    }
+    @Override
+    public void showSellerOrderInfo(OrderSellerInfo orderSellerInfo) {
+        this.orderSellerInfo=orderSellerInfo;
+
+            text_maiJia.setText("买家信息:"+orderSellerInfo.seller);
+
+
+        text_shouHuoDiZhi.setText(orderSellerInfo.receive_area);
+        text_faHuoDiZhi.setText(orderSellerInfo.delivery_area);
+        text_dingDanHao.setText(orderSellerInfo.number);
+        text_date.setText(orderSellerInfo.creat_time);
+        text_price.setText(String.valueOf(orderSellerInfo.total_price));
+        text_jian.setText(String.valueOf(orderSellerInfo.products.size()));
+        switch (orderSellerInfo.status){//0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+            case 0:
+                text_dingDanZhuangTai.setText("待付款");
+                break;
+            case 1:
+                text_dingDanZhuangTai.setText("已付款");
+                break;
+            case 2:
+                text_dingDanZhuangTai.setText("已发货");
+                break;
+            case 3:
+                text_dingDanZhuangTai.setText("已到货");
+                break;
+            case 4:
+                text_dingDanZhuangTai.setText("订单取消");
+                break;
+        }
+        adapter_seller=new SellerOrderDetailsAdapter(this,orderSellerInfo.products);
         listView.setAdapter(adapter);
 
 
@@ -171,22 +203,32 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 break;
             case R.id.adapter_order_details_btn_querenshouhuo:
                 Intent intent_receive =new Intent(OrderDetailsActivity.this,OrderReceiveActivity.class);
-                intent_receive.putExtra("id",this.orderBuyerInfo.number);
-                intent_receive.putExtra("creat_time",this.orderBuyerInfo.creat_time);
-                intent_receive.putExtra("seller",this.orderBuyerInfo.seller);
-                intent_receive.putExtra("total_price",this.orderBuyerInfo.total_price);
-                intent_receive.putExtra("number",String.valueOf(this.orderBuyerInfo.products.size()));
-                if(null!=getIntent()){
-                    if("1".equals(getIntent().getStringExtra("flag"))){
-                        intent_receive.putExtra("flag","1");
-                    }
+                if("1".equals(flag)){
+                    intent_receive.putExtra("id",this.orderSellerInfo.number);
+                    intent_receive.putExtra("creat_time",this.orderSellerInfo.creat_time);
+                    intent_receive.putExtra("seller",this.orderSellerInfo.seller);
+                    intent_receive.putExtra("total_price",this.orderSellerInfo.total_price);
+                    intent_receive.putExtra("number",String.valueOf(this.orderSellerInfo.products.size()));
+                    intent_receive.putExtra("flag","1");
+                }else{
+                    intent_receive.putExtra("id",this.orderBuyerInfo.number);
+                    intent_receive.putExtra("creat_time",this.orderBuyerInfo.creat_time);
+                    intent_receive.putExtra("seller",this.orderBuyerInfo.seller);
+                    intent_receive.putExtra("total_price",this.orderBuyerInfo.total_price);
+                    intent_receive.putExtra("number",String.valueOf(this.orderBuyerInfo.products.size()));
                 }
                 startActivityForResult(intent_receive,0);
                 break;
             case R.id.adapter_order_details_btn_guanbidingdan://异常申报
+
                 Intent intent_exception =new Intent(OrderDetailsActivity.this,OrderExceptionActivity.class);
-                intent_exception.putExtra("seller",orderBuyerInfo.seller);
-                intent_exception.putExtra("number",String.valueOf(orderBuyerInfo.products.size()));
+                if("1".equals(flag)){
+                    intent_exception.putExtra("seller", orderSellerInfo.seller);
+                    intent_exception.putExtra("number", String.valueOf(orderSellerInfo.products.size()));
+                }else {
+                    intent_exception.putExtra("seller", orderBuyerInfo.seller);
+                    intent_exception.putExtra("number", String.valueOf(orderBuyerInfo.products.size()));
+                }
                 startActivityForResult(intent_exception,0);
                 break;
         }

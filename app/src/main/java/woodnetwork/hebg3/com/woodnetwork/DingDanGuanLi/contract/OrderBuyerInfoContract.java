@@ -1,6 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract;
 
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderSellerInfo;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
@@ -15,7 +16,11 @@ public interface OrderBuyerInfoContract {
         /**
          * 展示订单详情
          */
-        void showOrderInfo(Object object);
+        void showOrderInfo(OrderBuyerInfo orderBuyerInfo);
+        /**
+         * 展示订单详情
+         */
+        void showSellerOrderInfo(OrderSellerInfo orderSellerInfo);
     }
     interface OrderBuyerInfoPresenterInterface extends BasePresenter{
         /**

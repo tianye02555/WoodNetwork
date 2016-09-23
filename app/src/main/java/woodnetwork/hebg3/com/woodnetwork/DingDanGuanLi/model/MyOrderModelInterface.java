@@ -28,4 +28,5 @@ public interface MyOrderModelInterface {
      * @param
      */
     void getorderBuyerProClose(Object object, OnServiceBaceInterface onServiceBaceInterface);
+
 }

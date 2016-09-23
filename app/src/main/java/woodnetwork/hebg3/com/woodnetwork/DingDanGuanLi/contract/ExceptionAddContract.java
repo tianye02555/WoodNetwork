@@ -1,7 +1,12 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract;
 
+import android.content.Context;
 import android.view.View;
 
+import java.io.File;
+import java.util.HashMap;
+
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
@@ -21,19 +26,23 @@ public interface ExceptionAddContract {
         /**
          * 展示异常订单的信息
          */
-        void showOrderExceptionInfo(OrderBuyerInfo orderBuyerInfo);
+        void showOrderExceptionInfo(ExceptionList exceptionList);
 
         /**
          * 添加异常图片
          */
         void addExceptionPicture(View view);
+        /**
+         * 关闭异常提交页
+         */
+        void closeActivity();
 
     }
     interface ExceptionAddPresenterInterface extends BasePresenter{
         /**
          * 提交异常信息接口
-         * @param myRequestInfo
+         * @param
          */
-        void submitExceptionOrder(MyRequestInfo myRequestInfo);
+        void submitExceptionOrder(Context context, HashMap<String, String> params, HashMap<String, File> files);
     }
 }

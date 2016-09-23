@@ -1,12 +1,19 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.model;
 
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 
+import java.io.File;
+import java.util.HashMap;
+
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
+import woodnetwork.hebg3.com.woodnetwork.Utils.AsyncTaskForUpLoadFilesNew;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ServiceInterfaceCont;
+import woodnetwork.hebg3.com.woodnetwork.net.Base;
 import woodnetwork.hebg3.com.woodnetwork.net.ClientParams;
 import woodnetwork.hebg3.com.woodnetwork.net.NetTask;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
@@ -20,13 +27,13 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            ResponseBody body = (ResponseBody) msg.obj;
+            Base base = (Base) msg.obj;
             switch (msg.what) {
-                case 0://获取全部订单列表接口
-                    if ("0".equals(body.base.code)) {//成功
-                        onServiceBaceInterface.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
-                        onServiceBaceInterface.onFailed(body.base.msg);
+                case 0://收货接口
+                    if ("0".equals(base.code)) {//成功
+                        onServiceBaceInterface.onSuccess(base.msg);
+                    } else if ("1".equals(base.code)) {//失败
+                        onServiceBaceInterface.onFailed(base.msg);
                     }
                     break;
             }
@@ -35,12 +42,21 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
     };
 
     @Override
-    public void submitReceiveOrder(Object object, OnServiceBaceInterface onServiceBaceInterface) {
+    public void submitReceiveOrder(Context context, HashMap<String, String> params, HashMap<String, File> files, OnServiceBaceInterface onServiceBaceInterface) {
         this.onServiceBaceInterface = onServiceBaceInterface;
-        ClientParams params = new ClientParams();
-        params.http_method = ClientParams.HTTP_POST;
-        params.getMethod = ServiceInterfaceCont.ORDERRECEIVE;
-        params.params = CommonUtils.getParamString(object);
-        new NetTask(handler.obtainMessage(0),params).execute();
+        AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
+                context, "http://192.168.2.12:12306/dev/wood/v1/order/receive", params, files,
+                handler.obtainMessage(0));
+        at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "0");
+    }
+
+
+    @Override
+    public void submitDeliveryOrder(Context context, HashMap<String, String> params, HashMap<String, File> files, OnServiceBaceInterface onServiceBaceInterface) {
+        this.onServiceBaceInterface = onServiceBaceInterface;
+        AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
+                context, "http://192.168.2.12:12306/dev/wood/v1/order/delivery", params, files,
+                handler.obtainMessage(0));
+        at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "0");
     }
 }

@@ -1,6 +1,10 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract;
 
+import android.content.Context;
 import android.view.View;
+
+import java.io.File;
+import java.util.HashMap;
 
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
@@ -21,19 +25,28 @@ public interface OrderReceiveContract {
         /**
          * 展示收获订单的信息
          */
-        void showOrderInfo(OrderBuyerInfo orderBuyerInfo);
+        void showOrderInfo();
 
         /**
          * 添加收货图片
          */
         void addReceivePicture(View view);
+        /**
+         * 关闭收货提交页
+         */
+        void closeActivity();
 
     }
     interface OrderReceivePresenterInterface extends BasePresenter{
         /**
          * 提交收货信息接口
-         * @param myRequestInfo
+         * @param
          */
-        void submitReceiveOrder(MyRequestInfo myRequestInfo);
+        void submitReceiveOrder(Context context, HashMap<String, String> params, HashMap<String, File> files);
+        /**
+         * 提交收货信息接口
+         * @param
+         */
+        void submitDelevryOrder(Context context, HashMap<String, String> params, HashMap<String, File> files);
     }
 }

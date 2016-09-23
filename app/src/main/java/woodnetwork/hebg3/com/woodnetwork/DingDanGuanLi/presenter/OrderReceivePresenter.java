@@ -1,5 +1,10 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter;
 
+import android.content.Context;
+
+import java.io.File;
+import java.util.HashMap;
+
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.OrderExceptionContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.OrderReceiveContract;
@@ -31,13 +36,14 @@ public class OrderReceivePresenter implements OrderReceiveContract.OrderReceiveP
     }
 
     @Override
-    public void submitReceiveOrder(MyRequestInfo myRequestInfo) {
+    public void submitReceiveOrder(Context context, HashMap<String, String> params,HashMap<String, File> files) {
         orderReceiveView.showProgress();
-        orderExceptionModel.submitReceiveOrder(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+        orderExceptionModel.submitReceiveOrder(context, params,files,new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
                 orderReceiveView.closeProgress();
-                orderReceiveView.showMessage((((ResponseBody)object).base).msg);
+                orderReceiveView.showMessage((String)object);
+                orderReceiveView.closeActivity();
             }
 
             @Override
@@ -47,5 +53,24 @@ public class OrderReceivePresenter implements OrderReceiveContract.OrderReceiveP
             }
         });
 
+    }
+
+    @Override
+    public void submitDelevryOrder(Context context, HashMap<String, String> params, HashMap<String, File> files) {
+        orderReceiveView.showProgress();
+        orderExceptionModel.submitDeliveryOrder(context, params,files,new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                orderReceiveView.closeProgress();
+                orderReceiveView.showMessage((String)object);
+                orderReceiveView.closeActivity();
+            }
+
+            @Override
+            public void onFailed(String string) {
+                orderReceiveView.closeProgress();
+                orderReceiveView.showMessage(string);
+            }
+        });
     }
 }

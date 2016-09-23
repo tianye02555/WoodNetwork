@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,6 +15,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderExceptionActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.SellerOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderSellerFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
@@ -51,7 +55,7 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
     }
 
     @Override
-    public void onBindViewHolder(BusnessHolder holder, int position) {
+    public void onBindViewHolder(BusnessHolder holder,final int position) {
 
         holder.text_id.setText(list.get(position).number);
         holder.text_date.setText(list.get(position).creat_time);
@@ -60,24 +64,53 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
 
         adapter=new SellerOrder_filterAdapterItem_Adapter(context,list.get(position).products,list.get(position).buyer);
         holder.listView.setAdapter(adapter);
-        if(0==list.get(position).status){ // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+        if (0 == list.get(position).status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             holder.text_daiShouHuo.setText("待付款");
             holder.btn_queRenDingDan.setVisibility(View.GONE);
-        }else if(1==list.get(position).status){
+            holder.btn_yiChangDingDan.setVisibility(View.GONE);
+        } else if (1 == list.get(position).status) {
             holder.text_daiShouHuo.setText("已付款");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-            holder.btn_queRenDingDan.setVisibility(View.GONE);
-        }else if(2==list.get(position).status){
+        } else if (2 == list.get(position).status) {
             holder.text_daiShouHuo.setText("已发货");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        }else if(3==list.get(position).status){
+        } else if (3 == list.get(position).status) {
             holder.text_daiShouHuo.setText("已到货");
-        }else if(4==list.get(position).status){
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (4 == list.get(position).status) {
             holder.text_daiShouHuo.setText("订单取消");
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.GONE);
         }
-        if(0==list.get(position).type){//0：订单正常；1：订单异常
+        if (0 == list.get(position).type) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
         }
+        holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SellerOrderActivity) context).closeOrder(list.get(position).id, position);
+
+            }
+        });
+        holder.btn_queRenDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SellerOrderActivity) context).orderDelivery(position);
+
+            }
+        });
+        holder. btn_yiChangDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OrderExceptionActivity.class);
+                intent.putExtra("seller", list.get(position).buyer);
+                intent.putExtra("number", String.valueOf(list.size()));
+                intent.putExtra("flag","1");
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -112,19 +145,22 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
         public BusnessHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((MyOrderActivity)context).closeOrder(list.get(getAdapterPosition()).id,getAdapterPosition());
-
-                }
-            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context,BusnessInfoActivity.class);
-                    intent.putExtra("sid",list.get(getAdapterPosition()).id);
-                    intent.putExtra("from","BusnessInfoListActivity");
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("flag","1");
+                    context.startActivity(intent);
+                }
+            });
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("flag","1");
                     context.startActivity(intent);
                 }
             });

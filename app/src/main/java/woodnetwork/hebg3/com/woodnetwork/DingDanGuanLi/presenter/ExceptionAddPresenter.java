@@ -1,6 +1,11 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter;
 
 
+import android.content.Context;
+
+import java.io.File;
+import java.util.HashMap;
+
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.ExceptionAddContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.model.ExceptionAddModel;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
@@ -24,17 +29,20 @@ public class ExceptionAddPresenter implements ExceptionAddContract.ExceptionAddP
     }
 
     @Override
-    public void submitExceptionOrder(MyRequestInfo myRequestInfo) {
+    public void submitExceptionOrder(Context context, HashMap<String, String> params, HashMap<String, File> files) {
         exceptionAddView.showProgress();
-        exceptionAddModel.submitExceptionOrder(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+        exceptionAddModel.submitExceptionOrder(context, params, files, new OnServiceBaceInterface() {
+
             @Override
             public void onSuccess(Object object) {
                 exceptionAddView.closeProgress();
-                exceptionAddView.showMessage((((ResponseBody)object).base).msg);
+                exceptionAddView.showMessage((String)object);
+                exceptionAddView.closeActivity();
             }
 
             @Override
             public void onFailed(String string) {
+
                 exceptionAddView.closeProgress();
                 exceptionAddView.showMessage(string);
             }

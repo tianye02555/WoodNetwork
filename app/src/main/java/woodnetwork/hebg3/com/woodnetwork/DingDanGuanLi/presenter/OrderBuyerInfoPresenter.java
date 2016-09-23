@@ -43,6 +43,24 @@ public class OrderBuyerInfoPresenter implements OrderBuyerInfoContract.OrderBuye
     }
 
     @Override
+    public void getSellerOrderData(MyRequestInfo myRequestInfo) {
+        orderBuyerInfoView.showProgress();
+        orderBuyerInfoModel.getSellerOrderData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                orderBuyerInfoView.closeProgress();
+                orderBuyerInfoView.showOrderInfo((OrderBuyerInfo) ((ResponseBody)object).obj);
+            }
+
+            @Override
+            public void onFailed(String string) {
+                orderBuyerInfoView.closeProgress();
+                orderBuyerInfoView.showMessage(string);
+            }
+        });
+    }
+
+    @Override
     public void start() {
 
     }

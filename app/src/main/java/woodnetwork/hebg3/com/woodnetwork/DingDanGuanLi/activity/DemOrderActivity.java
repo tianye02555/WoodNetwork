@@ -1,5 +1,6 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,6 +77,10 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
     private int nowPosition = 0;//当前所展示的订单类型
     private int page_no = 1;
 
+    /**
+     * 第一次不刷新列表，onPause后，再刷新
+     */
+    private boolean isFirst=true;
     private static Object object;
 
     private List<OrderBuyerDemList_listItem> list_all;
@@ -133,7 +138,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                         request_order_buyer_dem_filter_list.page_size = 10;
                         request_order_buyer_dem_filter_list.order_status = 2;
                         myRequestInfo.req = request_order_buyer_dem_filter_list;
-                        presenter.getorderBuyerDemExceptionListData(myRequestInfo,0);
+                        presenter.getorderBuyerDemFilterListData(myRequestInfo,0);
                         nowPosition = 2;
                         break;
                     case R.id.activity_dem_order_radiobutton_yichangdindan:
@@ -141,7 +146,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                         request_order_buyer_dem_exception_list.page_size = 10;
                         request_order_buyer_dem_exception_list.page_no = 1;
                         myRequestInfo.req = request_order_buyer_dem_exception_list;
-                        presenter.getorderBuyerDemClose(myRequestInfo);
+                        presenter.getorderBuyerDemExceptionListData(myRequestInfo,0);
                         nowPosition = 3;
                         break;
                 }
@@ -153,6 +158,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
 
     @Override
     public void showDemOrderInfo(Object object) {
+        this.object=object;
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
                                             @Override
@@ -230,6 +236,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
 
         );
         if (object instanceof OrderBuyerDemList) {//根据传入的参数，看属于哪个返回类型，加载哪个adapter
+            list_all= ((OrderBuyerDemList) object).list;
             adapter = new DemOrderAdapter(this, ((OrderBuyerDemList) object).list);
             if (1 == ((OrderBuyerDemList) object).total_page)
 
@@ -238,6 +245,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
             }
             recyclerview.setAdapter(adapter);
         } else if (object instanceof OrderBuyerDemFilterList) {//0根据status 字段判断是待付款还是待收货
+            list_Filter=((OrderBuyerDemFilterList) object).list;
             if (((OrderBuyerDemFilterList) object).list.get(0).status == 0) {
                 adapter_filter_weiFuKuan = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList) object).list);
                 if (1 == ((OrderBuyerDemFilterList) object).total_page)
@@ -256,6 +264,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 recyclerview.setAdapter(adapter_filter_weiShouHuo);
             }
         } else if (object instanceof OrderBuyerDemExceptionList) {
+            list_Exception= ((OrderBuyerDemExceptionList) object).list;
             adapter_exception = new DemOrder_exception_Adapter(this, ((OrderBuyerDemExceptionList) object).list);
             if (1 == ((OrderBuyerDemExceptionList) object).total_page)
 
@@ -372,7 +381,38 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 break;
         }
     }
+    @Override
+    public void orderReceive(int position) {
+        Intent intent=new Intent(this,OrderReceiveActivity.class);
+        switch (nowPosition) {
+            case 0://全部订单
+                list_all=adapter.getList();
+                intent.putExtra("id",list_all.get(position).number);
+                intent.putExtra("creat_time",list_all.get(position).creat_time);
+                intent.putExtra("seller",list_all.get(position).seller);
+                intent.putExtra("total_price",list_all.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_all.get(position).products.size()));
+                break;
+            case 2://待收货订单
+                list_Filter=adapter_filter_weiShouHuo.getList();
+                intent.putExtra("id",list_Filter.get(position).number);
+                intent.putExtra("creat_time",list_Filter.get(position).creat_time);
+                intent.putExtra("seller",list_Filter.get(position).seller);
+                intent.putExtra("total_price",list_Filter.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_Filter.get(position).products.size()));
+                break;
+            case 3://异常订单
+                list_Exception=adapter_exception.getList();
+                intent.putExtra("id",list_Exception.get(position).number);
+                intent.putExtra("creat_time",list_Exception.get(position).creat_time);
+                intent.putExtra("seller",list_Exception.get(position).seller);
+                intent.putExtra("total_price",list_Exception.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_Exception.get(position).products.size()));
+                break;
+        }
+        startActivityForResult(intent,0);
 
+    }
 
     @Override
     public void setPresenter(DemOrderContract.DemOrderPresenterInterface presenter) {
@@ -399,5 +439,41 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
     @OnClick(R.id.imge_title_left)
     public void onClick() {
         finish();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isFirst) {
+            switch (nowPosition) {
+                case 0://全部订单
+                    request_order_buyer_dem_list.page_no = page_no;
+                    myRequestInfo.req = request_order_buyer_dem_list;
+                    presenter.getAllDemOrderData(myRequestInfo, 1);
+                    break;
+                case 1://待付款订单
+                    request_order_buyer_dem_filter_list.page_no = page_no;
+                    request_order_buyer_dem_filter_list.order_status = 0;
+                    myRequestInfo.req = request_order_buyer_dem_filter_list;
+                    presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
+                    break;
+                case 2://待收货订单
+                    request_order_buyer_dem_filter_list.page_no = page_no;
+                    request_order_buyer_dem_filter_list.order_status = 2;
+                    myRequestInfo.req = request_order_buyer_dem_filter_list;
+                    presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
+                    break;
+                case 3://异常订单
+                    request_order_buyer_dem_exception_list.page_no = page_no;
+                    myRequestInfo.req = request_order_buyer_dem_exception_list;
+                    presenter.getorderBuyerDemExceptionListData(myRequestInfo, 1);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isFirst=false;
     }
 }

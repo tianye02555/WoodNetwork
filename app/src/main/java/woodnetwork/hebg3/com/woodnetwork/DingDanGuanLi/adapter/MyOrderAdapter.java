@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderExceptionActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessInfoActivity;
@@ -31,9 +32,9 @@ import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
  */
 
 public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessHolder> {
-    private static   Context context;
-    private  static  List<OrderBuyerProList_listItem> list;
-    private  MyOrder_AdapterItem_Adapter adapter;
+    private static Context context;
+    private static List<OrderBuyerProList_listItem> list;
+    private MyOrder_AdapterItem_Adapter adapter;
 
 
     public MyOrderAdapter(Context context, List<OrderBuyerProList_listItem> list) {
@@ -41,11 +42,12 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
         this.list = list;
 
     }
-    public  List<OrderBuyerProList_listItem> getList() {
+
+    public List<OrderBuyerProList_listItem> getList() {
         return list;
     }
 
-    public  void setList(List<OrderBuyerProList_listItem> list) {
+    public void setList(List<OrderBuyerProList_listItem> list) {
         MyOrderAdapter.list = list;
     }
 
@@ -56,27 +58,59 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
     }
 
     @Override
-    public void onBindViewHolder(BusnessHolder holder, int position) {
+    public void onBindViewHolder(BusnessHolder holder, final int position) {
 
-        holder.text_id.setText("订单编号："+list.get(position).number);
-        holder.text_date.setText("下单时间："+list.get(position).creat_time);
+        holder.text_id.setText("订单编号：" + list.get(position).number);
+        holder.text_date.setText("下单时间：" + list.get(position).creat_time);
         holder.text_jian.setText(String.valueOf(list.get(position).products.size()));
-        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price)+"元");
-        if(0==list.get(position).status){ // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price) + "元");
+        if (0 == list.get(position).status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             holder.text_daiShouHuo.setText("待付款");
-        }else if(1==list.get(position).status){
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.GONE);
+        } else if (1 == list.get(position).status) {
             holder.text_daiShouHuo.setText("已付款");
-        }else if(2==list.get(position).status){
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (2 == list.get(position).status) {
             holder.text_daiShouHuo.setText("已发货");
-        }else if(3==list.get(position).status){
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (3 == list.get(position).status) {
             holder.text_daiShouHuo.setText("已到货");
-        }else if(4==list.get(position).status){
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (4 == list.get(position).status) {
             holder.text_daiShouHuo.setText("订单取消");
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.GONE);
         }
-        if(0==list.get(position).type){//0：订单正常；1：订单异常
+        if (0 == list.get(position).type) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
         }
-        adapter=new MyOrder_AdapterItem_Adapter(context,list.get(position).products,list.get(position).seller);
+        holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MyOrderActivity) context).closeOrder(list.get(position).id, position);
+
+            }
+        });
+        holder.btn_queRenDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MyOrderActivity) context).orderReceive(position);
+
+            }
+        });
+        holder. btn_yiChangDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OrderExceptionActivity.class);
+                intent.putExtra("seller", list.get(position).seller);
+                intent.putExtra("number", String.valueOf(list.size()));
+                context.startActivity(intent);
+
+            }
+        });
+        adapter = new MyOrder_AdapterItem_Adapter(context, list.get(position).products, list.get(position).seller);
         holder.listView.setAdapter(adapter);
     }
 
@@ -109,24 +143,18 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
         MyListView listView;
         @Bind(R.id.adapter_myorder_text_yichang)
         TextView text_yiChang;
+
         public BusnessHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((MyOrderActivity)context).closeOrder(list.get(getAdapterPosition()).id,getAdapterPosition());
 
-                }
-            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context,OrderDetailsActivity.class);
-                    intent.putExtra("sid",list.get(getAdapterPosition()).id);
-                    intent.putExtra("from","BusnessInfoListActivity");
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
                     context.startActivity(intent);
                 }
             });
@@ -134,9 +162,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent=new Intent(context,OrderDetailsActivity.class);
-                    intent.putExtra("sid",list.get(getAdapterPosition()).id);
-                    intent.putExtra("from","BusnessInfoListActivity");
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
                     context.startActivity(intent);
                 }
             });

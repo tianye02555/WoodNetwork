@@ -1,5 +1,6 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,7 +65,10 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
     private int closePosition;
     private int nowPosition = 0;
     private int page_no = 1;
-
+    /**
+     * 第一次不刷新列表，onPause后，再刷新
+     */
+    private boolean isFirst=true;
     private List<OrderBuyerProList_listItem> list_all;
     private List<OrderBuyerProFilterList_listItem> list_Filter;
     private List<OrderBuyerProExceptionList_listItem> list_Exception;
@@ -226,6 +230,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
         if (object instanceof OrderBuyerProList)
 
         {//根据传入的参数，看属于哪个返回类型，加载哪个adapter
+            list_all=((OrderBuyerProList) object).list;
             adapter = new MyOrderAdapter(this, ((OrderBuyerProList) object).list);
             if (1 == ((OrderBuyerProList) object).total_page)
 
@@ -241,11 +246,10 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
             {//如果总页数一共就一页，关闭加载更多功能
                 recyclerview.setLoadingMoreEnabled(false);
             }
-
+            list_Filter=((OrderBuyerProFilterList) object).list;
             //0根据status 字段判断是待付款还是待收货
             if (((OrderBuyerProFilterList) object).list.get(0).status == 0) {
                 adapter_filter_weiFuKuan = new MyOrder_filter_Adapter(this, ((OrderBuyerProFilterList) object).list);
-
                 recyclerview.setAdapter(adapter_filter_weiFuKuan);
             } else if (((OrderBuyerProFilterList) object).list.get(0).status == 2) {
                 adapter_filter_weiShouHuo = new MyOrder_filter_Adapter(this, ((OrderBuyerProFilterList) object).list);
@@ -254,6 +258,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
         } else if (object instanceof OrderBuyerProExceptionList)
 
         {
+            list_Exception=((OrderBuyerProExceptionList) object).list;
             adapter_exception = new MyOrder_exception_Adapter(this, ((OrderBuyerProExceptionList) object).list);
             if (1 == ((OrderBuyerProExceptionList) object).total_page)
 
@@ -372,6 +377,39 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
         adapter_exception.notifyDataSetChanged();
     }
 
+    @Override
+    public void orderReceive(int position) {
+        Intent intent=new Intent(this,OrderReceiveActivity.class);
+        switch (nowPosition) {
+            case 0://全部订单
+                list_all=adapter.getList();
+                intent.putExtra("id",list_all.get(position).number);
+                intent.putExtra("creat_time",list_all.get(position).creat_time);
+                intent.putExtra("seller",list_all.get(position).seller);
+                intent.putExtra("total_price",list_all.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_all.get(position).products.size()));
+                break;
+            case 2://待收货订单
+                list_Filter=adapter_filter_weiShouHuo.getList();
+                intent.putExtra("id",list_Filter.get(position).number);
+                intent.putExtra("creat_time",list_Filter.get(position).creat_time);
+                intent.putExtra("seller",list_Filter.get(position).seller);
+                intent.putExtra("total_price",list_Filter.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_Filter.get(position).products.size()));
+                break;
+            case 3://异常订单
+                list_Exception=adapter_exception.getList();
+                intent.putExtra("id",list_Exception.get(position).number);
+                intent.putExtra("creat_time",list_Exception.get(position).creat_time);
+                intent.putExtra("seller",list_Exception.get(position).seller);
+                intent.putExtra("total_price",list_Exception.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_Exception.get(position).products.size()));
+                break;
+        }
+        startActivityForResult(intent,0);
+
+    }
+
 
     @Override
     public void setPresenter(MyOrderContract.MyOrderPresenterInterface presenter) {
@@ -398,5 +436,42 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
     @OnClick(R.id.imge_title_left)
     public void onClick() {
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isFirst) {
+            switch (nowPosition) {
+                case 0://全部订单
+                    request_orderBuyerProList.page_no = 1;
+                    myRequestInfo.req = request_orderBuyerProList;
+                    presenter.getAllMyOrderData(myRequestInfo, 1);
+                    break;
+                case 1://待付款订单
+                    request_orderBuyerProFilterList.page_no = 1;
+                    request_orderBuyerProFilterList.order_status = 0;
+                    myRequestInfo.req = request_orderBuyerProFilterList;
+                    presenter.getorderBuyerProFilterListData(myRequestInfo, 1);
+                    break;
+                case 2://待收货订单
+                    request_orderBuyerProFilterList.page_no = 1;
+                    request_orderBuyerProFilterList.order_status = 2;
+                    myRequestInfo.req = request_orderBuyerProFilterList;
+                    presenter.getorderBuyerProFilterListData(myRequestInfo, 1);
+                    break;
+                case 3://异常订单
+                    request_orderBuyerProExceptionList.page_no = 1;
+                    myRequestInfo.req = request_orderBuyerProExceptionList;
+                    presenter.getorderBuyerProExceptionListData(myRequestInfo, 1);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isFirst=false;
     }
 }

@@ -123,13 +123,20 @@
         android:text="dddd"
         android:textColor="@color/huiseziti"
         android:textSize="@dimen/font_normal" />
+    <View
+        android:id="@+id/lin_button"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/adapter_myorder_text_daishouhuo"
+        ></View>
 
     <Button
         android:id="@+id/adapter_myorder_btn_querenshouhuo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/adapter_myorder_text_daishouhuo"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/lin_button"
         android:layout_below="@+id/adapter_myorder_line"
         android:background="@null"
         android:text="@string/querenshouhuo"
@@ -155,6 +162,6 @@
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_toLeftOf="@+id/adapter_myorder_btn_guanbidingdan"
         android:background="@null"
-        android:text="@string/yichangdindan"
+        android:text="@string/shenbaoyichang"
         android:textColor="@android:color/holo_blue_bright" />
 </RelativeLayout>

@@ -64,6 +64,10 @@ public interface SellerOrderContract {
          * 异常订单更新
          */
         void refreshException(OrderSellerExceptionList orderSellerExceptionList);
+        /**
+         * 确认发货
+         */
+        void orderDelivery(int position);
     }
     interface SellerOrderPresenterInterface extends BasePresenter {
         /**

@@ -6,12 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderExceptionActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemExceptionList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
@@ -49,12 +54,48 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
     }
 
     @Override
-    public void onBindViewHolder(BusnessHolder holder, int position) {
+    public void onBindViewHolder(BusnessHolder holder,final int position) {
 
         holder.text_id.setText(list.get(position).number);
         holder.text_date.setText(list.get(position).creat_time);
         holder.text_jian.setText(String.valueOf(list.size()));
         holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price));
+        if (0 == list.get(position).status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+            holder.text_daiShouHuo.setText("待付款");
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.GONE);
+        } else if (1 == list.get(position).status) {
+            holder.text_daiShouHuo.setText("已付款");
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (2 == list.get(position).status) {
+            holder.text_daiShouHuo.setText("已发货");
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (3 == list.get(position).status) {
+            holder.text_daiShouHuo.setText("已到货");
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+        } else if (4 == list.get(position).status) {
+            holder.text_daiShouHuo.setText("订单取消");
+            holder.btn_guanBiDingDan.setVisibility(View.GONE);
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.GONE);
+        }
+        holder.btn_queRenDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MyOrderActivity) context).orderReceive(position);
+
+            }
+        });
+        holder.btn_yiChangDingDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OrderExceptionActivity.class);
+                intent.putExtra("seller", list.get(position).seller);
+                intent.putExtra("number", String.valueOf(list.size()));
+                context.startActivity(intent);
+
+            }
+        });
         adapter=new DemOrder_exceptionAdapterItem_Adapter(context,list.get(position).products,list.get(position).seller);
         holder.listView.setAdapter(adapter);
     }
@@ -78,6 +119,16 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
         TextView text_titlePrice;
         @Bind(R.id.adapter_myorder_mylistview)
         MyListView listView;
+        @Bind(R.id.adapter_myorder_btn_querenshouhuo)
+        Button btn_queRenDingDan;
+        @Bind(R.id.adapter_myorder_btn_yichangshenbao)
+        Button btn_yiChangDingDan;
+        @Bind(R.id.adapter_myorder_btn_guanbidingdan)
+        Button btn_guanBiDingDan;
+        @Bind(R.id.adapter_myorder_text_yichang)
+        TextView text_yiChang;
+        @Bind(R.id.adapter_myorder_text_daishouhuo)
+        TextView text_daiShouHuo;
 
         public BusnessHolder(View itemView) {
             super(itemView);
@@ -85,13 +136,20 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context,BusnessInfoActivity.class);
-                    intent.putExtra("sid",list.get(getAdapterPosition()).id);
-                    intent.putExtra("from","BusnessInfoListActivity");
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
                     context.startActivity(intent);
                 }
             });
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(context, OrderDetailsActivity.class);
+                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

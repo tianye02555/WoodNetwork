@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,19 +31,25 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.UploadPictureAdapter;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.ExceptionAddContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter.ExceptionAddPresenter;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.DividerItemDecoration;
+import woodnetwork.hebg3.com.woodnetwork.Utils.AsyncTaskForUpLoadFilesNew;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 public class ExceptionAddActivity extends AppCompatActivity implements ExceptionAddContract.ExceptionAddViewInterface {
@@ -77,8 +84,10 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     private final int ALBUM = 2;// 相册
     private final int CROP = 3;// 剪切
     private String m_strAvatar;
+    private String flag="";
     private ExceptionAddContract.ExceptionAddPresenterInterface presenter;
-    private OrderBuyerInfo orderBuyerInfo;
+    private ExceptionList exceptionList;
+    private HashMap<String, File>  files = new HashMap<String, File>();;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +97,11 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
 
         textTitle.setText("添加订单异常");
         imageTitleRight.setVisibility(View.GONE);
-        orderBuyerInfo = (OrderBuyerInfo) getIntent().getSerializableExtra("OrderBuyerInfo");
-        showOrderExceptionInfo(orderBuyerInfo);
+        if(null!=getIntent().getSerializableExtra("ExceptionList")){
+            exceptionList = (ExceptionList) getIntent().getSerializableExtra("ExceptionList");
+            flag=getIntent().getStringExtra("flag");
+        }
+        showOrderExceptionInfo(exceptionList);
         list = new ArrayList<Bitmap>();
         list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
         addAdapter = new UploadPictureAdapter(this, list,0);
@@ -105,6 +117,15 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                 finish();
                 break;
             case R.id.activity_order_exceptionadd_btn_tijiao:
+                HashMap<String, String> params = new HashMap<String, String>();
+
+                params.put("content", "发货数量不符");//edit_yiChangYuanYin.getText().toString().trim();
+                params.put("oid", "1234");//orderBuyerInfo.id
+//                SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(ExceptionAddActivity.this);
+//                sharePreferencesUtils.getData("userid","null");
+                params.put("sid", "1234");
+
+                presenter.submitExceptionOrder(ExceptionAddActivity.this,params,files);
                 break;
         }
     }
@@ -116,17 +137,28 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     }
 
     @Override
-    public void showOrderExceptionInfo(OrderBuyerInfo orderBuyerInfo) {
-        text_dinDanBianHao.setText("订单编号：" + orderBuyerInfo.number);
-        text_date.setText("下单日期：" + orderBuyerInfo.creat_time);
-        text_maiJiaXinXi.setText("卖家信息：" + orderBuyerInfo.seller);
-        text_price.setText(String.valueOf(orderBuyerInfo.total_price));
-        text_jian.setText(String.valueOf(orderBuyerInfo.products.size()));
+    public void showOrderExceptionInfo(ExceptionList exceptionList) {
+        text_dinDanBianHao.setText("订单编号：" + exceptionList.number);
+        text_date.setText("下单日期：" + exceptionList.creat_time);
+        if("1".equals(flag)){
+            text_maiJiaXinXi.setText("买家信息：" + exceptionList.seller);
+        }else{
+            text_maiJiaXinXi.setText("卖家信息：" + exceptionList.seller);
+        }
+
+        text_price.setText(String.valueOf(exceptionList.total_price));
+        text_jian.setText(exceptionList.shop_number);
     }
 
     @Override
     public void addExceptionPicture(View view) {
         showPopupWindow(view);
+    }
+
+    @Override
+    public void closeActivity() {
+        setResult(RESULT_OK);
+        finish();
     }
 
 
@@ -260,7 +292,7 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                         Bundle extras = data.getExtras();
                         if (extras != null) {
                             Bitmap photo = extras.getParcelable("data");
-//                            m_strAvatar = saveBitmapToFile(photo);
+                            m_strAvatar = saveBitmapToFile(photo);
                             list = addAdapter.getList();
                             list.remove(list.size() - 1);
                             list.add(photo);
@@ -269,28 +301,10 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                             addAdapter.notifyItemRangeChanged(list.size()-2,list.size()-1);
                         }
                     }
-//                    if (!TextUtils.isEmpty(m_strAvatar)) {
-//                        // img_avatar.setImageBitmap(photo);
-//                        // img_avatar.setTag(m_strAvatar);
-//                        System.out.println(m_strAvatar);
-////                        ProgressUtils.show(this, "请稍后……");
-//                        String actionUrl = "http://" + Const.AUTHORITY
-//                                + "/File/uploadPicture";
-//                        HashMap<String, File> files = new HashMap<String, File>();
-//                        File f = new File(m_strAvatar);
-//                        files.put("image", f);
-
-//                        HashMap<String, String> params = new HashMap<String, String>();
-//
-//                        params.put("access_token",
-//                                CommonUtils.getAccessToken("FileuploadPicture"));
-//                        params.put("uid", shared.getString("uid"));
-//
-//                        AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
-//                                this, actionUrl, params, files,
-//                                handler.obtainMessage(1));
-//                        at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "1");
-//                    }
+                    if (!TextUtils.isEmpty(m_strAvatar)) {
+                        File f = new File(m_strAvatar);
+                        files.put("image", f);
+                    }
                     break;
                 case ALBUM:
                     if (data != null) {

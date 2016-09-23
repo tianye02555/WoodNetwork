@@ -15,6 +15,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -71,11 +73,20 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
     RecyclerView recyclerview;
     @Bind(R.id.activity_order_receive_btn_tijiao)
     Button btn_tijiao;
+    private String m_strAvatar;
+    private HashMap<String, File> files = new HashMap<String, File>();
+    ;
     private UploadPictureAdapter addAdapter;
     private List<Bitmap> list;
     private final int TAKE_PHOTO = 1;// 拍照
     private final int ALBUM = 2;// 相册
     private final int CROP = 3;// 剪切
+
+    private String id;
+    private String creat_time;
+    private String seller;
+    private String total_price;
+    private String number;
     private OrderBuyerInfo orderBuyerInfo;
     private OrderReceiveContract.OrderReceivePresenterInterface presenter;
 
@@ -87,19 +98,22 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
 
 
         imageTitleRight.setVisibility(View.GONE);
-        if(null!=getIntent()){
-            if("1".equals(getIntent().getStringExtra("flag"))){
+        if (null != getIntent()) {
+            id = getIntent().getStringExtra("id");
+            creat_time = getIntent().getStringExtra("creat_time");
+            seller = getIntent().getStringExtra("seller");
+            total_price = getIntent().getStringExtra("total_price");
+            number = getIntent().getStringExtra("number");
+            if ("1".equals(getIntent().getStringExtra("flag"))) {
                 textTitle.setText("确认发货");
                 text_tuPian.setText(getResources().getString(R.string.fahuotupian));
-            }else{
+            } else {
                 textTitle.setText("确认收货");
             }
-        }else{
+        } else {
             textTitle.setText("确认收货");
         }
-
-        orderBuyerInfo = (OrderBuyerInfo) getIntent().getSerializableExtra("OrderBuyerInfo");
-        showOrderInfo(orderBuyerInfo);
+        showOrderInfo();
         new OrderReceivePresenter(this);
         list = new ArrayList<Bitmap>();
         list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
@@ -117,32 +131,40 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                 finish();
                 break;
             case R.id.activity_order_receive_btn_tijiao:
-                if(null!=getIntent()){
-                    if("1".equals(getIntent().getStringExtra("flag"))){
+                HashMap<String, String> params = new HashMap<String, String>();
+
+                params.put("content", "货物已经收到");//edit_yiChangYuanYin.getText().toString().trim();
+                params.put("oid", "1234");//orderBuyerInfo.id
+                params.put("sid", "1234");
+                if (null != getIntent()) {
+                    if ("1".equals(getIntent().getStringExtra("flag"))) {
+                        params.put("content", "货物已发送");
                         //发货接口
-                    }else{
+                        presenter.submitDelevryOrder(OrderReceiveActivity.this, params, files);
+                    } else {
                         //收货接口
+                        presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
                     }
-                }else{
+                } else {
                     //收货接口
+                    presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
                 }
-//                presenter.submitReceiveOrder();
                 break;
         }
     }
 
     @Override
     public String getBeiZhu() {
-return edit_beiZhu.getText().toString().trim();
+        return edit_beiZhu.getText().toString().trim();
     }
 
     @Override
-    public void showOrderInfo(OrderBuyerInfo orderBuyerInfo) {
-        text_dinDanBianHao.setText("订单编号：" + orderBuyerInfo.number);
-        text_date.setText("下单日期：" + orderBuyerInfo.creat_time);
-        text_maiJiaXinXi.setText("卖家信息：" + orderBuyerInfo.seller);
-        text_price.setText(String.valueOf(orderBuyerInfo.total_price));
-        text_jian.setText(String.valueOf(orderBuyerInfo.products.size()));
+    public void showOrderInfo() {
+        text_dinDanBianHao.setText("订单编号："+id);
+        text_date.setText("下单日期：" + creat_time);
+        text_maiJiaXinXi.setText("卖家信息：" + seller);
+        text_price.setText(total_price);
+        text_jian.setText(number);
     }
 
     @Override
@@ -286,31 +308,13 @@ return edit_beiZhu.getText().toString().trim();
                             list.add(photo);
                             list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
                             addAdapter.setList(list);
-                            addAdapter.notifyItemRangeChanged(list.size()-2,list.size()-1);
+                            addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);
                         }
                     }
-//                    if (!TextUtils.isEmpty(m_strAvatar)) {
-//                        // img_avatar.setImageBitmap(photo);
-//                        // img_avatar.setTag(m_strAvatar);
-//                        System.out.println(m_strAvatar);
-////                        ProgressUtils.show(this, "请稍后……");
-//                        String actionUrl = "http://" + Const.AUTHORITY
-//                                + "/File/uploadPicture";
-//                        HashMap<String, File> files = new HashMap<String, File>();
-//                        File f = new File(m_strAvatar);
-//                        files.put("image", f);
-
-//                        HashMap<String, String> params = new HashMap<String, String>();
-//
-//                        params.put("access_token",
-//                                CommonUtils.getAccessToken("FileuploadPicture"));
-//                        params.put("uid", shared.getString("uid"));
-//
-//                        AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
-//                                this, actionUrl, params, files,
-//                                handler.obtainMessage(1));
-//                        at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "1");
-//                    }
+                    if (!TextUtils.isEmpty(m_strAvatar)) {
+                        File f = new File(m_strAvatar);
+                        files.put("image", f);
+                    }
                     break;
                 case ALBUM:
                     if (data != null) {
@@ -376,5 +380,11 @@ return edit_beiZhu.getText().toString().trim();
             filePath = "";
         }
         return filePath;
+    }
+
+    @Override
+    public void closeActivity() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

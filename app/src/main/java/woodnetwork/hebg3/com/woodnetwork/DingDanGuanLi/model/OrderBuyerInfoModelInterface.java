@@ -11,4 +11,8 @@ public interface OrderBuyerInfoModelInterface {
      * 获取订单详情接口
      */
     void getOrderData(Object object, OnServiceBaceInterface onServiceBaceInterface);
+    /**
+     * 获取卖家订单详情接口
+     */
+    void getSellerOrderData(Object object, OnServiceBaceInterface onServiceBaceInterface);
 }

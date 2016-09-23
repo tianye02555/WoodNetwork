@@ -45,7 +45,10 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
     MyListView listview_yichangxinxi;
     @Bind(R.id.activity_order_exception_listview_yichangchuli)
     MyListView listview_yichangchuli;
-    private OrderBuyerInfo orderBuyerInfo;
+    private String seller="";
+    private String number="";
+    private String flag="";
+    private ExceptionList exceptionList;
     private OrderExceptionContract.OrderExceptionPresenterInterface presenter;
     private MyRequestInfo myRequestInfo;
     private OrderException_yiChangXinXi_listAdapter listAdapter_yiChangXinXi;
@@ -57,7 +60,13 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
         setContentView(R.layout.activity_order_exception);
         ButterKnife.bind(this);
 
-        orderBuyerInfo = (OrderBuyerInfo) getIntent().getSerializableExtra("OrderBuyerInfo");
+        if(null!=getIntent()){
+            seller=getIntent().getStringExtra("seller");
+            number=getIntent().getStringExtra("number");
+            flag=getIntent().getStringExtra("flag");
+        }
+
+//        orderBuyerInfo = (OrderBuyerInfo) getIntent().getSerializableExtra("OrderBuyerInfo");
         new OrderExceptionPresenter(this);
         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         Request_getAttribute request_getAttribute = new Request_getAttribute();
@@ -80,7 +89,10 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
                 break;
             case R.id.image_title_right:
                 Intent intent = new Intent(OrderExceptionActivity.this, ExceptionAddActivity.class);
-                intent.putExtra("OrderBuyerInfo",this.orderBuyerInfo);
+                intent.putExtra("ExceptionList",this.exceptionList);
+                if("1".equals(flag)){
+                    intent.putExtra("flag","1");
+                }
                 startActivity(intent);
                 break;
         }
@@ -88,11 +100,20 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
 
     @Override
     public void showOrderExceptionInfo(ExceptionList exceptionList) {
+        exceptionList.seller=seller;
+        exceptionList.shop_number=number;
+        this.exceptionList=exceptionList;
         date.setText("下单日期："+exceptionList.creat_time);
-        maiJiaXinXi.setText("卖家信息："+orderBuyerInfo.seller);
+        if("1".equals(flag)){
+            maiJiaXinXi.setText("买家信息："+seller);
+        }else{
+            maiJiaXinXi.setText("卖家信息："+seller);
+        }
+
         price.setText(String.valueOf(exceptionList.total_price));
-        jian.setText(String.valueOf(orderBuyerInfo.products.size()));
+        jian.setText(number);
         dinDanBianHao.setText("订单编号："+exceptionList.number);
+
 
         exceptionList.exception.get(0).imgs.add("http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg");
         exceptionList.exception.get(0).imgs.add("http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg");

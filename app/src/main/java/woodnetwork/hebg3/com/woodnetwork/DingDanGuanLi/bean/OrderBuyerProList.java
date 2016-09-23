@@ -2,13 +2,14 @@ package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ty on 2016/9/14 0014.
  */
 
-public class OrderBuyerProList {
+public class OrderBuyerProList implements Serializable {
     @Expose
     public Integer  page_size ;
     @Expose

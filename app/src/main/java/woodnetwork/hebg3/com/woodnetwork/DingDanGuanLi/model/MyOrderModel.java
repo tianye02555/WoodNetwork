@@ -55,6 +55,7 @@ public class MyOrderModel implements MyOrderModelInterface {
                         onServiceBaceInterface_getorderBuyerProClose.onFailed(body.base.msg);
                     }
                     break;
+
             }
 
         }
@@ -99,4 +100,6 @@ public class MyOrderModel implements MyOrderModelInterface {
         params.params = CommonUtils.getParamString(object);
         new NetTask(handler.obtainMessage(3),params).execute();
     }
+
+
 }

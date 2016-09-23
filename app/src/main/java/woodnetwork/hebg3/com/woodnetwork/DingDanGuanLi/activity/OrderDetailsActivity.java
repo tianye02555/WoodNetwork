@@ -59,6 +59,8 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     private MyRequestInfo myRequestInfo;
     private OrderDetailsAdapter adapter;
     private OrderBuyerInfo orderBuyerInfo;
+    private String oid="";
+    private String flag="";//判断是不是卖家
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,9 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
         imageTitleRight.setVisibility(View.GONE);
 
         if(null!=getIntent()){
-            if("1".equals(getIntent().getStringExtra("flag"))){
+            oid=getIntent().getStringExtra("oid");
+            flag=getIntent().getStringExtra("flag");
+            if("1".equals(flag)){
                 btn_queRenShouHuo.setText("发货");
             }
         }
@@ -78,7 +82,7 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
         Request_orderBuyInfo request_orderBuyInfo=new Request_orderBuyInfo();
-        request_orderBuyInfo.oid="1234";
+        request_orderBuyInfo.oid="1234";//oid
 
         myRequestInfo = new MyRequestInfo();
         myRequestInfo.req=request_orderBuyInfo;
@@ -90,10 +94,19 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     }
 
     @Override
-    public void showOrderInfo(OrderBuyerInfo orderBuyerInfo) {
+    public void showOrderInfo(Object object) {
+        if("1".equals(flag)){
+
+        }else{
+
+        }
         this.orderBuyerInfo=orderBuyerInfo;
-        SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(this);
-        text_maiJia.setText("买家信息:"+(String)sharePreferencesUtils.getData("user_name",""));
+        if("1".equals(flag)){
+            text_maiJia.setText("买家信息:"+orderBuyerInfo.seller);
+        }else{
+            text_maiJia.setText("卖家信息:"+orderBuyerInfo.seller);
+        }
+
         text_shouHuoDiZhi.setText(orderBuyerInfo.receive_area);
         text_faHuoDiZhi.setText(orderBuyerInfo.delivery_area);
                 text_dingDanHao.setText(orderBuyerInfo.number);
@@ -158,19 +171,33 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 break;
             case R.id.adapter_order_details_btn_querenshouhuo:
                 Intent intent_receive =new Intent(OrderDetailsActivity.this,OrderReceiveActivity.class);
-                intent_receive.putExtra("OrderBuyerInfo",this.orderBuyerInfo);
+                intent_receive.putExtra("id",this.orderBuyerInfo.number);
+                intent_receive.putExtra("creat_time",this.orderBuyerInfo.creat_time);
+                intent_receive.putExtra("seller",this.orderBuyerInfo.seller);
+                intent_receive.putExtra("total_price",this.orderBuyerInfo.total_price);
+                intent_receive.putExtra("number",String.valueOf(this.orderBuyerInfo.products.size()));
                 if(null!=getIntent()){
                     if("1".equals(getIntent().getStringExtra("flag"))){
                         intent_receive.putExtra("flag","1");
                     }
                 }
-                startActivity(intent_receive);
+                startActivityForResult(intent_receive,0);
                 break;
             case R.id.adapter_order_details_btn_guanbidingdan://异常申报
                 Intent intent_exception =new Intent(OrderDetailsActivity.this,OrderExceptionActivity.class);
-                intent_exception.putExtra("OrderBuyerInfo",this.orderBuyerInfo);
-                startActivity(intent_exception);
+                intent_exception.putExtra("seller",orderBuyerInfo.seller);
+                intent_exception.putExtra("number",String.valueOf(orderBuyerInfo.products.size()));
+                startActivityForResult(intent_exception,0);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            finish();
+        }
+
     }
 }

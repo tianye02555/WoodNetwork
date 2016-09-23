@@ -19,6 +19,8 @@ import android.os.Message;
 
 import com.google.gson.Gson;
 
+import woodnetwork.hebg3.com.woodnetwork.net.Base;
+
 public class AsyncTaskForUpLoadFilesNew extends
 		AsyncTask<Object, Object, Object> {
 
@@ -45,23 +47,24 @@ public class AsyncTaskForUpLoadFilesNew extends
 
 	@Override
 	protected void onPostExecute(Object result) {
-//		Base base = null;// 附件上传 服务器响应的json
-//		String response = (String) result;
-//		if (response.equals("-1")) {
-//			base = new Base();
-//			base.message = "提交失败";
-//		} else {
-//			base = g.fromJson(response, Base.class);
-//		}
-//		if (base.code.equals("0")) {
-//			m.what = 200;
-//			m.obj = base;
-//			m.sendToTarget();
-//		}else{
-//			m.what = 1;
-//			m.obj = base;
-//			m.sendToTarget();
-//		}
+		Base base = null;// 附件上传 服务器响应的json
+		String response = (String) result;
+		if (response.equals("-1")) {
+			base = new Base();
+			base.msg = "提交失败";
+			base.code="1";
+		} else {
+			base = g.fromJson(response, Base.class);
+		}
+		if (base.code.equals("0")) {
+			m.what = 0;
+			m.obj = base;
+			m.sendToTarget();
+		}else{
+			m.what = 1;
+			m.obj = base;
+			m.sendToTarget();
+		}
 		
 		
 	}

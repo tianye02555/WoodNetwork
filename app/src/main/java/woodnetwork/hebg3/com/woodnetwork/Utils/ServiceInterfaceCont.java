@@ -89,6 +89,8 @@ public class ServiceInterfaceCont {
 
     //17.1获取订单详情接口
     public static final String ORDERBUYERINFO = "/order/buyer/info?param=";
+    //17.2获取卖家订单详情接口
+    public static final String ORDERSELLERINFO = "/order/seller/info?param=";
 
     //18.1获取订单异常列表
     public static final String EXCEPTIONLIST = "/exception/list?param=";

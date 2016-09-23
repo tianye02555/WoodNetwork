@@ -64,6 +64,10 @@ public interface DemOrderContract {
          * 异常订单更新
          */
         void refreshException(OrderBuyerDemExceptionList orderBuyerDemExceptionList);
+        /**
+         * 确认收货
+         */
+        void orderReceive(int position);
     }
     interface DemOrderPresenterInterface extends BasePresenter {
         /**

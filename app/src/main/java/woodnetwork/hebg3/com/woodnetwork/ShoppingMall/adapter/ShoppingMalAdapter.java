@@ -19,6 +19,7 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.ShoppingMallFragment;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 
 /**
@@ -51,7 +52,7 @@ public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.
 
     @Override
     public void onBindViewHolder(ShoppingMalAdapter.ViewHolder holder, int position) {
-        holder.head.setImageURI(Uri.parse(productInfoList.get(position).pimg));
+        holder.head.setImageURI(Uri.parse(Const.PICTURE+productInfoList.get(position).pimg));
         holder.name.setText(productInfoList.get(position).pname);
         holder.price.setText(String.valueOf(productInfoList.get(position).price));
         holder.stock.setText("库存：" + productInfoList.get(position).stock + "方");
@@ -108,7 +109,7 @@ public class ShoppingMalAdapter extends RecyclerView.Adapter<ShoppingMalAdapter.
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, WoodInfoActivity.class);
-                    intent.putExtra("pid", productInfoList.get(getAdapterPosition()).pid);
+                    intent.putExtra("pid", productInfoList.get(getAdapterPosition()-1).pid);
                     context.startActivity(intent);
                 }
             });

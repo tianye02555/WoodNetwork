@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import woodnetwork.hebg3.com.woodnetwork.QiuGou.activity.QiuGouXiangQingActivity;
 import woodnetwork.hebg3.com.woodnetwork.QiuGou.activity.WoYaoBaoJiaActivity;
 import woodnetwork.hebg3.com.woodnetwork.QiuGou.bean.DemandList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
@@ -88,14 +89,14 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
             lianXiDianHua= (TextView) itemView.findViewById(R.id.qiugouhome_adapter_txt_lianxidianhua);
             woYaoBaoJia = (Button) itemView.findViewById(R.id.qiugouhome_adapter_btn_woyaobaojia);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, WoodInfoActivity.class);
-//                    intent.putExtra("pid", productInfoList.get(getAdapterPosition()).pid);
-//                    context.startActivity(intent);
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, QiuGouXiangQingActivity.class);
+                    intent.putExtra("did", demandList.get(getAdapterPosition()-1).id);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

@@ -32,5 +32,5 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp"
         android:scaleType="fitXY"
-        android:src="@drawable/title_right" />
+        android:src="@drawable/shooppingcart" />
 </RelativeLayout>

@@ -3,13 +3,13 @@ package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -64,6 +64,10 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     Spinner extractType;
     @Bind(R.id.activity_confirm_order_listview)
     MyListView listView;
+    @Bind(R.id.ll)
+    LinearLayout ll;
+    @Bind(R.id.ll2)
+    LinearLayout ll2;
     private int extractTypeNumber;
     private ConfirmOrderContrac.ConfirmOrderPresenterInterface presenter;
     private SharePreferencesUtils sharePreferencesUtils;
@@ -95,12 +99,17 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                     extractTypeNumber = 0;
                     address.setEnabled(false);
                     harvestPlace.setEnabled(false);
-                    simpleDraweeView.setVisibility(View.INVISIBLE);
-                    address.setText("");
+//                    simpleDraweeView.setVisibility(View.INVISIBLE);
+//                    address.setText("");
+                    ll.setVisibility(View.GONE);
+                    ll2.setVisibility(View.GONE);
                 } else if ("送货".equals(extractArray[i])) {
                     address.setEnabled(true);
+                    harvestPlace.setEnabled(true);
+                    ll.setVisibility(View.VISIBLE);
+                    ll2.setVisibility(View.VISIBLE);
                     extractTypeNumber = 1;
-                    simpleDraweeView.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -112,7 +121,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     }
 
-    @OnClick({R.id.activity_confirm_order_btn_querenxiadan, R.id.activity_confirm_order_btn_quxiao, R.id.simpleDraweeView,R.id.imge_title_left})
+    @OnClick({R.id.activity_confirm_order_btn_querenxiadan, R.id.activity_confirm_order_btn_quxiao, R.id.simpleDraweeView, R.id.imge_title_left})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_confirm_order_btn_querenxiadan://确认下单
@@ -142,7 +151,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                 finish();
                 break;
             case R.id.simpleDraweeView:
-                startActivityForResult(new Intent(this, ChooseAddressActivity.class),0);
+                startActivityForResult(new Intent(this, ChooseAddressActivity.class), 0);
                 break;
             case R.id.imge_title_left:
                 finish();
@@ -152,8 +161,8 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     @Override
     public void showOrderData(ShopcarList shopcarList) {
-        sellerName.setText("卖家名称："+shopcarList.list.get(0).seller.sname);
-        buyerName.setText("买家名称："+(String) sharePreferencesUtils.getData("user_name", ""));
+        sellerName.setText("卖家名称：" + shopcarList.list.get(0).seller.sname);
+        buyerName.setText("买家名称：" + (String) sharePreferencesUtils.getData("user_name", ""));
         orderType.setText("订单类型：销售订单");
         //计算总价格
         double totlePrice = 0;
@@ -161,7 +170,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
             totlePrice += shopcarList_listItem.xiaoJi;
         }
         yingFuJinge.setText(String.valueOf(totlePrice));
-        adapter=new ConfirmOrderAdapter(this,shopcarList.list);
+        adapter = new ConfirmOrderAdapter(this, shopcarList.list);
         listView.setAdapter(adapter);
 
     }
@@ -216,7 +225,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK){
+        if (resultCode == RESULT_OK) {
             harvestPlace.setText(data.getStringExtra("address"));
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -69,9 +70,9 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
     @Bind(R.id.mylistview)
     ListView mylistview;
     @Bind(R.id.text_chongzhi)
-    TextView textChongzhi;
+    Button textChongzhi;
     @Bind(R.id.text_queding)
-    TextView textQueding;
+    Button textQueding;
     @Bind(R.id.rel_shaixuan)
     RelativeLayout relShaixuan;
     /**
@@ -113,14 +114,14 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
 
-        Request_spinnerInfo request_spinnerInfo = new Request_spinnerInfo();
-        request_spinnerInfo.attr_vaule_id = "111";
-        request_spinnerInfo.attr_id = "1234";
-        request_spinnerInfoList.add(request_spinnerInfo);
-        Request_spinnerInfo request_spinnerInfo1 = new Request_spinnerInfo();
-        request_spinnerInfo1.attr_vaule_id = "444";
-        request_spinnerInfo1.attr_id = "2234";
-        request_spinnerInfoList.add(request_spinnerInfo1);
+//        Request_spinnerInfo request_spinnerInfo = new Request_spinnerInfo();
+//        request_spinnerInfo.attr_vaule_id = "111";
+//        request_spinnerInfo.attr_id = "1234";
+//        request_spinnerInfoList.add(request_spinnerInfo);
+//        Request_spinnerInfo request_spinnerInfo1 = new Request_spinnerInfo();
+//        request_spinnerInfo1.attr_vaule_id = "444";
+//        request_spinnerInfo1.attr_id = "2234";
+//        request_spinnerInfoList.add(request_spinnerInfo1);
         request_shoppingMall_woodsList = new Request_shoppingMall_woodsList();
         request_shoppingMall_woodsList.page_no = 1;
         request_shoppingMall_woodsList.page_size = 10;
@@ -309,17 +310,17 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
                         startActivity(intent);
                     } else if (id == R.id.shopppingmalladapter_btn_shoppingcart) {//加入购物车
                         Request_shopcarAdd request_shopcarAdd = new Request_shopcarAdd();
-                        request_shopcarAdd.number = 500;
-                        request_shopcarAdd.pid = "1234";//实际为参数list.get(position).pid
+                        request_shopcarAdd.number = Double.parseDouble(number.getText().toString().trim());
+                        request_shopcarAdd.pid = list.get(position).pid;
 
                         myRequestInfo.req = request_shopcarAdd;
                         shoppingMallPresenter.shopcarAdd(myRequestInfo);
 
                     }
-                    dialogInterface.dismiss();
+
                 }
 
-
+                dialogInterface.dismiss();
             }
         });
         builder.show();

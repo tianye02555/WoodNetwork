@@ -6,19 +6,16 @@
         android:id="@+id/adapter_quotationinfo_txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="姓名："
         android:gravity="left"
         android:textSize="@dimen/font_normal"
-
         android:textColor="@android:color/black"
         android:layout_below="@id/includ_title"
-        android:layout_marginLeft="@dimen/distance_normal" />
+        android:layout_marginLeft="@dimen/distance_longest" />
     <TextView
         android:id="@+id/adapter_quotationinfo_txt_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="李海涛"
-        android:layout_marginTop="@dimen/distance_shortest"
+        android:layout_marginTop="@dimen/distance_normal"
         android:textSize="@dimen/font_normal"
         android:textColor="@android:color/black"
         android:layout_toRightOf="@id/adapter_quotationinfo_txt_name"

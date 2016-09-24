@@ -5,19 +5,13 @@ import android.os.Environment;
 
 /** 常量 */
 public class Const {
-	public static final String APPNAME = "StudentStatus";
+	public static final String APPNAME = "MULIANWANG";
 
-
-	
-//	public static final String AUTHORITY = "101.200.77.60/xuejiguanli/api.php";
-	//服务器地址
-	//http://lbs.puzedianzi.com/ 服务器地址
-//	public static final String AUTHORITY = "192.168.2.50/xuejiguanli/api.php";
+//	public static final String AUTHORITY = "192.168.2.159:8080/wood/dev/wood/v1";
 	//云
-	public static final String AUTHORITY = "192.168.2.12:12306/dev/wood/v1";
-	public static final String APP_SECRET="qJpV79cj&$)6!1dk1Zf_Y75pw6`X7HUx";
-	
-	// public static final String AUTHORITY = "192.168.2.77:8080/";
+	public static final String AUTHORITY = "192.168.2.12:8080/wood/dev/wood/v1";
+	//图片前缀
+	 public static final String PICTURE = "http//:192.168.2.159:8080/wood/";
 	public static final int DEFAULT_TIMEOUT = 15 * 1000;// 默认的超时时间
 	public static final int DOWNLOAD_UPLOAD_TIMEOUT = 50 * 1000;// 下载上传文件的超时时间
 

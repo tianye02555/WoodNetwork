@@ -20,29 +20,30 @@ import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
 public class BusnessInfoModel implements BusnessInfoModelInterface {
     private OnServiceBaceInterface onServiceBaceInterface_getBusnessInfo;
     private OnServiceBaceInterface onServiceBaceInterface_getSellerBusnessInfo;
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            ResponseBody body =(ResponseBody) msg.obj;
-switch (msg.what){
-    case 0:
-        if("0".equals(body.base.code)){
-            onServiceBaceInterface_getBusnessInfo.onSuccess(body);
-        }else{
-            onServiceBaceInterface_getBusnessInfo.onFailed(body.base.msg);
-        }
-        break;
-    case 1:
-        if("0".equals(body.base.code)){
-            onServiceBaceInterface_getSellerBusnessInfo.onSuccess(body);
-        }else{
-            onServiceBaceInterface_getSellerBusnessInfo.onFailed(body.base.msg);
-        }
-        break;
-}
+            ResponseBody body = (ResponseBody) msg.obj;
+            switch (msg.what) {
+                case 0:
+                    if ("0".equals(body.base.code)) {
+                        onServiceBaceInterface_getBusnessInfo.onSuccess(body);
+                    } else {
+                        onServiceBaceInterface_getBusnessInfo.onFailed(body.base.msg);
+                    }
+                    break;
+                case 1:
+                    if ("0".equals(body.base.code)) {
+                        onServiceBaceInterface_getSellerBusnessInfo.onSuccess(body);
+                    } else {
+                        onServiceBaceInterface_getSellerBusnessInfo.onFailed(body.base.msg);
+                    }
+                    break;
+            }
 
         }
     };
+
     @Override
     public void getBusnessInfo(Object param, OnServiceBaceInterface onServiceBaceInterface) {
         this.onServiceBaceInterface_getBusnessInfo = onServiceBaceInterface;

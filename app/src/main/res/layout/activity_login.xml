@@ -80,26 +80,32 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/distance_normal"
             android:hint="密码"
-            android:singleLine="true"
             android:inputType="textPassword"
+            android:singleLine="true"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             android:textSize="@dimen/font_normal" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
+    <woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="20dp"
-        android:layout_weight="1.1"
-        android:background="@drawable/denglu"
-        android:text="@string/login"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/font_big" />
+        android:layout_weight="1.1">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/denglu"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_big" />
+    </woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

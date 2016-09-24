@@ -137,7 +137,7 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, OrderDetailsActivity.class);
-                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("oid", list.get(getAdapterPosition()-1).id);
                     context.startActivity(intent);
                 }
             });
@@ -146,7 +146,7 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(context, OrderDetailsActivity.class);
-                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("oid", list.get(getAdapterPosition()-1).id);
                     context.startActivity(intent);
                 }
             });

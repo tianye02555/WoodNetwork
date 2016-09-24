@@ -73,9 +73,9 @@ public class UploadPictureAdapter extends RecyclerView.Adapter<UploadPictureAdap
             cancle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    list.remove(list.get(getAdapterPosition()));
+                    list.remove(list.get(getAdapterPosition()-1));
 
-                    notifyItemRemoved(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition()-1);
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {

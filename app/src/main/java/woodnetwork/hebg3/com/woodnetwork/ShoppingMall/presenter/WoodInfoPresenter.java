@@ -10,6 +10,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.WoodInfoContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.model.WoodInfoModel;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.ProductSellerInfo;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
@@ -72,6 +73,24 @@ public class WoodInfoPresenter implements WoodInfoContrac.WoodInfoPresenterInter
             public void onSuccess(Object object) {
                 woodInfoView.closeProgress();
                 woodInfoView.showWoodData((ProductSellerInfo)((ResponseBody)object).obj);
+            }
+
+            @Override
+            public void onFailed(String string) {
+                woodInfoView.closeProgress();
+                woodInfoView.showMessage(string);
+            }
+        });
+    }
+
+    @Override
+    public void shopcarAdd(MyRequestInfo myRequestInfo) {
+        woodInfoView.showProgress();
+        woodInfoModel.addToShoppingCart(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                woodInfoView.closeProgress();
+                woodInfoView.showMessage(((ResponseBody)object).base.msg);
             }
 
             @Override

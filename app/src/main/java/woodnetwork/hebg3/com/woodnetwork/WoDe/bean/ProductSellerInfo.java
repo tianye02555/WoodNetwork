@@ -22,6 +22,8 @@ public class ProductSellerInfo {
     @Expose
     public Integer type;
     @Expose
+    public String sid;
+    @Expose
     public String seller;
     @Expose
     public String delivery;

@@ -240,7 +240,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
             }
         } else if (object instanceof OrderSellerExceptionList) {
             adapter_exception = new SellerOrder_exception_Adapter(this, ((OrderSellerExceptionList) object).list);
-            if (1 == ((OrderSellerList) object).total_page)
+            if (1 == ((OrderSellerExceptionList) object).total_page)
 
             {//如果总页数一共就一页，关闭加载更多功能
                 recyclerview.setLoadingMoreEnabled(false);

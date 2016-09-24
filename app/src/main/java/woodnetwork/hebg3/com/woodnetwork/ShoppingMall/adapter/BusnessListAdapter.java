@@ -86,7 +86,7 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
             image_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+list.get(getAdapterPosition()).phone));
+                    Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+list.get(getAdapterPosition()-1).phone));
                     context.startActivity(intent);
                 }
             });
@@ -94,7 +94,7 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
                 @Override
                 public void onClick(View view) {
                     Intent intent=new Intent(context,BusnessInfoActivity.class);
-                    intent.putExtra("sid",list.get(getAdapterPosition()).id);
+                    intent.putExtra("sid",list.get(getAdapterPosition()-1).id);
                     intent.putExtra("from","BusnessInfoListActivity");
                     context.startActivity(intent);
                 }

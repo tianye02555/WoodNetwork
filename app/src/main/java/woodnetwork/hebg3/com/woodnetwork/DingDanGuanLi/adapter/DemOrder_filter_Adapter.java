@@ -149,7 +149,7 @@ public class DemOrder_filter_Adapter extends RecyclerView.Adapter<DemOrder_filte
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, BusnessInfoActivity.class);
-                    intent.putExtra("sid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("sid", list.get(getAdapterPosition()-1).id);
                     context.startActivity(intent);
                 }
             });
@@ -157,7 +157,7 @@ public class DemOrder_filter_Adapter extends RecyclerView.Adapter<DemOrder_filte
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(context, OrderDetailsActivity.class);
-                    intent.putExtra("oid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("oid", list.get(getAdapterPosition()-1).id);
                     context.startActivity(intent);
                 }
             });

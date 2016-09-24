@@ -127,8 +127,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#02ad00"
-                    android:gravity="center"
+                    android:background="@color/dise"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/distance_normal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="商品规格"
@@ -144,57 +145,11 @@
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text=""
+                    android:visibility="gone"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_normal" />
             </LinearLayout>
 
-            <!--<TextView-->
-            <!--android:id="@+id/activity_wood_info_txt_dengji"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/ll"-->
-            <!--android:layout_marginLeft="@dimen/distance_longest"-->
-            <!--android:layout_marginTop="@dimen/distance_shortest"-->
-            <!--android:text="等级："-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="@dimen/font_small" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/activity_wood_info_txt_gongyinshang"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignLeft="@id/activity_wood_info_txt_dengji"-->
-            <!--android:layout_below="@id/activity_wood_info_txt_dengji"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="@dimen/distance_shortest"-->
-            <!--android:text="供应商："-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="@dimen/font_small" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/activity_wood_info_txt_jingjiduan"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignLeft="@id/activity_wood_info_txt_gongyinshang"-->
-            <!--android:layout_below="@id/activity_wood_info_txt_gongyinshang"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="@dimen/distance_shortest"-->
-            <!--android:text="径级段："-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="@dimen/font_small" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/activity_wood_info_txt_shuzhong"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignLeft="@id/activity_wood_info_txt_jingjiduan"-->
-            <!--android:layout_below="@id/activity_wood_info_txt_jingjiduan"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginRight="@dimen/distance_normal"-->
-            <!--android:layout_marginTop="@dimen/distance_shortest"-->
-            <!--android:text="树种："-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="@dimen/font_small" />-->
             <woodnetwork.hebg3.com.woodnetwork.view.MyListView
                 android:id="@+id/activity_wood_info_listview"
                 android:layout_width="match_parent"
@@ -212,28 +167,41 @@
                 android:layout_below="@+id/activity_wood_info_listview"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
+<woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
+    android:id="@+id/activity_wood_info_reveallayout_lijigoumai"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/line"
+    android:layout_marginTop="@dimen/distance_normal">
+    <Button
+        android:id="@+id/activity_wood_info_btn_lijigoumai"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="@string/lijigoumai"
+        android:textSize="@dimen/font_normal" />
+</woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
 
-            <Button
-                android:id="@+id/activity_wood_info_btn_lijigoumai"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/line"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@drawable/shape"
-                android:text="@string/lijigoumai"
-                android:textSize="@dimen/font_normal" />
+<woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:layout_toLeftOf="@+id/activity_wood_info_reveallayout_lijigoumai"
+    android:layout_marginRight="11dp"
+    android:layout_marginEnd="11dp"
+    android:layout_alignParentBottom="true"
+    android:baselineAligned="@+id/activity_wood_info_reveallayout_lijigoumai"
+    android:layout_toStartOf="@+id/activity_wood_info_reveallayout_lijigoumai">
+    <Button
+        android:id="@+id/activity_wood_info_btn_jiarugouwuche"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:text="@string/jiarugouwuche"
+        android:textSize="@dimen/font_normal"
+        />
+</woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
 
-            <Button
-                android:id="@+id/activity_wood_info_btn_jiarugouwuche"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/activity_wood_info_btn_lijigoumai"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_toLeftOf="@id/activity_wood_info_btn_lijigoumai"
-                android:background="@drawable/shape"
-                android:text="@string/jiarugouwuche"
-                android:textSize="@dimen/font_normal" />
 
         </RelativeLayout>
     </ScrollView>

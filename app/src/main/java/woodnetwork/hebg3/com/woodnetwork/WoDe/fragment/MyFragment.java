@@ -66,9 +66,9 @@ public class MyFragment extends Fragment {
         imgeTitleLeft.setVisibility(View.GONE);
         textTitle.setText("个人首页");
         sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(getActivity());
-//        if(0==(Integer) sharePreferencesUtils.getData("seller_flag",1)){
-//            maiJiaZhongXin.setVisibility(View.GONE);
-//        }
+        if(0==(Integer) sharePreferencesUtils.getData("seller_flag",1)){
+            maiJiaZhongXin.setVisibility(View.GONE);
+        }
         return view;
     }
 

@@ -58,8 +58,10 @@
                 android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/activity_confirm_order_text_ordertype"
+                android:layout_below="@+id/activity_confirm_order_text_extracttype"
                 android:layout_marginLeft="@dimen/distance_normal"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:orientation="horizontal">
 
@@ -105,6 +107,8 @@
                 android:layout_below="@id/ll"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
@@ -138,23 +142,11 @@
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/activity_confirm_order_text_extracttype"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll2"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:text="提取方式："
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-
             <View
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/activity_confirm_order_text_extracttype"
+                android:layout_below="@+id/ll2"
                 android:layout_marginTop="@dimen/distance_longest"
                 android:background="@color/dise"></View>
 
@@ -189,6 +181,18 @@
                 android:layout_alignTop="@+id/activity_confirm_order_text_extracttype"
                 android:layout_toEndOf="@+id/activity_confirm_order_text_extracttype"
                 android:layout_toRightOf="@+id/activity_confirm_order_text_extracttype"></Spinner>
+
+            <TextView
+                android:id="@+id/activity_confirm_order_text_extracttype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="提取方式："
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal"
+                android:layout_below="@+id/activity_confirm_order_text_ordertype"
+                android:layout_marginLeft="@dimen/distance_normal"
+                 />
 
 
         </RelativeLayout>

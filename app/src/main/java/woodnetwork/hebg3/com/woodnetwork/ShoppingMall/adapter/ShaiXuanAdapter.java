@@ -18,6 +18,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_spinnerInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterInfo;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.view.FlowRadioGroup;
 
 /**
@@ -74,9 +75,10 @@ public class ShaiXuanAdapter extends BaseAdapter {
             holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    RadioButton radioButton=(RadioButton) radioGroup.findViewById(i);
                     //获取选择的分类类型
                     shaiXuanList.get(position).attr_id = list.get(position).attr_id;
-                    shaiXuanList.get(position).attr_vaule_id = String.valueOf(i);
+                    shaiXuanList.get(position).attr_vaule_id = (String) radioButton.getTag();
                 }
             });
             contentView.setTag(holder);
@@ -95,7 +97,8 @@ public class ShaiXuanAdapter extends BaseAdapter {
             radioButton.setGravity(Gravity.CENTER);
             radioButton.setBackgroundResource(R.drawable.selector_shaixuan_drawable);
             radioButton.setText(list.get(position).value.get(i).value_name);
-            radioButton.setId(Integer.parseInt(list.get(position).value.get(i).value_id, 10));
+            radioButton.setTag(list.get(position).value.get(i).value_id);
+//            radioButton.setId(Integer.parseInt(list.get(position).value.get(i).value_id, 10));
 //            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
 //                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

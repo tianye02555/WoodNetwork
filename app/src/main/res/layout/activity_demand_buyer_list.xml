@@ -4,6 +4,7 @@
     android:id="@+id/activity_demand_buyer_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.DemandBuyerListActivity">
     <include
         android:id="@+id/includ_title"

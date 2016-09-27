@@ -67,7 +67,7 @@ public class BusnessInfoPresenter implements BusnessInfoContrac.BusnessInfoPrese
         Request_getAttribute request_getAttribute=new Request_getAttribute();
         request_getAttribute.user_id=(String)sharePreferencesUtils.getData("userid","");
 
-        busnessInfoModel.getBusnessInfo(CommonUtils.getRequestInfo(new Object(), request_getAttribute), new OnServiceBaceInterface() {
+        busnessInfoModel.getSellerBusnessInfo(CommonUtils.getRequestInfo(new Object(), request_getAttribute), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
                 busnessInfoView.closeProgress();

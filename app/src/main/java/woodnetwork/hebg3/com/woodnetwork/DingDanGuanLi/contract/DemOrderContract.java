@@ -8,12 +8,16 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemFilterL
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemPayList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemPayList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
@@ -65,6 +69,15 @@ public interface DemOrderContract {
          */
         void refreshException(OrderBuyerDemExceptionList orderBuyerDemExceptionList);
         /**
+         * 已付款订单加载更多
+         */
+        void loadMorePay(List<OrderBuyerDemPayList_listItem> list);
+
+        /**
+         * 已付款订单更新
+         */
+        void refreshPay(OrderBuyerDemPayList orderBuyerDemPayList);
+        /**
          * 确认收货
          */
         void orderReceive(int position);
@@ -90,5 +103,10 @@ public interface DemOrderContract {
          * @param myRequestInfo
          */
         void getorderBuyerDemClose(MyRequestInfo myRequestInfo);
+        /**
+         * 获取已付款订单列表
+         * @param myRequestInfo
+         */
+        void getOrderBuyerDemPaidListData(MyRequestInfo myRequestInfo, int flag);
     }
 }

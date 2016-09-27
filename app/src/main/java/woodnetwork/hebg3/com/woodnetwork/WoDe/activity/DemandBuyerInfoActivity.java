@@ -64,7 +64,13 @@ public class DemandBuyerInfoActivity extends AppCompatActivity implements DmandB
 
 
         Request_demandBuyerInfo request_demandBuyerInfo = new Request_demandBuyerInfo();
-        request_demandBuyerInfo.did = "10";//getIntent().getStringExtra("did")
+        if(null!=getIntent()){
+            request_demandBuyerInfo.did = getIntent().getStringExtra("did");
+        }else{
+            showMessage("获取信息失败");
+            return;
+        }
+
 
         MyRequestInfo myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_demandBuyerInfo;

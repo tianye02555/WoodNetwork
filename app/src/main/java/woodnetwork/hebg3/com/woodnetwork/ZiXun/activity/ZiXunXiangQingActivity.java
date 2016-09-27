@@ -50,14 +50,18 @@ public class ZiXunXiangQingActivity extends AppCompatActivity implements ZiXunXi
 
         textTitle.setText("资讯");
         imageTitleRight.setVisibility(View.GONE);
-        webview.loadUrl("http://baidu.com");//getIntent().getStringExtra("url");
-        webview.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl("http://baidu.com");
-                return true;
-            }
-        });
+        if(null!=getIntent()){
+            webview.loadUrl(getIntent().getStringExtra("url"));
+
+            webview.setWebViewClient(new WebViewClient(){
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                    view.loadUrl(getIntent().getStringExtra("url"));
+                    return true;
+                }
+            });
+        }
+
     }
 
     @OnClick(R.id.imge_title_left)

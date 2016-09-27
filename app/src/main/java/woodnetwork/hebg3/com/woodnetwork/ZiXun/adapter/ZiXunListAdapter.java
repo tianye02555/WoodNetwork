@@ -16,6 +16,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.activity.ZiXunXiangQingActivity;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.ArticleList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
  * Created by ty on 2016/8/31 0031.
@@ -48,7 +49,7 @@ public class ZiXunListAdapter extends RecyclerView.Adapter<ZiXunListAdapter.View
         holder.newName.setText(articleList.get(position).title);
         holder.newFrom.setText(articleList.get(position).author);
         holder.newDate.setText( articleList.get(position).time);
-        holder.imag.setImageURI(Uri.parse(articleList.get(position).img));
+        holder.imag.setImageURI(Uri.parse(Const.PICTURE+articleList.get(position).img));
     }
 
     @Override

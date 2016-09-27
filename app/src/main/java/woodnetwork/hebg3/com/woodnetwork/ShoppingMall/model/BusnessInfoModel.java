@@ -52,7 +52,7 @@ public class BusnessInfoModel implements BusnessInfoModelInterface {
         params.getMethod = ServiceInterfaceCont.SELLERINFO;
         params.GETTYPE = "1";
         params.params = CommonUtils.getParamString(param);
-        new NetTask(handler.obtainMessage(), params, BusnessInfo.class).execute();
+        new NetTask(handler.obtainMessage(0), params, BusnessInfo.class).execute();
 
     }
 
@@ -64,6 +64,6 @@ public class BusnessInfoModel implements BusnessInfoModelInterface {
         params.getMethod = ServiceInterfaceCont.SHOPINFO;
         params.GETTYPE = "1";
         params.params = CommonUtils.getParamString(param);
-        new NetTask(handler.obtainMessage(), params, ShopInfo.class).execute();
+        new NetTask(handler.obtainMessage(1), params, ShopInfo.class).execute();
     }
 }

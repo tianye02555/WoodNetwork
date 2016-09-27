@@ -29,4 +29,10 @@ public interface MyOrderModelInterface {
      */
     void getorderBuyerProClose(Object object, OnServiceBaceInterface onServiceBaceInterface);
 
+    /**
+     * 获取已付款订单列表
+     * @param object
+     * @param onServiceBaceInterface
+     */
+    void getOrderBuyerProPaidListData(Object object, OnServiceBaceInterface onServiceBaceInterface);
 }

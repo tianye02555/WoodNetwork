@@ -3,6 +3,7 @@ package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -72,6 +73,9 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     private ConfirmOrderContrac.ConfirmOrderPresenterInterface presenter;
     private SharePreferencesUtils sharePreferencesUtils;
     private ConfirmOrderAdapter adapter;
+    private ShopcarList shopcarList;
+    private ArrayList<String> shopCarPosition = new ArrayList<String>();
+    private String addressID;//地址id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +89,9 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
         imageTitleRight.setVisibility(View.GONE);
 
         new ConfirmOrderPresenter(this);
-
-        showOrderData((ShopcarList) getIntent().getSerializableExtra("shopcarList"));
-
+        shopcarList=(ShopcarList) getIntent().getSerializableExtra("shopcarList");
+        showOrderData(shopcarList);
+        shopCarPosition=(ArrayList<String>) getIntent().getStringArrayListExtra("shopcarPositonList");
         final String[] extractArray = getResources().getStringArray(R.array.tiqufangshi);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, extractArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,13 +103,10 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                     extractTypeNumber = 0;
                     address.setEnabled(false);
                     harvestPlace.setEnabled(false);
-//                    simpleDraweeView.setVisibility(View.INVISIBLE);
-//                    address.setText("");
                     ll.setVisibility(View.GONE);
                     ll2.setVisibility(View.GONE);
                 } else if ("送货".equals(extractArray[i])) {
                     address.setEnabled(true);
-                    harvestPlace.setEnabled(true);
                     ll.setVisibility(View.VISIBLE);
                     ll2.setVisibility(View.VISIBLE);
                     extractTypeNumber = 1;
@@ -125,25 +126,31 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_confirm_order_btn_querenxiadan://确认下单
+                if(TextUtils.isEmpty(harvestPlace.getText().toString().trim())||TextUtils.isEmpty(address.getText().toString().trim())){
+                    CommonUtils.showToast(ConfirmOrderActivity.this,"请填写收货地点和详细地址");
+                    return;
+                }
                 Request_orderAdd request_orderAdd = new Request_orderAdd();
-                request_orderAdd.seller_id = "2234";
-                request_orderAdd.buyer_id = "1234";
+                request_orderAdd.seller_id =shopcarList.list.get(0).seller.sid ;
+                if("".equals((String) sharePreferencesUtils.getData("userid",""))){
+                    showMessage("身份信息失效，请重新登录");
+                   return;
+                }
+                request_orderAdd.buyer_id = (String) sharePreferencesUtils.getData("userid","");
                 ArrayList<Request_orderAdd_productsItem> list = new ArrayList<Request_orderAdd_productsItem>();
-                Request_orderAdd_productsItem request_orderAdd_productsItem = new Request_orderAdd_productsItem();
-                request_orderAdd_productsItem.number = 1000.000;
-                request_orderAdd_productsItem.pid = "1234";
-                request_orderAdd_productsItem.price = 250.00;
-                list.add(request_orderAdd_productsItem);
+                for(int i=0;i<shopcarList.list.size();i++){
+                    Request_orderAdd_productsItem request_orderAdd_productsItem = new Request_orderAdd_productsItem();
+                    request_orderAdd_productsItem.number = shopcarList.list.get(i).stock;
+                    request_orderAdd_productsItem.pid = shopcarList.list.get(i).pid;
+                    request_orderAdd_productsItem.price = shopcarList.list.get(i).price;
+                    list.add(request_orderAdd_productsItem);
+                }
                 request_orderAdd.products = list;
-                request_orderAdd.receive_area = "历下街250号";
-                request_orderAdd.receive_id = "1010100";
-                request_orderAdd.receive_type = 0;
-                ArrayList<String> stringList = new ArrayList<String>();
-                stringList.add("1");
-                stringList.add("2");
-                request_orderAdd.shopcar_ids = stringList;
-                request_orderAdd.receive_area = "历下街250号";
-                request_orderAdd.type = 1;
+                request_orderAdd.receive_area = harvestPlace.getText().toString().trim()+address.getText().toString().trim();
+                request_orderAdd.receive_id = String.valueOf(addressID);
+                request_orderAdd.receive_type = extractTypeNumber;
+                request_orderAdd.shopcar_ids = shopCarPosition;
+                request_orderAdd.type =1 ;
                 //添加属性
                 presenter.saveOrder(request_orderAdd);
                 break;
@@ -194,6 +201,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     public void jumpActivitywithAttribute(OrderAdd orderAdd) {
         Intent intent = new Intent(this, OrderListActivity.class);
         intent.putExtra("orderadd", orderAdd);
+        intent.putExtra("shopcarList", shopcarList);
         startActivity(intent);
     }
 
@@ -227,6 +235,7 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             harvestPlace.setText(data.getStringExtra("address"));
+            addressID=data.getStringExtra("addressID");
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

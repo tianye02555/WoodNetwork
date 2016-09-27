@@ -103,11 +103,11 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
                 finish();
                 break;
             case R.id.activity_choose_address_btn_queding:
-                StringBuilder address = new StringBuilder();
+                String address = new String();
                 for (Integer key : addressMap.keySet()) {
-                    address.append(addressMap.get(key));
+                    address=addressMap.get(key)+address;
                 }
-                intent.putExtra("address", address.toString());
+                intent.putExtra("address", address);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;
@@ -116,6 +116,9 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
 
     @Override
     public void showNewSpinner(final AreaList areaList) {
+        if(0==areaList.list.size()){
+            return;
+        }
         areaListNew=new AreaList();
         AreaList_listItem areaList_listItem=new AreaList_listItem();
         areaList_listItem.id="1";
@@ -147,7 +150,6 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
             spinnerID = generateViewId();
         }
         spinner.setId(spinnerID);
-        CommonUtils.showToast(this,String.valueOf(spinnerID));
         spinnerList.add(spinnerID);
         rootLayout.addView(spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stringArrayList);
@@ -173,15 +175,14 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
                         isDelet = true;
                     }
                 }
-
-                intent.putExtra("pid", areaListNew.list.get(i).id);//获取最后一个spinner的选中的项的id
+                intent.putExtra("addressID", areaListNew.list.get(i-1).id);//获取最后一个spinner的选中的项的id
                 addressMap.put(spinner.getId(), areaListNew.list.get(i).name);
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(ChooseAddressActivity.this);
                 Request_getAttribute request_getAttribute = new Request_getAttribute();
                 request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
                 Request_area_list request_area_list = new Request_area_list();
-                request_area_list.pid = "1";//areaList.list.get(i).id
+                request_area_list.pid = areaList.list.get(i-1).id;
 
                 MyRequestInfo myRequestInfo = new MyRequestInfo();
                 myRequestInfo.req = request_area_list;

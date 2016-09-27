@@ -98,6 +98,7 @@
         android:layout_marginTop="@dimen/distance_normal"
         android:numColumns="2"
         android:verticalSpacing="@dimen/distance_normal"
+        android:layout_marginBottom="@dimen/distance_normal"
         android:horizontalSpacing="@dimen/distance_normal"
         android:visibility="gone"
         android:layout_below="@+id/confirm_order_adapter_text_more"

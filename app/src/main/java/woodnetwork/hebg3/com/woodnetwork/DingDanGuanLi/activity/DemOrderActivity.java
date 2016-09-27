@@ -22,6 +22,7 @@ import butterknife.OnClick;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.DemOrderAdapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.DemOrder_exception_Adapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.DemOrder_filter_Adapter;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.DemOrder_pay_Adapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.MyOrderAdapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.MyOrder_exception_Adapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.MyOrder_filter_Adapter;
@@ -31,12 +32,16 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemFilterL
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemPayList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemPayList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.DemOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.MyOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter.DemOrderPresenter;
@@ -44,6 +49,7 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter.MyOrderPresente
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderBuyerClose;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderBuyerDemPayList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderBuyerProExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderBuyerProFilterList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_orderBuyerProList;
@@ -72,6 +78,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
     private DemOrder_filter_Adapter adapter_filter_weiFuKuan;
     private DemOrder_filter_Adapter adapter_filter_weiShouHuo;
     private DemOrder_exception_Adapter adapter_exception;
+    private DemOrder_pay_Adapter adapter_pay;
 
     private int closePosition;
     private int nowPosition = 0;//当前所展示的订单类型
@@ -86,11 +93,13 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
     private List<OrderBuyerDemList_listItem> list_all;
     private List<OrderBuyerDemFilterList_listItem> list_Filter;
     private List<OrderBuyerDemExceptionList_listItem> list_Exception;
+    private List<OrderBuyerDemPayList_listItem> list_pay;
 
     private MyRequestInfo myRequestInfo;
     private Request_order_buyer_dem_filter_list request_order_buyer_dem_filter_list;
     private Request_order_buyer_dem_list request_order_buyer_dem_list;
     private Request_order_buyer_dem_exception_list request_order_buyer_dem_exception_list;
+    private Request_orderBuyerDemPayList request_orderBuyerDemPayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,12 +142,12 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                         presenter.getorderBuyerDemFilterListData(myRequestInfo,0);
                         nowPosition = 1;
                         break;
-                    case R.id.activity_dem_order_radiobutton_daishouhuo:
-                        request_order_buyer_dem_filter_list.page_no = 1;
-                        request_order_buyer_dem_filter_list.page_size = 10;
-                        request_order_buyer_dem_filter_list.order_status = 2;
-                        myRequestInfo.req = request_order_buyer_dem_filter_list;
-                        presenter.getorderBuyerDemFilterListData(myRequestInfo,0);
+                    case R.id.activity_dem_order_radiobutton_yifukuan:
+                        request_orderBuyerDemPayList=new Request_orderBuyerDemPayList();
+                        request_orderBuyerDemPayList.page_no = 1;
+                        request_orderBuyerDemPayList.page_size = 10;
+                        myRequestInfo.req = request_orderBuyerDemPayList;
+                        presenter.getOrderBuyerDemPaidListData(myRequestInfo,0);
                         nowPosition = 2;
                         break;
                     case R.id.activity_dem_order_radiobutton_yichangdindan:
@@ -176,11 +185,10 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                                                         myRequestInfo.req = request_order_buyer_dem_filter_list;
                                                         presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
                                                         break;
-                                                    case 2://待收货订单
-                                                        request_order_buyer_dem_filter_list.page_no = page_no;
-                                                        request_order_buyer_dem_filter_list.order_status = 2;
-                                                        myRequestInfo.req = request_order_buyer_dem_filter_list;
-                                                        presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
+                                                    case 2://已收货订单
+                                                        request_orderBuyerDemPayList.page_no = page_no;
+                                                        myRequestInfo.req = request_orderBuyerDemPayList;
+                                                        presenter.getOrderBuyerDemPaidListData(myRequestInfo, 1);
                                                         break;
                                                     case 3://异常订单
                                                         request_order_buyer_dem_exception_list.page_no = page_no;
@@ -211,14 +219,13 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                                                         myRequestInfo.req = request_order_buyer_dem_filter_list;
                                                         presenter.getorderBuyerDemFilterListData(myRequestInfo, 2);
                                                         break;
-                                                    case 2://待收货订单
-                                                        if (page_no >= ((OrderBuyerDemFilterList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                    case 2://已发货订单
+                                                        if (page_no >= ((OrderBuyerDemPayList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
-                                                        request_order_buyer_dem_filter_list.page_no = page_no;
-                                                        request_order_buyer_dem_filter_list.order_status = 2;
-                                                        myRequestInfo.req = request_order_buyer_dem_filter_list;
-                                                        presenter.getorderBuyerDemFilterListData(myRequestInfo, 2);
+                                                        request_orderBuyerDemPayList.page_no = page_no;
+                                                        myRequestInfo.req = request_orderBuyerDemPayList;
+                                                        presenter.getOrderBuyerDemPaidListData(myRequestInfo, 2);
                                                         break;
                                                     case 3://异常订单
                                                         if (page_no >= ((OrderBuyerDemExceptionList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
@@ -246,7 +253,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
             recyclerview.setAdapter(adapter);
         } else if (object instanceof OrderBuyerDemFilterList) {//0根据status 字段判断是待付款还是待收货
             list_Filter=((OrderBuyerDemFilterList) object).list;
-            if (((OrderBuyerDemFilterList) object).list.get(0).status == 0) {
+//            if (((OrderBuyerDemFilterList) object).list.get(0).status == 0) {
                 adapter_filter_weiFuKuan = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList) object).list);
                 if (1 == ((OrderBuyerDemFilterList) object).total_page)
 
@@ -254,15 +261,15 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                     recyclerview.setLoadingMoreEnabled(false);
                 }
                 recyclerview.setAdapter(adapter_filter_weiFuKuan);
-            } else if (((OrderBuyerDemFilterList) object).list.get(0).status == 2) {
-                adapter_filter_weiShouHuo = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList) object).list);
-                if (1 == ((OrderBuyerDemFilterList) object).total_page)
-
-                {//如果总页数一共就一页，关闭加载更多功能
-                    recyclerview.setLoadingMoreEnabled(false);
-                }
-                recyclerview.setAdapter(adapter_filter_weiShouHuo);
-            }
+//            } else if (((OrderBuyerDemFilterList) object).list.get(0).status == 2) {
+//                adapter_filter_weiShouHuo = new DemOrder_filter_Adapter(this, ((OrderBuyerDemFilterList) object).list);
+//                if (1 == ((OrderBuyerDemFilterList) object).total_page)
+//
+//                {//如果总页数一共就一页，关闭加载更多功能
+//                    recyclerview.setLoadingMoreEnabled(false);
+//                }
+//                recyclerview.setAdapter(adapter_filter_weiShouHuo);
+//            }
         } else if (object instanceof OrderBuyerDemExceptionList) {
             list_Exception= ((OrderBuyerDemExceptionList) object).list;
             adapter_exception = new DemOrder_exception_Adapter(this, ((OrderBuyerDemExceptionList) object).list);
@@ -272,6 +279,15 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 recyclerview.setLoadingMoreEnabled(false);
             }
             recyclerview.setAdapter(adapter_exception);
+        }else if (object instanceof OrderBuyerDemPayList) {
+            list_pay= ((OrderBuyerDemPayList) object).list;
+            adapter_pay = new DemOrder_pay_Adapter(this, ((OrderBuyerDemPayList) object).list);
+            if (1 == ((OrderBuyerDemPayList) object).total_page)
+
+            {//如果总页数一共就一页，关闭加载更多功能
+                recyclerview.setLoadingMoreEnabled(false);
+            }
+            recyclerview.setAdapter(adapter_pay);
         }
 
 
@@ -351,6 +367,24 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
         myRequestInfo.req = request_orderBuyerClose;
         presenter.getorderBuyerDemClose(myRequestInfo);
     }
+    @Override
+    public void loadMorePay(List<OrderBuyerDemPayList_listItem> list) {
+        recyclerview.loadMoreComplete();
+        list_pay = adapter_pay.getList();
+        list_pay.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void refreshPay(OrderBuyerDemPayList orderBuyerDemPayList) {
+        recyclerview.refreshComplete();
+        if (1 < orderBuyerDemPayList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
+            recyclerview.setLoadingMoreEnabled(true);
+        }
+        list_pay = orderBuyerDemPayList.list;
+        adapter_pay.setList(list_pay);
+        adapter_pay.notifyDataSetChanged();
+    }
 
     @Override
     public void refreshOrder() {
@@ -368,10 +402,10 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 adapter_filter_weiFuKuan.notifyDataSetChanged();
                 break;
             case 2:
-                List<OrderBuyerDemFilterList_listItem> list_filter_weiShouHuo = adapter_filter_weiShouHuo.getList();
-                list_filter_weiShouHuo.get(closePosition).status = 4;
-                adapter_filter_weiShouHuo.setList(list_filter_weiShouHuo);
-                adapter_filter_weiShouHuo.notifyDataSetChanged();
+                List<OrderBuyerDemPayList_listItem> list_pay = adapter_pay.getList();
+                list_pay.get(closePosition).status = 4;
+                adapter_pay.setList(list_pay);
+                adapter_pay.notifyDataSetChanged();
                 break;
             case 3:
                 List<OrderBuyerDemExceptionList_listItem> list_exception = adapter_exception.getList();
@@ -393,13 +427,13 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 intent.putExtra("total_price",list_all.get(position).total_price);
                 intent.putExtra("number",String.valueOf(list_all.get(position).products.size()));
                 break;
-            case 2://待收货订单
-                list_Filter=adapter_filter_weiShouHuo.getList();
-                intent.putExtra("id",list_Filter.get(position).number);
-                intent.putExtra("creat_time",list_Filter.get(position).creat_time);
-                intent.putExtra("seller",list_Filter.get(position).seller);
-                intent.putExtra("total_price",list_Filter.get(position).total_price);
-                intent.putExtra("number",String.valueOf(list_Filter.get(position).products.size()));
+            case 2://已收货订单
+                list_pay=adapter_pay.getList();
+                intent.putExtra("id",list_pay.get(position).number);
+                intent.putExtra("creat_time",list_pay.get(position).creat_time);
+                intent.putExtra("seller",list_pay.get(position).seller);
+                intent.putExtra("total_price",list_pay.get(position).total_price);
+                intent.putExtra("number",String.valueOf(list_pay.get(position).products.size()));
                 break;
             case 3://异常订单
                 list_Exception=adapter_exception.getList();
@@ -456,11 +490,10 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                     myRequestInfo.req = request_order_buyer_dem_filter_list;
                     presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
                     break;
-                case 2://待收货订单
-                    request_order_buyer_dem_filter_list.page_no = page_no;
-                    request_order_buyer_dem_filter_list.order_status = 2;
-                    myRequestInfo.req = request_order_buyer_dem_filter_list;
-                    presenter.getorderBuyerDemFilterListData(myRequestInfo, 1);
+                case 2://已收货订单
+                    request_orderBuyerDemPayList.page_no = page_no;
+                    myRequestInfo.req = request_orderBuyerDemPayList;
+                    presenter.getOrderBuyerDemPaidListData(myRequestInfo, 1);
                     break;
                 case 3://异常订单
                     request_order_buyer_dem_exception_list.page_no = page_no;

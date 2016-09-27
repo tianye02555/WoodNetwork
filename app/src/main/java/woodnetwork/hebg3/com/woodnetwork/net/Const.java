@@ -11,7 +11,9 @@ public class Const {
 	//云
 	public static final String AUTHORITY = "192.168.2.12:8080/wood/dev/wood/v1";
 	//图片前缀
-	 public static final String PICTURE = "http//:192.168.2.159:8080/wood/";
+	 public static final String PICTURE = "http://192.168.2.12:8080/wood/";
+	//图片前缀
+	public static final String PICTURE_LUNBOTU = "http://192.168.2.12:8080";
 	public static final int DEFAULT_TIMEOUT = 15 * 1000;// 默认的超时时间
 	public static final int DOWNLOAD_UPLOAD_TIMEOUT = 50 * 1000;// 下载上传文件的超时时间
 

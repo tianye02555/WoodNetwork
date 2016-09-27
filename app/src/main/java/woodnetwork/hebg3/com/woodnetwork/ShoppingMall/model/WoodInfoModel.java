@@ -30,21 +30,21 @@ public class WoodInfoModel implements WoodInfoModelInterface {
                 case 1://获取产品详情接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_woodData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_woodData.onFailed(body.base.msg);
                     }
                     break;
                 case 2://添加到购物车接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_addToShoppingCart.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_addToShoppingCart.onFailed(body.base.msg);
                     }
                     break;
                 case 3://直接购买接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getWoodDataOther.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getWoodDataOther.onFailed(body.base.msg);
                     }
                     break;

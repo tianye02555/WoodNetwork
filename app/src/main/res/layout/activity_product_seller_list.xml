@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.ProductSellerListActivity">
 
     <include layout="@layout/layout_title"></include>

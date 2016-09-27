@@ -10,6 +10,8 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterL
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BasePresenter;
 import woodnetwork.hebg3.com.woodnetwork.Interface.BaseView;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
@@ -70,6 +72,15 @@ public interface MyOrderContract {
          * 异常订单更新
          */
         void refreshException(OrderBuyerProExceptionList orderBuyerProExceptionList);
+        /**
+         * 已付款订单加载更多
+         */
+        void loadMorePay(List<OrderBuyerProPayList_listItem> list);
+
+        /**
+         * 已付款订单更新
+         */
+        void refreshPay(OrderBuyerProPayList orderBuyerProPayList);
 
         /**
          * 确认收货
@@ -106,5 +117,10 @@ public interface MyOrderContract {
          */
         void getorderBuyerProClose(MyRequestInfo myRequestInfo);
 
+        /**
+         * 获取已付款订单列表
+         * @param myRequestInfo
+         */
+        void getOrderBuyerProPaidListData(MyRequestInfo myRequestInfo, int flag);
     }
 }

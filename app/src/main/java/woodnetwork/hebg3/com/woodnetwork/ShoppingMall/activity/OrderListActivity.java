@@ -14,6 +14,7 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.ConfirmOrderAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.OrderAdd;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.OrderListContrac;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.OrderListPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
@@ -58,7 +59,8 @@ public class OrderListActivity extends AppCompatActivity implements OrderListCon
     @Bind(R.id.activity_order_list_text_ordertime)
     TextView orderTime;
     private OrderListContrac.OrderListPresenterInterface presenter;
-
+private ShopcarList shopcarList;
+    private OrderAdd orderAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,11 @@ public class OrderListActivity extends AppCompatActivity implements OrderListCon
         CommonUtils.addActivity(this);
         ButterKnife.bind(this);
         new OrderListPresenter(this);
-        showOrderData((OrderAdd) getIntent().getSerializableExtra("orderadd"));
+        if(null!=getIntent()){
+            shopcarList=(ShopcarList) getIntent().getSerializableExtra("shopcarList");
+            orderAdd=(OrderAdd) getIntent().getSerializableExtra("orderadd");
+        }
+        showOrderData(orderAdd);
     }
 
     @OnClick({R.id.imge_title_left, R.id.activity_order_list_btn_querenxiadan})
@@ -113,9 +119,9 @@ public class OrderListActivity extends AppCompatActivity implements OrderListCon
         orderTime.setText("下单时间："+orderAdd.creat_time);
         yingFuFinge.setText(String.valueOf(orderAdd.total));
 
-//        ConfirmOrderAdapter adapter=new ConfirmOrderAdapter(this,orderAdd.products);
+        ConfirmOrderAdapter adapter=new ConfirmOrderAdapter(this,shopcarList.list);
 
-//        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
     }
 
     @Override

@@ -82,8 +82,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/distance_longest"
+            android:background="@drawable/button_shape_dise"
             android:text="重置"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/font_normal" />
 
         <Button
@@ -93,8 +94,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/distance_longest"
+            android:background="@drawable/button_shape_dise"
             android:text="@string/queding"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/font_normal" />
     </RelativeLayout>
 </RelativeLayout>

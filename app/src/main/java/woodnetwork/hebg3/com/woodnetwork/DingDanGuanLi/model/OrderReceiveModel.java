@@ -32,7 +32,7 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
                 case 0://收货接口
                     if ("0".equals(base.code)) {//成功
                         onServiceBaceInterface.onSuccess(base.msg);
-                    } else if ("1".equals(base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface.onFailed(base.msg);
                     }
                     break;

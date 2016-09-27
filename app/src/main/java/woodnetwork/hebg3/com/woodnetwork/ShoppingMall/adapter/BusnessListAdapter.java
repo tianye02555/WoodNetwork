@@ -21,6 +21,7 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.BusnessInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.BusnessInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
  * Created by ty on 2016/8/25 0025.
@@ -53,7 +54,7 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
 
     @Override
     public void onBindViewHolder(BusnessHolder holder, int position) {
-        holder.image_head.setImageURI(Uri.parse(list.get(position).img));
+        holder.image_head.setImageURI(Uri.parse(Const.PICTURE+list.get(position).img));
         holder.text_company.setText(list.get(position).name);
         holder.text_email.setText(list.get(position).mail);
         holder.text_phone.setText(list.get(position).phone);

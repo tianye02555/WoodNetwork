@@ -3,6 +3,7 @@ package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -34,6 +35,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
  * Created by ty on 2016/8/30 0030.
@@ -42,7 +44,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapter.ViewHolder> {
     private Context context;
     private List<ShopcarList_listItem> list;
-    private List<Double> xiaoJiList = new ArrayList<Double>();
+    private DecimalFormat df;
 
     public ShoopingCartAdapter(Context context, List<ShopcarList_listItem> list) {
         this.context = context;
@@ -66,7 +68,11 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        list.get(position).xiaoJi = (list.get(position).stock) * (list.get(position).price);
+        holder.head.setImageURI(Uri.parse(Const.PICTURE+list.get(position).pimg));
+         df= new DecimalFormat("###############0.00");//   16位整数位，两小数位
+        Double number=(list.get(position).stock) * (list.get(position).price);//一个订单的小结
+        String stringNumber = df.format(number);//字符串类型的小结
+        list.get(position).xiaoJi = Double.parseDouble(stringNumber);
         holder.name.setText(list.get(position).pname);
         holder.company.setText(list.get(position).seller.sname);
         holder.faHuoDi.setText("发货地：" + list.get(position).delivery);
@@ -96,15 +102,14 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                         new AlertDialog.Builder(context).setMessage("最多保留小数点后3位").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                holder.number.setSelection(holder.number.getText().length());//设置光标的位置到最后
                                 dialogInterface.dismiss();
                             }
                         }).show();
                         return;
                     }
                 }
-                if (Double.parseDouble(holder.number.getText().toString().trim()) <= 1) {
-                    new AlertDialog.Builder(context).setMessage("数量不能小于1").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                if (Double.parseDouble(holder.number.getText().toString().trim()) <= 0||"".equals(holder.number.getText().toString().trim())) {
+                    new AlertDialog.Builder(context).setMessage("数量不能小于0").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             holder.number.setText("1");
@@ -114,21 +119,24 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
                     return;
                 }
+//                if (Double.parseDouble(holder.number.getText().toString().trim()) >list.get(position).stock ) {
+//                    new AlertDialog.Builder(context).setMessage("库存不足").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            holder.number.setText(String.valueOf(list.get(position).stock));
+//                            dialogInterface.dismiss();
+//                        }
+//                    }).show();
+//                    return;
+//                }
                 list.get(position).stock = Double.parseDouble(number);
 
                 Double numberTitle = (list.get(position).stock) * (list.get(position).price);
-//                if (numberTitle.contains(".")) {
-//                    int index = numberTitle.indexOf(".");
-//                    if (numberTitle.length() - 1 - index > 2) {
-//                        numberTitle=numberTitle.substring(0, index + 3);
-//                    }
-//                }
-//                numberTitle=(double)Math.round(numberTitle*100)/100;
 
-                DecimalFormat   df   =     new DecimalFormat( "###############0.00 ");//   16位整数位，两小数位
-                String   temp     =   df.format(numberTitle);
+
+                String temp = df.format(numberTitle);
                 holder.xiaoJi.setText(String.valueOf(temp));
-                list.get(position).xiaoJi =Double.parseDouble(temp) ;
+                list.get(position).xiaoJi = Double.parseDouble(temp);
                 ((ShoopingCartActivity) context).showTitlePrice();
             }
         });
@@ -163,12 +171,6 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         holder.xuanZhong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                    if(b){
-//
-//                        ((ShoopingCartActivity)context).setDeleteSid(list.get(getAdapterPosition()).sid,String.valueOf(getAdapterPosition()));
-//                    }else{
-//                        ((ShoopingCartActivity)context).setDeleteSid(list.get(getAdapterPosition()).sid,String.valueOf(getAdapterPosition()));
-//                    }
                 list.get(position).checkbox = b;
                 ((ShoopingCartActivity) context).showTitlePrice();
             }
@@ -176,8 +178,8 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         holder.rel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, WoodInfoActivity.class);
-                intent.putExtra("pid",list.get(position).pid);
+                Intent intent = new Intent(context, WoodInfoActivity.class);
+                intent.putExtra("pid", list.get(position).pid);
                 context.startActivity(intent);
             }
         });
@@ -218,20 +220,18 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             xuanZhong = (CheckBox) itemView.findViewById(R.id.shopppingcart_adapter_checkbox);
             xiaoJi = (TextView) itemView.findViewById(R.id.shopppingcart_adapter_txt_xiaojijinge);
             number = (EditText) itemView.findViewById(R.id.shopppingcart_adapter_edit_stock);
-rel=(RelativeLayout) itemView.findViewById(R.id.shoppingcar_rel);
+            rel = (RelativeLayout) itemView.findViewById(R.id.shoppingcar_rel);
 
             shanChu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    list.get(getAdapterPosition()-1).checkbox=true;
                     SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(context);
                     Request_getAttribute request_getAttribute = new Request_getAttribute();
                     request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
                     ArrayList<String> sidList = new ArrayList<String>();
-                    sidList.add("1234");
-                    sidList.add("2234");
-                    sidList.add("3234");
-//                    sidList.add(list.get(getAdapterPosition()).sid);
+                    sidList.add(list.get(getAdapterPosition()-1).sid);
                     Request_shopcar_delete request_shopcar_delete = new Request_shopcar_delete();
                     request_shopcar_delete.sid = sidList;
 

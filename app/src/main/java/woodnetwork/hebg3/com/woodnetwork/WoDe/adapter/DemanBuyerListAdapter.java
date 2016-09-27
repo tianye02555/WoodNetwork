@@ -88,7 +88,7 @@ public class DemanBuyerListAdapter extends RecyclerView.Adapter<DemanBuyerListAd
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, DemandBuyerInfoActivity.class);
-                    intent.putExtra("did", list.get(getAdapterPosition()).id);
+                    intent.putExtra("did", list.get(getAdapterPosition()-1).id);
                     context.startActivity(intent);
                 }
             });

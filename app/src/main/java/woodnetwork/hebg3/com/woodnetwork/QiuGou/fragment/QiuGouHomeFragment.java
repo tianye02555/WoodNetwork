@@ -38,7 +38,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
 
-public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface{
+public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface {
 
 
     @Bind(R.id.imge_title_left)
@@ -76,14 +76,13 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
 
-         request_demandList = new Request_DemandList();
-//        request_demandInfo.did=(String)getIntent().getStringExtra("did");//正确代码，下为测试
+        request_demandList = new Request_DemandList();
         request_demandList.page_no = 1;
-        request_demandList.page_size=10;
-         myRequestInfo = new MyRequestInfo();
+        request_demandList.page_size = 10;
+        myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_demandList;
         myRequestInfo.req_meta = request_getAttribute;
-        presenter.getQiuGouData(myRequestInfo,0);
+        presenter.getQiuGouData(myRequestInfo, 0);
         return view;
     }
 
@@ -96,7 +95,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
 
     @Override
     public void showQiuGouInfo(final DemandList demandList) {
-         qiuGouHomeAdapter=new QiuGouHomeAdapter(getActivity(),demandList.list);
+        qiuGouHomeAdapter = new QiuGouHomeAdapter(getActivity(), demandList.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -115,7 +114,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
                 }
                 request_demandList.page_no = page_no;
                 myRequestInfo.req = request_demandList;
-                presenter.getQiuGouData(myRequestInfo,2);
+                presenter.getQiuGouData(myRequestInfo, 2);
 
 
             }
@@ -125,6 +124,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
         }
         recyclerView.setAdapter(qiuGouHomeAdapter);
     }
+
     @Override
     public void loadMore(List<DemandList_listItem> list) {
 
@@ -149,14 +149,14 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
 
     @Override
     public void setPresenter(QiuGouHomeContract.QiuGouHomePresenterInterface presenter) {
-    if(null!=presenter){
-        this.presenter=presenter;
-    }
+        if (null != presenter) {
+            this.presenter = presenter;
+        }
     }
 
     @Override
     public void showProgress() {
-        ProgressUtils.show(getActivity(),getResources().getString(R.string.qingshaohou));
+        ProgressUtils.show(getActivity(), getResources().getString(R.string.qingshaohou));
     }
 
     @Override
@@ -166,6 +166,6 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
 
     @Override
     public void showMessage(String string) {
-        CommonUtils.showToast(getActivity(),string);
+        CommonUtils.showToast(getActivity(), string);
     }
 }

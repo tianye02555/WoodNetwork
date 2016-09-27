@@ -66,6 +66,7 @@
         android:layout_below="@+id/lin"
         android:layout_marginLeft="@dimen/distance_long"
         android:layout_alignParentRight="true"
+        android:textSize="@dimen/font_big"
         android:layout_marginRight="@dimen/distance_longest"
         android:background="@null"
         android:textColor="@android:color/holo_blue_bright"

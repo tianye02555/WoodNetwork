@@ -66,14 +66,14 @@
             android:background="@android:color/black"></View>
 
         <RadioButton
-            android:id="@+id/activity_dem_order_radiobutton_daishouhuo"
+            android:id="@+id/activity_dem_order_radiobutton_yifukuan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
             android:textColor="@drawable/selector_color"
-            android:text="@string/daishouhuo" />
+            android:text="@string/yifukuan" />
 
         <View
             android:layout_width="1dp"

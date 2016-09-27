@@ -8,7 +8,6 @@
         android:id="@+id/adapter_order_details_text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="afsdfsdaaaaaaaaaaaaaaaaaa"
         android:layout_toRightOf="@+id/adapter_order_details_image"
         android:layout_alignTop="@+id/adapter_order_details_image"
         android:layout_toLeftOf="@+id/adapter_order_details_text_price"
@@ -18,7 +17,6 @@
         android:id="@+id/adapter_order_details_text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="afsdf"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_alignTop="@+id/adapter_order_details_image"
@@ -28,7 +26,6 @@
         android:id="@+id/adapter_order_details_text_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="afs"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/adapter_order_details_text_price"
         android:layout_marginRight="@dimen/distance_normal"
@@ -42,4 +39,12 @@
         android:layout_height="50dp"
         fresco:placeholderImage="@drawable/defaultimg"
         android:layout_margin="@dimen/distance_normal" />
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/adapter_order_details_imag_qihuo"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignRight="@+id/adapter_order_details_image"
+        android:layout_alignTop="@+id/adapter_order_details_image"
+        fresco:placeholderImage="@drawable/xianhuo"></com.facebook.drawee.view.SimpleDraweeView>
+
 </RelativeLayout>

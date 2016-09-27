@@ -66,7 +66,8 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
     @Bind(R.id.activity_woyaobaojia_image_dianhua)
     SimpleDraweeView imageDianHua;
     private WoYaoBaoJiaContract.WoYaoBaoJiaPresenterInterface presenter;
-    private String phone;
+    private DemandInfo demandInfo;
+    private String addressID;//地址id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +88,8 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
 
 
         Request_demandInfo request_demandInfo = new Request_demandInfo();
-//        request_demandInfo.did=(String)getIntent().getStringExtra("did");//正确代码，下为测试
-        request_demandInfo.did = "10";
+        request_demandInfo.did=(String)getIntent().getStringExtra("did");
+
 
         MyRequestInfo myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_demandInfo;
@@ -109,11 +110,11 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
 
 
                Request_quotation_add request_quotation_add = new Request_quotation_add();
-                request_quotation_add.delivery_address ="新中路228号";
-                request_quotation_add.delivery_area="1234";
-                request_quotation_add.demand_id="1234";
-                request_quotation_add.price=250.00;
-                request_quotation_add.remarks="无";
+                request_quotation_add.delivery_address =editShouHuoDi.getText().toString().trim();
+                request_quotation_add.delivery_area=addressID;
+                request_quotation_add.demand_id=demandInfo.id;
+                request_quotation_add.price=Double.parseDouble(editNinDeBaoJia.getText().toString().trim());
+                request_quotation_add.remarks=editBeiZhu.getText().toString().trim();
 
                 MyRequestInfo myRequestInfo = new MyRequestInfo();
                 myRequestInfo.req = request_quotation_add;
@@ -124,7 +125,7 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
             case R.id.activity_woyaobaojia_image_dianhua://拨打电话
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + this.phone));
+                intent.setData(Uri.parse("tel:" + this.demandInfo.phone));
                 startActivity(intent);
                 break;
             case R.id.imge_title_left:
@@ -135,6 +136,7 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
 
     @Override
     public void showWoYaoBaoJiaInfo(DemandInfo demandInfo) {
+        this.demandInfo=demandInfo;
         maiJia.setText("买        家："+demandInfo.buyer);
         chanPinYiXiang.setText("意向产品："+demandInfo.pname);
         gouMaiShuLiang.setText("购买数量："+String.valueOf(demandInfo.number)+"方");
@@ -142,7 +144,6 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
         faBuYu.setText("发  布  于："+demandInfo.create_time);
         jiaoHuoDiDian.setText("交货地点："+demandInfo.receive_area);
         lianXiFangShi.setText("联系方式："+demandInfo.phone);
-        this.phone = demandInfo.phone;
 
     }
 
@@ -171,6 +172,7 @@ public class WoYaoBaoJiaActivity extends AppCompatActivity implements WoYaoBaoJi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==RESULT_OK){
             editShouHuoDi.setText(data.getStringExtra("address"));
+            addressID=data.getStringExtra("addressID");
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

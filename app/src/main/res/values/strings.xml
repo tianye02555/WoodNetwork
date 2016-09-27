@@ -98,7 +98,7 @@
     <!-- 我的订单页面-->
     <string name="quanbudingdan">全部订单</string>
     <string name="daifukuan">待付款</string>
-    <string name="daishouhuo">待收货</string>
+    <string name="yifukuan">已付款</string>
     <string name="daifahuo">待发货</string>
     <string name="yichangdindan">异常订单</string>
     <string name="gongji">合计￥</string>

@@ -25,17 +25,17 @@ public class ReportsPresenter implements ReportsContract.ReportsPresenterInterfa
 
     @Override
     public void getReportsURL(MyRequestInfo myRequestInfo) {
-        reportsView.showProgress();
+
         reportsModel.getReportsURL(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                reportsView.closeProgress();
+
                 reportsView.showWebViewUri((ReportsInfo) ((ResponseBody)object).obj);
             }
 
             @Override
             public void onFailed(String string) {
-                reportsView.closeProgress();
+
                 reportsView.showMessage(string);
             }
         });

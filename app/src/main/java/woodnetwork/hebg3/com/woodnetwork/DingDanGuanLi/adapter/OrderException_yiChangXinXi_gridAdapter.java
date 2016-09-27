@@ -22,6 +22,7 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList_except
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
  * Created by ty on 2016/9/6 0006.
@@ -65,11 +66,10 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
         } else {
             holder = (ViewHodler) contentView.getTag();
         }
-        holder.image.setImageURI(Uri.parse(list.get(position)));
+        holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position)));
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-CommonUtils.launchNetPictureShow(context,list,position);
             }
         });
         return contentView;

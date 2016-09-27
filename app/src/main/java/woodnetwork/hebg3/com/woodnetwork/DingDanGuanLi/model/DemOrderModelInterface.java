@@ -27,4 +27,11 @@ public interface DemOrderModelInterface {
      * @param
      */
     void getorderBuyerProClose(Object object, OnServiceBaceInterface onServiceBaceInterface);
+
+    /**
+     * 获取已付款求购订单
+     * @param object
+     * @param onServiceBaceInterface
+     */
+    void getOrderBuyerDemPaidListData(Object object, OnServiceBaceInterface onServiceBaceInterface);
 }

@@ -66,7 +66,12 @@ public class QuotationInfoActivity extends AppCompatActivity implements Quotatio
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
         Request_quotationInfo request_quotationInfo = new Request_quotationInfo();
-        request_quotationInfo.qid = "1234";
+        if(null!=getIntent()){
+            request_quotationInfo.qid = getIntent().getStringExtra("qid");
+        }else{
+            showMessage("获取信息失败");
+        }
+
 
         MyRequestInfo myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_quotationInfo;

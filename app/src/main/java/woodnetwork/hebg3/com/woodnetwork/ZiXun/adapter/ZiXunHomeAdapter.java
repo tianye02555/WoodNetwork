@@ -20,6 +20,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_pro
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.activity.ZiXunListActivity;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList_listItem;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 
 /**
@@ -43,7 +44,7 @@ public class ZiXunHomeAdapter extends RecyclerView.Adapter<ZiXunHomeAdapter.View
     @Override
     public void onBindViewHolder(ZiXunHomeAdapter.ViewHolder holder, int position) {
         holder.name.setText(list.get(position).name);
-//        holder.image.setImageURI(Uri.parse(list.get(position).img));
+        holder.image.setImageURI(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position).img));
     }
 
     @Override

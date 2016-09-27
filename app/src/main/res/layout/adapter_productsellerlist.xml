@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/reltivelayout"
@@ -13,14 +14,14 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             fresco:placeholderImage="@drawable/defaultimg" />
-        <TextView
-            android:id="@+id/adapter_productsellerlist_text_qihuo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_smalltest"
-            android:text="@string/qihuo"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/adapter_productsellerlist_simpledraweeview_qihuo"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignRight="@+id/adapter_productsellerlist_simpledraweeview_head"
+            android:layout_alignTop="@+id/adapter_productsellerlist_simpledraweeview_head"
             android:textColor="@android:color/holo_red_light"
-            android:layout_alignParentRight="true" />
+            />
     </RelativeLayout>
 
 

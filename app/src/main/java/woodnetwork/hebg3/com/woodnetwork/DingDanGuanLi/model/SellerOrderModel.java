@@ -33,28 +33,28 @@ public class SellerOrderModel implements SellerOrderModelInterface {
                 case 0://获取全部订单列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getAllSellerOrderData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getAllSellerOrderData.onFailed(body.base.msg);
                     }
                     break;
                 case 1://根据订单类型获取订单列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getorderSellerFilterListData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getorderSellerFilterListData.onFailed(body.base.msg);
                     }
                     break;
                 case 2://获取异常订单列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getorderSellerExceptionListData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getorderSellerExceptionListData.onFailed(body.base.msg);
                     }
                     break;
                 case 3://关闭订单接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getorderSellerClose.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else {//失败
                         onServiceBaceInterface_getorderSellerClose.onFailed(body.base.msg);
                     }
                     break;

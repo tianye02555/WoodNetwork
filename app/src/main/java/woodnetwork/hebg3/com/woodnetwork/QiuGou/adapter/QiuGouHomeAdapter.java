@@ -15,6 +15,8 @@ import woodnetwork.hebg3.com.woodnetwork.QiuGou.activity.QiuGouXiangQingActivity
 import woodnetwork.hebg3.com.woodnetwork.QiuGou.activity.WoYaoBaoJiaActivity;
 import woodnetwork.hebg3.com.woodnetwork.QiuGou.bean.DemandList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
 /**
  * Created by ty on 2016/8/31 0031.
@@ -22,10 +24,12 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.ViewHolder> {
     private Context context;
     private List<DemandList_listItem> demandList;
+    private SharePreferencesUtils sharePreferencesUtils;
 
     public QiuGouHomeAdapter(Context context, List<DemandList_listItem> demandList) {
         this.context = context;
         this.demandList = demandList;
+        this.sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(context);
     }
 
     public List<DemandList_listItem> getDemandList() {
@@ -45,7 +49,7 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.jiaoHuoDiDian.setText("交货地点："+demandList.get(position).receive_area);
-        holder.yiXiangChanPin.setText("意向产品"+demandList.get(position).pname);
+        holder.yiXiangChanPin.setText("意向产品:"+demandList.get(position).pname);
         holder.gouMaiShuLiang.setText("购买数量：" + demandList.get(position).number);
         holder.maiJia.setText("买家" + demandList.get(position).buyer);
         holder.lianXiDianHua.setText("联系电话："+demandList.get(position).phone);
@@ -56,6 +60,14 @@ public class QiuGouHomeAdapter extends RecyclerView.Adapter<QiuGouHomeAdapter.Vi
         holder.woYaoBaoJia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommonUtils.showToast(context,"请注册卖家进行报价"+sharePreferencesUtils.getData("seller_flag",999));
+                if(0==(Integer)sharePreferencesUtils.getData("seller_flag",999)){
+                    CommonUtils.showToast(context,"请注册卖家进行报价");
+                    return;
+                }
+                if("已报价".equals(((Button)view).getText())){
+                    CommonUtils.showToast(context,"已报价");
+                }
                 Intent intet=new Intent(context, WoYaoBaoJiaActivity.class);
                 intet.putExtra("did",demandList.get(position).id);
                 context.startActivity(intet);

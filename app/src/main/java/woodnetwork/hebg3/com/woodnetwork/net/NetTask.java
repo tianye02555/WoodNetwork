@@ -44,7 +44,7 @@ public class NetTask extends AsyncTask<Void, Void, ResponseBody> {
 		public void onEntityLoadComplete(Base entity) {
 			if (body == null)
 				body = new ResponseBody();
-			if ("0".equals(entity.code)||"1".equals(entity.code)) {
+			if ("0".equals(entity.code)||"1".equals(entity.code)||"108201".equals(entity.code)||"1001".equals(entity.code)) {
 				try {
 					if (clazz != null)
 						body.obj = CommonUtils.gson.fromJson(entity.res,  clazz);

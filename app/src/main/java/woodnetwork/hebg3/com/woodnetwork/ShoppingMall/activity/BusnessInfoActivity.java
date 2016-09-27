@@ -19,6 +19,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.BusnessInfoContra
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.BusnessInfoPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 public class BusnessInfoActivity extends AppCompatActivity implements BusnessInfoContrac.BusnessInfoViewInterface {
 
@@ -67,7 +68,7 @@ public class BusnessInfoActivity extends AppCompatActivity implements BusnessInf
 
     @Override
     public void showBusnessData(BusnessInfo busnessInfo) {
-        image_head.setImageURI(Uri.parse(busnessInfo.img));
+        image_head.setImageURI(Uri.parse(Const.PICTURE+busnessInfo.img));
         text_name.setText("商家名称："+busnessInfo.name);
         text_email.setText("联系邮箱："+busnessInfo.mail);
         text_phone.setText("手机号码："+busnessInfo.phone);

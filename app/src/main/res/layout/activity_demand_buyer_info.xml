@@ -17,7 +17,6 @@
         android:layout_below="@+id/activity_demand_buyer_info_includ"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_longest"
-        android:text="商品名称："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -28,7 +27,6 @@
         android:layout_below="@+id/activity_demand_buyer_text_name"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="求购数量："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
     <woodnetwork.hebg3.com.woodnetwork.view.MyListView
@@ -49,7 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_demand_buyer_text_listview"
         android:layout_marginLeft="@dimen/distance_normal"
-        android:text="产品类型："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -60,7 +57,6 @@
         android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="发  货  地："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -74,7 +70,6 @@
         android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/activity_demand_buyer_text_fahuodibiaoshi"
-        android:text="石家庄dsddffdsfdsfdsfdsfdsfs"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -85,7 +80,6 @@
         android:layout_below="@+id/activity_demand_buyer_text_fahuodi"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="状       态："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -96,7 +90,6 @@
         android:layout_below="@+id/activity_demand_buyer_text_zhuangtai"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="创建时间："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 

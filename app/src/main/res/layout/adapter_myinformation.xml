@@ -4,6 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <com.facebook.drawee.view.SimpleDraweeView
+    android:layout_margin="@dimen/distance_normal"
     android:id="@+id/adapter_myinformation_image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

@@ -3,6 +3,7 @@ package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.MyOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.model.MyOrderModel;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
@@ -133,6 +134,32 @@ public class MyOrderPresenter implements MyOrderContract.MyOrderPresenterInterfa
         });
     }
 
+    @Override
+    public void getOrderBuyerProPaidListData(MyRequestInfo myRequestInfo, final int flag) {
+        if (0 == flag) {
+            myOrderView.showProgress();
+        }
+        myOrderModel.getOrderBuyerProPaidListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                if (0 == flag) {
+                    myOrderView.closeProgress();
+                    myOrderView.showMyOrderInfo((OrderBuyerProPayList) ((((ResponseBody) object).obj)));
+                } else if (1 == flag) {
+                    myOrderView.refreshPay(((OrderBuyerProPayList) ((ResponseBody) object).obj));
+                } else if (2 == flag) {
+                    myOrderView.loadMorePay(((OrderBuyerProPayList) ((ResponseBody) object).obj).list);
+                }
+
+            }
+
+            @Override
+            public void onFailed(String string) {
+                myOrderView.closeProgress();
+                myOrderView.showMessage(string);
+            }
+        });
+    }
 
 
     @Override

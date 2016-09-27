@@ -22,6 +22,10 @@ public interface AdviceContract {
          */
         void setGuestbookTypeData(GuestbookTypeList guestbookTypeList);
 
+        /**
+         * 关闭页面
+         */
+        void finish();
 
     }
     interface AdvicePresenterInterface extends BasePresenter{

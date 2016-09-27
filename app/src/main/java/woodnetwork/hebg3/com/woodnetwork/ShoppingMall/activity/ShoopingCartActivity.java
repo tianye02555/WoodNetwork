@@ -76,10 +76,15 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     /**
      *
      */
-    private ArrayList<ShopcarList_listItem>  ShopcarList_listItemList;
+    private ArrayList<ShopcarList_listItem> ShopcarList_listItemList;
     private int page_no = 1;
     private Request_shopcarList request_shopcarList;
     private MyRequestInfo myRequestInfo;
+    /**
+     * 存放选中的订单在购物车中的位置
+     */
+    private ArrayList<String> shopCarPosition = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,13 +117,13 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
-         request_shopcarList = new Request_shopcarList();
+        request_shopcarList = new Request_shopcarList();
         request_shopcarList.page_no = 1;
         request_shopcarList.page_size = 10;
-         myRequestInfo = new MyRequestInfo();
+        myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_shopcarList;
         myRequestInfo.req_meta = request_getAttribute;
-        presenter.getShoopingCartData(myRequestInfo,0);
+        presenter.getShoopingCartData(myRequestInfo, 0);
     }
 
     @OnClick({R.id.imge_title_left, R.id.activity_shopping_cart_btn_jiesuan, R.id.activity_shopping_cart_btn_shanchu})
@@ -129,15 +134,15 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
                 break;
             case R.id.activity_shopping_cart_btn_jiesuan://结算按钮
 
-               submitOrder();
+                submitOrder();
                 break;
             case R.id.activity_shopping_cart_btn_shanchu://删除按钮
                 sidList = new ArrayList<String>();
-//                for (ShopcarList_listItem item : adapter.getShoopingCarList()) {
-//                    if (item.checkbox) {
-////                        sidList.add(item.sid);
-//                    }
-//                }
+                for (ShopcarList_listItem item : adapter.getShoopingCarList()) {
+                    if (item.checkbox) {
+                        sidList.add(item.sid);//选中的商品的sid集合，同时使用这个集合判断是否有订单选中
+                    }
+                }
                 if (0 == sidList.size()) {
                     showMessage("请选择需要删除的商品");
                     return;
@@ -149,11 +154,6 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
                         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(ShoopingCartActivity.this);
                         Request_getAttribute request_getAttribute = new Request_getAttribute();
                         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
-                        //选中的商品的sid集合
-
-                        sidList.add("1234");
-                        sidList.add("2234");
-                        sidList.add("3234");
 
                         Request_shopcar_delete request_shopcar_delete = new Request_shopcar_delete();
                         request_shopcar_delete.sid = sidList;
@@ -170,7 +170,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     }
 
     @Override
-    public void showShoopingCartInfo(final  ShopcarList shopcarList) {
+    public void showShoopingCartInfo(final ShopcarList shopcarList) {
         this.shopcarList = shopcarList;
         adapter = new ShoopingCartAdapter(this, this.shopcarList.list);
         shoppingCartRecyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -192,7 +192,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
                 }
                 request_shopcarList.page_no = page_no;
                 myRequestInfo.req = request_shopcarList;
-                presenter.getShoopingCartData(myRequestInfo,2);
+                presenter.getShoopingCartData(myRequestInfo, 2);
 
 
             }
@@ -203,6 +203,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         shoppingCartRecyclerview.setAdapter(adapter);
 
     }
+
     @Override
     public void loadMore(List<ShopcarList_listItem> list) {
 
@@ -224,50 +225,67 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         adapter.notifyDataSetChanged();
 
     }
+
     @Override
     public void deleteGoods() {
-        shopcarList.list=adapter.getShoopingCarList();
-        for (ShopcarList_listItem item : shopcarList.list) {
-            if (item.checkbox) {
-                shopcarList.list.remove(item);
+        shopcarList.list = adapter.getList();
+//        for (ShopcarList_listItem item : shopcarList.list) {
+//            if (item.checkbox) {
+//                shopcarList.list.remove(item);
+//            }
+//        }
+        for (int i = 0; i < shopcarList.list.size(); i++) {
+            if (shopcarList.list.get(i).checkbox) {
+                shopcarList.list.remove(i);
+                i -= 1;//由于直接删除集合数据，所以需要更改角标，删一个 减一
             }
         }
-
+        adapter.setList(shopcarList.list);
         adapter.notifyDataSetChanged();
         showTitlePrice();
     }
 
     @Override
     public void submitOrder() {
-        ShopcarList mShopcarList=new ShopcarList();
-        ShopcarList_listItemList= new ArrayList<ShopcarList_listItem>();
+        ShopcarList mShopcarList = new ShopcarList();
+        ShopcarList_listItemList = new ArrayList<ShopcarList_listItem>();
         Intent intent = new Intent(this, ConfirmOrderActivity.class);
-        for (ShopcarList_listItem item : adapter.getShoopingCarList()) {
-            if (item.checkbox) {
-                ShopcarList_listItemList.add(item);
+//        for (ShopcarList_listItem item : adapter.getList()) {
+//            if (item.checkbox) {
+//                ShopcarList_listItemList.add(item);
+//                shopCarPosition.add(String.valueOf())
+//            }
+//        }
+        //提取选中的订单
+        for (int i = 0; i < adapter.getList().size(); i++) {
+            if (adapter.getList().get(i).checkbox) {
+                ShopcarList_listItemList.add(adapter.getList().get(i));
+                shopCarPosition.add(String.valueOf(i+1));
             }
         }
-
-        if(0==ShopcarList_listItemList.size()){
+        //判断是否选择订单
+        if (0 == ShopcarList_listItemList.size()) {
             showMessage("请选择需要的商品");
             return;
         }
-        String company=ShopcarList_listItemList.get(0).seller.sname;
-        for(ShopcarList_listItem shopcarList_listItem:ShopcarList_listItemList){
-            if(!company.equals(shopcarList_listItem.seller.sname)){
+        //判断发货人和发货地是否一致
+        String company = ShopcarList_listItemList.get(0).seller.sname;
+        for (ShopcarList_listItem shopcarList_listItem : ShopcarList_listItemList) {
+            if (!company.equals(shopcarList_listItem.seller.sname)) {
                 showMessage("同一订单的发货人必须相同");
                 return;
             }
         }
-        String delivery=ShopcarList_listItemList.get(0).delivery;
-        for(ShopcarList_listItem shopcarList_listItem:ShopcarList_listItemList){
-            if(!delivery.equals(shopcarList_listItem.delivery)){
+        String delivery = ShopcarList_listItemList.get(0).delivery;
+        for (ShopcarList_listItem shopcarList_listItem : ShopcarList_listItemList) {
+            if (!delivery.equals(shopcarList_listItem.delivery)) {
                 showMessage("同一订单的发货地必须相同");
                 return;
             }
         }
-        mShopcarList.list=ShopcarList_listItemList;
+        mShopcarList.list = ShopcarList_listItemList;
         intent.putExtra("shopcarList", mShopcarList);
+        intent.putStringArrayListExtra("shopcarPositonList", shopCarPosition);
         startActivity(intent);
     }
 
@@ -281,13 +299,13 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         //计算总价格
         double titlePrice = 0;
         //循环如果选中就叠加计算总价格
-        for (ShopcarList_listItem shopcarList_listItem : adapter.getShoopingCarList()) {
+        for (ShopcarList_listItem shopcarList_listItem : adapter.getList()) {
             if (shopcarList_listItem.checkbox) {
                 titlePrice += shopcarList_listItem.xiaoJi;
             }
         }
-        DecimalFormat df   =     new DecimalFormat( "###############0.00 ");//   16位整数位，两小数位
-        String   temp     =   df.format(titlePrice);
+        DecimalFormat df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
+        String temp = df.format(titlePrice);
         jingE.setText(String.valueOf(temp));
 
     }

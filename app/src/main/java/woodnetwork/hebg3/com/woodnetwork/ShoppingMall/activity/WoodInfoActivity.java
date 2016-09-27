@@ -181,7 +181,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
 
         gallery.start(this, pictures, 3000,
                 DotContainer, R.drawable.dot_onn,
-                R.drawable.dot_offf);
+                R.drawable.dot_offf,null,null);
 
 
     }

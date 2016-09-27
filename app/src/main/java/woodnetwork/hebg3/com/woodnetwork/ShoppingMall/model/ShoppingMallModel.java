@@ -31,21 +31,21 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
                 case 0://获取筛选属性列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_spinner.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_spinner.onFailed(body.base.msg);
                     }
                     break;
                 case 1://根据属性获取产品列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_goods.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_goods.onFailed(body.base.msg);
                     }
                     break;
                 case 2://加入购物车接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getShopcarAdd.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getShopcarAdd.onFailed(body.base.msg);
                     }
                     break;

@@ -18,7 +18,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <TextView
                 android:id="@+id/activity_woyaobaojia_text_chanpinyixiang"
@@ -138,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/activity_woyaobaojia_text_xiangxidizhi"
                 android:layout_marginRight="@dimen/distance_normal"
+                android:textSize="@dimen/font_normal"
                 android:layout_toLeftOf="@+id/view_xiangxidizhi"
                 android:layout_toRightOf="@+id/activity_woyaobaojia_text_xiangxidizhi"
                 android:singleLine="true" />
@@ -158,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:gravity="start"
+                android:textSize="@dimen/font_normal"
                 android:layout_alignTop="@+id/activity_woyaobaojia_text_beizhu"
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_toLeftOf="@+id/view_beizhu"
@@ -203,8 +207,11 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:textColor="@android:color/holo_blue_bright"
+                android:background="@drawable/button_shape_dise"
                 android:layout_below="@+id/activity_woyaobaojia_edit_beizhu"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:text="@string/tijiao" />
 
@@ -220,8 +227,8 @@
                 android:layout_below="@+id/activity_woyaobaojia_text_qitaxuqiu" />
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 fresco:placeholderImage="@drawable/dianhua"
                 android:id="@+id/activity_woyaobaojia_image_dianhua"
                 android:layout_marginLeft="@dimen/distance_longest"
@@ -234,6 +241,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:textSize="@dimen/font_normal"
                 android:layout_toRightOf="@+id/activity_woyaobaojia_text_xiangxidizhi"
                 android:layout_alignBaseline="@+id/activity_woyaobaojia_text_nindebaojia"
                 android:layout_alignBottom="@+id/activity_woyaobaojia_text_nindebaojia"

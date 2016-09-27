@@ -125,6 +125,10 @@ public class AdviceActivity extends AppCompatActivity implements AdviceContract.
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 request_guestbookAdd = new Request_guestbookAdd();
                 request_guestbookAdd.type = guestbookTypeList.list.get(i).id;
+                request_guestbookAdd.content=editLiuyanneirong.getText().toString().trim();
+                request_guestbookAdd.phone=editPhone.getText().toString().trim();
+                request_guestbookAdd.mail=editEmail.getText().toString().trim();
+                request_guestbookAdd.name=editName.getText().toString().trim();
             }
 
             @Override
@@ -154,6 +158,9 @@ public class AdviceActivity extends AppCompatActivity implements AdviceContract.
     @Override
     public void showMessage(String string) {
         CommonUtils.showToast(this, string);
+    }
+    public void finish(){
+        finish();
     }
 }
 

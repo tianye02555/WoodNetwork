@@ -3,9 +3,11 @@ package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemFilterList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerDemPayList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.DemOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.MyOrderContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.model.DemOrderModel;
@@ -130,7 +132,32 @@ public class DemOrderPresenter implements DemOrderContract.DemOrderPresenterInte
             }
         });
     }
+    @Override
+    public void getOrderBuyerDemPaidListData(MyRequestInfo myRequestInfo, final int flag) {
+        if (0 == flag) {
+            demOrderView.showProgress();
+        }
+        demOrderModel.getOrderBuyerDemPaidListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+                if (0 == flag) {
+                    demOrderView.closeProgress();
+                    demOrderView.showDemOrderInfo((OrderBuyerDemPayList) ((((ResponseBody) object).obj)));
+                } else if (1 == flag) {
+                    demOrderView.refreshPay(((OrderBuyerDemPayList) ((ResponseBody) object).obj));
+                } else if (2 == flag) {
+                    demOrderView.loadMorePay(((OrderBuyerDemPayList) ((ResponseBody) object).obj).list);
+                }
 
+            }
+
+            @Override
+            public void onFailed(String string) {
+                demOrderView.closeProgress();
+                demOrderView.showMessage(string);
+            }
+        });
+    }
     @Override
     public void start() {
 

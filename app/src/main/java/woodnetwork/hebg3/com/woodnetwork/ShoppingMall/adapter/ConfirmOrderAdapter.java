@@ -62,7 +62,7 @@ public class ConfirmOrderAdapter extends BaseAdapter {
             holder.gengDuo = (TextView) contentView.findViewById(R.id.confirm_order_adapter_text_more);
 
             holder.gridView = (MyGridView) contentView.findViewById(R.id.confirm_order_adapter_gridview);
-            adapter_myGridViewAdapter = new ConfirmOrderAdapter_myGridViewAdapter(context, list.get(position).attribute);
+
             contentView.setTag(holder);
         } else {
             holder = (MyViewHolder) contentView.getTag();
@@ -76,6 +76,7 @@ public class ConfirmOrderAdapter extends BaseAdapter {
         }else{
             holder.gridView.setVisibility(View.GONE);
         }
+        adapter_myGridViewAdapter = new ConfirmOrderAdapter_myGridViewAdapter(context, list.get(position).attribute);
         holder.gridView.setAdapter(adapter_myGridViewAdapter);
         holder.gengDuo.setOnClickListener(new View.OnClickListener() {
             @Override

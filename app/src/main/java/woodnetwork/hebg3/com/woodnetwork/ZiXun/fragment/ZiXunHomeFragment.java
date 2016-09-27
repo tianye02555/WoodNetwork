@@ -19,17 +19,16 @@ import butterknife.ButterKnife;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
-import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcarList;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
-import woodnetwork.hebg3.com.woodnetwork.ZiXun.adapter.DividerGridItemDecoration;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.adapter.ZiXunHomeAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.BannerList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.contract.ZiXunHomeContract;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.presenter.ZiXunHomePresenter;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 import woodnetwork.hebg3.com.woodnetwork.view.MyGallery;
 
 public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiXunHomeViewInterface {
@@ -38,6 +37,8 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
     ImageView imgeTitleLeft;
     @Bind(R.id.text_title)
     TextView textTitle;
+    @Bind(R.id.text_new)
+    TextView textNews;
     @Bind(R.id.image_title_right)
     ImageView imageTitleRight;
     @Bind(R.id.home_customgallery)
@@ -50,6 +51,7 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
     RecyclerView recyclerview_gridview;
     private ZiXunHomeContract.ZiXunHomePresenterInterface presenter;
     private ZiXunHomeAdapter ziXunHomeAdapter;
+    private String[] title;//轮播图下方的文字数组
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +69,8 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
-        Request_CategoryList request_categoryList=new Request_CategoryList();
-        request_categoryList.pid="1";
+        Request_CategoryList request_categoryList = new Request_CategoryList();
+        request_categoryList.pid = "1";
 
         MyRequestInfo myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = new Object();
@@ -76,7 +78,7 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
         presenter.getMyGalleryData(myRequestInfo);
 
         myRequestInfo.req = request_categoryList;
-         presenter.getCategoryListData(myRequestInfo);
+        presenter.getCategoryListData(myRequestInfo);
 
         return view;
     }
@@ -89,30 +91,25 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
     }
 
     @Override
-    public void setMyGalleryInfo(BannerList bannerList) {
-        // Inflate the layout for this fragment
-        // 设置轮播图的 宽高比 为2:1 宽为屏幕宽度
+    public void setMyGalleryInfo(final BannerList bannerList) {
+        title = new String[bannerList.list.size()];
         WindowManager manager = getActivity().getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
-//        RelativeLayout.LayoutParams lay = new RelativeLayout.LayoutParams(
-//                outMetrics.widthPixels, outMetrics.widthPixels * 2 / 3);
-//        lay.addRule(RelativeLayout.BELOW, R.id.includ_title);
-//        homeRlTp.setLayoutParams(lay);
-        String[] pictures = new String[3];
-        pictures[0] = "http://img5.imgtn.bdimg.com/it/u=3279813050,4113215971&fm=206&gp=0.jpg";
-        pictures[1] = "http://img0.imgtn.bdimg.com/it/u=638420455,3521255219&fm=206&gp=0.jpg";
-        pictures[2] = "http://img1.imgtn.bdimg.com/it/u=766966808,4047206931&fm=206&gp=0.jpg";
+        String[] pictures = new String[bannerList.list.size()];
+        for (int i = 0; i < bannerList.list.size(); i++) {
+            pictures[i] = Const.PICTURE_LUNBOTU + bannerList.list.get(i).img;
+            title[i] = bannerList.list.get(i).title;
+        }
         gallery.start(getActivity(), pictures, 3000,
                 DotContainer, R.drawable.dot_onn,
-                R.drawable.dot_offf);
+                R.drawable.dot_offf, title, textNews);
     }
 
     @Override
     public void setCategoryListInfo(CategoryList categoryList) {
         ziXunHomeAdapter = new ZiXunHomeAdapter(getActivity(), categoryList.list);
         recyclerview_gridview.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-//        recyclerview_gridview.addItemDecoration(new DividerGridItemDecoration(getActivity()));
         recyclerview_gridview.setAdapter(ziXunHomeAdapter);
     }
 

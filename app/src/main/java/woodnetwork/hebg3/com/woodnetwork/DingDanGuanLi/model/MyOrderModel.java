@@ -6,6 +6,7 @@ import android.os.Message;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProList;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ServiceInterfaceCont;
@@ -21,6 +22,7 @@ public class MyOrderModel implements MyOrderModelInterface {
     private OnServiceBaceInterface onServiceBaceInterface_getAllMyOrderData;
     private OnServiceBaceInterface onServiceBaceInterface_getorderBuyerProFilterListData;
     private OnServiceBaceInterface onServiceBaceInterface_getorderBuyerProExceptionListData;
+    private OnServiceBaceInterface onServiceBaceInterface_getOrderBuyerProPaidListData;
     private OnServiceBaceInterface onServiceBaceInterface_getorderBuyerProClose;
     private Handler handler = new Handler() {
         @Override
@@ -30,29 +32,36 @@ public class MyOrderModel implements MyOrderModelInterface {
                 case 0://获取全部订单列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getAllMyOrderData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getAllMyOrderData.onFailed(body.base.msg);
                     }
                     break;
                 case 1://根据订单类型获取订单列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getorderBuyerProFilterListData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getorderBuyerProFilterListData.onFailed(body.base.msg);
                     }
                     break;
                 case 2://获取异常订单列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getorderBuyerProExceptionListData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getorderBuyerProExceptionListData.onFailed(body.base.msg);
                     }
                     break;
                 case 3://关闭订单接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getorderBuyerProClose.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getorderBuyerProClose.onFailed(body.base.msg);
+                    }
+                    break;
+                case 4://获取已付款订单接口
+                    if ("0".equals(body.base.code)) {//成功
+                        onServiceBaceInterface_getOrderBuyerProPaidListData.onSuccess(body);
+                    } else  {//失败
+                        onServiceBaceInterface_getOrderBuyerProPaidListData.onFailed(body.base.msg);
                     }
                     break;
 
@@ -99,6 +108,16 @@ public class MyOrderModel implements MyOrderModelInterface {
         params.getMethod = ServiceInterfaceCont.ORDERBUYERCLOSE;
         params.params = CommonUtils.getParamString(object);
         new NetTask(handler.obtainMessage(3),params).execute();
+    }
+
+    @Override
+    public void getOrderBuyerProPaidListData(Object object, OnServiceBaceInterface onServiceBaceInterface) {
+        this.onServiceBaceInterface_getOrderBuyerProPaidListData = onServiceBaceInterface;
+        ClientParams params = new ClientParams();
+        params.http_method = ClientParams.HTTP_GET;
+        params.getMethod = ServiceInterfaceCont.ORDERBUYERPROPAIDLIST;
+        params.params = CommonUtils.getParamString(object);
+        new NetTask(handler.obtainMessage(4),params, OrderBuyerProPayList.class).execute();
     }
 
 

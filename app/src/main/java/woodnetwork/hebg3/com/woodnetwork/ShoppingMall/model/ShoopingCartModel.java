@@ -28,21 +28,21 @@ public class ShoopingCartModel implements ShoopingCartModelInterface {
                 case 0://获取购物车列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getShoopingCartData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getShoopingCartData.onFailed(body.base.msg);
                     }
                     break;
                 case 1://更改物品数量接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_changeGoodsNumber.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else {//失败
                         onServiceBaceInterface_changeGoodsNumber.onFailed(body.base.msg);
                     }
                     break;
                 case 2://删除物品接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_deleteGoods.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_deleteGoods.onFailed(body.base.msg);
                     }
                     break;

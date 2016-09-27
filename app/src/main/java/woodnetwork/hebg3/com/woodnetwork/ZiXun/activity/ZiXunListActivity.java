@@ -62,6 +62,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
     private Request_article_list request_article_list;
     private MyRequestInfo myRequestInfo;
     private List<ArticleList_listItem> list;
+    private String pid;//父级分类编号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +72,11 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
         ButterKnife.bind(this);
 
         imageTitleRight.setVisibility(View.GONE);
-//        textTitle.setText(getIntent().getStringExtra("title"));
-        textTitle.setText(getIntent().getStringExtra("title"));
+        if (null != getIntent()) {
+            textTitle.setText(getIntent().getStringExtra("title"));
+            pid=getIntent().getStringExtra("pid");
+        }
+
 
         new ZiXunListPresenter(this);
 
@@ -81,7 +85,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
         Request_CategoryList request_CategoryList = new Request_CategoryList();
-        request_CategoryList.pid = "1";
+        request_CategoryList.pid = pid;
 
         myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_CategoryList;
@@ -110,7 +114,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
                         request_article_list = new Request_article_list();
-                        request_article_list.cid = "1";// 实际代码request_article_list.cid=(String)compoundButton.getTag();
+                        request_article_list.cid =(String)compoundButton.getTag();
                         request_article_list.page_no = 1;
                         request_article_list.page_size = 10;
                         myRequestInfo.req = request_article_list;

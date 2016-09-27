@@ -19,6 +19,13 @@
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         fresco:placeholderImage="@drawable/defaultimg" />
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/adapter_myorder_imag_qihuo"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignRight="@+id/adapter_myorder_image_img"
+        android:layout_alignTop="@+id/adapter_myorder_image_img"
+        fresco:placeholderImage="@drawable/xianhuo"></com.facebook.drawee.view.SimpleDraweeView>
 
     <TextView
         android:id="@+id/adapter_myorder_text_name"

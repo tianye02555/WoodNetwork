@@ -27,14 +27,14 @@ public class WoYaoBaoJiaModel implements WoYaoBaoJiaModelInterface {
                 case 0://获取筛选属性列表接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getWoYaoBaoJiaData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getWoYaoBaoJiaData.onFailed(body.base.msg);
                     }
                     break;
                 case 1://保存订单接口
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_saveWoDeBaoJia.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_saveWoDeBaoJia.onFailed(body.base.msg);
                     }
                     break;

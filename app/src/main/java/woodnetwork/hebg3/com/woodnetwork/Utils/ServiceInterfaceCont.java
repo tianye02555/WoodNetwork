@@ -155,4 +155,11 @@ public class ServiceInterfaceCont {
     //32.1获取版本接口
     public static final String VERSIONINFO = "/version/info?param=";
 
+    //获取我的已付款订单
+    public static final String ORDERBUYERPROPAIDLIST = "/order/buyer/pro/paid/list?param=";
+
+    //获取求购已付款订单
+    public static final String ORDERBUYERDEMPAIDLIST = "/order/buyer/dem/paid/list?param=";
+
+
 }

@@ -29,21 +29,21 @@ public class OrderBuyerInfoModel implements OrderBuyerInfoModelInterface {
                 case 0://获取买家订单详情
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface.onFailed(body.base.msg);
                     }
                     break;
                 case 1://获取卖家订单详情
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getSellerOrderData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getSellerOrderData.onFailed(body.base.msg);
                     }
                     break;
                 case 2://获取求购订单详情
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface_getDemOrderData.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface_getDemOrderData.onFailed(body.base.msg);
                     }
                     break;

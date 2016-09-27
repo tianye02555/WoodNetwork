@@ -62,6 +62,7 @@ public class ShoopingCartPresenter implements ShoopingCartContract.ShoopingCartP
             public void onSuccess(Object object) {
 //                shoopingCartView.closeProgress();
                 shoopingCartView.changeNumber();
+                shoopingCartView.showMessage(((ResponseBody)object).base.msg);
             }
 
             @Override

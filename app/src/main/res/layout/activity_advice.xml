@@ -4,6 +4,7 @@
     android:id="@+id/activity_advice"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.AdviceActivity">
 
     <include
@@ -36,6 +37,7 @@
         android:layout_marginRight="@dimen/distance_longest"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal"
+        android:singleLine="true"
         android:layout_alignBaseline="@+id/text_name"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_toRightOf="@+id/text_name" />
@@ -66,6 +68,7 @@
         android:hint="@string/qingshurulianxiyouxiang"
         android:layout_marginRight="@dimen/distance_longest"
         android:textColor="@android:color/black"
+        android:singleLine="true"
         android:textSize="@dimen/font_normal"
         android:layout_alignBaseline="@+id/text_email"
         android:layout_marginLeft="@dimen/distance_normal"
@@ -84,19 +87,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_email"
-
         android:layout_marginLeft="@dimen/distance_longest"
         android:layout_marginTop="@dimen/distance_normal"
         android:text="@string/dianhua"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
-
     <EditText
         android:id="@+id/activity_advice_edit_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/qingshurulianxiyouxiang"
         android:layout_marginRight="@dimen/distance_longest"
+        android:singleLine="true"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal"
         android:layout_alignBaseline="@+id/text_phone"
@@ -116,7 +118,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_phone"
-
         android:layout_marginLeft="@dimen/distance_longest"
         android:layout_marginTop="@dimen/distance_normal"
         android:text="@string/fenlei"
@@ -169,6 +170,7 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal"
         android:gravity="top"
+        android:singleLine="true"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/text_name" />
 

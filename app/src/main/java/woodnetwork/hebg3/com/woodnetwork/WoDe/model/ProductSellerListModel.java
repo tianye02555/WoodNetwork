@@ -24,7 +24,7 @@ public class ProductSellerListModel implements ProductSellerListModelInterface {
 
             if ("0".equals(body.base.code)) {//成功
                 onServiceBaceInterface.onSuccess(body);
-            } else if ("1".equals(body.base.code)) {//失败
+            } else  {//失败
                 onServiceBaceInterface.onFailed(body.base.msg);
             }
 

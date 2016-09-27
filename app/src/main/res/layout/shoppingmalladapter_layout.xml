@@ -17,14 +17,13 @@
             android:layout_height="70dp"
             fresco:placeholderImage="@drawable/defaultimg" />
 
-        <TextView
-            android:id="@+id/shopppingmalladapter_text_qihuo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/shopppingmalladapter_imag_qihuo"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
-            android:text="@string/qihuo"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="@dimen/font_normal" />
+            fresco:placeholderImage="@drawable/xianhuo"
+  />
     </RelativeLayout>
 
 

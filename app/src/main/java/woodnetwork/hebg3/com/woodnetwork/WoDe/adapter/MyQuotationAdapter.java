@@ -95,7 +95,7 @@ public class MyQuotationAdapter extends RecyclerView.Adapter<MyQuotationAdapter.
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, QuotationInfoActivity.class);
-                    intent.putExtra("qid", list.get(getAdapterPosition()).id);
+                    intent.putExtra("qid", list.get(getAdapterPosition()-1).id);
                     context.startActivity(intent);
                 }
             });

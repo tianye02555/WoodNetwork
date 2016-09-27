@@ -30,6 +30,7 @@ public class AdvicePresenter implements AdviceContract.AdvicePresenterInterface{
             public void onSuccess(Object object) {
                 adviceView.closeProgress();
                 adviceView.showMessage(((ResponseBody)object).base.msg);
+                adviceView.finish();
             }
 
             @Override

@@ -18,6 +18,7 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.ProductSellerList_productsItem;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 
 /**
@@ -48,7 +49,7 @@ public class ProductSellerListAdapter extends RecyclerView.Adapter<ProductSeller
 
     @Override
     public void onBindViewHolder(ProductSellerListAdapter.ViewHolder holder, int position) {
-        holder.head.setImageURI(Uri.parse(productInfoList.get(position).pimg));
+        holder.head.setImageURI(Uri.parse(Const.PICTURE+productInfoList.get(position).pimg));
         holder.name.setText(productInfoList.get(position).pname);
         holder.price.setText(String.valueOf(productInfoList.get(position).price));
         holder.stock.setText("库存：" + productInfoList.get(position).stock + "方");
@@ -59,10 +60,12 @@ public class ProductSellerListAdapter extends RecyclerView.Adapter<ProductSeller
         }
 
         holder.producingArea.setText("产地：" + productInfoList.get(position).attributes.get(0).attr_value);
-        if (0 == productInfoList.get(position).type) {//0：期货；1：现货；2：板材
-            holder.qiHuo.setText("期货");
-        } else if (1 == productInfoList.get(position).type) {
-            holder.qiHuo.setText("现货");
+        if (0==productInfoList.get(position).type) {//0：期货；1：现货；2：板材
+            holder.qiHuo.setImageURI(Uri.parse("res://woodnetwork.hebg3.com.woodnetwork/"+R.drawable.qihuo));
+        }else if(1==productInfoList.get(position).type){
+            holder.qiHuo.setImageURI(Uri.parse("res://woodnetwork.hebg3.com.woodnetwork/"+R.drawable.xianhuo));
+        }else if(3==productInfoList.get(position).type){
+            holder.qiHuo.setImageURI(Uri.parse("res://woodnetwork.hebg3.com.woodnetwork/"+R.drawable.bancai));
         }
 
     }
@@ -82,7 +85,8 @@ public class ProductSellerListAdapter extends RecyclerView.Adapter<ProductSeller
         private TextView producingArea;//木材产地
         private TextView price;//单价
         private TextView stock;//库存
-        private TextView qiHuo;//期货小角标
+        private SimpleDraweeView qiHuo;//期货小角标
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -92,12 +96,12 @@ public class ProductSellerListAdapter extends RecyclerView.Adapter<ProductSeller
             producingArea = (TextView) itemView.findViewById(R.id.adapter_productsellerlist_txt_productarea);
             price = (TextView) itemView.findViewById(R.id.adapter_productsellerlist_txt_price);
             stock = (TextView) itemView.findViewById(R.id.adapter_productsellerlist_txt_stock);
-            qiHuo = (TextView) itemView.findViewById(R.id.adapter_productsellerlist_text_qihuo);
+            qiHuo = (SimpleDraweeView) itemView.findViewById(R.id.adapter_productsellerlist_simpledraweeview_qihuo);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, WoodInfoActivity.class);
-                    intent.putExtra("pid", productInfoList.get(getAdapterPosition()).pid);
+                    intent.putExtra("pid", productInfoList.get(getAdapterPosition()-1).pid);
                     intent.putExtra("isShowButton", false);//是否显示商品详情页的 加入购物车按钮
                     context.startActivity(intent);
                 }

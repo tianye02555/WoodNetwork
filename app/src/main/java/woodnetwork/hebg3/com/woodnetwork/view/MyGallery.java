@@ -23,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -40,6 +41,8 @@ public class MyGallery extends Gallery implements AdapterView.OnItemClickListene
 	private int mFocusedId;
 	private int mNormalId;
 	private String[] mUris;
+	private String [] title;
+	private TextView titleView;
 	List<ImageView> listImgs;
 
 //	private DisplayImageOptions displayPictureOptions = new DisplayImageOptions.Builder()
@@ -65,9 +68,11 @@ public class MyGallery extends Gallery implements AdapterView.OnItemClickListene
 	}
 
 	public void start(Context context, String[] mris, int switchTime, LinearLayout ovalLayout, int focusedId,
-			int normalId) {
+					  int normalId, String[] title, TextView titleView) {
 		this.mContext = context;
 		this.mUris = mris;
+		this.title=title;
+		this.titleView=titleView;
 		this.mSwitchTime = switchTime;
 		this.mOvalLayout = ovalLayout;
 		this.mFocusedId = focusedId;
@@ -182,6 +187,9 @@ public class MyGallery extends Gallery implements AdapterView.OnItemClickListene
 		if (mOvalLayout != null && listImgs.size() > 1) {
 			mOvalLayout.getChildAt(oldIndex).setBackgroundResource(mNormalId);
 			mOvalLayout.getChildAt(curIndex).setBackgroundResource(mFocusedId);
+			if(null!=titleView){
+				this.titleView.setText(title[curIndex]);
+			}
 			oldIndex = curIndex;
 		}
 	}

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.MyInformationActivity">
 
     <include layout="@layout/layout_title">
@@ -153,10 +154,11 @@
             <woodnetwork.hebg3.com.woodnetwork.view.MyGridView
                 android:id="@+id/activity_my_information_mygridview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:numColumns="3"
                 android:verticalSpacing="10dp"
                 android:horizontalSpacing="10dp"
+                android:layout_margin="@dimen/distance_normal"
                 android:stretchMode="columnWidth"
                 android:gravity="center"
                 ></woodnetwork.hebg3.com.woodnetwork.view.MyGridView>

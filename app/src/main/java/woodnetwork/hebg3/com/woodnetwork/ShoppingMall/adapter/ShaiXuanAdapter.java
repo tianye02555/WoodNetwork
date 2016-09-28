@@ -81,23 +81,18 @@ public class ShaiXuanAdapter extends BaseAdapter {
                     shaiXuanList.get(position).attr_vaule_id = (String) radioButton.getTag();
                 }
             });
-            contentView.setTag(holder);
-        } else {
-            holder = (ViewHodler) contentView.getTag();
-        }
-
-        RadioButton radioButton = null;
-        //根据返回的类型数 动态加载radiobutton
-        for (int i = 0; i < list.get(position).value.size(); i++) {
-            //根据xml  获取radiobutton
-            radioButton = (RadioButton) LayoutInflater.from(context).inflate(R.layout.radiobutton, null);
-            LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(150,100);
-            layoutParams.setMargins(10,10,10,10);
-            radioButton.setLayoutParams(layoutParams);
-            radioButton.setGravity(Gravity.CENTER);
-            radioButton.setBackgroundResource(R.drawable.selector_shaixuan_drawable);
-            radioButton.setText(list.get(position).value.get(i).value_name);
-            radioButton.setTag(list.get(position).value.get(i).value_id);
+            RadioButton radioButton = null;
+            //根据返回的类型数 动态加载radiobutton
+            for (int i = 0; i < list.get(position).value.size(); i++) {
+                //根据xml  获取radiobutton
+                radioButton = (RadioButton) LayoutInflater.from(context).inflate(R.layout.radiobutton, null);
+                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(150,100);
+                layoutParams.setMargins(10,10,10,10);
+                radioButton.setLayoutParams(layoutParams);
+                radioButton.setGravity(Gravity.CENTER);
+                radioButton.setBackgroundResource(R.drawable.selector_shaixuan_drawable);
+                radioButton.setText(list.get(position).value.get(i).value_name);
+                radioButton.setTag(list.get(position).value.get(i).value_id);
 //            radioButton.setId(Integer.parseInt(list.get(position).value.get(i).value_id, 10));
 //            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
@@ -107,8 +102,14 @@ public class ShaiXuanAdapter extends BaseAdapter {
 //                    }
 //                }
 //            });
-            holder.radioGroup.addView(radioButton, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                holder.radioGroup.addView(radioButton, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            }
+            contentView.setTag(holder);
+        } else {
+            holder = (ViewHodler) contentView.getTag();
         }
+
+
         holder.textView.setText(list.get(position).name);
         ((RadioButton) holder.radioGroup.getChildAt(0)).setChecked(true);//默认选择第一个
         return contentView;

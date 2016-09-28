@@ -105,7 +105,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
         setContentView(R.layout.activity_seller_order);
         ButterKnife.bind(this);
 
-        textTitle.setText("求购订单");
+        textTitle.setText("卖家订单");
         imageTitleRight.setVisibility(View.GONE);
 
         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
@@ -137,7 +137,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                         request_order_seller_filter_list.page_size = 10;
                         request_order_seller_filter_list.order_status = 2;
                         myRequestInfo.req = request_order_seller_filter_list;
-                        presenter.getSellerOrderExceptionListData(myRequestInfo, 0);
+                        presenter.getSellerFilterOrderData(myRequestInfo, 0);
                         nowPosition = 1;
                         break;
                     case R.id.activity_seller_order_radiobutton_yichangdindan://异常订单

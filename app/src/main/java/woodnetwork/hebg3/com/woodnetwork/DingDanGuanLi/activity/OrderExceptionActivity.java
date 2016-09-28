@@ -48,6 +48,7 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
     private String seller="";
     private String number="";
     private String flag="";
+    private String oid="";
     private ExceptionList exceptionList;
     private OrderExceptionContract.OrderExceptionPresenterInterface presenter;
     private MyRequestInfo myRequestInfo;
@@ -64,6 +65,7 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
             seller=getIntent().getStringExtra("seller");
             number=getIntent().getStringExtra("number");
             flag=getIntent().getStringExtra("flag");
+            oid=getIntent().getStringExtra("oid");
         }
 
 //        orderBuyerInfo = (OrderBuyerInfo) getIntent().getSerializableExtra("OrderBuyerInfo");
@@ -73,7 +75,7 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
         Request_exceptionList request_exceptionList = new Request_exceptionList();
-        request_exceptionList.oid = "1234";
+        request_exceptionList.oid = oid;
 
         myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_exceptionList;

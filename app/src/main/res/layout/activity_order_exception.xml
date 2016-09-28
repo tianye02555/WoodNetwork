@@ -56,7 +56,6 @@
                 android:id="@+id/activity_order_exception_text_dinDanBianHao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/activity_order_exception_relative"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:text="订单编号"
@@ -94,7 +93,6 @@
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:layout_toRightOf="@+id/activity_order_exception_text_gongji"
-                android:text="1500元"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 

@@ -57,10 +57,10 @@ public class MyOrder_filter_Adapter extends RecyclerView.Adapter<MyOrder_filter_
     @Override
     public void onBindViewHolder(BusnessHolder holder, final int position) {
 
-        holder.text_id.setText(list.get(position).number);
-        holder.text_date.setText(list.get(position).creat_time);
-        holder.text_jian.setText(String.valueOf(list.size()));
-        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price));
+        holder.text_id.setText("订单编号：" +list.get(position).number);
+        holder.text_date.setText("下单时间：" +list.get(position).creat_time);
+        holder.text_jian.setText(String.valueOf(list.get(position).products.size()));
+        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price)+"元");
 
         adapter = new MyOrder_filterAdapterItem_Adapter(context, list.get(position).products, list.get(position).seller);
         holder.listView.setAdapter(adapter);
@@ -83,7 +83,7 @@ public class MyOrder_filter_Adapter extends RecyclerView.Adapter<MyOrder_filter_
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
         }
-        if (0 == list.get(position).type) {//0：订单正常；1：订单异常
+        if (0 == list.get(position).appeal_flag) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
         }
         holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {

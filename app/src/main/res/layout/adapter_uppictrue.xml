@@ -5,11 +5,11 @@
     android:layout_height="60dp"
     android:orientation="vertical">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/adapter_upload_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fresco:placeholderImage="@drawable/defaultimg" />
+        android:src="@drawable/defaultimg" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/adapter_upload_cancel"

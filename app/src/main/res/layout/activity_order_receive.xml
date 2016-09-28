@@ -137,7 +137,7 @@
                 android:textSize="@dimen/font_normal" />
 
             <EditText
-                android:id="@+id/activity_order_receive_edit_yiChangYuanYin"
+                android:id="@+id/activity_order_receive_edit_beizhu"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="start"
@@ -148,7 +148,7 @@
                 android:id="@+id/activity_order_receive_text_yiChangtupian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/activity_order_receive_edit_yiChangYuanYin"
+                android:layout_below="@+id/activity_order_receive_edit_beizhu"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:text="@string/shouhuotupian"

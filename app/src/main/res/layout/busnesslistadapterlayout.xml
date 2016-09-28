@@ -51,8 +51,8 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/busnesslistadapterlayout_image_phone"
         fresco:placeholderImage="@drawable/dianhua"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignTop="@id/busnesslistadapterlayout_text_company"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="26dp"

@@ -415,25 +415,28 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
             case 0://全部订单
                 list_all = adapter.getList();
                 intent.putExtra("id", list_all.get(position).number);
+                intent.putExtra("oid", list_all.get(position).id);
                 intent.putExtra("creat_time", list_all.get(position).creat_time);
                 intent.putExtra("seller", list_all.get(position).seller);
-                intent.putExtra("total_price", list_all.get(position).total_price);
+                intent.putExtra("total_price",String.valueOf(list_pay.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_all.get(position).products.size()));
                 break;
             case 2://已付款订单
                 list_pay = adapter_pay.getList();
                 intent.putExtra("id", list_pay.get(position).number);
+                intent.putExtra("oid", list_all.get(position).id);
                 intent.putExtra("creat_time", list_pay.get(position).creat_time);
                 intent.putExtra("seller", list_pay.get(position).seller);
-                intent.putExtra("total_price", list_pay.get(position).total_price);
+                intent.putExtra("total_price", String.valueOf(list_pay.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_pay.get(position).products.size()));
                 break;
             case 3://异常订单
                 list_Exception = adapter_exception.getList();
                 intent.putExtra("id", list_Exception.get(position).number);
+                intent.putExtra("oid", list_all.get(position).id);
                 intent.putExtra("creat_time", list_Exception.get(position).creat_time);
                 intent.putExtra("seller", list_Exception.get(position).seller);
-                intent.putExtra("total_price", list_Exception.get(position).total_price);
+                intent.putExtra("total_price", String.valueOf(list_pay.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_Exception.get(position).products.size()));
                 break;
         }

@@ -11,19 +11,7 @@
         android:id="@+id/activity_dem_order_include"
         layout="@layout/layout_title"></include>
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/activity_dem_order_include"
-        android:background="@android:color/black"></View>
 
-    <View
-        android:id="@+id/line2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/activity_dem_order_radiogroup"
-        android:background="@android:color/black"></View>
 
     <RadioGroup
         android:id="@+id/activity_dem_order_radiogroup"
@@ -45,10 +33,7 @@
             android:textColor="@drawable/selector_color"
             android:text="@string/quanbudingdan" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"></View>
+
 
         <RadioButton
             android:id="@+id/activity_dem_order_radiobutton_daifukuan"
@@ -60,10 +45,7 @@
             android:textColor="@drawable/selector_color"
             android:text="@string/daifukuan" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"></View>
+
 
         <RadioButton
             android:id="@+id/activity_dem_order_radiobutton_yifukuan"
@@ -75,10 +57,7 @@
             android:textColor="@drawable/selector_color"
             android:text="@string/yifukuan" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"></View>
+
 
         <RadioButton
             android:id="@+id/activity_dem_order_radiobutton_yichangdindan"
@@ -90,18 +69,14 @@
             android:textColor="@drawable/selector_color"
             android:text="@string/yichangdindan" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"></View>
+
 
     </RadioGroup>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/activity_dem_order_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/line2"
-        android:layout_marginTop="@dimen/distance_long"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/activity_dem_order_radiogroup"
         android:background="@android:color/white"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </RelativeLayout>

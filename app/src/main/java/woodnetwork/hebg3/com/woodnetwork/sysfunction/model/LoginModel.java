@@ -25,7 +25,7 @@ public class LoginModel implements LoginModelInterface {
             ResponseBody body = (ResponseBody) msg.obj;
             if ("0".equals(body.base.code)) {//成功
                 onLoginLisenter.onSuccess(body);
-            } else if ("1".equals(body.base.code)) {//失败
+            } else  {//失败
                 onLoginLisenter.onFailed(body.base.msg);
             }
         }

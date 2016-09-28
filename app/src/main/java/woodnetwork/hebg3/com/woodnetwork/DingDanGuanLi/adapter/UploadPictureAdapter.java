@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -47,7 +48,7 @@ public class UploadPictureAdapter extends RecyclerView.Adapter<UploadPictureAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.imag.setImageURI(Uri.parse(MediaStore.Images.Media.insertImage(context.getContentResolver(), list.get(position), null,null)));
+        holder.imag.setImageBitmap(list.get(position));
         if(position+1==list.size()){
             holder.cancle.setVisibility(View.GONE);
         }else{
@@ -64,18 +65,18 @@ public class UploadPictureAdapter extends RecyclerView.Adapter<UploadPictureAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private SimpleDraweeView imag;//内容图片
+        private ImageView imag;//内容图片
         private SimpleDraweeView cancle;//小叉号
         public ViewHolder(View itemView) {
             super(itemView);
-            imag = (SimpleDraweeView) itemView.findViewById(R.id.adapter_upload_image);
+            imag = (ImageView) itemView.findViewById(R.id.adapter_upload_image);
             cancle = (SimpleDraweeView) itemView.findViewById(R.id.adapter_upload_cancel);
             cancle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    list.remove(list.get(getAdapterPosition()-1));
+                    list.remove(list.get(getAdapterPosition()));
 
-                    notifyItemRemoved(getAdapterPosition()-1);
+                    notifyItemRemoved(getAdapterPosition());
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {

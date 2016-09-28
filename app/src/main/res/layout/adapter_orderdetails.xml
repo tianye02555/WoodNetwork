@@ -46,5 +46,10 @@
         android:layout_alignRight="@+id/adapter_order_details_image"
         android:layout_alignTop="@+id/adapter_order_details_image"
         fresco:placeholderImage="@drawable/xianhuo"></com.facebook.drawee.view.SimpleDraweeView>
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/dise"
+    android:layout_below="@+id/adapter_order_details_image"
+    android:layout_marginTop="@dimen/distance_normal"></View>
 </RelativeLayout>

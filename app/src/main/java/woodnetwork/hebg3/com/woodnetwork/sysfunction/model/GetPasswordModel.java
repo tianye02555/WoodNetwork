@@ -26,14 +26,14 @@ public class GetPasswordModel implements GetPasswordModelInterface {
                 case 0://获取验证码
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface.onFailed(body.base.msg);
                     }
                     break;
                 case 1://更改密码
                     if ("0".equals(body.base.code)) {//成功
                         onServiceBaceInterface.onSuccess(body);
-                    } else if ("1".equals(body.base.code)) {//失败
+                    } else  {//失败
                         onServiceBaceInterface.onFailed(body.base.msg);
                     }
                     break;

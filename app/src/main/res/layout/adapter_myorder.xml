@@ -164,4 +164,10 @@
         android:background="@null"
         android:text="@string/shenbaoyichang"
         android:textColor="@android:color/holo_blue_bright" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/dise"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_below="@+id/adapter_myorder_text_daishouhuo"></View>
 </RelativeLayout>

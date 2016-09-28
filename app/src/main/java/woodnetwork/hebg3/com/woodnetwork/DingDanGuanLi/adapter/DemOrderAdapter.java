@@ -79,7 +79,7 @@ public class DemOrderAdapter extends RecyclerView.Adapter<DemOrderAdapter.Busnes
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
         }
-        if (0 == list.get(position).type) {//0：订单正常；1：订单异常
+        if (0 == list.get(position).appeal_flag) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
         }
         holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {

@@ -45,7 +45,7 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
     public void submitReceiveOrder(Context context, HashMap<String, String> params, HashMap<String, File> files, OnServiceBaceInterface onServiceBaceInterface) {
         this.onServiceBaceInterface = onServiceBaceInterface;
         AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
-                context, "http://192.168.2.12:12306/dev/wood/v1/order/receive", params, files,
+                context, "http://192.168.2.12:8080/wood/dev/wood/v1/order/receive", params, files,
                 handler.obtainMessage(0));
         at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "0");
     }
@@ -55,7 +55,7 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
     public void submitDeliveryOrder(Context context, HashMap<String, String> params, HashMap<String, File> files, OnServiceBaceInterface onServiceBaceInterface) {
         this.onServiceBaceInterface = onServiceBaceInterface;
         AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
-                context, "http://192.168.2.12:12306/dev/wood/v1/order/delivery", params, files,
+                context, "http://192.168.2.12:8080/wood/dev/wood/v1/order/delivery", params, files,
                 handler.obtainMessage(0));
         at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "0");
     }

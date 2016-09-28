@@ -83,7 +83,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
         }
-        if (0 == list.get(position).type) {//0：订单正常；1：订单异常
+        if (0 == list.get(position).appeal_flag) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
         }
         holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +106,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.BusnessH
                 Intent intent = new Intent(context, OrderExceptionActivity.class);
                 intent.putExtra("seller", list.get(position).seller);
                 intent.putExtra("number", String.valueOf(list.size()));
+                intent.putExtra("oid",list.get(position).id);
                 context.startActivity(intent);
 
             }

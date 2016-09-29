@@ -187,7 +187,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
             @Override
             public void onLoadMore() {
                 page_no++;
-                if (page_no >= shopcarList.total_page) {//判断是否为最后一页
+                if (page_no > shopcarList.total_page) {//判断是否为最后一页
                     shoppingCartRecyclerview.setIsnomore(true);//底部显示没有更多数据
                 }
                 request_shopcarList.page_no = page_no;

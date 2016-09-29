@@ -44,11 +44,12 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_order_exception_relative">
 
-        <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -90,9 +91,20 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activity_order_exception_text_maiJiaXinXi"
                 android:layout_marginLeft="@dimen/distance_shortest"
-                android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:layout_toRightOf="@+id/activity_order_exception_text_gongji"
+                android:textColor="@color/jiage"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/activity_order_exception_text_yuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_exception_text_maiJiaXinXi"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:layout_toRightOf="@+id/activity_order_exception_text_price"
+                android:text="元"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 
@@ -115,7 +127,7 @@
                 android:layout_marginTop="@dimen/distance_normal"
                 android:layout_toRightOf="@+id/gong"
                 android:text="1"
-                android:textColor="@android:color/black"
+                android:textColor="@color/jiage"
                 android:textSize="@dimen/font_normal" />
 
             <TextView
@@ -153,11 +165,22 @@
                 android:padding="@dimen/distance_normal"
                 android:text="异常信息:" />
 
+            <TextView
+                android:id="@+id/activity_order_exception_text_yichangxinxi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_exception_text_yichangxinxitou"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/distance_long"
+                android:background="@color/dise"
+                android:text="暂无异常信息"
+                android:visibility="gone" />
+
             <woodnetwork.hebg3.com.woodnetwork.view.MyListView
                 android:id="@+id/activity_order_exception_listview_yichangxinxi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/activity_order_exception_text_yichangxinxitou"
+                android:layout_below="@+id/activity_order_exception_text_yichangxinxi"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:listSelector="#00000000"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
 
@@ -171,11 +194,21 @@
                 android:padding="@dimen/distance_normal"
                 android:text="异常处理:" />
 
+            <TextView
+                android:id="@+id/activity_order_exception_text_yichangchuli"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_exception_text_yichangchulitou"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/distance_long"
+                android:text="暂无异常处理信息"
+                android:visibility="gone" />
+
             <woodnetwork.hebg3.com.woodnetwork.view.MyListView
                 android:id="@+id/activity_order_exception_listview_yichangchuli"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/activity_order_exception_text_yichangchulitou"
+                android:layout_below="@+id/activity_order_exception_text_yichangchuli"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:listSelector="#00000000"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
         </RelativeLayout>

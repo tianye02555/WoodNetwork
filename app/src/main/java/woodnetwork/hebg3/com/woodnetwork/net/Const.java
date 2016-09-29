@@ -7,7 +7,7 @@ import android.os.Environment;
 public class Const {
 	public static final String APPNAME = "MULIANWANG";
 
-//	public static final String AUTHORITY = "192.168.2.159:8080/wood/dev/wood/v1";
+//	public static final String AUTHORITY = "192.168.2.135:8006/wood/dev/wood/v1";
 	//云
 	public static final String AUTHORITY = "192.168.2.12:8080/wood/dev/wood/v1";
 	//图片前缀

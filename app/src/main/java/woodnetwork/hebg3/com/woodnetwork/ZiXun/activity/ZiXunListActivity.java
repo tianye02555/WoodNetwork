@@ -153,7 +153,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
             @Override
             public void onLoadMore() {
                 page_no++;
-                if (page_no >= articleList.total_page) {//判断是否为最后一页
+                if (page_no > articleList.total_page) {//判断是否为最后一页
                     recyclerView.setIsnomore(true);//底部显示没有更多数据
                 }
                 request_article_list.page_no = page_no;

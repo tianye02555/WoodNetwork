@@ -49,7 +49,7 @@ public class ZiXunListAdapter extends RecyclerView.Adapter<ZiXunListAdapter.View
         holder.newName.setText(articleList.get(position).title);
         holder.newFrom.setText(articleList.get(position).author);
         holder.newDate.setText( articleList.get(position).time);
-        holder.imag.setImageURI(Uri.parse(Const.PICTURE+articleList.get(position).img));
+        holder.imag.setImageURI(Uri.parse(Const.PICTURE_LUNBOTU+articleList.get(position).img));
     }
 
     @Override
@@ -77,7 +77,7 @@ public class ZiXunListAdapter extends RecyclerView.Adapter<ZiXunListAdapter.View
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ZiXunXiangQingActivity.class);
-                    intent.putExtra("url", articleList.get(getAdapterPosition()).url);
+                    intent.putExtra("url", articleList.get(getAdapterPosition()-1).url);
                     context.startActivity(intent);
                 }
             });

@@ -152,15 +152,15 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                     return;
                 }
                 int times;//存放文件的循环次数
-                if(addAdapter.getList().size()<4){
-                    times=addAdapter.getList().size()-1;
-                }else{
-                    times=4;
+                if (addAdapter.getList().size() < 4) {
+                    times = addAdapter.getList().size() - 1;
+                } else {
+                    times = 4;
                 }
-            for(int i=0;i<times;i++){
-                File file=new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
-                files.put("image",file);
-            }
+                for (int i = 0; i < times; i++) {
+                    File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
+                    files.put("image", file);
+                }
                 if (null != getIntent()) {
                     if ("1".equals(getIntent().getStringExtra("flag"))) {
                         //发货接口
@@ -186,7 +186,11 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
     public void showOrderInfo() {
         text_dinDanBianHao.setText("订单编号：" + id);
         text_date.setText("下单日期：" + creat_time);
-        text_maiJiaXinXi.setText("卖家信息：" + seller);
+        if("1".equals(getIntent().getStringExtra("flag"))){
+            text_maiJiaXinXi.setText("买家信息：" + seller);
+        }else{
+            text_maiJiaXinXi.setText("卖家信息：" + seller);
+        }
         text_price.setText(total_price);
         text_jian.setText(number);
     }

@@ -13,7 +13,7 @@
         android:name=".WoodNetworkApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".sysfunction.activity.LoginActivity"></activity>

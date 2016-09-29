@@ -1,6 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter;
 
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderSellerInfo;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.OrderBuyerInfoContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.model.OrderBuyerInfoModel;
 import woodnetwork.hebg3.com.woodnetwork.Interface.OnServiceBaceInterface;
@@ -49,7 +50,7 @@ public class OrderBuyerInfoPresenter implements OrderBuyerInfoContract.OrderBuye
             @Override
             public void onSuccess(Object object) {
                 orderBuyerInfoView.closeProgress();
-                orderBuyerInfoView.showOrderInfo((OrderBuyerInfo) ((ResponseBody)object).obj);
+                orderBuyerInfoView.showSellerOrderInfo((OrderSellerInfo) ((ResponseBody)object).obj);
             }
 
             @Override

@@ -1,6 +1,6 @@
 <resources>
     <string name="qingshaohou">请稍后……</string>
-    <string name="app_name">WoodNetwork</string>
+    <string name="app_name">木联网</string>
     <string name="login">登录</string>
     <string name="zhanghu">账户:</string>
     <string name="mima">密码:</string>
@@ -101,12 +101,13 @@
     <string name="yifukuan">已付款</string>
     <string name="daifahuo">待发货</string>
     <string name="yichangdindan">异常订单</string>
-    <string name="gongji">合计￥</string>
+    <string name="gongji">合计</string>
     <string name="jianshangping">件商品</string>
     <string name="gong">共</string>
     <string name="shenbaoyichang">异常申报</string>
     <string name="guanbidingdan">关闭订单</string>
     <string name="querenshouhuo">确认收货</string>
+    <string name="querenfahuo">确认发货</string>
     <string name="shouhuotupian">收货图片：</string>
     <string name="fahuotupian">发货图片：</string>
     <string name="yichangdingdankuohao">（异常订单）</string>

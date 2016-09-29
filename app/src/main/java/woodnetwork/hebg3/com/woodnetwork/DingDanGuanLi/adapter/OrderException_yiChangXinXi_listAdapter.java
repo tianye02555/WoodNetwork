@@ -57,7 +57,7 @@ public class OrderException_yiChangXinXi_listAdapter extends BaseAdapter {
             holder = (ViewHodler) contentView.getTag();
         }
         holder.content.setText(list.get(position).content);
-        adapter=new OrderException_yiChangXinXi_gridAdapter(context,list.get(position).imgs);
+        adapter=new OrderException_yiChangXinXi_gridAdapter(context,list.get(position).imgs,list.get(position).type);
         holder.gridView.setAdapter(adapter);
         return contentView;
     }

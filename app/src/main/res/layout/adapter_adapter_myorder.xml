@@ -35,7 +35,6 @@
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/adapter_myorder_image_img"
-        android:text="优质辐射木"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -43,12 +42,22 @@
         android:id="@+id/adapter_myorder_text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_myorder_line1"
+        android:layout_toLeftOf="@+id/adapter_myorder_text_yuan"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:textColor="@color/jiage"
+        android:textSize="@dimen/font_normal" />
+    <TextView
+        android:id="@+id/adapter_myorder_text_yuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/adapter_myorder_line1"
-        android:layout_marginLeft="@dimen/distance_normal"
+
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="1500元"
+        android:text="元"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -61,7 +70,6 @@
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/adapter_myorder_image_img"
-        android:text="公司"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -70,12 +78,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/adapter_myorder_image_img"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/adapter_myorder_text_name"
         android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_myorder_text_fang"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:textColor="@color/jiage"
+        android:textSize="@dimen/font_normal" />
+    <TextView
+        android:id="@+id/adapter_myorder_text_fang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/adapter_myorder_image_img"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_myorder_text_name"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="500方"
+        android:text="方"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 

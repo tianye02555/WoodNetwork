@@ -100,7 +100,7 @@ public class MyQuotationActivity extends AppCompatActivity implements MyQuotatio
             @Override
             public void onLoadMore() {
                 page_no++;
-                if (page_no >= quotationList.total_page) {//判断是否为最后一页
+                if (page_no > quotationList.total_page) {//判断是否为最后一页
                     recyclerview.setIsnomore(true);//底部显示没有更多数据
                 }
                 request_quotationList.page_no = page_no;

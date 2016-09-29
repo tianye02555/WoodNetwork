@@ -175,6 +175,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/distance_longest"
                 android:layout_marginRight="@dimen/distance_longest"
+                android:background="@drawable/button_shape_title"
+                android:textColor="@android:color/white"
                 android:layout_marginTop="@dimen/distance_longest"
                 android:text="@string/xiugaimima" />
         </LinearLayout>

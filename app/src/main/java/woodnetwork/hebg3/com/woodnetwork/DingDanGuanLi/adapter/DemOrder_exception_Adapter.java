@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.DemOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderExceptionActivity;
@@ -56,33 +57,45 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
     @Override
     public void onBindViewHolder(BusnessHolder holder,final int position) {
 
-        holder.text_id.setText(list.get(position).number);
-        holder.text_date.setText(list.get(position).creat_time);
+        holder.text_id.setText("订单编号：" + list.get(position).number);
+        holder.text_date.setText("下单时间：" +list.get(position).creat_time);
         holder.text_jian.setText(String.valueOf(list.size()));
         holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price));
-        if (0 == list.get(position).status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+        int status=list.get(position).status;
+        if (0 == status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             holder.text_daiShouHuo.setText("待付款");
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
-        } else if (1 == list.get(position).status) {
+            holder.btn_guanBiDingDan.setVisibility(View.VISIBLE);
+        } else if (1 == status) {
             holder.text_daiShouHuo.setText("已付款");
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        } else if (2 == list.get(position).status) {
+            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+        } else if (2 == status) {
             holder.text_daiShouHuo.setText("已发货");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        } else if (3 == list.get(position).status) {
+            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
+        } else if (3 == status) {
             holder.text_daiShouHuo.setText("已到货");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        } else if (4 == list.get(position).status) {
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
+        } else if (4 == status) {
             holder.text_daiShouHuo.setText("订单取消");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
+        }else{
+            holder.btn_guanBiDingDan.setVisibility(View.VISIBLE);
+            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
         }
         holder.btn_queRenDingDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MyOrderActivity) context).orderReceive(position);
+                ((DemOrderActivity) context).orderReceive(position);
 
             }
         });
@@ -92,6 +105,10 @@ public class DemOrder_exception_Adapter extends RecyclerView.Adapter<DemOrder_ex
                 Intent intent = new Intent(context, OrderExceptionActivity.class);
                 intent.putExtra("seller", list.get(position).seller);
                 intent.putExtra("number", String.valueOf(list.size()));
+                intent.putExtra("oid",list.get(position).id);
+                intent.putExtra("id", list.get(position).number);
+                intent.putExtra("creat_time", list.get(position).creat_time);
+                intent.putExtra("total_price", String.valueOf(list.get(position).total_price));
                 context.startActivity(intent);
 
             }

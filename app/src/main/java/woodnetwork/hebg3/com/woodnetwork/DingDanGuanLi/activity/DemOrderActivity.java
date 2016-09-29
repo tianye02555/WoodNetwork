@@ -203,7 +203,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                                                 page_no++;
                                                 switch (nowPosition) {
                                                     case 0://全部订单
-                                                        if (page_no >= ((OrderBuyerDemList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerDemList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_order_buyer_dem_list.page_no = page_no;
@@ -211,7 +211,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                                                         presenter.getAllDemOrderData(myRequestInfo, 2);
                                                         break;
                                                     case 1://待付款订单
-                                                        if (page_no >= ((OrderBuyerDemFilterList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerDemFilterList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_order_buyer_dem_filter_list.page_no = page_no;
@@ -220,7 +220,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                                                         presenter.getorderBuyerDemFilterListData(myRequestInfo, 2);
                                                         break;
                                                     case 2://已发货订单
-                                                        if (page_no >= ((OrderBuyerDemPayList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerDemPayList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_orderBuyerDemPayList.page_no = page_no;
@@ -228,7 +228,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                                                         presenter.getOrderBuyerDemPaidListData(myRequestInfo, 2);
                                                         break;
                                                     case 3://异常订单
-                                                        if (page_no >= ((OrderBuyerDemExceptionList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerDemExceptionList) (DemOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_order_buyer_dem_exception_list.page_no = page_no;
@@ -422,9 +422,10 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
             case 0://全部订单
                 list_all=adapter.getList();
                 intent.putExtra("id",list_all.get(position).number);
+                intent.putExtra("oid", list_all.get(position).id);
                 intent.putExtra("creat_time",list_all.get(position).creat_time);
                 intent.putExtra("seller",list_all.get(position).seller);
-                intent.putExtra("total_price",list_all.get(position).total_price);
+                intent.putExtra("total_price",String.valueOf(list_all.get(position).total_price));
                 intent.putExtra("number",String.valueOf(list_all.get(position).products.size()));
                 break;
             case 2://已收货订单
@@ -432,7 +433,8 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 intent.putExtra("id",list_pay.get(position).number);
                 intent.putExtra("creat_time",list_pay.get(position).creat_time);
                 intent.putExtra("seller",list_pay.get(position).seller);
-                intent.putExtra("total_price",list_pay.get(position).total_price);
+                intent.putExtra("oid", list_pay.get(position).id);
+                intent.putExtra("total_price",String.valueOf(list_pay.get(position).total_price));
                 intent.putExtra("number",String.valueOf(list_pay.get(position).products.size()));
                 break;
             case 3://异常订单
@@ -440,6 +442,7 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
                 intent.putExtra("id",list_Exception.get(position).number);
                 intent.putExtra("creat_time",list_Exception.get(position).creat_time);
                 intent.putExtra("seller",list_Exception.get(position).seller);
+                intent.putExtra("oid", list_Exception.get(position).id);
                 intent.putExtra("total_price",list_Exception.get(position).total_price);
                 intent.putExtra("number",String.valueOf(list_Exception.get(position).products.size()));
                 break;

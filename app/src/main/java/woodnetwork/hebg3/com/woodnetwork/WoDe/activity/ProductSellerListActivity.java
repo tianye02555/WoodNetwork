@@ -96,7 +96,7 @@ public class ProductSellerListActivity extends AppCompatActivity implements Prod
             @Override
             public void onLoadMore() {
                 page_no++;
-                if (page_no >= productSellerList.total_page) {//判断是否为最后一页
+                if (page_no > productSellerList.total_page) {//判断是否为最后一页
                     recyclerview.setIsnomore(true);//底部显示没有更多数据
                 }
                 request_productSellerList.page_no = page_no;

@@ -113,11 +113,12 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
 
         if (null != getIntent()) {
             pid = getIntent().getStringExtra("pid");
-            if (!getIntent().getBooleanExtra("isShowButton", true)) {
+            if (!getIntent().getBooleanExtra("isShowButton", true)) {//卖家查看商品详情
                 buy.setVisibility(View.GONE);
                 addToShoppingCart.setVisibility(View.GONE);
                 line.setVisibility(View.GONE);
                 imageTitleRight.setVisibility(View.GONE);
+                state.setVisibility(View.GONE);
             }
         }
 
@@ -148,7 +149,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
                 } else {
                     kind.setText("产品类型： 期货");
                 }
-                state.setText("卖        家：" + productSellerInfo.seller);
+//                state.setText("卖        家：" + productSellerInfo.seller);
                 String[] picture = new String[productSellerInfo.pimg.size()];
                 for (int i = 0; i < productSellerInfo.pimg.size(); i++) {
                     picture[i] = Const.PICTURE + productSellerInfo.pimg.get(i);

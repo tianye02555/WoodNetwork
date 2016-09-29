@@ -66,8 +66,7 @@
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:layout_toRightOf="@+id/activity_order_exceptionadd_text_gongji"
-                android:text="1500元"
-                android:textColor="@android:color/black"
+                android:textColor="@color/jiage"
                 android:textSize="@dimen/font_normal" />
 
             <TextView
@@ -88,8 +87,7 @@
                 android:layout_below="@+id/activity_order_exceptionadd_text_maiJiaXinXi"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:layout_toRightOf="@+id/gong"
-                android:text="1"
-                android:textColor="@android:color/black"
+                android:textColor="@color/jiage"
                 android:textSize="@dimen/font_normal" />
 
             <TextView
@@ -177,6 +175,8 @@
         android:text="@string/tijiao"
         android:layout_marginLeft="@dimen/distance_longest"
         android:layout_marginRight="@dimen/distance_longest"
+        android:background="@drawable/button_shape_title"
+        android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/distance_longest"
         android:layout_marginBottom="@dimen/distance_normal"/>

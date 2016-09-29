@@ -57,14 +57,15 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderBuye
     Button btn_queRenShouHuo;
     @Bind(R.id.adapter_order_details_btn_guanbidingdan)
     Button btn_yiChangShenBao;
-private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
+    private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     private MyRequestInfo myRequestInfo;
     private OrderDetailsAdapter adapter;
     private OrderBuyerInfo orderBuyerInfo;
     private OrderSellerInfo orderSellerInfo;
     private SellerOrderDetailsAdapter adapter_seller;
-    private String oid="";
-    private String flag="";//判断s
+    private String oid = "";
+    private String flag = "";//判断s
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,44 +74,43 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
         textTitle.setText("订单详情");
         imageTitleRight.setVisibility(View.GONE);
 
-        if(null!=getIntent()){
-            oid=getIntent().getStringExtra("oid");
-            flag=getIntent().getStringExtra("flag");
-            if("1".equals(flag)){
+        if (null != getIntent()) {
+            oid = getIntent().getStringExtra("oid");
+            flag = getIntent().getStringExtra("flag");
+            if ("1".equals(flag)) {
                 btn_queRenShouHuo.setText("发货");
             }
         }
 
+        new OrderBuyerInfoPresenter(this);
         SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
-        Request_orderBuyInfo request_orderBuyInfo=new Request_orderBuyInfo();
-        request_orderBuyInfo.oid=oid;
+        Request_orderBuyInfo request_orderBuyInfo = new Request_orderBuyInfo();
+        request_orderBuyInfo.oid = oid;
 
         myRequestInfo = new MyRequestInfo();
-        myRequestInfo.req=request_orderBuyInfo;
+        myRequestInfo.req = request_orderBuyInfo;
         myRequestInfo.req_meta = request_getAttribute;
-
-        new OrderBuyerInfoPresenter(this);
-
-        presenter.getOrderData(myRequestInfo);
+        if ("1".equals(flag)) {
+            presenter.getSellerOrderData(myRequestInfo);
+        } else {
+            presenter.getOrderData(myRequestInfo);
+        }
     }
 
     @Override
     public void showOrderInfo(OrderBuyerInfo orderBuyerInfo) {
-        this.orderBuyerInfo=orderBuyerInfo;
-
-            text_maiJia.setText("卖家信息:"+orderBuyerInfo.seller);
-
-
+        this.orderBuyerInfo = orderBuyerInfo;
+        text_maiJia.setText("卖家信息：" + orderBuyerInfo.seller);
         text_shouHuoDiZhi.setText(orderBuyerInfo.receive_area);
         text_faHuoDiZhi.setText(orderBuyerInfo.delivery_area);
-                text_dingDanHao.setText(orderBuyerInfo.number);
+        text_dingDanHao.setText(orderBuyerInfo.number);
         text_date.setText(orderBuyerInfo.creat_time);
         text_price.setText(String.valueOf(orderBuyerInfo.total_price));
-                text_jian.setText(String.valueOf(orderBuyerInfo.products.size()));
-        switch (orderBuyerInfo.status){//0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+        text_jian.setText(String.valueOf(orderBuyerInfo.products.size()));
+        switch (orderBuyerInfo.status) {//0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             case 0:
                 text_dingDanZhuangTai.setText("待付款");
                 btn_queRenShouHuo.setVisibility(View.GONE);
@@ -124,6 +124,7 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 break;
             case 3:
                 text_dingDanZhuangTai.setText("已到货");
+                btn_queRenShouHuo.setVisibility(View.GONE);
                 break;
             case 4:
                 text_dingDanZhuangTai.setText("订单取消");
@@ -131,16 +132,17 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 btn_yiChangShenBao.setVisibility(View.GONE);
                 break;
         }
-        adapter=new OrderDetailsAdapter(this,orderBuyerInfo.products);
+        adapter = new OrderDetailsAdapter(this, orderBuyerInfo.products);
         listView.setAdapter(adapter);
 
 
     }
+
     @Override
     public void showSellerOrderInfo(OrderSellerInfo orderSellerInfo) {
-        this.orderSellerInfo=orderSellerInfo;
+        this.orderSellerInfo = orderSellerInfo;
 
-            text_maiJia.setText("买家信息:"+orderSellerInfo.seller);
+        text_maiJia.setText("买家信息：" + orderSellerInfo.seller);
 
 
         text_shouHuoDiZhi.setText(orderSellerInfo.receive_area);
@@ -149,11 +151,11 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
         text_date.setText(orderSellerInfo.creat_time);
         text_price.setText(String.valueOf(orderSellerInfo.total_price));
         text_jian.setText(String.valueOf(orderSellerInfo.products.size()));
-        switch (orderSellerInfo.status){//0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+        switch (orderSellerInfo.status) {//0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             case 0:
                 text_dingDanZhuangTai.setText("待付款");
                 btn_queRenShouHuo.setVisibility(View.GONE);
-                        btn_yiChangShenBao.setVisibility(View.GONE);
+                btn_yiChangShenBao.setVisibility(View.GONE);
                 break;
             case 1:
                 text_dingDanZhuangTai.setText("已付款");
@@ -170,7 +172,7 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 btn_yiChangShenBao.setVisibility(View.GONE);
                 break;
         }
-        adapter_seller=new SellerOrderDetailsAdapter(this,orderSellerInfo.products);
+        adapter_seller = new SellerOrderDetailsAdapter(this, orderSellerInfo.products);
         listView.setAdapter(adapter);
 
 
@@ -210,38 +212,38 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
                 finish();
                 break;
             case R.id.adapter_order_details_btn_querenshouhuo://确认收货
-                Intent intent_receive =new Intent(OrderDetailsActivity.this,OrderReceiveActivity.class);
-                if("1".equals(flag)){
-                    intent_receive.putExtra("id",this.orderSellerInfo.number);
-                    intent_receive.putExtra("oid",oid);
-                    intent_receive.putExtra("creat_time",this.orderSellerInfo.creat_time);
-                    intent_receive.putExtra("seller",this.orderSellerInfo.seller);
-                    intent_receive.putExtra("total_price",this.orderSellerInfo.total_price);
-                    intent_receive.putExtra("number",String.valueOf(this.orderSellerInfo.products.size()));
-                    intent_receive.putExtra("flag","1");
-                }else{
-                    intent_receive.putExtra("oid",oid);
-                    intent_receive.putExtra("id",this.orderBuyerInfo.number);
-                    intent_receive.putExtra("creat_time",this.orderBuyerInfo.creat_time);
-                    intent_receive.putExtra("seller",this.orderBuyerInfo.seller);
-                    intent_receive.putExtra("total_price",String.valueOf(this.orderBuyerInfo.total_price));
-                    intent_receive.putExtra("number",String.valueOf(this.orderBuyerInfo.products.size()));
+                Intent intent_receive = new Intent(OrderDetailsActivity.this, OrderReceiveActivity.class);
+                if ("1".equals(flag)) {
+                    intent_receive.putExtra("id", this.orderSellerInfo.number);
+                    intent_receive.putExtra("oid", oid);
+                    intent_receive.putExtra("creat_time", this.orderSellerInfo.creat_time);
+                    intent_receive.putExtra("seller", this.orderSellerInfo.seller);
+                    intent_receive.putExtra("total_price", this.orderSellerInfo.total_price);
+                    intent_receive.putExtra("number", String.valueOf(this.orderSellerInfo.products.size()));
+                    intent_receive.putExtra("flag", "1");
+                } else {
+                    intent_receive.putExtra("oid", oid);
+                    intent_receive.putExtra("id", this.orderBuyerInfo.number);
+                    intent_receive.putExtra("creat_time", this.orderBuyerInfo.creat_time);
+                    intent_receive.putExtra("seller", this.orderBuyerInfo.seller);
+                    intent_receive.putExtra("total_price", String.valueOf(this.orderBuyerInfo.total_price));
+                    intent_receive.putExtra("number", String.valueOf(this.orderBuyerInfo.products.size()));
                 }
-                startActivityForResult(intent_receive,0);
+                startActivityForResult(intent_receive, 0);
                 break;
             case R.id.adapter_order_details_btn_guanbidingdan://异常申报
 
-                Intent intent_exception =new Intent(OrderDetailsActivity.this,OrderExceptionActivity.class);
-                if("1".equals(flag)){
+                Intent intent_exception = new Intent(OrderDetailsActivity.this, OrderExceptionActivity.class);
+                if ("1".equals(flag)) {
                     intent_exception.putExtra("seller", orderSellerInfo.seller);
                     intent_exception.putExtra("oid", oid);
                     intent_exception.putExtra("number", String.valueOf(orderSellerInfo.products.size()));
-                }else {
+                } else {
                     intent_exception.putExtra("seller", orderBuyerInfo.seller);
                     intent_exception.putExtra("oid", oid);
                     intent_exception.putExtra("number", String.valueOf(orderBuyerInfo.products.size()));
                 }
-                startActivityForResult(intent_exception,0);
+                startActivityForResult(intent_exception, 0);
                 break;
         }
     }
@@ -249,7 +251,7 @@ private OrderBuyerInfoContract.OrderBuyerInfoPresenterInterface presenter;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK){
+        if (resultCode == RESULT_OK) {
             finish();
         }
 

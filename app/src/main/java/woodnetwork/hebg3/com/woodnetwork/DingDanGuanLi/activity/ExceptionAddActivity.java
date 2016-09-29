@@ -3,6 +3,7 @@ package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -82,32 +83,43 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     private List<Bitmap> list;
     private final int TAKE_PHOTO = 1;// 拍照
     private final int ALBUM = 2;// 相册
-    private final int CROP = 3;// 剪切
-    private String m_strAvatar;
-    private String flag="";
+    private String seller = "";
+    private String number = "";
+    private String flag = "";
+    private String oid = "";
+    private String title_price = "";
+    private String creatTime = "";
+    private String id;
     private ExceptionAddContract.ExceptionAddPresenterInterface presenter;
-    private ExceptionList exceptionList;
-    private HashMap<String, File>  files = new HashMap<String, File>();;
+    private SharePreferencesUtils sharePreferencesUtils;
+    private HashMap<String, File> files = new HashMap<String, File>();
+    ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exception_add);
         ButterKnife.bind(this);
         new ExceptionAddPresenter(this);
-
+        sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         textTitle.setText("添加订单异常");
         imageTitleRight.setVisibility(View.GONE);
-        if(null!=getIntent().getSerializableExtra("ExceptionList")){
-            exceptionList = (ExceptionList) getIntent().getSerializableExtra("ExceptionList");
-            flag=getIntent().getStringExtra("flag");
+        if (null != getIntent()) {
+            seller = getIntent().getStringExtra("seller");
+            number = getIntent().getStringExtra("number");
+            flag = getIntent().getStringExtra("flag");
+            oid = getIntent().getStringExtra("oid");
+            title_price = getIntent().getStringExtra("total_price");
+            creatTime = getIntent().getStringExtra("creat_time");
+            id = getIntent().getStringExtra("id");
         }
-        showOrderExceptionInfo(exceptionList);
         list = new ArrayList<Bitmap>();
         list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
-        addAdapter = new UploadPictureAdapter(this, list,0);
+        addAdapter = new UploadPictureAdapter(this, list, 0);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 2));
         recyclerview.setAdapter(addAdapter);
+        showOrderExceptionInfo();
     }
 
     @OnClick({R.id.imge_title_left, R.id.activity_order_exceptionadd_btn_tijiao})
@@ -119,13 +131,26 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
             case R.id.activity_order_exceptionadd_btn_tijiao:
                 HashMap<String, String> params = new HashMap<String, String>();
 
-                params.put("content", "发货数量不符");//edit_yiChangYuanYin.getText().toString().trim();
-                params.put("oid", "1234");//orderBuyerInfo.id
-//                SharePreferencesUtils sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(ExceptionAddActivity.this);
-//                sharePreferencesUtils.getData("userid","null");
-                params.put("sid", "1234");
+                params.put("content", edit_yiChangYuanYin.getText().toString().trim());
+                params.put("oid", oid);
+                if (!"".equals((String) sharePreferencesUtils.getData("userid", ""))) {
+                    params.put("sid", (String) sharePreferencesUtils.getData("userid", ""));
+                } else {
+                    showMessage("身份信息失效，请重新登录");
+                    return;
+                }
+                int times;//存放文件的循环次数
+                if (addAdapter.getList().size() < 4) {
+                    times = addAdapter.getList().size() - 1;
+                } else {
+                    times = 4;
+                }
+                for (int i = 0; i < times; i++) {
+                    File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
+                    files.put("image", file);
+                }
 
-                presenter.submitExceptionOrder(ExceptionAddActivity.this,params,files);
+                presenter.submitExceptionOrder(ExceptionAddActivity.this, params, files);
                 break;
         }
     }
@@ -137,17 +162,17 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     }
 
     @Override
-    public void showOrderExceptionInfo(ExceptionList exceptionList) {
-        text_dinDanBianHao.setText("订单编号：" + exceptionList.number);
-        text_date.setText("下单日期：" + exceptionList.creat_time);
-        if("1".equals(flag)){
-            text_maiJiaXinXi.setText("买家信息：" + exceptionList.seller);
-        }else{
-            text_maiJiaXinXi.setText("卖家信息：" + exceptionList.seller);
+    public void showOrderExceptionInfo() {
+        text_dinDanBianHao.setText("订单编号：" + id);
+        text_date.setText("下单日期：" + creatTime);
+        if ("1".equals(flag)) {
+            text_maiJiaXinXi.setText("买家信息：" + seller);
+        } else {
+            text_maiJiaXinXi.setText("卖家信息：" + seller);
         }
 
-        text_price.setText(String.valueOf(exceptionList.total_price));
-        text_jian.setText(exceptionList.shop_number);
+        text_price.setText(String.valueOf(title_price));
+        text_jian.setText(number);
     }
 
     @Override
@@ -285,90 +310,43 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                                 "获取照片失败");
                         return;
                     }
-                    startPhotoZoom(Uri.fromFile(file));
-                    break;
-                case CROP:// 裁剪圖片
-                    if (data != null) {
-                        Bundle extras = data.getExtras();
-                        if (extras != null) {
-                            Bitmap photo = extras.getParcelable("data");
-                            m_strAvatar = saveBitmapToFile(photo);
-                            list = addAdapter.getList();
-                            list.remove(list.size() - 1);
-                            list.add(photo);
-                            list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
-                            addAdapter.setList(list);
-                            addAdapter.notifyItemRangeChanged(list.size()-2,list.size()-1);
-                        }
+                    list = addAdapter.getList();
+                    list.remove(list.size() - 1);
+                    list.add(CommonUtils.getSmallAndRightBitmap(file.getAbsolutePath()));
+                    if (list.size() < 4) {//限制上传4张图片
+                        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian));
                     }
-                    if (!TextUtils.isEmpty(m_strAvatar)) {
-                        File f = new File(m_strAvatar);
-                        files.put("image", f);
-                    }
+                    addAdapter.setList(list);
+                    addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);
                     break;
                 case ALBUM:
                     if (data != null) {
-                        startPhotoZoom(data.getData());
+                        try {
+                            Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                            cursor.moveToFirst();
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            String picturePath = cursor.getString(columnIndex);  //获取照片路径
+                            cursor.close();
+
+                            list = addAdapter.getList();
+                            list.remove(list.size() - 1);
+                            list.add(CommonUtils.getSmallAndRightBitmap(picturePath));
+                            if (list.size() < 4) {//限制上传4张图片
+                                Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian);
+                                list.add(photoDefault);
+                            }
+                            addAdapter.setList(list);
+                            addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);
+                        } catch (Exception e) {
+                            // TODO Auto-generatedcatch block
+                            e.printStackTrace();
+                        }
                     }
                     break;
-
             }
         }
-    }
-
-    private Bitmap getBitmapFromUri(Uri uri) {
-        try {
-            // 读取uri所在的图片
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                    this.getContentResolver(), uri);
-            return bitmap;
-        } catch (Exception e) {
-            Log.e("[Android]", e.getMessage());
-            Log.e("[Android]", "目录为：" + uri);
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * 裁剪图片方法实现
-     *
-     * @param uri
-     */
-    public void startPhotoZoom(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        // 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 200);
-        intent.putExtra("outputY", 200);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, CROP);
-    }
-
-    /**
-     * 保存bitmap到文件
-     *
-     * @param bmp 要保存的bitmap
-     * @return String 文件保存的路径
-     */
-    private String saveBitmapToFile(Bitmap bmp) {
-        String filePath = Const.PICTURE_PATH + System.currentTimeMillis()
-                + ".png";
-        File file = new File(filePath);
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            CommonUtils.log(e);
-            filePath = "";
-        }
-        return filePath;
     }
 }

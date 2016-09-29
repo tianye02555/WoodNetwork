@@ -63,7 +63,7 @@ public class OrderBuyerInfoModel implements OrderBuyerInfoModelInterface {
 
     @Override
     public void getSellerOrderData(Object object, OnServiceBaceInterface onServiceBaceInterface) {
-        this.onServiceBaceInterface = onServiceBaceInterface;
+        this.onServiceBaceInterface_getSellerOrderData = onServiceBaceInterface;
         ClientParams params = new ClientParams();
         params.http_method = ClientParams.HTTP_GET;
         params.getMethod = ServiceInterfaceCont.ORDERSELLERINFO;

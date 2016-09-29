@@ -51,7 +51,7 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
     @Override
     public BusnessHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new BusnessHolder(LayoutInflater.from(context).inflate(R.layout.adapter_myorder, parent, false));
+        return new BusnessHolder(LayoutInflater.from(context).inflate(R.layout.adapter_seller_myorder, parent, false));
     }
 
     @Override
@@ -64,27 +64,42 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
 
         adapter=new SellerOrder_filterAdapterItem_Adapter(context,list.get(position).products,list.get(position).buyer);
         holder.listView.setAdapter(adapter);
-        if (0 == list.get(position).status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
+        int status=list.get(position).status;
+        int appeal_flag=list.get(position).appeal_flag;
+        if (0 == status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             holder.text_daiShouHuo.setText("待付款");
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
-        } else if (1 == list.get(position).status) {
+            holder.btn_guanBiDingDan.setVisibility(View.VISIBLE);
+        } else if (1 == status) {
             holder.text_daiShouHuo.setText("已付款");
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        } else if (2 == list.get(position).status) {
+            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+        } else if (2 == status) {
             holder.text_daiShouHuo.setText("已发货");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        } else if (3 == list.get(position).status) {
+            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
+        } else if (3 == status) {
             holder.text_daiShouHuo.setText("已到货");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-        } else if (4 == list.get(position).status) {
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
+        } else if (4 == status) {
             holder.text_daiShouHuo.setText("订单取消");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
+        }else{
+            holder.btn_guanBiDingDan.setVisibility(View.VISIBLE);
+            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+            holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
         }
-        if (0 == list.get(position).type) {//0：订单正常；1：订单异常
+        if (0 == appeal_flag) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
+        }else{
+            holder.text_yiChang.setVisibility(View.VISIBLE);
         }
         holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,9 +119,13 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderExceptionActivity.class);
+                intent.putExtra("flag","1");
                 intent.putExtra("seller", list.get(position).buyer);
                 intent.putExtra("number", String.valueOf(list.size()));
-                intent.putExtra("flag","1");
+                intent.putExtra("oid",list.get(position).id);
+                intent.putExtra("id", list.get(position).number);
+                intent.putExtra("creat_time", list.get(position).creat_time);
+                intent.putExtra("total_price", String.valueOf(list.get(position).total_price));
                 context.startActivity(intent);
 
             }

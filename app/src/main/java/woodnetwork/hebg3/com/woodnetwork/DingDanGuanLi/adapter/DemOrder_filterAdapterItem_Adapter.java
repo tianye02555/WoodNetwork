@@ -65,8 +65,8 @@ public class DemOrder_filterAdapterItem_Adapter extends BaseAdapter {
         }
         holder.name.setText(list.get(position).name);
         holder.company.setText(this.seller);
-        holder.price.setText(String.valueOf(list.get(position).price)+"元");
-        holder.number.setText(String.valueOf(list.get(position).number)+"方");
+        holder.price.setText(String.valueOf(list.get(position).price));
+        holder.number.setText(String.valueOf(list.get(position).number));
         return contentView;
     }
 

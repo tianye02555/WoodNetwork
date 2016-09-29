@@ -146,7 +146,7 @@
         android:layout_below="@+id/adapter_myorder_line"
         android:layout_toLeftOf="@+id/lin_button"
         android:background="@drawable/button_shape_title"
-        android:text="@string/querenshouhuo"
+        android:text="@string/querenfahuo"
         android:textColor="@android:color/white" />
 
     <Button

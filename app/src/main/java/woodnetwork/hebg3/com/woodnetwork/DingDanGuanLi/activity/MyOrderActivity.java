@@ -190,7 +190,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
                                                 page_no++;
                                                 switch (nowPosition) {
                                                     case 0://全部订单
-                                                        if (page_no >= ((OrderBuyerProList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerProList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_orderBuyerProList.page_no = page_no;
@@ -198,7 +198,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
                                                         presenter.getAllMyOrderData(myRequestInfo, 2);
                                                         break;
                                                     case 1://待付款订单
-                                                        if (page_no >= ((OrderBuyerProFilterList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerProFilterList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_orderBuyerProFilterList.page_no = page_no;
@@ -207,7 +207,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
                                                         presenter.getorderBuyerProFilterListData(myRequestInfo, 2);
                                                         break;
                                                     case 2://已付款订单
-                                                        if (page_no >= ((OrderBuyerProPayList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerProPayList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_orderBuyerProPayList.page_no = page_no;
@@ -215,7 +215,7 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
                                                         presenter.getOrderBuyerProPaidListData(myRequestInfo, 2);
                                                         break;
                                                     case 3://异常订单
-                                                        if (page_no >= ((OrderBuyerProExceptionList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderBuyerProExceptionList) (MyOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_orderBuyerProExceptionList.page_no = page_no;
@@ -418,13 +418,13 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
                 intent.putExtra("oid", list_all.get(position).id);
                 intent.putExtra("creat_time", list_all.get(position).creat_time);
                 intent.putExtra("seller", list_all.get(position).seller);
-                intent.putExtra("total_price",String.valueOf(list_pay.get(position).total_price));
+                intent.putExtra("total_price",String.valueOf(list_all.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_all.get(position).products.size()));
                 break;
             case 2://已付款订单
                 list_pay = adapter_pay.getList();
                 intent.putExtra("id", list_pay.get(position).number);
-                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("oid", list_pay.get(position).id);
                 intent.putExtra("creat_time", list_pay.get(position).creat_time);
                 intent.putExtra("seller", list_pay.get(position).seller);
                 intent.putExtra("total_price", String.valueOf(list_pay.get(position).total_price));
@@ -433,10 +433,10 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
             case 3://异常订单
                 list_Exception = adapter_exception.getList();
                 intent.putExtra("id", list_Exception.get(position).number);
-                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("oid", list_Exception.get(position).id);
                 intent.putExtra("creat_time", list_Exception.get(position).creat_time);
                 intent.putExtra("seller", list_Exception.get(position).seller);
-                intent.putExtra("total_price", String.valueOf(list_pay.get(position).total_price));
+                intent.putExtra("total_price", String.valueOf(list_Exception.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_Exception.get(position).products.size()));
                 break;
         }

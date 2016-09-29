@@ -26,7 +26,7 @@ public interface ExceptionAddContract {
         /**
          * 展示异常订单的信息
          */
-        void showOrderExceptionInfo(ExceptionList exceptionList);
+        void showOrderExceptionInfo();
 
         /**
          * 添加异常图片

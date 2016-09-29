@@ -11,10 +11,20 @@
         android:layout_height="match_parent"
         android:src="@drawable/defaultimg" />
 
+
+    <ImageView
+        android:id="@+id/baidi"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+         />
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/adapter_upload_cancel"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
-        fresco:placeholderImage="@drawable/defaultimg" />
+        fresco:placeholderImage="@drawable/deleteimage" />
 </RelativeLayout>

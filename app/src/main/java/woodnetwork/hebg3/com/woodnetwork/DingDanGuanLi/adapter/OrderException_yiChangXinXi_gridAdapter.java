@@ -32,8 +32,10 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
     private Context context;
     private List<String> list;
     String pictureName;
-    public OrderException_yiChangXinXi_gridAdapter(Context context, List<String> list) {
+    private int type;
+    public OrderException_yiChangXinXi_gridAdapter(Context context, List<String> list,int type) {
         this.context = context;
+        this.type=type;
         this.list = list;
     }
 
@@ -66,7 +68,12 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
         } else {
             holder = (ViewHodler) contentView.getTag();
         }
-        holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position)));
+        if(0==type){
+            holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position)));
+        }else{
+            holder.image.setImageURI(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position)));
+        }
+
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

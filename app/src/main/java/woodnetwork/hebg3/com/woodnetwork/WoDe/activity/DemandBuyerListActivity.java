@@ -97,7 +97,7 @@ public class DemandBuyerListActivity extends AppCompatActivity implements DemanB
             @Override
             public void onLoadMore() {
                 page_no++;
-                if (page_no >= demanBuyerList.total_page) {//判断是否为最后一页
+                if (page_no > demanBuyerList.total_page) {//判断是否为最后一页
                     recyclerView.setIsnomore(true);//底部显示没有更多数据
                 }
                 request_demandBuyerList.page_no = page_no;

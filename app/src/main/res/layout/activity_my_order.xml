@@ -12,14 +12,14 @@
         layout="@layout/layout_title"></include>
 
 
-
     <RadioGroup
         android:id="@+id/activity_my_order_radiogroup"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@android:color/white"
+        android:layout_below="@+id/activity_my_order_include"
+        android:background="@color/dise"
         android:orientation="horizontal">
 
         <RadioButton
@@ -29,9 +29,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:textColor="@drawable/selector_color"
-            android:text="@string/quanbudingdan" />
-
+            android:text="@string/quanbudingdan"
+            android:textColor="@drawable/selector_color" />
 
 
         <RadioButton
@@ -41,9 +40,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:textColor="@drawable/selector_color"
-            android:text="@string/daifukuan" />
-
+            android:text="@string/daifukuan"
+            android:textColor="@drawable/selector_color" />
 
 
         <RadioButton
@@ -53,9 +51,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:textColor="@drawable/selector_color"
-            android:text="@string/yifukuan" />
-
+            android:text="@string/yifukuan"
+            android:textColor="@drawable/selector_color" />
 
 
         <RadioButton
@@ -65,9 +62,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:textColor="@drawable/selector_color"
-            android:text="@string/yichangdindan" />
-
+            android:text="@string/yichangdindan"
+            android:textColor="@drawable/selector_color" />
 
 
     </RadioGroup>

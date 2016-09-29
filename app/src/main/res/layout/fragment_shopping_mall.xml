@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/image_title_gouwuche"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/distance_short"
             android:layout_toLeftOf="@+id/image_title_shaixuan"
@@ -36,8 +36,8 @@
 
         <ImageView
             android:id="@+id/image_title_shaixuan"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/distance_short"

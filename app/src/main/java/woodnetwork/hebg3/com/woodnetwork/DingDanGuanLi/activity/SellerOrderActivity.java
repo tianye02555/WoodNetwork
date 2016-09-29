@@ -87,7 +87,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
     /**
      * 第一次不刷新列表，onPause后，再刷新
      */
-    private boolean isFirst=true;
+    private boolean isFirst = true;
     private static Object object;
 
     private MyRequestInfo myRequestInfo;
@@ -135,7 +135,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                         request_order_seller_filter_list = new Request_order_seller_filter_list();
                         request_order_seller_filter_list.page_no = 1;
                         request_order_seller_filter_list.page_size = 10;
-                        request_order_seller_filter_list.order_status = 2;
+                        request_order_seller_filter_list.order_status = 1;
                         myRequestInfo.req = request_order_seller_filter_list;
                         presenter.getSellerFilterOrderData(myRequestInfo, 0);
                         nowPosition = 1;
@@ -157,7 +157,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
 
     @Override
     public void showSellerOrderInfo(Object object) {
-        this.object=object;
+        this.object = object;
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
                                             @Override
@@ -171,7 +171,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                                                         break;
                                                     case 1://待付款订单
                                                         request_order_seller_filter_list.page_no = page_no;
-                                                        request_order_seller_filter_list.order_status = 0;
+                                                        request_order_seller_filter_list.order_status = 1;
                                                         myRequestInfo.req = request_order_seller_filter_list;
                                                         presenter.getSellerFilterOrderData(myRequestInfo, 1);
                                                         break;
@@ -188,7 +188,7 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                                                 page_no++;
                                                 switch (nowPosition) {
                                                     case 0://全部订单
-                                                        if (page_no >= ((OrderSellerList) (SellerOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderSellerList) (SellerOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_order_seller_list.page_no = page_no;
@@ -197,16 +197,16 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                                                         break;
 
                                                     case 1://待发货订单
-                                                        if (page_no >= ((OrderSellerFilterList) (SellerOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderSellerFilterList) (SellerOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_order_seller_filter_list.page_no = page_no;
-                                                        request_order_seller_filter_list.order_status = 2;
+                                                        request_order_seller_filter_list.order_status = 1;
                                                         myRequestInfo.req = request_order_seller_filter_list;
                                                         presenter.getSellerFilterOrderData(myRequestInfo, 2);
                                                         break;
                                                     case 2://异常订单
-                                                        if (page_no >= ((OrderSellerExceptionList) (SellerOrderActivity.object)).total_page) {//判断是否为最后一页
+                                                        if (page_no > ((OrderSellerExceptionList) (SellerOrderActivity.object)).total_page) {//判断是否为最后一页
                                                             recyclerview.setIsnomore(true);//底部显示没有更多数据
                                                         }
                                                         request_order_seller_exception_list.page_no = page_no;
@@ -228,16 +228,16 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                 recyclerview.setLoadingMoreEnabled(false);
             }
             recyclerview.setAdapter(adapter);
-        } else if (object instanceof OrderSellerFilterList) {//0根据status 字段判断是待付款还是待收货
-            if (((OrderSellerFilterList) object).list.get(0).status == 0) {
+        } else if (object instanceof OrderSellerFilterList) {
+
                 adapter_filter_weiFaHuo = new SellerOrder_filter_Adapter(this, ((OrderSellerFilterList) object).list);
-                if (1 == ((OrderSellerList) object).total_page)
+                if (1 == ((OrderSellerFilterList) object).total_page)
 
                 {//如果总页数一共就一页，关闭加载更多功能
                     recyclerview.setLoadingMoreEnabled(false);
                 }
                 recyclerview.setAdapter(adapter_filter_weiFaHuo);
-            }
+
         } else if (object instanceof OrderSellerExceptionList) {
             adapter_exception = new SellerOrder_exception_Adapter(this, ((OrderSellerExceptionList) object).list);
             if (1 == ((OrderSellerExceptionList) object).total_page)
@@ -267,19 +267,19 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                 List<OrderSellerList_listItem> list = adapter.getList();
                 list.get(closePosition).status = 4;
                 adapter.setList(list);
-                adapter.notifyItemChanged(closePosition);
+                adapter.notifyDataSetChanged();
                 break;
             case 1:
                 List<OrderSellerFilterList_listItem> list_filter_weiShouHuo = adapter_filter_weiFaHuo.getList();
                 list_filter_weiShouHuo.get(closePosition).status = 4;
                 adapter_filter_weiFaHuo.setList(list_filter_weiShouHuo);
-                adapter_filter_weiFaHuo.notifyItemChanged(closePosition);
+                adapter_filter_weiFaHuo.notifyDataSetChanged();
                 break;
             case 2:
                 List<OrderSellerExceptionList_listItem> list_exception = adapter_exception.getList();
                 list_exception.get(closePosition).status = 4;
                 adapter_exception.setList(list_exception);
-                adapter_exception.notifyItemChanged(closePosition);
+                adapter_exception.notifyDataSetChanged();
                 break;
         }
     }
@@ -346,39 +346,43 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
 
     @Override
     public void orderDelivery(int position) {
-        Intent intent=new Intent(this,OrderReceiveActivity.class);
+        Intent intent = new Intent(this, OrderReceiveActivity.class);
         switch (nowPosition) {
             case 0://全部订单
-                list_all=adapter.getList();
-                intent.putExtra("id",list_all.get(position).number);
-                intent.putExtra("creat_time",list_all.get(position).creat_time);
-                intent.putExtra("seller",list_all.get(position).buyer);
-                intent.putExtra("total_price",list_all.get(position).total_price);
-                intent.putExtra("number",String.valueOf(list_all.get(position).products.size()));
-                intent.putExtra("flag","1");
+                list_all = adapter.getList();
+                intent.putExtra("id", list_all.get(position).number);
+                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("creat_time", list_all.get(position).creat_time);
+                intent.putExtra("seller", list_all.get(position).buyer);
+                intent.putExtra("total_price", String.valueOf(list_all.get(position).total_price));
+                intent.putExtra("number", String.valueOf(list_all.get(position).products.size()));
+                intent.putExtra("flag", "1");
                 break;
-            case 2://待收货订单
-                list_Filter=adapter_filter_weiFaHuo.getList();
-                intent.putExtra("id",list_Filter.get(position).number);
-                intent.putExtra("creat_time",list_Filter.get(position).creat_time);
-                intent.putExtra("seller",list_Filter.get(position).buyer);
-                intent.putExtra("total_price",list_Filter.get(position).total_price);
-                intent.putExtra("number",String.valueOf(list_Filter.get(position).products.size()));
-                intent.putExtra("flag","1");
+            case 2://待发货订单
+                list_Filter = adapter_filter_weiFaHuo.getList();
+                intent.putExtra("id", list_Filter.get(position).number);
+                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("creat_time", list_Filter.get(position).creat_time);
+                intent.putExtra("seller", list_Filter.get(position).buyer);
+                intent.putExtra("total_price", String.valueOf(list_Filter.get(position).total_price));
+                intent.putExtra("number", String.valueOf(list_Filter.get(position).products.size()));
+                intent.putExtra("flag", "1");
                 break;
             case 3://异常订单
-                list_Exception=adapter_exception.getList();
-                intent.putExtra("id",list_Exception.get(position).number);
-                intent.putExtra("creat_time",list_Exception.get(position).creat_time);
-                intent.putExtra("seller",list_Exception.get(position).buyer);
-                intent.putExtra("total_price",list_Exception.get(position).total_price);
-                intent.putExtra("number",String.valueOf(list_Exception.get(position).products.size()));
-                intent.putExtra("flag","1");
+                list_Exception = adapter_exception.getList();
+                intent.putExtra("id", list_Exception.get(position).number);
+                intent.putExtra("creat_time", list_Exception.get(position).creat_time);
+                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("seller", list_Exception.get(position).buyer);
+                intent.putExtra("total_price", String.valueOf(list_Exception.get(position).total_price));
+                intent.putExtra("number", String.valueOf(list_Exception.get(position).products.size()));
+                intent.putExtra("flag", "1");
                 break;
         }
-        startActivityForResult(intent,0);
+        startActivityForResult(intent, 0);
 
     }
+
     @Override
     public void setPresenter(SellerOrderContract.SellerOrderPresenterInterface presenter) {
         if (null != presenter) {
@@ -405,19 +409,20 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
     public void onClick() {
         finish();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if(!isFirst) {
+        if (!isFirst) {
             switch (nowPosition) {
                 case 0://全部订单
                     request_order_seller_list.page_no = page_no;
                     myRequestInfo.req = request_order_seller_list;
                     presenter.getAllSellerOrderData(myRequestInfo, 1);
                     break;
-                case 1://待付款订单
+                case 1://待发货订单
                     request_order_seller_filter_list.page_no = page_no;
-                    request_order_seller_filter_list.order_status = 0;
+                    request_order_seller_filter_list.order_status = 1;
                     myRequestInfo.req = request_order_seller_filter_list;
                     presenter.getSellerFilterOrderData(myRequestInfo, 1);
                     break;
@@ -434,6 +439,6 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
     @Override
     protected void onPause() {
         super.onPause();
-        isFirst=false;
+        isFirst = false;
     }
 }

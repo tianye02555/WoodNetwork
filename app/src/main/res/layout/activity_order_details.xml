@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/activity_order_details_include"
-        android:background="@color/dise"
-        ></View>
+        android:background="@color/dise"></View>
 
     <TextView
         android:id="@+id/activity_order_details_text_maijiaxinxi"
@@ -26,7 +25,7 @@
         android:layout_below="@+id/activity_order_details_view"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
-        android:text="买家信息:"
+        android:text="买家信息："
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -119,13 +118,25 @@
         android:id="@+id/adapter_order_details_text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/adapter_order_details_listview"
         android:layout_marginLeft="@dimen/distance_shortest"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_yuan"
+        android:textColor="@color/jiage"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_yuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/adapter_order_details_listview"
         android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
+        android:text="元"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -143,6 +154,7 @@
         android:text="@string/jianshangping"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
@@ -157,7 +169,7 @@
         android:layout_below="@+id/adapter_order_details_listview"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toLeftOf="@+id/adapter_order_details_text_jianshangping"
-        android:textColor="@android:color/black"
+        android:textColor="@color/jiage"
         android:textSize="@dimen/font_normal" />
 
     <TextView
@@ -196,24 +208,25 @@
     <Button
         android:id="@+id/adapter_order_details_btn_querenshouhuo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/adapter_order_details_text_dingdanzhuangtai"
+        android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/view1"
-        android:background="@null"
+        android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@drawable/button_shape_title"
         android:text="@string/querenshouhuo"
-        android:textColor="@android:color/holo_blue_bright" />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/adapter_order_details_btn_guanbidingdan"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/adapter_order_details_text_dingdanzhuangtai"
+        android:layout_height="40dp"
         android:layout_below="@+id/view1"
+        android:layout_marginTop="@dimen/distance_normal"
         android:layout_toLeftOf="@+id/adapter_order_details_btn_querenshouhuo"
-        android:background="@null"
+        android:background="@drawable/button_shape_title"
         android:text="@string/shenbaoyichang"
-        android:textColor="@android:color/holo_blue_bright" />
+        android:textColor="@android:color/white" />
 
 
 </RelativeLayout>

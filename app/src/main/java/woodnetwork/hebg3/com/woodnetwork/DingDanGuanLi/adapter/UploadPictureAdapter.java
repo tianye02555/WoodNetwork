@@ -51,8 +51,10 @@ public class UploadPictureAdapter extends RecyclerView.Adapter<UploadPictureAdap
         holder.imag.setImageBitmap(list.get(position));
         if(position+1==list.size()){
             holder.cancle.setVisibility(View.GONE);
+            holder.baiDi.setVisibility(View.GONE);
         }else{
             holder.cancle.setVisibility(View.VISIBLE);
+            holder.baiDi.setVisibility(View.VISIBLE);
         }
     }
 
@@ -66,11 +68,13 @@ public class UploadPictureAdapter extends RecyclerView.Adapter<UploadPictureAdap
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imag;//内容图片
+        private ImageView baiDi;//小叉号的白色底图
         private SimpleDraweeView cancle;//小叉号
         public ViewHolder(View itemView) {
             super(itemView);
             imag = (ImageView) itemView.findViewById(R.id.adapter_upload_image);
             cancle = (SimpleDraweeView) itemView.findViewById(R.id.adapter_upload_cancel);
+            baiDi= (ImageView) itemView.findViewById(R.id.baidi);
             cancle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

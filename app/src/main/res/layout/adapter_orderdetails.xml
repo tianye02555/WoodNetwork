@@ -8,37 +8,61 @@
         android:id="@+id/adapter_order_details_text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/adapter_order_details_image"
         android:layout_alignTop="@+id/adapter_order_details_image"
         android:layout_toLeftOf="@+id/adapter_order_details_text_price"
+        android:layout_toRightOf="@+id/adapter_order_details_image"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_normal"/>
+        android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/adapter_order_details_text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/distance_normal"
         android:layout_alignTop="@+id/adapter_order_details_image"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_yuan"
+        android:textColor="@color/jiage"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_yuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/adapter_order_details_image"
+        android:layout_marginRight="@dimen/distance_normal"
+        android:text="元"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/font_normal"/>
+        android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/adapter_order_details_text_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/adapter_order_details_text_price"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:layout_toLeftOf="@+id/adapter_order_details_text_mi"
+        android:textColor="@color/jiage"
+        android:textSize="@dimen/font_normal" />
+
+    <TextView
+        android:id="@+id/adapter_order_details_text_mi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/adapter_order_details_text_price"
         android:layout_marginRight="@dimen/distance_normal"
-        android:textColor="@android:color/black"
         android:layout_marginTop="@dimen/distance_normal"
-        android:textSize="@dimen/font_normal"/>
+        android:text="m³"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/adapter_order_details_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        fresco:placeholderImage="@drawable/defaultimg"
-        android:layout_margin="@dimen/distance_normal" />
+        android:layout_margin="@dimen/distance_normal"
+        fresco:placeholderImage="@drawable/defaultimg" />
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/adapter_order_details_imag_qihuo"
         android:layout_width="15dp"
@@ -46,10 +70,11 @@
         android:layout_alignRight="@+id/adapter_order_details_image"
         android:layout_alignTop="@+id/adapter_order_details_image"
         fresco:placeholderImage="@drawable/xianhuo"></com.facebook.drawee.view.SimpleDraweeView>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@color/dise"
-    android:layout_below="@+id/adapter_order_details_image"
-    android:layout_marginTop="@dimen/distance_normal"></View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/adapter_order_details_image"
+        android:layout_marginTop="@dimen/distance_normal"
+        android:background="@color/dise"></View>
 </RelativeLayout>

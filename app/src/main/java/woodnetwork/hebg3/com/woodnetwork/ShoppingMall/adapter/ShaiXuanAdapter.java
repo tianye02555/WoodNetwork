@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,6 +19,7 @@ import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_spinnerInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.view.FlowRadioGroup;
+import woodnetwork.hebg3.com.woodnetwork.view.MyGridView;
 
 /**
  * Created by ty on 2016/9/6 0006.
@@ -28,21 +28,32 @@ import woodnetwork.hebg3.com.woodnetwork.view.FlowRadioGroup;
 public class ShaiXuanAdapter extends BaseAdapter {
     private Context context;
     private List<WoodFilterInfo> list;
-    private List<Request_spinnerInfo> shaiXuanList;//筛选最后的值得集合
+    private List<Request_spinnerInfo> shaiXuanList;//筛选中间的值得集合
     private Request_spinnerInfo request_spinnerInfo;//每一项里边的筛选值
+    private List<Request_spinnerInfo> shaiXuanListFinal;//筛选最后的值得集合
 
     public ShaiXuanAdapter(Context context, List<WoodFilterInfo> list) {
         this.context = context;
         this.list = list;
         shaiXuanList = new ArrayList<Request_spinnerInfo>();
-        for (int i = 0; i < list.size(); i++) {
+        shaiXuanListFinal = new ArrayList<Request_spinnerInfo>();
+        for (int i = 0; i < list.size(); i++) {//添加中间请求体
             request_spinnerInfo = new Request_spinnerInfo();
             shaiXuanList.add(request_spinnerInfo);
         }
     }
 
     public List<Request_spinnerInfo> getShaiXuanList() {
-        return shaiXuanList;
+        for (int j = 0; j < shaiXuanList.size(); j++) {//添加最终请求体
+            shaiXuanListFinal.add(shaiXuanList.get(j));
+        }
+        for (int i = 0; i < shaiXuanListFinal.size(); i++) {//去除所选的全部的请求体
+            if ("quanbu".equals(shaiXuanListFinal.get(i).attr_vaule_id)) {
+                shaiXuanListFinal.remove(i);
+                i -= 1;//改变了集合的数量，减一适配remove操作
+            }
+        }
+        return shaiXuanListFinal;
     }
 
     @Override
@@ -75,41 +86,32 @@ public class ShaiXuanAdapter extends BaseAdapter {
             holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    RadioButton radioButton=(RadioButton) radioGroup.findViewById(i);
+                    RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
                     //获取选择的分类类型
                     shaiXuanList.get(position).attr_id = list.get(position).attr_id;
                     shaiXuanList.get(position).attr_vaule_id = (String) radioButton.getTag();
                 }
             });
             RadioButton radioButton = null;
+//            View view=null;
             //根据返回的类型数 动态加载radiobutton
             for (int i = 0; i < list.get(position).value.size(); i++) {
                 //根据xml  获取radiobutton
-                radioButton = (RadioButton) LayoutInflater.from(context).inflate(R.layout.radiobutton, null);
-                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(150,100);
-                layoutParams.setMargins(10,10,10,10);
+                radioButton = new RadioButton(context);
+                RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(
+                        30, RadioGroup.LayoutParams.WRAP_CONTENT);//这里设置radiogroup的宽高
                 radioButton.setLayoutParams(layoutParams);
                 radioButton.setGravity(Gravity.CENTER);
+                radioButton.setButtonDrawable(android.R.color.transparent);//隐藏单选圆形按钮
                 radioButton.setBackgroundResource(R.drawable.selector_shaixuan_drawable);
                 radioButton.setText(list.get(position).value.get(i).value_name);
                 radioButton.setTag(list.get(position).value.get(i).value_id);
-//            radioButton.setId(Integer.parseInt(list.get(position).value.get(i).value_id, 10));
-//            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                    if(b){
-//                        compoundButton.setBackgroundColor(context.getResources().getColor(R.color.title));
-//                    }
-//                }
-//            });
-                holder.radioGroup.addView(radioButton, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                holder.radioGroup.addView(radioButton);
             }
             contentView.setTag(holder);
         } else {
             holder = (ViewHodler) contentView.getTag();
         }
-
-
         holder.textView.setText(list.get(position).name);
         ((RadioButton) holder.radioGroup.getChildAt(0)).setChecked(true);//默认选择第一个
         return contentView;
@@ -118,5 +120,6 @@ public class ShaiXuanAdapter extends BaseAdapter {
     class ViewHodler {
         private FlowRadioGroup radioGroup;
         private TextView textView;
+
     }
 }

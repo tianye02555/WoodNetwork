@@ -85,33 +85,39 @@
     <Button
         android:id="@+id/shopppingmalladapter_btn_buy"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/lin"
         android:layout_marginLeft="@dimen/distance_long"
+        android:layout_marginTop="@dimen/distance_short"
+        android:layout_marginBottom="@dimen/distance_short"
+        android:padding="@dimen/distance_short"
         android:layout_marginRight="@dimen/distance_longest"
-        android:background="@null"
+        android:background="@drawable/button_shape_title"
         android:text="@string/lijigoumai"
-        android:textColor="@android:color/holo_blue_bright"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/font_normal" />
 
     <Button
         android:id="@+id/shopppingmalladapter_btn_shoppingcart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/lin"
+        android:layout_marginTop="@dimen/distance_short"
+        android:layout_marginBottom="@dimen/distance_short"
         android:layout_toLeftOf="@+id/shopppingmalladapter_btn_buy"
-        android:background="@null"
+        android:background="@drawable/button_shape_title"
+        android:padding="@dimen/distance_short"
         android:text="@string/jiarugouwuche"
-        android:textColor="@android:color/holo_blue_bright"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/font_normal" />
 
     <TextView
-        android:id="@+id/shopppingmalladapter_txt_company"
+
+        android:layout_marginBottom="@dimen/distance_normal" android:id="@+id/shopppingmalladapter_txt_company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/shopppingmalladapter_txt_name"
-        android:layout_marginBottom="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toEndOf="@+id/reltivelayout"
         android:layout_toLeftOf="@+id/shopppingmalladapter_txt_stock"

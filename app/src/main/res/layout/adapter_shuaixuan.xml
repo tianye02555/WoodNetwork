@@ -7,11 +7,9 @@
         android:id="@+id/adapter_shaixuan_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dfffs"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal"
         android:layout_margin="@dimen/distance_normal"/>
-
     <woodnetwork.hebg3.com.woodnetwork.view.FlowRadioGroup
         android:id="@+id/adapter_shaixuan_radiogroup"
         android:layout_width="match_parent"
@@ -19,8 +17,6 @@
         android:orientation="horizontal"
         android:layout_below="@+id/adapter_shaixuan_text"
         >
-
     </woodnetwork.hebg3.com.woodnetwork.view.FlowRadioGroup>
-
 
 </RelativeLayout>

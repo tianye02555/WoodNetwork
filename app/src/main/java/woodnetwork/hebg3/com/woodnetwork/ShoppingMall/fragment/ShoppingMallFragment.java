@@ -46,6 +46,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem_attributeItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem_seller;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterAttribute;
+import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterValue;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.ShoppingMallContract;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.ShoppingMallPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
@@ -95,7 +96,8 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
     private List<ProductFilterList_productsItem> list;
     private EditText number;
     private int page_no = 1;
-
+    private List<WoodFilterValue> filterList=new ArrayList<WoodFilterValue>();
+    private boolean chongZhi=true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -203,6 +205,12 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
     @Override
     public void showAttributeFilterListInfo(WoodFilterAttribute woodFilterAttribute) {
+        WoodFilterValue woodFilterValue=new WoodFilterValue();
+        woodFilterValue.value_id="quanbu";
+        woodFilterValue.value_name="全部";
+        for(int i=0;i<woodFilterAttribute.attribute.size();i++){
+                woodFilterAttribute.attribute.get(i).value.add(0,woodFilterValue);
+        }
         this.woodFilterAttribute = woodFilterAttribute;
         shaiXuanAdapter = new ShaiXuanAdapter(getActivity(), woodFilterAttribute.attribute);
         mylistview.setAdapter(shaiXuanAdapter);
@@ -382,6 +390,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
             case R.id.text_chongzhi://筛选重置
                 shaiXuanAdapter = new ShaiXuanAdapter(getActivity(), woodFilterAttribute.attribute);
                 mylistview.setAdapter(shaiXuanAdapter);
+
                 break;
             case R.id.text_queding://筛选确定
                 relShaixuan.setVisibility(View.GONE);

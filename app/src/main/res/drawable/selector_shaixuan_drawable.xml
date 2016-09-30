@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/shuaixuan_lv"
+        android:drawable="@drawable/shaixuanlv_news"
         android:state_checked="true"></item>
-    <item android:drawable="@drawable/shuaixuan_bai"></item>
+    <item android:drawable="@drawable/shaixuanbai_new"></item>
 
 </selector>

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:layout_marginTop="2dp"
+        android:paddingTop="@dimen/distance_short"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 

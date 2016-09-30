@@ -3,6 +3,6 @@
     <item
         android:drawable="@drawable/zixun_lv"
         android:state_checked="true"></item>
-    <item android:drawable="@drawable/zixun_hui"></item>
+    <item android:drawable="@drawable/zixun_newhui"></item>
 
 </selector>

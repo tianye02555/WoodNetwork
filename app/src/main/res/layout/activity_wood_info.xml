@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_wood_info"
     android:layout_width="match_parent"
@@ -12,9 +13,11 @@
         layout="@layout/layout_title"></include>
 
     <ScrollView
+        android:id="@+id/activity_wood_info_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/includ_title">
+        android:layout_below="@+id/includ_title"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -46,8 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_rl_tp"
-                android:layout_marginTop="@dimen/font_normal"
                 android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginTop="@dimen/font_normal"
                 android:text="名        称："
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
@@ -130,8 +133,8 @@
                     android:layout_weight="1"
                     android:background="@color/dise"
                     android:gravity="left"
-                    android:paddingLeft="@dimen/distance_normal"
                     android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/distance_normal"
                     android:paddingTop="10dp"
                     android:text="商品规格"
                     android:textColor="@android:color/black"
@@ -146,20 +149,20 @@
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text=""
-                    android:visibility="gone"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/font_normal" />
+                    android:textSize="@dimen/font_normal"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <woodnetwork.hebg3.com.woodnetwork.view.MyListView
                 android:id="@+id/activity_wood_info_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@null"
+                android:layout_below="@+id/ll"
                 android:layout_marginTop="@dimen/distance_shortest"
+                android:divider="@null"
                 android:dividerHeight="0dp"
-                android:listSelector="#00000000"
-                android:layout_below="@+id/ll"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
+                android:listSelector="#00000000"></woodnetwork.hebg3.com.woodnetwork.view.MyListView>
 
             <View
                 android:id="@+id/line"
@@ -168,46 +171,83 @@
                 android:layout_below="@+id/activity_wood_info_listview"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
-<woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
-    android:id="@+id/activity_wood_info_reveallayout_lijigoumai"
-    android:layout_width="120dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_below="@id/line"
-    android:layout_marginTop="@dimen/distance_normal">
-    <Button
-        android:id="@+id/activity_wood_info_btn_lijigoumai"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:background="@drawable/button_shape_title"
-        android:textColor="@android:color/white"
-        android:text="@string/lijigoumai"
-        android:textSize="@dimen/font_normal" />
-</woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
 
-<woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
-    android:layout_width="120dp"
-    android:layout_height="wrap_content"
-    android:layout_toLeftOf="@+id/activity_wood_info_reveallayout_lijigoumai"
-    android:layout_marginRight="11dp"
-    android:layout_marginEnd="11dp"
-    android:layout_alignParentBottom="true"
-    android:baselineAligned="@+id/activity_wood_info_reveallayout_lijigoumai"
-    android:layout_toStartOf="@+id/activity_wood_info_reveallayout_lijigoumai">
-    <Button
-        android:id="@+id/activity_wood_info_btn_jiarugouwuche"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:background="@drawable/button_shape_title"
-        android:textColor="@android:color/white"
-        android:text="@string/jiarugouwuche"
-        android:textSize="@dimen/font_normal"
-        />
-</woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
+            <woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
+                android:id="@+id/activity_wood_info_reveallayout_lijigoumai"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/line"
+                android:layout_marginTop="@dimen/distance_normal">
+
+                <Button
+                    android:id="@+id/activity_wood_info_btn_lijigoumai"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_shape_title"
+                    android:text="@string/lijigoumai"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_normal" />
+            </woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
+
+            <woodnetwork.hebg3.com.woodnetwork.view.RevealLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:layout_toLeftOf="@+id/activity_wood_info_reveallayout_lijigoumai"
+                android:layout_toStartOf="@+id/activity_wood_info_reveallayout_lijigoumai"
+                android:baselineAligned="@+id/activity_wood_info_reveallayout_lijigoumai">
+
+                <Button
+                    android:id="@+id/activity_wood_info_btn_jiarugouwuche"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_shape_title"
+                    android:text="@string/jiarugouwuche"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_normal" />
+            </woodnetwork.hebg3.com.woodnetwork.view.RevealLayout>
 
 
         </RelativeLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/activity_wood_info_linearlayout_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/includ_title"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
 
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            fresco:placeholderImage="@drawable/defaultimg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance_short"
+            android:text="加载失败"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_big" />
+
+        <TextView
+            android:id="@+id/activity_wood_info_txt_chongxinjiazai"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="@dimen/distance_short"
+            android:background="@null"
+            android:gravity="center"
+            android:text="重新加载"
+            android:textColor="@android:color/holo_blue_bright" />
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="20dp" />
+    </LinearLayout>
 </RelativeLayout>

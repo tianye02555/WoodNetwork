@@ -96,8 +96,8 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
     private List<ProductFilterList_productsItem> list;
     private EditText number;
     private int page_no = 1;
-    private List<WoodFilterValue> filterList=new ArrayList<WoodFilterValue>();
-    private boolean chongZhi=true;
+    private List<WoodFilterValue> filterList = new ArrayList<WoodFilterValue>();
+    private boolean chongZhi = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,37 +108,23 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
         textTitle.setText("木联网");
         sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
-        if ("null".equals(sharePreferencesUtils.getData("userid", "null"))) {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-        }
 
-        recyclerview.setHasFixedSize(true);
-        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL, 5));
+            recyclerview.setHasFixedSize(true);
+            recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+            request_shoppingMall_woodsList = new Request_shoppingMall_woodsList();
+            request_shoppingMall_woodsList.page_no = 1;
+            request_shoppingMall_woodsList.page_size = 10;
+            request_shoppingMall_woodsList.attribute = request_spinnerInfoList;
 
-//        Request_spinnerInfo request_spinnerInfo = new Request_spinnerInfo();
-//        request_spinnerInfo.attr_vaule_id = "111";
-//        request_spinnerInfo.attr_id = "1234";
-//        request_spinnerInfoList.add(request_spinnerInfo);
-//        Request_spinnerInfo request_spinnerInfo1 = new Request_spinnerInfo();
-//        request_spinnerInfo1.attr_vaule_id = "444";
-//        request_spinnerInfo1.attr_id = "2234";
-//        request_spinnerInfoList.add(request_spinnerInfo1);
-        request_shoppingMall_woodsList = new Request_shoppingMall_woodsList();
-        request_shoppingMall_woodsList.page_no = 1;
-        request_shoppingMall_woodsList.page_size = 10;
-        request_shoppingMall_woodsList.attribute = request_spinnerInfoList;
+            new ShoppingMallPresenter(this);
 
-
-        new ShoppingMallPresenter(this);
-
-        Request_getAttribute request_getAttribute = new Request_getAttribute();
-        request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
-        myRequestInfo = new MyRequestInfo();
-        myRequestInfo.req = new Object();
-        myRequestInfo.req_meta = request_getAttribute;
-        shoppingMallPresenter.getAttributeFilterListData(myRequestInfo);
-        shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
+            Request_getAttribute request_getAttribute = new Request_getAttribute();
+            request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
+            myRequestInfo = new MyRequestInfo();
+            myRequestInfo.req = new Object();
+            myRequestInfo.req_meta = request_getAttribute;
+            shoppingMallPresenter.getAttributeFilterListData(myRequestInfo);
+            shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
 
         return view;
     }
@@ -205,11 +191,11 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
     @Override
     public void showAttributeFilterListInfo(WoodFilterAttribute woodFilterAttribute) {
-        WoodFilterValue woodFilterValue=new WoodFilterValue();
-        woodFilterValue.value_id="quanbu";
-        woodFilterValue.value_name="全部";
-        for(int i=0;i<woodFilterAttribute.attribute.size();i++){
-                woodFilterAttribute.attribute.get(i).value.add(0,woodFilterValue);
+        WoodFilterValue woodFilterValue = new WoodFilterValue();
+        woodFilterValue.value_id = "quanbu";
+        woodFilterValue.value_name = "全部";
+        for (int i = 0; i < woodFilterAttribute.attribute.size(); i++) {
+            woodFilterAttribute.attribute.get(i).value.add(0, woodFilterValue);
         }
         this.woodFilterAttribute = woodFilterAttribute;
         shaiXuanAdapter = new ShaiXuanAdapter(getActivity(), woodFilterAttribute.attribute);

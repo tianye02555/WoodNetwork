@@ -159,9 +159,7 @@ public class AdviceActivity extends AppCompatActivity implements AdviceContract.
     public void showMessage(String string) {
         CommonUtils.showToast(this, string);
     }
-    public void finish(){
-        finish();
-    }
+
 }
 
 

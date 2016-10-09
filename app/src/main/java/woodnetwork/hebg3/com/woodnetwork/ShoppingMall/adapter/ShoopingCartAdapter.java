@@ -68,9 +68,9 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.head.setImageURI(Uri.parse(Const.PICTURE+list.get(position).pimg));
-         df= new DecimalFormat("###############0.00");//   16位整数位，两小数位
-        Double number=(list.get(position).stock) * (list.get(position).price);//一个订单的小结
+        holder.head.setImageURI(Uri.parse(Const.PICTURE + list.get(position).pimg));
+        df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
+        Double number = (list.get(position).stock) * (list.get(position).price);//一个订单的小结
         String stringNumber = df.format(number);//字符串类型的小结
         list.get(position).xiaoJi = Double.parseDouble(stringNumber);
         holder.name.setText(list.get(position).pname);
@@ -95,6 +95,19 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
 
                 final String number = editable.toString().trim();
+                if ("".equals(number)) {
+                    return;
+                }
+                if ("-".equals(number) || ".".equals(number)) {
+                    new AlertDialog.Builder(context).setMessage("只能输入数字").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            holder.number.setText("");
+                            dialogInterface.dismiss();
+                        }
+                    }).show();
+                    return;
+                }
                 if (number.contains(".")) {
                     int index = number.indexOf(".");
                     if (number.length() - 1 - index > 3) {
@@ -108,17 +121,17 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                         return;
                     }
                 }
-                if (Double.parseDouble(holder.number.getText().toString().trim()) <= 0||"".equals(holder.number.getText().toString().trim())) {
-                    new AlertDialog.Builder(context).setMessage("数量不能小于0").setNeutralButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            holder.number.setText("1");
-                            dialogInterface.dismiss();
-                        }
-                    }).show();
+//                if ("".equals(holder.number.getText().toString().trim())||Double.parseDouble(holder.number.getText().toString().trim()) <= 0) {
+//                    new AlertDialog.Builder(context).setMessage("数量不能小于0").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+////                            holder.number.setText("1");
+//                            dialogInterface.dismiss();
+//                        }
+//                    }).show();
 
-                    return;
-                }
+//                    return;
+//                }
 //                if (Double.parseDouble(holder.number.getText().toString().trim()) >list.get(position).stock ) {
 //                    new AlertDialog.Builder(context).setMessage("库存不足").setNeutralButton("确定", new DialogInterface.OnClickListener() {
 //                        @Override
@@ -145,7 +158,10 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             @Override
             public void onClick(View view) {
 
-
+                if ("".equals(holder.number.getText().toString().trim())) {
+                    CommonUtils.showToast(context,"请输入购买数量");
+                    return;
+                }
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(context);
                 Request_getAttribute request_getAttribute = new Request_getAttribute();
                 request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
@@ -225,13 +241,13 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             shanChu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    list.get(getAdapterPosition()-1).checkbox=true;
+                    list.get(getAdapterPosition() - 1).checkbox = true;
                     SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(context);
                     Request_getAttribute request_getAttribute = new Request_getAttribute();
                     request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
                     ArrayList<String> sidList = new ArrayList<String>();
-                    sidList.add(list.get(getAdapterPosition()-1).sid);
+                    sidList.add(list.get(getAdapterPosition() - 1).sid);
                     Request_shopcar_delete request_shopcar_delete = new Request_shopcar_delete();
                     request_shopcar_delete.sid = sidList;
 

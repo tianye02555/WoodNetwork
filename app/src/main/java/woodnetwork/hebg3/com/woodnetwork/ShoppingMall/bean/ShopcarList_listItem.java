@@ -35,6 +35,10 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public String delivery;
     @Expose
+    public String delivery_area;
+    @Expose
+    public String delivery_id;
+    @Expose
     public List<ShopcarList_listItem_attributeItem> attribute;
 
 }

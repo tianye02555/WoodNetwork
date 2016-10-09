@@ -34,12 +34,12 @@ public class GetPasswordPresenter implements GetPasswordContract.GetPasswordPres
         request_getPassword.name=mGetPasswordView.getUserName();
         request_getPassword.auth_code=mGetPasswordView.getCode();
         request_getPassword.password=mGetPasswordView.getNewPassword();
-        getPasswordModel.submit(CommonUtils.getRequestInfo(request_getPassword,new Object()), new OnServiceBaceInterface() {
+        getPasswordModel.sendCode(CommonUtils.getRequestInfo(request_getPassword,new Object()), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
                 mGetPasswordView.closeProgress();
                 mGetPasswordView.showToastMessage(((ResponseBody)object).base.msg);
-                mGetPasswordView.closeActivity();
+//                mGetPasswordView.closeActivity();
             }
 
             @Override
@@ -58,12 +58,14 @@ public class GetPasswordPresenter implements GetPasswordContract.GetPasswordPres
         getPasswordModel.submit(CommonUtils.getRequestInfo(request_getCode,new Object()), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
+                mGetPasswordView.closeProgress();
                 mGetPasswordView.showToastMessage(((ResponseBody)object).base.msg);
 
             }
 
             @Override
             public void onFailed(String string) {
+                mGetPasswordView.closeProgress();
                 mGetPasswordView.showMessage(string);
             }
         });

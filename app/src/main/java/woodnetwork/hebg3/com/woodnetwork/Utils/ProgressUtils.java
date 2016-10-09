@@ -13,11 +13,12 @@ public class ProgressUtils {
 	}
 
 	public static void show(Context context, String msg) {
+
 		if (pd == null || !pd.isShowing()) {
 			pd = CustomProgressDialog.createDialog(context);
 			if (!TextUtils.isEmpty(msg))
 				pd.setMessage(msg);
-			pd.setCancelable(true);
+			pd.setCancelable(false);
 			pd.show();
 		}
 	}

@@ -119,7 +119,7 @@ public class AsyncTaskForUpLoadFilesNew extends
 				sb.append(entry.getValue());
 				sb.append(LINEND);
 			}
-			String a=sb.toString();
+			CommonUtils.log("++++++++++++++上传文件文本参数++++++++++++++++"+sb.toString());
 			DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
 			BufferedOutputStream bos = new BufferedOutputStream(dos);
 			bos.write(sb.toString().getBytes());
@@ -163,7 +163,8 @@ public class AsyncTaskForUpLoadFilesNew extends
 			bos.write(end_data);
 			bos.flush();
 			// 得到响应码
-			int aaa=conn.getResponseCode();
+
+			CommonUtils.log("++++++++++++++上传文件响应码++++++++++++++++"+String.valueOf(conn.getResponseCode()));
 			if (conn.getResponseCode() == 200) {
 				InputStream in = conn.getInputStream();
 

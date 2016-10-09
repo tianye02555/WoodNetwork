@@ -6,11 +6,14 @@ package woodnetwork.hebg3.com.woodnetwork.Utils;
 
 public class ServiceInterfaceCont {
 
-    //登录接口
+    //1.1登录接口
     public static final String LOGIN = "/user/login";
 
-    //更改密码接口
+    //2.2更改密码接口
     public static final String GETPASSWORD = "/user/password/update";
+
+    //2.1 获取验证码接口
+    public static final String GETAUTHCODE = "/user/authcode";
 
     //获取筛选属性列表
     public static final String ATTRIBUTEFILTER = "/attribute/filter/list?param=";

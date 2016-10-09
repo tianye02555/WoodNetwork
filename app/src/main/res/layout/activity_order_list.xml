@@ -31,9 +31,9 @@
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_marginTop="@dimen/distance_normal"
             android:gravity="center"
-            android:background="@drawable/button_shape_dise"
+            android:background="@drawable/button_shape_title"
             android:text="@string/chaxunyue"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/font_normal" />
 
         <TextView

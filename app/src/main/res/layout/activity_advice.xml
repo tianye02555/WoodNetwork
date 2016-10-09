@@ -182,5 +182,7 @@
         android:layout_marginRight="@dimen/distance_longest"
         android:layout_marginLeft="@dimen/distance_longest"
         android:layout_marginTop="@dimen/distance_longest"
+        android:background="@drawable/button_shape_title"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/activity_advice_edit_liuyanneirong"/>
 </RelativeLayout>

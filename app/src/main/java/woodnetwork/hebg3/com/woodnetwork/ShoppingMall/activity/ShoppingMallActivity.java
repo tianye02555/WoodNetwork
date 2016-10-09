@@ -25,8 +25,10 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.BusnessListFragment;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.ShoppingMallFragment;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.fragment.MyFragment;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.fragment.ZiXunHomeFragment;
+import woodnetwork.hebg3.com.woodnetwork.sysfunction.activity.LoginActivity;
 
 public class ShoppingMallActivity extends FragmentActivity {
 
@@ -46,6 +48,7 @@ public class ShoppingMallActivity extends FragmentActivity {
     private QiuGouHomeFragment qiuGouHomeFragment;
     private BusnessListFragment busnessListFragment;
     private ShoppingMallFragment shoppingMallFragment;
+    private SharePreferencesUtils sharePreferencesUtils;
     /**
      * MyFragment的tab
      */
@@ -86,7 +89,7 @@ public class ShoppingMallActivity extends FragmentActivity {
     /**
      * 记录当前fragment
      */
-    private int nowPosition=0;
+    private int nowPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +97,12 @@ public class ShoppingMallActivity extends FragmentActivity {
         setContentView(R.layout.activity_shopping_mall);
         CommonUtils.addActivity(this);
         ButterKnife.bind(this);
+        sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(this);
+        if ("null".equals(sharePreferencesUtils.getData("userid", "null"))) {
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
         data();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-////        fragmentTransaction.add(R.id.activity_shopping_mall_framelayout, new ShoppingMallFragment(), "shoppingmallfragment").commit();
-//        fragmentTransaction.add(R.id.activity_shopping_mall_framelayout, new MyFragment(), "MyFragment").commit();
     }
 
     private void data() {
@@ -145,7 +149,7 @@ public class ShoppingMallActivity extends FragmentActivity {
      * @param position 切换第几个
      */
     public void setvisible(int position) {
-        nowPosition=position;
+        nowPosition = position;
         FragmentTransaction ft1 = getSupportFragmentManager()
                 .beginTransaction();
         for (int i = 0; i < list_fragment.size(); i++) {
@@ -237,12 +241,12 @@ public class ShoppingMallActivity extends FragmentActivity {
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
 //        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putInt("position",nowPosition);
+        outState.putInt("position", nowPosition);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        nowPosition=savedInstanceState.getInt("position");
+        nowPosition = savedInstanceState.getInt("position");
         setvisible(nowPosition);
         super.onRestoreInstanceState(savedInstanceState);
     }

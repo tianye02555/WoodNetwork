@@ -25,9 +25,9 @@ public class GetPasswordModel implements GetPasswordModelInterface {
             switch (msg.what) {
                 case 0://获取验证码
                     if ("0".equals(body.base.code)) {//成功
-                        onServiceBaceInterface.onSuccess(body);
+                        onServiceBaceInterface_getCode.onSuccess(body);
                     } else  {//失败
-                        onServiceBaceInterface.onFailed(body.base.msg);
+                        onServiceBaceInterface_getCode.onFailed(body.base.msg);
                     }
                     break;
                 case 1://更改密码
@@ -46,7 +46,7 @@ public class GetPasswordModel implements GetPasswordModelInterface {
         this.onServiceBaceInterface_getCode = onServiceBaceInterface;
         ClientParams params = new ClientParams();
         params.http_method = ClientParams.HTTP_POST;
-        params.getMethod = ServiceInterfaceCont.GETPASSWORD;
+        params.getMethod = ServiceInterfaceCont.GETAUTHCODE;
         params.params = CommonUtils.getParamString(param);
         new NetTask(handler.obtainMessage(0), params).execute();
     }

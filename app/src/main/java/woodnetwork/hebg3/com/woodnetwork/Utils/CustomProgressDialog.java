@@ -5,6 +5,7 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 /** 提示语遮罩;主要是loading */
@@ -40,5 +41,13 @@ public class CustomProgressDialog extends Dialog {
 			tvMsg.setText(strMessage);
 		}
 		return customProgressDialog;
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode==KeyEvent.KEYCODE_BACK){
+			customProgressDialog.cancel();
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

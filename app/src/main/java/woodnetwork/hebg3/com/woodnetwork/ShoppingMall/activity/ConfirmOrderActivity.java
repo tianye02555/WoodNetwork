@@ -126,10 +126,13 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_confirm_order_btn_querenxiadan://确认下单
-                if(TextUtils.isEmpty(harvestPlace.getText().toString().trim())||TextUtils.isEmpty(address.getText().toString().trim())){
-                    CommonUtils.showToast(ConfirmOrderActivity.this,"请填写收货地点和详细地址");
-                    return;
+                if(extractTypeNumber == 1){
+                    if(TextUtils.isEmpty(harvestPlace.getText().toString().trim())||TextUtils.isEmpty(address.getText().toString().trim())){
+                        CommonUtils.showToast(ConfirmOrderActivity.this,"请填写收货地点和详细地址");
+                        return;
+                    }
                 }
+
                 Request_orderAdd request_orderAdd = new Request_orderAdd();
                 request_orderAdd.seller_id =shopcarList.list.get(0).seller.sid ;
                 if("".equals((String) sharePreferencesUtils.getData("userid",""))){
@@ -144,10 +147,20 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
                     request_orderAdd_productsItem.pid = shopcarList.list.get(i).pid;
                     request_orderAdd_productsItem.price = shopcarList.list.get(i).price;
                     list.add(request_orderAdd_productsItem);
+                    if(extractTypeNumber == 0){//自提
+                        request_orderAdd.receive_area =shopcarList.list.get(i).delivery_area ;
+                        request_orderAdd.receive_id =shopcarList.list.get(i).delivery_id ;
+                    }
                 }
                 request_orderAdd.products = list;
-                request_orderAdd.receive_area = harvestPlace.getText().toString().trim()+address.getText().toString().trim();
-                request_orderAdd.receive_id = String.valueOf(addressID);
+                if(extractTypeNumber == 0){//自提
+                    request_orderAdd.receive_area =shopcarList.list.get(0).delivery_area ;
+                    request_orderAdd.receive_id =shopcarList.list.get(0).delivery_id ;
+                }else if(extractTypeNumber == 1){//收货
+                    request_orderAdd.receive_area = harvestPlace.getText().toString().trim()+address.getText().toString().trim();
+                    request_orderAdd.receive_id = String.valueOf(addressID);
+                }
+
                 request_orderAdd.receive_type = extractTypeNumber;
                 request_orderAdd.shopcar_ids = shopCarPosition;
                 request_orderAdd.type =1 ;

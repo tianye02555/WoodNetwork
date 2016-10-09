@@ -8,9 +8,9 @@
     <string name="wangjimima">忘记密码</string>
     <!--忘记密码-->
     <string name="getcode">获取验证码</string>
-    <string name="code">验证码</string>
-    <string name="newpassword">新密码</string>
-    <string name="makesurepassword">确认密码</string>
+    <string name="code">验证码:</string>
+    <string name="newpassword">新密码:</string>
+    <string name="makesurepassword">确认密码:</string>
     <string name="submit">提交</string>
     <!--商城首页-->
     <string name="shangcheng">商城</string>

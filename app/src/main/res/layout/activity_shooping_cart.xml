@@ -20,6 +20,7 @@
         android:id="@+id/activity_shopping_cart_relative"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/distance_normal"
         android:layout_height="wrap_content">
         <CheckBox
             android:id="@+id/activity_shopping_cart_checkbox"
@@ -56,7 +57,7 @@
             android:textColor="@color/jiage"
             android:layout_below="@+id/view"
             android:layout_marginLeft="@dimen/distance_shortest"
-            android:text="0"
+            android:text="0.00"
             android:layout_toRightOf="@+id/activity_shopping_cart_text_heji"
             android:layout_marginTop="@dimen/distance_short"
             android:textSize="@dimen/font_normal"/>
@@ -74,25 +75,27 @@
         <Button
             android:id="@+id/activity_shopping_cart_btn_jiesuan"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:text="@string/jiesuan"
             android:textSize="@dimen/font_normal"
-            android:background="@null"
-            android:textColor="@android:color/holo_blue_bright"
+            android:background="@drawable/button_shape_title"
+            android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/distance_normal"
             android:layout_marginRight="@dimen/distance_normal"
-            android:layout_below="@+id/activity_shopping_cart_text_yuan" />
+            android:layout_marginTop="@dimen/distance_normal"
+            android:layout_below="@+id/view" />
 
         <Button
             android:id="@+id/activity_shopping_cart_btn_shanchu"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:textSize="@dimen/font_normal"
             android:text="@string/shanchu"
-            android:background="@null"
-            android:textColor="@android:color/holo_blue_bright"
+            android:background="@drawable/button_shape_title"
+            android:textColor="@android:color/white"
             android:layout_marginRight="@dimen/distance_normal"
-            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/distance_normal"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>

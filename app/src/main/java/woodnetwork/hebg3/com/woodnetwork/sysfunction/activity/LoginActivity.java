@@ -25,12 +25,6 @@ import woodnetwork.hebg3.com.woodnetwork.sysfunction.contract.LoginContract;
 import woodnetwork.hebg3.com.woodnetwork.sysfunction.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
-//    @Bind(R.id.imge_title_left)
-//    ImageView imgeTitleLeft;//顶部左侧返回键
-//    @Bind(R.id.text_title)
-//    TextView textTitle;
-//    @Bind(R.id.image_title_right)
-//    ImageView imageTitleRight;
     @Bind(R.id.text_user)
     EditText textUser;
     @Bind(R.id.text_password)
@@ -50,10 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         ButterKnife.bind(this);
         CommonUtils.addActivity(this);
         button.setText("登录");
-//        imageTitleRight.setVisibility(View.GONE);
-//        imgeTitleLeft.setVisibility(View.GONE);
         new LoginPresenter(this);
-
     }
 
     @Override

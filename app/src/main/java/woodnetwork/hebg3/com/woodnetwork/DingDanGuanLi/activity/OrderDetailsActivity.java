@@ -78,7 +78,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderBuye
             oid = getIntent().getStringExtra("oid");
             flag = getIntent().getStringExtra("flag");
             if ("1".equals(flag)) {
-                btn_queRenShouHuo.setText("发货");
+                btn_queRenShouHuo.setText("确认发货");
             }
         }
 
@@ -237,10 +237,16 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderBuye
                 if ("1".equals(flag)) {
                     intent_exception.putExtra("seller", orderSellerInfo.seller);
                     intent_exception.putExtra("oid", oid);
+                    intent_exception.putExtra("id", orderSellerInfo.number);
+                    intent_exception.putExtra("creat_time", orderSellerInfo.creat_time);
+                    intent_exception.putExtra("total_price", orderSellerInfo.total_price);
                     intent_exception.putExtra("number", String.valueOf(orderSellerInfo.products.size()));
                 } else {
                     intent_exception.putExtra("seller", orderBuyerInfo.seller);
                     intent_exception.putExtra("oid", oid);
+                    intent_exception.putExtra("id", orderBuyerInfo.number);
+                    intent_exception.putExtra("creat_time", orderBuyerInfo.creat_time);
+                    intent_exception.putExtra("total_price", orderBuyerInfo.total_price);
                     intent_exception.putExtra("number", String.valueOf(orderBuyerInfo.products.size()));
                 }
                 startActivityForResult(intent_exception, 0);

@@ -30,7 +30,7 @@ public class ExceptionAddPresenter implements ExceptionAddContract.ExceptionAddP
 
     @Override
     public void submitExceptionOrder(Context context, HashMap<String, String> params, HashMap<String, File> files) {
-        exceptionAddView.showProgress();
+
         exceptionAddModel.submitExceptionOrder(context, params, files, new OnServiceBaceInterface() {
 
             @Override

@@ -218,10 +218,10 @@
             android:layout_below="@+id/activity_confirm_order_text_yingfujinge"
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_marginTop="@dimen/distance_normal"
-            android:background="@null"
+            android:background="@drawable/button_shape_title"
             android:gravity="center"
             android:text="@string/querenxiadan"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/font_normal" />
 
         <Button
@@ -232,10 +232,10 @@
             android:layout_marginRight="@dimen/distance_normal"
             android:layout_marginTop="@dimen/distance_normal"
             android:layout_toLeftOf="@+id/activity_confirm_order_btn_querenxiadan"
-            android:background="@null"
+            android:background="@drawable/button_shape_title"
             android:gravity="center"
             android:text="@string/quxiao"
-            android:textColor="@android:color/holo_blue_bright"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/font_normal" />
 
         <TextView

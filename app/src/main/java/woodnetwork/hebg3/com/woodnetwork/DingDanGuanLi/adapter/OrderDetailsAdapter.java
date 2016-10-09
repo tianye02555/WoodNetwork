@@ -73,7 +73,7 @@ public class OrderDetailsAdapter extends BaseAdapter {
         holder.name.setText(list.get(position).name);
         holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position).img));
         holder.price.setText("￥"+list.get(position).total_price);
-        holder.number.setText(list.get(position).number+"m³");
+        holder.number.setText(String.valueOf(list.get(position).number));
         return contentView;
     }
 

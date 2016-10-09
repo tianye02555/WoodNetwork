@@ -14,11 +14,11 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.sysfunction.contract.GetPasswordContract;
 import woodnetwork.hebg3.com.woodnetwork.sysfunction.presenter.GetPasswordPresenter;
-import woodnetwork.hebg3.com.woodnetwork.R;
 
 public class GetPasswordActivity extends AppCompatActivity implements GetPasswordContract.GetPasswordView {
 
@@ -70,7 +70,7 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
         if (!TextUtils.isEmpty(getpasswordEditCode.getText().toString().trim())) {
             return getpasswordEditCode.getText().toString().trim();
         }
-        CommonUtils.showToast(this, "");
+        CommonUtils.showToast(this, "验证码不能为空");
         return null;
     }
 
@@ -79,6 +79,7 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
         if (!TextUtils.isEmpty(getpasswordEditNewpassword.getText().toString().trim())) {
             return getpasswordEditNewpassword.getText().toString().trim();
         }
+        CommonUtils.showToast(this, "新密码不能为空");
         return null;
     }
 
@@ -87,6 +88,7 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
         if (!TextUtils.isEmpty(getpasswordEditMakesurepassword.getText().toString().trim())) {
             return getpasswordEditMakesurepassword.getText().toString().trim();
         }
+        CommonUtils.showToast(this, "确认密码不能为空");
         return null;
     }
 
@@ -138,24 +140,31 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
         CommonUtils.showToast(this, string);
     }
 
-    @OnClick({R.id.getpassword_btn_getcode, R.id.activity_get_password})
+    @OnClick({R.id.getpassword_btn_getcode, R.id.getpassword_btn_submit,R.id.imge_title_left})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.getpassword_btn_getcode:
-                if(!TextUtils.isEmpty(getUserName())){
+                if (!TextUtils.isEmpty(getUserName())) {
                     new CountTimer(120000).start();
                     getPasswordPresenter.sendCode();
-                }else{
-                    CommonUtils.showToast(this,"用户名不能为空");
+                } else {
+                    CommonUtils.showToast(this, "用户名不能为空");
                 }
                 break;
-            case R.id.activity_get_password:
-                if (!TextUtils.isEmpty(getUserName()) && TextUtils.isEmpty(getCode()) && TextUtils.isEmpty(getNewPassword()) && TextUtils.isEmpty(getNewPasswordTwice())) {
-                    if(getNewPassword().equals(getNewPasswordTwice())){
+            case R.id.getpassword_btn_submit:
+                if (!TextUtils.isEmpty(getUserName()) && null != getUserName() && !TextUtils.isEmpty(getCode()) && null != getCode() && !TextUtils.isEmpty(getNewPassword()) && null != getNewPassword() && !TextUtils.isEmpty(getNewPasswordTwice()) && null != getNewPasswordTwice()) {
+                    if (getNewPassword().equals(getNewPasswordTwice())) {
                         getPasswordPresenter.submit();
+                    } else {
+                        CommonUtils.showToast(this, "两次密码输入不一致");
                     }
+                } else {
+                    CommonUtils.showToast(this, "请完善信息");
                 }
 
+                break;
+            case R.id.imge_title_left:
+                finish();
                 break;
         }
     }
@@ -163,16 +172,17 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
     /**
      * 倒计时类
      */
-    class CountTimer extends CountDownTimer{
-        public CountTimer(long z){
-            super(z,1000);
+    class CountTimer extends CountDownTimer {
+        public CountTimer(long z) {
+            super(z, 1000);
 
         }
 
         @Override
         public void onTick(long l) {
             getpasswordBtnGetcode.setClickable(false);
-            getpasswordBtnGetcode.setText(l/1000+"s");
+            getpasswordBtnGetcode.setBackgroundResource(R.drawable.button_shape_dise);
+            getpasswordBtnGetcode.setText(l / 1000 + "s");
         }
 
         @Override

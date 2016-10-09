@@ -1,23 +1,20 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,7 +28,6 @@ import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcarAdd;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.WoodInfoAdapter;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.WoodInfoOtherAdapter;
-import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem_attributesItem;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ShopcarList_listItem;
@@ -94,6 +90,10 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
     View line;
     @Bind(R.id.activity_wood_info)
     RelativeLayout activityWoodInfo;
+    @Bind(R.id.activity_wood_info_scrollview)
+    ScrollView Scrollview;
+    @Bind(R.id.activity_wood_info_linearlayout_error)
+    LinearLayout layoutError;
     private WoodInfoContrac.WoodInfoPresenterInterface presenter;
     private String pid;
     private WoodInfoAdapter adapter;
@@ -182,7 +182,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
 
         gallery.start(this, pictures, 3000,
                 DotContainer, R.drawable.dot_onn,
-                R.drawable.dot_offf,null,null);
+                R.drawable.dot_offf, null, null);
 
 
     }

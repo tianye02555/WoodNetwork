@@ -30,7 +30,7 @@
         <activity android:name=".ShoppingMall.activity.ConfirmOrderActivity" />
         <activity android:name=".ShoppingMall.activity.OrderListActivity" />
         <activity android:name=".ShoppingMall.activity.ChooseAddressActivity" />
-        <activity android:name=".ShoppingMall.activity.ShoopingCartActivity" />
+        <activity android:name=".ShoppingMall.activity.ShoopingCartActivity" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".QiuGou.activity.WoYaoBaoJiaActivity" />
         <activity android:name=".ZiXun.activity.ZiXunXiangQingActivity" />
         <activity android:name=".ZiXun.activity.ZiXunListActivity" />

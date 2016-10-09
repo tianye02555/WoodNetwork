@@ -140,6 +140,7 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                 finish();
                 break;
             case R.id.activity_order_receive_btn_tijiao:
+
                 HashMap<String, String> params = new HashMap<String, String>();
 
                 params.put("content", edit_beiZhu.getText().toString().trim());
@@ -161,6 +162,11 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                     File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
                     files.put("image", file);
                 }
+                if(null==files||files.size()==0){
+                    showMessage("请添加确认图片");
+                    return;
+                }
+                showProgress();
                 if (null != getIntent()) {
                     if ("1".equals(getIntent().getStringExtra("flag"))) {
                         //发货接口

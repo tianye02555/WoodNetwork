@@ -15,6 +15,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ServiceInterfaceCont;
 import woodnetwork.hebg3.com.woodnetwork.net.Base;
 import woodnetwork.hebg3.com.woodnetwork.net.ClientParams;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 import woodnetwork.hebg3.com.woodnetwork.net.NetTask;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
 
@@ -28,14 +29,11 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
         @Override
         public void handleMessage(Message msg) {
             Base base = (Base) msg.obj;
-            switch (msg.what) {
-                case 0://收货接口
-                    if ("0".equals(base.code)) {//成功
-                        onServiceBaceInterface.onSuccess(base.msg);
-                    } else  {//失败
-                        onServiceBaceInterface.onFailed(base.msg);
-                    }
-                    break;
+
+            if ("0".equals(base.code)) {//成功
+                onServiceBaceInterface.onSuccess(base.msg);
+            } else {//失败
+                onServiceBaceInterface.onFailed(base.msg);
             }
 
         }
@@ -45,7 +43,7 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
     public void submitReceiveOrder(Context context, HashMap<String, String> params, HashMap<String, File> files, OnServiceBaceInterface onServiceBaceInterface) {
         this.onServiceBaceInterface = onServiceBaceInterface;
         AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
-                context, "http://192.168.2.12:8080/wood/dev/wood/v1/order/receive", params, files,
+                context, Const.PICTURE_UPLOAD_ORDERRECEIVE, params, files,
                 handler.obtainMessage(0));
         at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "0");
     }
@@ -55,7 +53,7 @@ public class OrderReceiveModel implements OrderReceiveModelInterface {
     public void submitDeliveryOrder(Context context, HashMap<String, String> params, HashMap<String, File> files, OnServiceBaceInterface onServiceBaceInterface) {
         this.onServiceBaceInterface = onServiceBaceInterface;
         AsyncTaskForUpLoadFilesNew at = new AsyncTaskForUpLoadFilesNew(
-                context, "http://192.168.2.12:8080/wood/dev/wood/v1/order/delivery", params, files,
+                context, Const.PICTURE_UPLOAD_ORDERDELIVERY, params, files,
                 handler.obtainMessage(0));
         at.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "0");
     }

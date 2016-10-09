@@ -17,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -129,6 +130,7 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                 finish();
                 break;
             case R.id.activity_order_exceptionadd_btn_tijiao:
+
                 HashMap<String, String> params = new HashMap<String, String>();
 
                 params.put("content", edit_yiChangYuanYin.getText().toString().trim());
@@ -149,7 +151,11 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                     File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
                     files.put("image", file);
                 }
-
+                if(null==files||files.size()==0){
+                    showMessage("请添加异常图片");
+                    return;
+                }
+                showProgress();
                 presenter.submitExceptionOrder(ExceptionAddActivity.this, params, files);
                 break;
         }

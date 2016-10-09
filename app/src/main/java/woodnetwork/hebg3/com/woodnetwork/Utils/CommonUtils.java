@@ -114,28 +114,28 @@ public static void log(String msg) {
 		if (true)
 			Log.i(generateTag(), tr.toString(), tr);
 	}
-	/**
-	 * 加载图片  分是否要求wifi网络
-	 * @param uri 图片地址
-	 * @param view 控件
-	 * @param context 上下文
-	 * @param isWIFI 是否要求wifi
-	 */
-		public static void displayImage(Context context,String uri,ImageView view,boolean isWIFI) {
-			if (null != uri && !"".equals(uri) && null != view && !"".equals(view)) {
-				if(isWIFI){//要求在wifi下加载
-					if(CommonUtils.isWiFiActive(context)){//判断是否是wifi
-						Picasso.with(context).load(uri).into(view);
-						return;
-					}else{
-						return;
-					}
-				}else{//在任何网络下
-					Picasso.with(context).load(uri).into(view);
-				}
-				
-			}
-		}
+//	/**
+//	 * 加载图片  分是否要求wifi网络
+//	 * @param uri 图片地址
+//	 * @param view 控件
+//	 * @param context 上下文
+//	 * @param isWIFI 是否要求wifi
+//	 */
+//		public static void displayImage(Context context,String uri,ImageView view,boolean isWIFI) {
+//			if (null != uri && !"".equals(uri) && null != view && !"".equals(view)) {
+//				if(isWIFI){//要求在wifi下加载
+//					if(CommonUtils.isWiFiActive(context)){//判断是否是wifi
+//						Picasso.with(context).load(uri).into(view);
+//						return;
+//					}else{
+//						return;
+//					}
+//				}else{//在任何网络下
+//					Picasso.with(context).load(uri).into(view);
+//				}
+//
+//			}
+//		}
 
 	/**
 	 * 获取toast对象，防止重复显示时间过长
@@ -561,18 +561,18 @@ public static void log(String msg) {
 	 * @param context 上下文
 	 * @param isWIFI 是否要求wifi
 	 */
-	public static void displayImage(String uri, SimpleDraweeView view, Context context, boolean isWIFI) {
+	public static void displayImage(Uri uri, SimpleDraweeView view, Context context, boolean isWIFI) {
 		if (null != uri && !"".equals(uri) && null != view && !"".equals(view)) {
 			if(isWIFI){//要求在wifi下加载
 				if(CommonUtils.isWiFiActive(context)){//判断是否是wifi
-					view.setImageURI(Uri.parse(uri));
+					view.setImageURI(uri);
 					return;
 				}else{
 					showToast(context,"无WIFI网络！");
 					return;
 				}
 			}else{//在任何网络下
-				view.setImageURI(Uri.parse(uri));
+				view.setImageURI(uri);
 			}
 
 		}

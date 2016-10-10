@@ -56,14 +56,25 @@
                 android:text="卖家信息"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
-
+            <TextView
+                android:id="@+id/activity_order_exceptionadd_text_yuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_order_exceptionadd_text_maiJiaXinXi"
+                android:layout_marginRight="@dimen/distance_normal"
+                android:layout_marginTop="@dimen/distance_normal"
+                android:text="@string/yuan"
+                android:layout_toRightOf="@+id/activity_order_exceptionadd_text_price"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/font_normal" />
             <TextView
                 android:id="@+id/activity_order_exceptionadd_text_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activity_order_exceptionadd_text_maiJiaXinXi"
                 android:layout_marginLeft="@dimen/distance_shortest"
-                android:layout_marginRight="@dimen/distance_normal"
+
+                android:text="1111"
                 android:layout_marginTop="@dimen/distance_normal"
                 android:layout_toRightOf="@+id/activity_order_exceptionadd_text_gongji"
                 android:textColor="@color/jiage"

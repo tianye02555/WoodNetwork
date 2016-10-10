@@ -1,7 +1,9 @@
 package woodnetwork.hebg3.com.woodnetwork.WoDe.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -114,9 +116,21 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
                 startActivity(new Intent(this, AboutMeActivity.class));
                 break;
             case R.id.activity_setting_btn_zhuxiao:
-                SharePreferencesUtils sharePreferences= SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
-                sharePreferences.clearData();
-                startActivity(new Intent(this, LoginActivity.class));
+                new AlertDialog.Builder(this).setMessage("确认要注销吗？").setTitle("提示").setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharePreferencesUtils sharePreferences= SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
+                        sharePreferences.clearData();
+                        startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+                    }
+                }).show();
+
+
                 break;
         }
     }

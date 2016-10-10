@@ -79,7 +79,7 @@ public class SellerOrder_filter_Adapter extends RecyclerView.Adapter<SellerOrder
         } else if (2 == status) {
             holder.text_daiShouHuo.setText("已发货");
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
-            holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
+            holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
         } else if (3 == status) {
             holder.text_daiShouHuo.setText("已到货");

@@ -151,8 +151,8 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                     File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
                     files.put("image", file);
                 }
-                if(null==files||files.size()==0){
-                    showMessage("请添加异常图片");
+                if(null==files||files.size()==0||"".equals(edit_yiChangYuanYin.getText().toString().trim())){
+                    showMessage("请完善异常信息");
                     return;
                 }
                 showProgress();
@@ -343,6 +343,10 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                             if (list.size() < 4) {//限制上传4张图片
                                 Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian);
                                 list.add(photoDefault);
+                                addAdapter.setLastIsAdd(true);
+                            }else if(list.size() == 4){
+                                addAdapter.setShow(true);
+                                addAdapter.setLastIsAdd(false);
                             }
                             addAdapter.setList(list);
                             addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);

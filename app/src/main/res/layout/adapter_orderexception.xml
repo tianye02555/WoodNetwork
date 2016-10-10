@@ -19,5 +19,6 @@
         android:verticalSpacing="@dimen/distance_normal"
         android:horizontalSpacing="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
+        android:layout_marginLeft="@dimen/distance_short"
         android:numColumns="4"></woodnetwork.hebg3.com.woodnetwork.view.MyGridView>
 </LinearLayout>

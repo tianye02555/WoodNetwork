@@ -238,15 +238,13 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
             }
         });
         builder.setView(view);
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.setNeutralButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                if("".equals(number.getText().toString().trim())||"-".equals(number.getText().toString().trim())||".".equals(number.getText().toString().trim())){
+                    showMessage("请输入正确购买数量");
+                    return;
+                }
                 if (Double.parseDouble(number.getText().toString().trim()) > list.get(position).stock) {
                     new AlertDialog.Builder(getActivity()).setMessage("库存不足").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                         @Override
@@ -314,6 +312,12 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
 
                 }
 
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });

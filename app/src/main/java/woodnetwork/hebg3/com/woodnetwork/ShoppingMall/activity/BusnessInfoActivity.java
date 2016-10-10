@@ -68,7 +68,7 @@ public class BusnessInfoActivity extends AppCompatActivity implements BusnessInf
 
     @Override
     public void showBusnessData(BusnessInfo busnessInfo) {
-        image_head.setImageURI(Uri.parse(Const.PICTURE+busnessInfo.img));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+busnessInfo.img),image_head,this,CommonUtils.isOnlyWIFIDownLoadPic(this));
         text_name.setText("商家名称："+busnessInfo.name);
         text_email.setText("联系邮箱："+busnessInfo.mail);
         text_phone.setText("手机号码："+busnessInfo.phone);

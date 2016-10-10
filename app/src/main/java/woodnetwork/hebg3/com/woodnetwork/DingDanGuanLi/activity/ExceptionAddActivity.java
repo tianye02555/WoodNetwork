@@ -115,7 +115,7 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
             id = getIntent().getStringExtra("id");
         }
         list = new ArrayList<Bitmap>();
-        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
+        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian));
         addAdapter = new UploadPictureAdapter(this, list, 0);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 2));

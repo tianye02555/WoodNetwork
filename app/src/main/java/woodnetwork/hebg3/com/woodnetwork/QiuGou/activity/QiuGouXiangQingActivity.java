@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -48,6 +49,8 @@ public class QiuGouXiangQingActivity extends AppCompatActivity implements WoYaoB
     TextView text_beiZhu;
     @Bind(R.id.activity_qiu_gou_xiang_qing_listview)
     MyListView listview;
+    @Bind(R.id.scrollView)
+    ScrollView scrollView;
     private WoYaoBaoJiaContract.WoYaoBaoJiaPresenterInterface presenter;
     private QiuGouXiangQingAdapter adapter;
 
@@ -91,6 +94,7 @@ public class QiuGouXiangQingActivity extends AppCompatActivity implements WoYaoB
                 text_beiZhu.setText("备注："+demandInfo.remarks);
         adapter=new QiuGouXiangQingAdapter(this,demandInfo.attribute);
         listview.setAdapter(adapter);
+        scrollView.smoothScrollTo(0,0);
     }
 
 

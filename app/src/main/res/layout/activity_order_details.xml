@@ -209,7 +209,7 @@
         android:id="@+id/adapter_order_details_btn_querenshouhuo"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/view2"
         android:layout_below="@+id/view1"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
@@ -228,5 +228,10 @@
         android:text="@string/shenbaoyichang"
         android:textColor="@android:color/white" />
 
-
+<View
+    android:id="@+id/view2"
+    android:layout_width="1dp"
+    android:layout_height="1dp"
+    android:layout_below="@+id/view1"
+    android:layout_alignParentRight="true"></View>
 </RelativeLayout>

@@ -68,7 +68,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.head.setImageURI(Uri.parse(Const.PICTURE + list.get(position).pimg));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position).pimg),holder.head,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
         Double number = (list.get(position).stock) * (list.get(position).price);//一个订单的小结
         String stringNumber = df.format(number);//字符串类型的小结

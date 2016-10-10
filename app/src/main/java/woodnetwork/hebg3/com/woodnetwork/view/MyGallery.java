@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -100,7 +101,7 @@ public class MyGallery extends Gallery implements AdapterView.OnItemClickListene
 			imageview.setLayoutParams(
 					new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 //			ImageLoader.getInstance().displayImage(mUris[i], imageview, displayPictureOptions);
-			Picasso.with(mContext).load(mUris[i]).into(imageview);
+			CommonUtils.displayImage(mUris[i],imageview,mContext,CommonUtils.isOnlyWIFIDownLoadPic(mContext));
 			listImgs.add(imageview);
 		}
 

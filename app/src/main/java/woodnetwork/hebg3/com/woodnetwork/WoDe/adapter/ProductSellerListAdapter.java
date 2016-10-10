@@ -17,6 +17,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.ProductSellerList_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
@@ -49,7 +50,7 @@ public class ProductSellerListAdapter extends RecyclerView.Adapter<ProductSeller
 
     @Override
     public void onBindViewHolder(ProductSellerListAdapter.ViewHolder holder, int position) {
-        holder.head.setImageURI(Uri.parse(Const.PICTURE+productInfoList.get(position).pimg));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+productInfoList.get(position).pimg),holder.head,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         holder.name.setText(productInfoList.get(position).pname);
         holder.price.setText(String.valueOf(productInfoList.get(position).price));
         holder.stock.setText("库存：" + productInfoList.get(position).stock + "方");

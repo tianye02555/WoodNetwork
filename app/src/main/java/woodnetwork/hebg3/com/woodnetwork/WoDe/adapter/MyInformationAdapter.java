@@ -15,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
@@ -67,7 +68,7 @@ public class MyInformationAdapter extends BaseAdapter {
         LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(width/3,width/3-20);
 
         myViewHolder.image.setLayoutParams(layoutParams);
-        myViewHolder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position)));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position)),myViewHolder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         return convertView;
     }
 

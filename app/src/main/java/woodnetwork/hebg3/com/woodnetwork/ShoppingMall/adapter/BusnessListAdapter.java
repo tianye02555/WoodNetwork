@@ -54,7 +54,7 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
 
     @Override
     public void onBindViewHolder(BusnessHolder holder, int position) {
-        holder.image_head.setImageURI(Uri.parse(Const.PICTURE+list.get(position).img));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position).img),holder.image_head,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         holder.text_company.setText(list.get(position).name);
         holder.text_email.setText(list.get(position).mail);
         holder.text_phone.setText(list.get(position).phone);

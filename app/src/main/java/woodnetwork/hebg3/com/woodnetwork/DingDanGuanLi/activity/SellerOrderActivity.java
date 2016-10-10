@@ -358,21 +358,21 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
                 intent.putExtra("number", String.valueOf(list_all.get(position).products.size()));
                 intent.putExtra("flag", "1");
                 break;
-            case 2://待发货订单
+            case 1://待发货订单
                 list_Filter = adapter_filter_weiFaHuo.getList();
                 intent.putExtra("id", list_Filter.get(position).number);
-                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("oid", list_Filter.get(position).id);
                 intent.putExtra("creat_time", list_Filter.get(position).creat_time);
                 intent.putExtra("seller", list_Filter.get(position).buyer);
                 intent.putExtra("total_price", String.valueOf(list_Filter.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_Filter.get(position).products.size()));
                 intent.putExtra("flag", "1");
                 break;
-            case 3://异常订单
+            case 2://异常订单
                 list_Exception = adapter_exception.getList();
                 intent.putExtra("id", list_Exception.get(position).number);
                 intent.putExtra("creat_time", list_Exception.get(position).creat_time);
-                intent.putExtra("oid", list_all.get(position).id);
+                intent.putExtra("oid", list_Exception.get(position).id);
                 intent.putExtra("seller", list_Exception.get(position).buyer);
                 intent.putExtra("total_price", String.valueOf(list_Exception.get(position).total_price));
                 intent.putExtra("number", String.valueOf(list_Exception.get(position).products.size()));

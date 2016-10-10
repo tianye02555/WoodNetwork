@@ -15,6 +15,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderSellerInfo_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
@@ -71,7 +72,7 @@ public class SellerOrderDetailsAdapter extends BaseAdapter {
             holder.qiHuo.setImageURI(Uri.parse("res://woodnetwork.hebg3.com.woodnetwork/"+R.drawable.bancai));
         }
         holder.name.setText(list.get(position).name);
-        holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position).img));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position).img),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         holder.price.setText("￥"+list.get(position).total_price);
         holder.number.setText(list.get(position).number+"m³");
         return contentView;

@@ -15,6 +15,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProFilterList_listItem_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProPayList_listItem_productsItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
@@ -73,7 +74,7 @@ public class MyOrder_payAdapterItem_Adapter extends BaseAdapter {
         }else if(3==list.get(position).type){
             holder.qiHuo.setImageURI(Uri.parse("res://woodnetwork.hebg3.com.woodnetwork/"+R.drawable.bancai));
         }
-        holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position).img));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position).img),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         holder.name.setText(list.get(position).name);
         holder.company.setText(this.seller);
         holder.price.setText(String.valueOf(list.get(position).price));

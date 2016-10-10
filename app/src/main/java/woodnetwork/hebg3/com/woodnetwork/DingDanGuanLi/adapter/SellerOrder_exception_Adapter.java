@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.MyOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderDetailsActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.OrderExceptionActivity;
+import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity.SellerOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerProExceptionList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderSellerExceptionList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.R;
@@ -95,7 +96,7 @@ public class SellerOrder_exception_Adapter extends RecyclerView.Adapter<SellerOr
         holder.btn_queRenDingDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MyOrderActivity) context).orderReceive(position);
+                ((SellerOrderActivity) context).orderDelivery(position);
 
             }
         });

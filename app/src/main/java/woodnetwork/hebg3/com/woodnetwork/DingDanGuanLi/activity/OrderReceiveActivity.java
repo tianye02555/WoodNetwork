@@ -125,7 +125,7 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
         showOrderInfo();
         new OrderReceivePresenter(this);
         list = new ArrayList<Bitmap>();
-        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
+        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian));
         addAdapter = new UploadPictureAdapter(this, list, 1);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL, 2));
@@ -333,7 +333,7 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                     list.remove(list.size() - 1);
                     list.add(CommonUtils.getSmallAndRightBitmap(file.getAbsolutePath()));
                     if (list.size() < 4) {//限制上传4张图片
-                        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.defaultimg));
+                        list.add(BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian));
                     }
                     addAdapter.setList(list);
                     addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);

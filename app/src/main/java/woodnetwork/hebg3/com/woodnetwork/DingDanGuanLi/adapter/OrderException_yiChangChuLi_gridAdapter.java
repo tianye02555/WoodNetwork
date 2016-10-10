@@ -12,6 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import woodnetwork.hebg3.com.woodnetwork.R;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
@@ -56,7 +57,7 @@ public class OrderException_yiChangChuLi_gridAdapter extends BaseAdapter {
         } else {
             holder = (ViewHodler) contentView.getTag();
         }
-        holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position)));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position)),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         return contentView;
     }
 

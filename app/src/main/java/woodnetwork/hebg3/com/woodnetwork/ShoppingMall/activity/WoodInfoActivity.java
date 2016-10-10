@@ -149,7 +149,6 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
                 } else {
                     kind.setText("产品类型： 期货");
                 }
-//                state.setText("卖        家：" + productSellerInfo.seller);
                 String[] picture = new String[productSellerInfo.pimg.size()];
                 for (int i = 0; i < productSellerInfo.pimg.size(); i++) {
                     picture[i] = Const.PICTURE + productSellerInfo.pimg.get(i);
@@ -184,7 +183,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
                 DotContainer, R.drawable.dot_onn,
                 R.drawable.dot_offf, null, null);
 
-
+        Scrollview.smoothScrollTo(0,0);
     }
 
     @Override

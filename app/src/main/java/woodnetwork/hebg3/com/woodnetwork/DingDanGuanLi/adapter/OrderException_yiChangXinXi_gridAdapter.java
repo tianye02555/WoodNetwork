@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList_exceptionItem;
@@ -31,12 +32,20 @@ import woodnetwork.hebg3.com.woodnetwork.net.Const;
 public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
     private Context context;
     private List<String> list;
-    String pictureName;
+    private List<String> finalList=new ArrayList<String>();
     private int type;
     public OrderException_yiChangXinXi_gridAdapter(Context context, List<String> list,int type) {
         this.context = context;
         this.type=type;
         this.list = list;
+        for(String url:list){
+            if(0==type){
+                finalList.add(Const.PICTURE+url);
+            }else{
+                finalList.add(Const.PICTURE_LUNBOTU+url);
+            }
+
+        }
     }
 
     @Override
@@ -69,14 +78,15 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
             holder = (ViewHodler) contentView.getTag();
         }
         if(0==type){
-            holder.image.setImageURI(Uri.parse(Const.PICTURE+list.get(position)));
+            CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position)),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         }else{
-            holder.image.setImageURI(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position)));
+            CommonUtils.displayImage(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position)),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
         }
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommonUtils.launchNetPictureShow(context,finalList,position);
             }
         });
         return contentView;

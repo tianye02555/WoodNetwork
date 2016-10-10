@@ -64,7 +64,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderBuye
     private OrderSellerInfo orderSellerInfo;
     private SellerOrderDetailsAdapter adapter_seller;
     private String oid = "";
-    private String flag = "";//判断s
+    private String flag = "";//判断
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +134,6 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderBuye
         }
         adapter = new OrderDetailsAdapter(this, orderBuyerInfo.products);
         listView.setAdapter(adapter);
-
 
     }
 

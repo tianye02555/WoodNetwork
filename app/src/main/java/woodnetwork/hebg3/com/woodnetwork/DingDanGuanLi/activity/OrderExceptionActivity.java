@@ -117,7 +117,7 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
                 if ("1".equals(flag)) {
                     intent.putExtra("flag", "1");
                 }
-                startActivity(intent);
+                startActivityForResult(intent,0);
                 break;
         }
     }
@@ -193,6 +193,13 @@ public class OrderExceptionActivity extends AppCompatActivity implements OrderEx
     @Override
     protected void onResume() {
         super.onResume();
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK&&null!=myRequestInfo){
+            presenter.getOrderExceptionList(myRequestInfo);
+        }
     }
 }

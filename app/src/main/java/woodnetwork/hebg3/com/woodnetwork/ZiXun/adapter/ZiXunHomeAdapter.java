@@ -17,6 +17,7 @@ import java.util.List;
 import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.WoodInfoActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_productsItem;
+import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.activity.ZiXunListActivity;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList_listItem;
@@ -44,7 +45,7 @@ public class ZiXunHomeAdapter extends RecyclerView.Adapter<ZiXunHomeAdapter.View
     @Override
     public void onBindViewHolder(ZiXunHomeAdapter.ViewHolder holder, int position) {
         holder.name.setText(list.get(position).name);
-        holder.image.setImageURI(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position).img));
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position).img),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
     }
 
     @Override

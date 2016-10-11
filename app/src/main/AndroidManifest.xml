@@ -53,6 +53,12 @@
         <activity android:name=".DingDanGuanLi.activity.DemOrderActivity" />
         <activity android:name=".DingDanGuanLi.activity.SellerOrderActivity" />
         <activity android:name=".QiuGou.activity.QiuGouXiangQingActivity"></activity>
+        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
+
+        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

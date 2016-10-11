@@ -84,43 +84,49 @@ public class UploadPictureAdapter extends RecyclerView.Adapter<UploadPictureAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imag;//内容图片
+        private SimpleDraweeView imag;//内容图片
         private ImageView baiDi;//小叉号的白色底图
         private SimpleDraweeView cancle;//小叉号
 
         public ViewHolder(View itemView) {
-            super(itemView);
-            imag = (ImageView) itemView.findViewById(R.id.adapter_upload_image);
-            cancle = (SimpleDraweeView) itemView.findViewById(R.id.adapter_upload_cancel);
-            baiDi = (ImageView) itemView.findViewById(R.id.baidi);
-            cancle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                super(itemView);
+                imag = (SimpleDraweeView) itemView.findViewById(R.id.adapter_upload_image);
+                cancle = (SimpleDraweeView) itemView.findViewById(R.id.adapter_upload_cancel);
+                baiDi = (ImageView) itemView.findViewById(R.id.baidi);
+                cancle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                    if (list.size() == 4 && !lastIsAdd) {//图片总数为4，并且最后一张不是添加图片的默认图，先添加一张添加图片的默认图
-                        Bitmap photoDefault = BitmapFactory.decodeResource(context.getResources(), R.drawable.chuangjian);
-                        list.add(photoDefault);
-                        setShow(false);//设置最后添加的默认图不显示小红叉
-                        setLastIsAdd(true);//设置最后一张图是默认图
-                    }
-                    list.remove(list.get(getAdapterPosition()));
-                    notifyItemRemoved(getAdapterPosition());
-
-
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (list.size() == getAdapterPosition() + 1 && lastIsAdd) {//如果点击项为最后的图片并且图片是默认的添加更多的图片，允许点击添加更多
+                        if (list.size() == 4 && !lastIsAdd) {//图片总数为4，并且最后一张不是添加图片的默认图，先添加一张添加图片的默认图
+                            Bitmap photoDefault = BitmapFactory.decodeResource(context.getResources(), R.drawable.chuangjian);
+                            list.add(photoDefault);
+                            setShow(false);//设置最后添加的默认图不显示小红叉
+                            setLastIsAdd(true);//设置最后一张图是默认图
+                        }
+                        list.remove(list.get(getAdapterPosition()));
                         if (flag == 1) {
-                            ((OrderReceiveActivity) context).addReceivePicture(view);
+                            ((OrderReceiveActivity)context).setChooseNumber( ((OrderReceiveActivity)context).getChooseNumber()+1);
                         } else {
-                            ((ExceptionAddActivity) context).addExceptionPicture(view);
+                            ((ExceptionAddActivity)context).setChooseNumber( ((ExceptionAddActivity)context).getChooseNumber()+1);
+                        }
+
+                        notifyItemRemoved(getAdapterPosition());
+
+
+                    }
+                });
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (list.size() == getAdapterPosition() + 1 && lastIsAdd) {//如果点击项为最后的图片并且图片是默认的添加更多的图片，允许点击添加更多
+                            if (flag == 1) {
+                                ((OrderReceiveActivity) context).addReceivePicture(view);
+                            } else {
+                                ((ExceptionAddActivity) context).addExceptionPicture(view);
+                            }
                         }
                     }
-                }
-            });
+                });
         }
     }
 }

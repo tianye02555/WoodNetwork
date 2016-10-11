@@ -5,11 +5,12 @@
     android:layout_height="60dp"
     android:orientation="vertical">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/adapter_upload_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/defaultimg" />
+        fresco:placeholderImage="@drawable/chuangjian"
+        />
 
 
     <ImageView

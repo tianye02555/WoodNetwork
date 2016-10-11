@@ -3,21 +3,16 @@ package woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,17 +33,13 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.iwf.photopicker.PhotoPicker;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.UploadPictureAdapter;
-import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.ExceptionList;
-import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.bean.OrderBuyerInfo;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.contract.ExceptionAddContract;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.presenter.ExceptionAddPresenter;
 import woodnetwork.hebg3.com.woodnetwork.R;
-import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment.DividerItemDecoration;
-import woodnetwork.hebg3.com.woodnetwork.Utils.AsyncTaskForUpLoadFilesNew;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
-import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
@@ -91,10 +81,20 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     private String title_price = "";
     private String creatTime = "";
     private String id;
+
+    public int getChooseNumber() {
+        return chooseNumber;
+    }
+
+    public void setChooseNumber(int chooseNumber) {
+        this.chooseNumber = chooseNumber;
+    }
+
+    private int chooseNumber = 4;
     private ExceptionAddContract.ExceptionAddPresenterInterface presenter;
     private SharePreferencesUtils sharePreferencesUtils;
     private HashMap<String, File> files = new HashMap<String, File>();
-    ;
+    private List<String> pics = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +151,7 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                     File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
                     files.put("image", file);
                 }
-                if(null==files||files.size()==0||"".equals(edit_yiChangYuanYin.getText().toString().trim())){
+                if (null == files || files.size() == 0 || "".equals(edit_yiChangYuanYin.getText().toString().trim())) {
                     showMessage("请完善异常信息");
                     return;
                 }
@@ -183,6 +183,7 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
 
     @Override
     public void addExceptionPicture(View view) {
+
         showPopupWindow(view);
     }
 
@@ -263,19 +264,13 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
 
             @Override
             public void onClick(View arg0) {
-                Intent intent;
-                if (Build.VERSION.SDK_INT < 19) {
-                    intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/*");
-
-                } else {
-                    intent = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                }
+                PhotoPicker.PhotoPickerBuilder builder = PhotoPicker.builder();
+                builder.setPhotoCount(chooseNumber)
+                        .setShowCamera(false)
+                        .setShowGif(true)
+                        .setPreviewEnabled(false)
+                        .start(ExceptionAddActivity.this, PhotoPicker.REQUEST_CODE);
                 popupWindow.dismiss();
-                startActivityForResult(intent, ALBUM);
-
             }
 
         });
@@ -307,6 +302,37 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PhotoPicker.REQUEST_CODE) {
+
+            if (data != null) {
+                ArrayList<String> photos =
+                        data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+                list = addAdapter.getList();
+                list.remove(list.size() - 1);
+                Bitmap bitmap;
+                BitmapFactory.Options opts = new BitmapFactory.Options();
+                opts.inTempStorage = new byte[100 * 1024];
+                opts.inPreferredConfig = Bitmap.Config.RGB_565;
+                opts.inPurgeable = true;
+                opts.inSampleSize = 4;
+                for (String url : photos) {
+                    bitmap = BitmapFactory.decodeFile(url, opts);
+                    list.add(bitmap);
+                    chooseNumber = chooseNumber - 1;
+                }
+                if (list.size() < 4) {//限制上传4张图片
+                    Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian);
+                    list.add(photoDefault);
+                    addAdapter.setLastIsAdd(true);
+                } else if (list.size() == 4) {
+                    addAdapter.setShow(true);
+                    addAdapter.setLastIsAdd(false);
+                }
+                addAdapter.setList(list);
+                addAdapter.notifyDataSetChanged();
+                return;
+            }
+        }
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case TAKE_PHOTO:
@@ -319,44 +345,49 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                     list = addAdapter.getList();
                     list.remove(list.size() - 1);
                     list.add(CommonUtils.getSmallAndRightBitmap(file.getAbsolutePath()));
+                    chooseNumber = chooseNumber - 1;
                     if (list.size() < 4) {//限制上传4张图片
                         list.add(BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian));
+                    } else if (list.size() == 4) {
+                        addAdapter.setShow(true);
+                        addAdapter.setLastIsAdd(false);
                     }
                     addAdapter.setList(list);
                     addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);
                     break;
-                case ALBUM:
-                    if (data != null) {
-                        try {
-                            Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
-                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                            Cursor cursor = getContentResolver().query(selectedImage,
-                                    filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
-                            cursor.moveToFirst();
-                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                            String picturePath = cursor.getString(columnIndex);  //获取照片路径
-                            cursor.close();
-
-                            list = addAdapter.getList();
-                            list.remove(list.size() - 1);
-                            list.add(CommonUtils.getSmallAndRightBitmap(picturePath));
-                            if (list.size() < 4) {//限制上传4张图片
-                                Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian);
-                                list.add(photoDefault);
-                                addAdapter.setLastIsAdd(true);
-                            }else if(list.size() == 4){
-                                addAdapter.setShow(true);
-                                addAdapter.setLastIsAdd(false);
-                            }
-                            addAdapter.setList(list);
-                            addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);
-                        } catch (Exception e) {
-                            // TODO Auto-generatedcatch block
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
+//                case ALBUM:
+//                    if (data != null) {
+//                        try {
+//                            Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+//                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+//                            Cursor cursor = getContentResolver().query(selectedImage,
+//                                    filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+//                            cursor.moveToFirst();
+//                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                            String picturePath = cursor.getString(columnIndex);  //获取照片路径
+//                            cursor.close();
+//
+//                            list = addAdapter.getList();
+//                            list.remove(list.size() - 1);
+//                            list.add(CommonUtils.getSmallAndRightBitmap(picturePath));
+//                            if (list.size() < 4) {//限制上传4张图片
+//                                Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.drawable.chuangjian);
+//                                list.add(photoDefault);
+//                                addAdapter.setLastIsAdd(true);
+//                            }else if(list.size() == 4){
+//                                addAdapter.setShow(true);
+//                                addAdapter.setLastIsAdd(false);
+//                            }
+//                            addAdapter.setList(list);
+//                            addAdapter.notifyItemRangeChanged(list.size() - 2, list.size() - 1);
+//                        } catch (Exception e) {
+//                            // TODO Auto-generatedcatch block
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    break;
             }
         }
     }
+
 }

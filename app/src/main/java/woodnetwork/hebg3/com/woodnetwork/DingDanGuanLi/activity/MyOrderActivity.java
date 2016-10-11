@@ -348,11 +348,8 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
     @Override
     public void loadMoreFilter(List<OrderBuyerProFilterList_listItem> list) {
         recyclerview.loadMoreComplete();
-//        if (list.get(0).status == 0) {//未付款
         list_Filter = adapter_filter_weiFuKuan.getList();
-//        } else if (list.get(0).status == 2) {//未收货
-//            list_Filter = adapter_filter_weiShouHuo.getList();
-//        }
+
         list_Filter.addAll(list);
         adapter.notifyDataSetChanged();
     }
@@ -364,10 +361,10 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
             recyclerview.setLoadingMoreEnabled(true);
         }
         list_Filter = orderBuyerProFilterList.list;
-        if (orderBuyerProFilterList.list.get(0).status == 0) {//未付款
+
             adapter_filter_weiFuKuan.setList(list_Filter);
             adapter_filter_weiFuKuan.notifyDataSetChanged();
-        }
+
     }
 
     @Override

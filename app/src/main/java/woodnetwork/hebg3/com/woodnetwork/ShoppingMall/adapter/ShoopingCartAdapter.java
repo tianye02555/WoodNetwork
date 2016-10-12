@@ -241,33 +241,30 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             shanChu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    list.get(getAdapterPosition() - 1).checkbox = true;
-                    SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(context);
-                    Request_getAttribute request_getAttribute = new Request_getAttribute();
-                    request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
+                    new AlertDialog.Builder(context).setTitle("提示").setMessage("确定删除商品吗").setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            list.get(getAdapterPosition() - 1).checkbox = true;
+                            SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(context);
+                            Request_getAttribute request_getAttribute = new Request_getAttribute();
+                            request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
-                    ArrayList<String> sidList = new ArrayList<String>();
-                    sidList.add(list.get(getAdapterPosition() - 1).sid);
-                    Request_shopcar_delete request_shopcar_delete = new Request_shopcar_delete();
-                    request_shopcar_delete.sid = sidList;
+                            ArrayList<String> sidList = new ArrayList<String>();
+                            sidList.add(list.get(getAdapterPosition() - 1).sid);
+                            Request_shopcar_delete request_shopcar_delete = new Request_shopcar_delete();
+                            request_shopcar_delete.sid = sidList;
 
-                    MyRequestInfo myRequestInfo = new MyRequestInfo();
-                    myRequestInfo.req = request_shopcar_delete;
-                    myRequestInfo.req_meta = request_getAttribute;
-                    ((ShoopingCartActivity) context).presenter.deleteGoods(myRequestInfo);
+                            MyRequestInfo myRequestInfo = new MyRequestInfo();
+                            myRequestInfo.req = request_shopcar_delete;
+                            myRequestInfo.req_meta = request_getAttribute;
+                            ((ShoopingCartActivity) context).presenter.deleteGoods(myRequestInfo);
+                        }
+                    }).show();
+
 
                 }
             });
 
-
-//            itemVw.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(context, WoodInfoActivity.class);
-//                    intent.putExtra("pid", list.get(getAdapterPosition()).pid);
-//                    context.startActivity(intent);
-//                }
-//            });
         }
     }
 

@@ -314,6 +314,9 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
 
     @Override
     public void loadMoreFilter(List<OrderBuyerDemFilterList_listItem> list) {
+        if (null==list||0==list.size()){
+            return;
+        }
         recyclerview.loadMoreComplete();
         if (list.get(0).status == 0) {//未付款
             list_Filter = adapter_filter_weiFuKuan.getList();
@@ -326,6 +329,10 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
 
     @Override
     public void refreshFilter(OrderBuyerDemFilterList orderBuyerDemFilterList) {
+        if (null==orderBuyerDemFilterList||null==orderBuyerDemFilterList.list||0==orderBuyerDemFilterList.list.size()){
+            recyclerview.refreshComplete();
+            return;
+        }
         recyclerview.refreshComplete();
         if (1 < orderBuyerDemFilterList.total_page) {//如果刷新后数据多余一页，加载更多功能启用
             recyclerview.setLoadingMoreEnabled(true);
@@ -512,4 +519,5 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
         super.onPause();
         isFirst=false;
     }
+
 }

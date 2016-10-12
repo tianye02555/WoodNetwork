@@ -205,6 +205,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
 
             @Override
             public void afterTextChanged(Editable editable) {
+
                 if (editable.toString().trim().contains(".")) {
                     int index = editable.toString().indexOf(".");
                     if (editable.toString().trim().length() - 1 - index > 3) {
@@ -222,15 +223,13 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
             }
         });
         builder.setView(view);
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.setNeutralButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                if("".equals(number.getText().toString().trim())||"-".equals(number.getText().toString().trim())||".".equals(number.getText().toString().trim())){
+                    showMessage("请输入正确购买数量");
+                    return;
+                }
                 if (Double.parseDouble(number.getText().toString().trim()) <= 0) {
                     new AlertDialog.Builder(WoodInfoActivity.this).setMessage("输入错误").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                         @Override
@@ -320,9 +319,15 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
                     }
                     dialogInterface.dismiss();
                 }
-
-
             }
+        });
+        builder.setNeutralButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                    dialogInterface.dismiss();
+                }
+
         });
         builder.show();
     }

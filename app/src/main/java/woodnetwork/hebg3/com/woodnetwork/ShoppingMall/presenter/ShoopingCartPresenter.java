@@ -49,6 +49,7 @@ public class ShoopingCartPresenter implements ShoopingCartContract.ShoopingCartP
 
             @Override
             public void onFailed(String string) {
+                shoopingCartView.closeProgress();
                 shoopingCartView.showMessage(string);
             }
         });

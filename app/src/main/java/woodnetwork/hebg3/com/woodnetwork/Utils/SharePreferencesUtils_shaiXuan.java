@@ -7,29 +7,29 @@ import android.content.SharedPreferences;
  * Created by ty on 2016/8/15 0015.
  */
 
-public class SharePreferencesUtils {
-    private static final String FILE_NAME = "app_data";
+public class SharePreferencesUtils_shaiXuan {
+    private static final String FILE_NAME = "shaixuan";
     private static SharedPreferences mSharedPreferences;// 单例
     private static Context context;
 
-    private SharePreferencesUtils(Context context) {
+    private SharePreferencesUtils_shaiXuan(Context context) {
         mSharedPreferences = context.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
-        SharePreferencesUtils.context=context;
+        SharePreferencesUtils_shaiXuan.context=context;
     }
 
     /**
      * 内部类实现线程安全的单利模式
      */
     private static class SharePreferencesHelper{
-        private static SharePreferencesUtils sharePreferencesUtils=new SharePreferencesUtils(context);
+        private static SharePreferencesUtils_shaiXuan sharePreferencesUtils=new SharePreferencesUtils_shaiXuan(context);
     }
 
     /**
      * 内部获取单利，不对外
      * @return
      */
-    private static SharePreferencesUtils getInstance(){
+    private static SharePreferencesUtils_shaiXuan getInstance(){
         return SharePreferencesHelper.sharePreferencesUtils;
     }
 
@@ -37,8 +37,8 @@ public class SharePreferencesUtils {
      * 外部获取单利对象
      * @return SharePreferencesUtils单利对象
      */
-    public static SharePreferencesUtils getSharePreferencesUtils(Context context){
-        SharePreferencesUtils.context=context;
+    public static SharePreferencesUtils_shaiXuan getSharePreferencesUtils(Context context){
+        SharePreferencesUtils_shaiXuan.context=context;
         return getInstance();/**/
     }
     /**

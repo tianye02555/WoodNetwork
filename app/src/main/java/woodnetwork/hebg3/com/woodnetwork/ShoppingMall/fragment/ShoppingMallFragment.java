@@ -53,6 +53,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils_shaiXuan;
 import woodnetwork.hebg3.com.woodnetwork.sysfunction.activity.LoginActivity;
 import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
@@ -199,6 +200,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         }
         this.woodFilterAttribute = woodFilterAttribute;
         shaiXuanAdapter = new ShaiXuanAdapter(getActivity(), woodFilterAttribute.attribute);
+        SharePreferencesUtils_shaiXuan.getSharePreferencesUtils(getActivity()).getEditor().clear().commit();
         mylistview.setAdapter(shaiXuanAdapter);
     }
 
@@ -371,18 +373,29 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
                 if (View.GONE == relShaixuan.getVisibility()) {
                     relShaixuan.setVisibility(View.VISIBLE);
                     recyclerview.setVisibility(View.GONE);
+                    shaiXuanAdapter.setNeedGetsp(true);
+                    shaiXuanAdapter.notifyDataSetChanged();
+
                 } else {
+
                     relShaixuan.setVisibility(View.GONE);
+//                    shaiXuanAdapter = new ShaiXuanAdapter(getActivity(), woodFilterAttribute.attribute);
+//                    mylistview.setAdapter(shaiXuanAdapter);
                     recyclerview.setVisibility(View.VISIBLE);
+//                    shaiXuanAdapter.notifyDataSetChanged();
                 }
 
                 break;
             case R.id.text_chongzhi://筛选重置
+
                 shaiXuanAdapter = new ShaiXuanAdapter(getActivity(), woodFilterAttribute.attribute);
+                shaiXuanAdapter.setNeedGetsp(false);
                 mylistview.setAdapter(shaiXuanAdapter);
 
                 break;
             case R.id.text_queding://筛选确定
+                shaiXuanAdapter.setNeedGetsp(true);
+                shaiXuanAdapter.getEditor().commit();
                 relShaixuan.setVisibility(View.GONE);
                 recyclerview.setVisibility(View.VISIBLE);
                 request_shoppingMall_woodsList.attribute = shaiXuanAdapter.getShaiXuanList();

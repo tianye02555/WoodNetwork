@@ -79,6 +79,13 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         holder.xuanZhong.setChecked(list.get(position).checkbox);
         holder.price.setText(String.valueOf(list.get(position).price));
         holder.number.setText(String.valueOf(list.get(position).stock));
+        if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
+            holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
+            holder.baoCun.setClickable(false);
+        }else {
+            holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
+            holder.baoCun.setClickable(true);
+        }
         holder.number.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -87,7 +94,13 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
+                    holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
+                    holder.baoCun.setClickable(false);
+                }else {
+                    holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
+                    holder.baoCun.setClickable(true);
+                }
             }
 
             @Override
@@ -102,7 +115,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                     new AlertDialog.Builder(context).setMessage("只能输入数字").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            holder.number.setText("");
+                           holder.number.setText(null);
                             dialogInterface.dismiss();
                         }
                     }).show();
@@ -162,6 +175,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                     CommonUtils.showToast(context,"请输入购买数量");
                     return;
                 }
+
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(context);
                 Request_getAttribute request_getAttribute = new Request_getAttribute();
                 request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
@@ -241,7 +255,13 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             shanChu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new AlertDialog.Builder(context).setTitle("提示").setMessage("确定删除商品吗").setNegativeButton("确定", new DialogInterface.OnClickListener() {
+
+                    new AlertDialog.Builder(context).setTitle("提示").setMessage("确定删除商品吗").setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             list.get(getAdapterPosition() - 1).checkbox = true;
@@ -258,6 +278,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                             myRequestInfo.req = request_shopcar_delete;
                             myRequestInfo.req_meta = request_getAttribute;
                             ((ShoopingCartActivity) context).presenter.deleteGoods(myRequestInfo);
+
                         }
                     }).show();
 

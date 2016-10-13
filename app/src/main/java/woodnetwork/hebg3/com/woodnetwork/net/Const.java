@@ -25,7 +25,7 @@ public class Const {
 //    //图片前缀
 //    public static final String PICTURE_LUNBOTU = "http://192.168.2.12:8080";
 
-
+// 132 8006
 
     public static final String HTTP = "http://";
 

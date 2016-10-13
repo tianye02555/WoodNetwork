@@ -92,7 +92,7 @@
         android:layout_marginTop="@dimen/distance_short"
         android:layout_marginBottom="@dimen/distance_short"
         android:padding="@dimen/distance_short"
-        android:layout_marginRight="@dimen/distance_longest"
+        android:layout_marginRight="@dimen/distance_normal"
         android:background="@drawable/button_shape_title"
         android:text="@string/lijigoumai"
         android:textColor="@android:color/white"

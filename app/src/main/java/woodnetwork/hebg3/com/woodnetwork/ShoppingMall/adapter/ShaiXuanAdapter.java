@@ -1,6 +1,7 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import woodnetwork.hebg3.com.woodnetwork.R;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_spinnerInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils_shaiXuan;
 import woodnetwork.hebg3.com.woodnetwork.view.FlowRadioGroup;
 import woodnetwork.hebg3.com.woodnetwork.view.MyGridView;
 
@@ -31,12 +34,41 @@ public class ShaiXuanAdapter extends BaseAdapter {
     private List<Request_spinnerInfo> shaiXuanList;//筛选中间的值得集合
     private Request_spinnerInfo request_spinnerInfo;//每一项里边的筛选值
     private List<Request_spinnerInfo> shaiXuanListFinal;//筛选最后的值得集合
+    private SharePreferencesUtils_shaiXuan sharePreferencesUtils;
+
+    public void setNeedGetsp(boolean needGetsp) {
+        isNeedGetsp = needGetsp;
+    }
+
+    private boolean isNeedGetsp = true;
+
+    public SharedPreferences.Editor getEditor() {
+        return editor;
+    }
+
+    public void setEditor(SharedPreferences.Editor editor) {
+        this.editor = editor;
+    }
+
+    private SharedPreferences.Editor editor;
+
+    public int getSelectPosition() {
+        return selectPosition;
+    }
+
+    public void setSelectPosition(int selectPosition) {
+        this.selectPosition = selectPosition;
+    }
+
+    private int selectPosition = 0;
 
     public ShaiXuanAdapter(Context context, List<WoodFilterInfo> list) {
         this.context = context;
         this.list = list;
         shaiXuanList = new ArrayList<Request_spinnerInfo>();
         shaiXuanListFinal = new ArrayList<Request_spinnerInfo>();
+        sharePreferencesUtils = SharePreferencesUtils_shaiXuan.getSharePreferencesUtils(context);
+        editor = sharePreferencesUtils.getEditor();
         for (int i = 0; i < list.size(); i++) {//添加中间请求体
             request_spinnerInfo = new Request_spinnerInfo();
             shaiXuanList.add(request_spinnerInfo);
@@ -76,6 +108,15 @@ public class ShaiXuanAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View contentView, ViewGroup viewGroup) {
+        if (isNeedGetsp) {
+            for (int l = 0; l < list.get(position).value.size(); l++) {
+                if (list.get(position).value.get(l).value_name.equals((String) (sharePreferencesUtils.getData(list.get(position).name, "")))) {
+                    setSelectPosition(l);
+                }
+            }
+        }
+
+
         ViewHodler holder = null;
         if (null == contentView) {
             holder = new ViewHodler();
@@ -86,7 +127,9 @@ public class ShaiXuanAdapter extends BaseAdapter {
             holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
                     RadioButton radioButton = (RadioButton) radioGroup.findViewById(i);
+                        editor.putString(list.get(position).name, radioButton.getText().toString());
                     //获取选择的分类类型
                     shaiXuanList.get(position).attr_id = list.get(position).attr_id;
                     shaiXuanList.get(position).attr_vaule_id = (String) radioButton.getTag();
@@ -113,7 +156,7 @@ public class ShaiXuanAdapter extends BaseAdapter {
             holder = (ViewHodler) contentView.getTag();
         }
         holder.textView.setText(list.get(position).name);
-        ((RadioButton) holder.radioGroup.getChildAt(0)).setChecked(true);//默认选择第一个
+        ((RadioButton) holder.radioGroup.getChildAt(selectPosition)).setChecked(true);//默认选择第一个
         return contentView;
     }
 

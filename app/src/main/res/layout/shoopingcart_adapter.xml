@@ -142,7 +142,8 @@
         android:layout_width="60dp"
         android:layout_height="35dp"
         android:layout_below="@+id/lin"
-        android:background="@drawable/button_shape_title"
+        android:clickable="false"
+        android:background="@drawable/button_shape_hui"
         android:textColor="@android:color/white"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_btn_shanchu"
         android:layout_marginTop="@dimen/distance_short"
@@ -153,6 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_small"
+        android:layout_marginLeft="@dimen/distance_short"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
         android:text="@string/xuanzhong"
         android:layout_below="@+id/lin"/>

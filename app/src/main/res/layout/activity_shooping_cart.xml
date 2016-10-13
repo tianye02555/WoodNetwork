@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_normal"
-            android:layout_marginLeft="@dimen/distance_normal"
+            android:layout_marginLeft="@dimen/distance_short"
             android:layout_alignBaseline="@+id/activity_shopping_cart_btn_shanchu"
             android:text="@string/quanxuan"/>
 

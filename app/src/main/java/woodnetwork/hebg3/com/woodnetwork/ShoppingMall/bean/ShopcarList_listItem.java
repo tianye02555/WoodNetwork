@@ -39,6 +39,8 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public String delivery_id;
     @Expose
+    public Integer flag;
+    @Expose
     public List<ShopcarList_listItem_attributeItem> attribute;
 
 }

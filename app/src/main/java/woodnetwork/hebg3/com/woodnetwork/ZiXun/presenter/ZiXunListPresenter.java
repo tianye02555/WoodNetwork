@@ -28,17 +28,17 @@ public class ZiXunListPresenter implements ZiXunListContract.ZiXunListPresenterI
 
     @Override
     public void getCategoryListData(MyRequestInfo myRequestInfo) {
-        ziXunListView.showProgress();
+
         ziXunListMode.getCategoryListData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                ziXunListView.closeProgress();
+
                 ziXunListView.setCategoryListInfo((CategoryList) ((ResponseBody) object).obj);
             }
 
             @Override
             public void onFailed(String string) {
-                ziXunListView.closeProgress();
+
                 ziXunListView.showMessage(string);
             }
         });

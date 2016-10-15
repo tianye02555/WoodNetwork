@@ -24,6 +24,7 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.ReportsInfo;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.ReportsContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.presenter.ReportsPresenter;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.contract.ZiXunXiangQingContrack;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 /**
  * 报表页
@@ -66,12 +67,12 @@ public class ReportsActivity extends AppCompatActivity implements ReportsContrac
     }
 
     @Override
-    public void showWebViewUri(ReportsInfo reportsInfo) {
-        webView.loadUrl("http://baidu.com");
+    public void showWebViewUri(final  ReportsInfo reportsInfo) {
+        webView.loadUrl(Const.PICTURE+reportsInfo.url);
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl("http://baidu.com");
+                view.loadUrl(Const.PICTURE+reportsInfo.url);
                 return true;
             }
         });

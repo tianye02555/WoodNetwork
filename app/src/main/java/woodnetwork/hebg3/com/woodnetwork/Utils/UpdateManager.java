@@ -23,7 +23,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.widget.Toast;
+
+import woodnetwork.hebg3.com.woodnetwork.R;
 
 
 /**
@@ -223,8 +226,10 @@ public class UpdateManager {
 	private void showDownloadDialog() {
 		// 构造软件下载对话框
 	    softUpdate=new ProgressDialog(mContext);
-	    softUpdate.setTitle("正在更新");//标题
-	    softUpdate.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);//设置水平进度条
+		softUpdate.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	    softUpdate.setTitle("提示");//标题
+		softUpdate.setMessage("正在下载请稍后……");
+//	    softUpdate.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);//设置水平进度条\
 	    softUpdate.setMax(100);//设置最大进度
 	    softUpdate.setCanceledOnTouchOutside(false);//是否允许点击对话框外取消对话框
 	    softUpdate.setCancelable(true);//是否允许点击back取消对话框
@@ -272,7 +277,8 @@ public class UpdateManager {
 					// 创建连接
 					HttpURLConnection conn = (HttpURLConnection) url
 							.openConnection();
-					conn.connect();
+					conn .setRequestProperty("Accept-Encoding", "identity");
+//					conn.connect();
 					// 获取文件大小
 					int length = conn.getContentLength();
 					// 创建输入流--读取数据
@@ -295,6 +301,10 @@ public class UpdateManager {
 						count += numread;
 						// 计算进度条位置
 						progress = (int) (((float) count / length) * 100);
+//						if(progress){
+//
+//						}
+//						progress +=10;
 						// 更新进度
 						mHandler.sendEmptyMessage(DOWNLOAD);
 						if (numread <= 0) {

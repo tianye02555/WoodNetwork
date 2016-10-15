@@ -98,7 +98,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     for (ShopcarList_listItem shopcarList_listItem : shopcarList.list) {
-                        if (!shopcarList_listItem.checkbox) {
+                        if (!shopcarList_listItem.checkbox && 0 == shopcarList_listItem.flag) {
                             shopcarList_listItem.checkbox = true;
                         }
                         adapter.notifyDataSetChanged();
@@ -260,7 +260,7 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
         for (int i = 0; i < adapter.getList().size(); i++) {
             if (adapter.getList().get(i).checkbox) {
                 ShopcarList_listItemList.add(adapter.getList().get(i));
-                shopCarPosition.add(String.valueOf(i+1));
+                shopCarPosition.add(String.valueOf(i + 1));
             }
         }
         //判断是否选择订单

@@ -16,6 +16,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.model.ShoppingMallModel;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.VersionInfo;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
 
 /**
@@ -94,6 +95,22 @@ public class ShoppingMallPresenter implements ShoppingMallContract.ShoppingMallP
             @Override
             public void onFailed(String string) {
                 shoppingMallView.showMessage(string);
+            }
+        });
+    }
+    @Override
+    public void getCheckUpdateData(MyRequestInfo myRequestInfo) {
+
+        shoppingMallModel.getVersionData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
+            @Override
+            public void onSuccess(Object object) {
+
+                shoppingMallView.uploadVerSion((VersionInfo) ((ResponseBody)object).obj);
+            }
+
+            @Override
+            public void onFailed(String string) {
+
             }
         });
     }

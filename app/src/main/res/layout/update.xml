@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about_me"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.activity.AboutMeActivity">
+<com.facebook.drawee.view.SimpleDraweeView
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    fresco:placeholderImage="@drawable/jindutiao"
+    android:paddingLeft="@dimen/distance_normal"
+    android:paddingRight="@dimen/distance_normal"
+    fresco:placeholderImageScaleType="fitXY"/>
+</LinearLayout>

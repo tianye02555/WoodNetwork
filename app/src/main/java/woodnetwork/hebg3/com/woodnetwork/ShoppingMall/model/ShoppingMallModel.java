@@ -10,6 +10,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterAttribute;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ServiceInterfaceCont;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.VersionInfo;
 import woodnetwork.hebg3.com.woodnetwork.net.ClientParams;
 import woodnetwork.hebg3.com.woodnetwork.net.NetTask;
 import woodnetwork.hebg3.com.woodnetwork.net.ResponseBody;
@@ -23,6 +24,7 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
     private OnServiceBaceInterface onServiceBaceInterface_spinner;
     private OnServiceBaceInterface onServiceBaceInterface_goods;
     private OnServiceBaceInterface onServiceBaceInterface_getShopcarAdd;
+    private OnServiceBaceInterface onServiceBaceInterface_getVersionData;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -47,6 +49,13 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
                         onServiceBaceInterface_getShopcarAdd.onSuccess(body);
                     } else  {//失败
                         onServiceBaceInterface_getShopcarAdd.onFailed(body.base.msg);
+                    }
+                    break;
+                case 3://自动更新
+                    if ("0".equals(body.base.code)) {//成功
+                        onServiceBaceInterface_getVersionData.onSuccess(body);
+                    } else  {//失败
+                        onServiceBaceInterface_getVersionData.onFailed(body.base.msg);
                     }
                     break;
             }
@@ -81,6 +90,16 @@ public class ShoppingMallModel implements ShoppingMallModelInterface {
         params.getMethod = ServiceInterfaceCont.SHOPCARADD;
         params.params = CommonUtils.getParamString(param);
         new NetTask(handler.obtainMessage(2), params).execute();
+    }
+    @Override
+    public void getVersionData(Object object, OnServiceBaceInterface onServiceBaceInterface) {
+        this.onServiceBaceInterface_getVersionData = onServiceBaceInterface;
+        ClientParams params = new ClientParams();
+        params.http_method = ClientParams.HTTP_GET;
+        params.getMethod = ServiceInterfaceCont.VERSIONINFO;
+        params.GETTYPE = "1";
+        params.params = CommonUtils.getParamString(object);
+        new NetTask(handler.obtainMessage(3), params, VersionInfo.class).execute();
     }
 
 //    @Override

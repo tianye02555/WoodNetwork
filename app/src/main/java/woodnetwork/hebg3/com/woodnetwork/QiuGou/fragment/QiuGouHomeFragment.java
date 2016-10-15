@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -38,7 +39,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
 
-public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface {
+public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface ,View.OnTouchListener{
 
 
     @Bind(R.id.imge_title_left)
@@ -65,6 +66,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_qiu_gou_home, container, false);
+        view.setOnTouchListener(this);
         ButterKnife.bind(this, view);
         imgeTitleLeft.setVisibility(View.GONE);
         textTitle.setText("木联网");
@@ -167,5 +169,9 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
     @Override
     public void showMessage(String string) {
         CommonUtils.showToast(getActivity(), string);
+    }
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return true;
     }
 }

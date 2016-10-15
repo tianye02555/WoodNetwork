@@ -79,6 +79,14 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         holder.xuanZhong.setChecked(list.get(position).checkbox);
         holder.price.setText(String.valueOf(list.get(position).price));
         holder.number.setText(String.valueOf(list.get(position).stock));
+        if(list.get(position).flag==0){
+            holder.shiXiao.setVisibility(View.INVISIBLE);
+            holder.xuanZhong.setVisibility(View.VISIBLE);
+        }else{
+            holder.shiXiao.setVisibility(View.VISIBLE);
+            holder.xuanZhong.setVisibility(View.INVISIBLE);
+            holder.number.setEnabled(false);
+        }
         if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
             holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
             holder.baoCun.setClickable(false);
@@ -170,6 +178,13 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         holder.baoCun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
+                   return;
+                }
+                if ("0".equals(holder.number.getText().toString().trim())) {
+                    CommonUtils.showToast(context,"购买数量必须大于0");
+                    return;
+                }
 
                 if ("".equals(holder.number.getText().toString().trim())) {
                     CommonUtils.showToast(context,"请输入购买数量");
@@ -234,6 +249,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         private Button baoCun;//保存
         private CheckBox xuanZhong;//选中按钮
         private TextView xiaoJi;//小计
+        private TextView shiXiao;//商品失效
         private EditText number;//数量
         private RelativeLayout rel;
 
@@ -249,6 +265,7 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
             baoCun = (Button) itemView.findViewById(R.id.shopppingcart_adapter_btn_baocun);
             xuanZhong = (CheckBox) itemView.findViewById(R.id.shopppingcart_adapter_checkbox);
             xiaoJi = (TextView) itemView.findViewById(R.id.shopppingcart_adapter_txt_xiaojijinge);
+            shiXiao = (TextView) itemView.findViewById(R.id.shopppingcart_adapter_text_shixiao);
             number = (EditText) itemView.findViewById(R.id.shopppingcart_adapter_edit_stock);
             rel = (RelativeLayout) itemView.findViewById(R.id.shoppingcar_rel);
 

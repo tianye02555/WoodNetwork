@@ -159,6 +159,18 @@
         android:text="@string/xuanzhong"
         android:layout_below="@+id/lin"/>
     <TextView
+        android:id="@+id/shopppingcart_adapter_text_shixiao"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textSize="@dimen/font_normal"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="@dimen/distance_short"
+        android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
+        android:text="商品失效"
+        android:background="@color/gouwuchehui"
+        android:layout_below="@+id/lin"/>
+
+    <TextView
         android:id="@+id/shopppingcart_adapter_txt_xiaoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

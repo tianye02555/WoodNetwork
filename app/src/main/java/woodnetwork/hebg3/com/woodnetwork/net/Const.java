@@ -10,12 +10,12 @@ import android.os.Environment;
 public class Const {
     public static final String APPNAME = "MULIANWANG";
 
-    //云
-    public static final String AUTHORITY = "www.woodlian.cn/dev/wood/v1";
-    //外网图片前缀
-    public static final String PICTURE = "http://www.woodlian.cn/";
-    //外网图片前缀
-    public static final String PICTURE_LUNBOTU = "http://www.woodlian.cn";
+//    //云
+//    public static final String AUTHORITY = "www.woodlian.cn/dev/wood/v1";
+//    //外网图片前缀
+//    public static final String PICTURE = "http://www.woodlian.cn/";
+//    //外网图片前缀
+//    public static final String PICTURE_LUNBOTU = "http://www.woodlian.cn";
 
 
 //    //本地
@@ -24,6 +24,13 @@ public class Const {
 //    public static final String PICTURE = "http://192.168.2.12:8080/wood/";
 //    //图片前缀
 //    public static final String PICTURE_LUNBOTU = "http://192.168.2.12:8080";
+
+        //本地
+    public static final String AUTHORITY = "192.168.2.132:8006/wood/dev/wood/v1";
+    //图片前缀
+    public static final String PICTURE = "http://192.168.2.132:8006/wood/";
+    //图片前缀
+    public static final String PICTURE_LUNBOTU = "http://192.168.2.132:8006";
 
 // 132 8006
 

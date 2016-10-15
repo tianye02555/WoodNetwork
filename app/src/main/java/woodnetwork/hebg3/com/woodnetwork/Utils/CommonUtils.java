@@ -170,6 +170,19 @@ public class CommonUtils {
             return "";
         }
     }
+    /**
+     * 获取应用版本
+     *
+     * @param context
+     * @return
+     */
+    public static int getVersionCode(Context context) {
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (NameNotFoundException e) {
+            return 0;
+        }
+    }
 
 //	/** 获取屏幕宽度 */
 //	@SuppressWarnings("deprecation")

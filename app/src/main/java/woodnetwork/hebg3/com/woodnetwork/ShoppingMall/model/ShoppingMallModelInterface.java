@@ -27,4 +27,10 @@ public interface ShoppingMallModelInterface {
      * @param onLoginLisenter
      */
     void getShopcarAdd(Object param, final OnServiceBaceInterface onLoginLisenter);
+    /**
+     * 获取版本信息
+     * @param object
+     * @param onServiceBaceInterface
+     */
+    void getVersionData(Object object, OnServiceBaceInterface onServiceBaceInterface);
 }

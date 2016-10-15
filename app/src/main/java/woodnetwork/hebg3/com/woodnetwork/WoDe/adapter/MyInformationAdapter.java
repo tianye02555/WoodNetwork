@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import woodnetwork.hebg3.com.woodnetwork.R;
@@ -25,10 +26,14 @@ import woodnetwork.hebg3.com.woodnetwork.net.Const;
 public class MyInformationAdapter extends BaseAdapter {
     private Context context;
     private List<String> list;
+    private List<String> listString=new ArrayList<String>();
 
     public MyInformationAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
+        for(String url:list){
+            listString.add(Const.PICTURE+url);
+        }
     }
 
     @Override
@@ -50,13 +55,18 @@ public class MyInformationAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
+    public View getView(final int position, View convertView, ViewGroup viewGroup) {
         MyViewHolder myViewHolder = null;
         if (convertView == null) {
             myViewHolder = new MyViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.adapter_myinformation, viewGroup, false);
             myViewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.adapter_myinformation_image);
-
+            myViewHolder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CommonUtils.launchNetPictureShow(context,listString,position);
+                }
+            });
             convertView.setTag(myViewHolder);
         } else {
             myViewHolder = (MyViewHolder) convertView.getTag();

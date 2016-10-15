@@ -26,6 +26,7 @@ import woodnetwork.hebg3.com.woodnetwork.ZiXun.bean.CategoryList;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.contract.ZiXunHomeContract;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.contract.ZiXunXiangQingContrack;
 import woodnetwork.hebg3.com.woodnetwork.ZiXun.presenter.ZiXunXiangQingPresenter;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
 public class ZiXunXiangQingActivity extends AppCompatActivity implements ZiXunXiangQingContrack.ZiXunXiangQingViewInterface{
 
@@ -51,12 +52,12 @@ public class ZiXunXiangQingActivity extends AppCompatActivity implements ZiXunXi
         textTitle.setText("资讯");
         imageTitleRight.setVisibility(View.GONE);
         if(null!=getIntent()){
-            webview.loadUrl(getIntent().getStringExtra("url"));
+            webview.loadUrl(Const.PICTURE_LUNBOTU+getIntent().getStringExtra("url"));
 
             webview.setWebViewClient(new WebViewClient(){
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                    view.loadUrl(getIntent().getStringExtra("url"));
+                    view.loadUrl(Const.PICTURE_LUNBOTU+getIntent().getStringExtra("url"));
                     return true;
                 }
             });

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.ReportsActivity;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.SettingActivity;
 
 
-public class MyFragment extends Fragment {
+public class MyFragment extends Fragment implements View.OnTouchListener{
 
     @Bind(R.id.imge_title_left)
     ImageView imgeTitleLeft;
@@ -117,5 +118,10 @@ public class MyFragment extends Fragment {
     }
     public void startActivity(Class mClass){
         startActivity(new Intent(getActivity(),mClass));
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return true;
     }
 }

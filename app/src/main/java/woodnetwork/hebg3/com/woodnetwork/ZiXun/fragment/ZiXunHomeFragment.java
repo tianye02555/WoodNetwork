@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -31,7 +32,7 @@ import woodnetwork.hebg3.com.woodnetwork.ZiXun.presenter.ZiXunHomePresenter;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 import woodnetwork.hebg3.com.woodnetwork.view.MyGallery;
 
-public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiXunHomeViewInterface {
+public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiXunHomeViewInterface ,View.OnTouchListener{
 
     @Bind(R.id.imge_title_left)
     ImageView imgeTitleLeft;
@@ -57,6 +58,7 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_zi_xun_home, container, false);
+        view.setOnTouchListener(this);
         ButterKnife.bind(this, view);
 
         imgeTitleLeft.setVisibility(View.GONE);
@@ -133,5 +135,10 @@ public class ZiXunHomeFragment extends Fragment implements ZiXunHomeContract.ZiX
     @Override
     public void showMessage(String string) {
         CommonUtils.showToast(getActivity(), string);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return true;
     }
 }

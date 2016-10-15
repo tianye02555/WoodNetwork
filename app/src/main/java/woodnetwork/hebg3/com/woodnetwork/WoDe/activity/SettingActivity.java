@@ -31,6 +31,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.UpdateManager;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.VersionInfo;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.SettingContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.presenter.SettingPresenter;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 import woodnetwork.hebg3.com.woodnetwork.sysfunction.activity.LoginActivity;
 
 /**
@@ -77,8 +78,8 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
         checkBoxWIFI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SharePreferencesUtils sharePreferences=  SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
-                sharePreferences.saveData("isdown",b);
+                SharePreferencesUtils sharePreferences = SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
+                sharePreferences.saveData("isdown", b);
             }
         });
         new SettingPresenter(this);
@@ -94,7 +95,7 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
                 //fresco 手动清除缓存   一般fresco不需要手动清除  当后台退出app时  自己会清理
                 ImagePipeline imagePipeline = Fresco.getImagePipeline();
                 imagePipeline.clearCaches();
-                CommonUtils.showToast(this,"清理成功");
+                CommonUtils.showToast(this, "清理成功");
                 break;
             case R.id.activity_setting_rel:
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
@@ -102,7 +103,13 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
                 request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
                 Request_versionInfo request_versionInfo = new Request_versionInfo();
-                request_versionInfo.os_type = 1;
+                if (0 == CommonUtils.getVersionCode(SettingActivity.this)) {
+                    CommonUtils.showToast(SettingActivity.this, "获取版本号失败");
+                    return;
+                } else {
+                    request_versionInfo.os_type = CommonUtils.getVersionCode(SettingActivity.this);
+                }
+
 
                 MyRequestInfo myRequestInfo = new MyRequestInfo();
                 myRequestInfo.req = request_versionInfo;
@@ -124,7 +131,7 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
                 }).setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SharePreferencesUtils sharePreferences= SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
+                        SharePreferencesUtils sharePreferences = SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
                         sharePreferences.clearData();
                         startActivity(new Intent(SettingActivity.this, LoginActivity.class));
                     }
@@ -138,7 +145,7 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
     @Override
     public void setCheckUpdateInfo(VersionInfo versionInfo) {
         UpdateManager manager = new UpdateManager(
-                SettingActivity.this, String.valueOf(versionInfo.number), versionInfo.url,
+                SettingActivity.this, String.valueOf(versionInfo.number), Const.PICTURE_LUNBOTU+versionInfo.url,
                 versionInfo.code, 1, "0");
         manager.checkUpdate();
     }

@@ -110,7 +110,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
         setContentView(R.layout.activity_wood_info);
         CommonUtils.addActivity(this);
         ButterKnife.bind(this);
-
+        textTitle.setText("商品详情");
         if (null != getIntent()) {
             pid = getIntent().getStringExtra("pid");
             if (!getIntent().getBooleanExtra("isShowButton", true)) {//卖家查看商品详情
@@ -351,6 +351,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
 
     @Override
     public void showMessage(String string) {
+        Scrollview.setVisibility(View.GONE);
         CommonUtils.showToast(this, string);
     }
 

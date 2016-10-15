@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context="woodnetwork.hebg3.com.woodnetwork.WoDe.fragment.MyFragment">
 
     <RelativeLayout
@@ -54,13 +54,15 @@
             <TextView
                 android:id="@+id/myfragment_text_wodexinxi"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
+                android:background="@drawable/selector_presscolor"
                 android:gravity="center_vertical"
+                android:paddingBottom="@dimen/distance_normal"
                 android:paddingLeft="@dimen/distance_longest"
                 android:paddingRight="@dimen/distance_longest"
                 android:text="@string/wodexinxi"
+                android:paddingTop="@dimen/distance_normal"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 
@@ -69,7 +71,6 @@
                 android:layout_height="2dp"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
 
             <TextView
@@ -77,8 +78,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/distance_normal"
+                android:background="@drawable/selector_presscolor"
                 android:drawableRight="@drawable/back_left"
                 android:gravity="center_vertical"
+                android:paddingBottom="@dimen/distance_normal"
                 android:paddingLeft="@dimen/distance_longest"
                 android:paddingRight="@dimen/distance_longest"
                 android:text="@string/wodedindan"
@@ -90,7 +93,6 @@
                 android:layout_height="2dp"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
 
             <TextView
@@ -105,10 +107,12 @@
             <TextView
                 android:id="@+id/myfragment_text_wodeqiugouxinxi"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
+                android:paddingTop="@dimen/distance_normal"
+                android:background="@drawable/selector_presscolor"
                 android:gravity="center_vertical"
+                android:paddingBottom="15dp"
                 android:paddingLeft="@dimen/distance_longest"
                 android:paddingRight="@dimen/distance_longest"
                 android:text="@string/wodeqiugouxinxi"
@@ -120,7 +124,6 @@
                 android:layout_height="2dp"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
 
             <TextView
@@ -128,9 +131,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
+                android:background="@drawable/selector_presscolor"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/distance_longest"
+                android:paddingTop="@dimen/distance_normal"
+                android:paddingBottom="15dp"
                 android:paddingRight="@dimen/distance_longest"
                 android:text="@string/qiugoudingdan"
                 android:textColor="@android:color/black"
@@ -141,127 +146,133 @@
                 android:layout_height="2dp"
                 android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@color/dise"></View>
-<LinearLayout
-    android:id="@+id/linearlayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@color/dise"
-                android:padding="@dimen/distance_normal"
-                android:text="@string/maijiazhongxin"
-                android:textColor="@android:color/black" />
-
-            <TextView
-                android:id="@+id/myfragment_text_wodeshangpu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/distance_longest"
-                android:paddingRight="@dimen/distance_longest"
-                android:text="@string/wodeshangpu"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
                 android:background="@color/dise"></View>
 
-            <TextView
-                android:id="@+id/myfragment_text_wodeshangping"
+            <LinearLayout
+                android:id="@+id/linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/distance_longest"
-                android:paddingRight="@dimen/distance_longest"
-                android:text="@string/wodeshangpin"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                android:orientation="vertical">
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@color/dise"></View>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:background="@color/dise"
+                    android:padding="@dimen/distance_normal"
+                    android:text="@string/maijiazhongxin"
+                    android:textColor="@android:color/black" />
 
-            <TextView
-                android:id="@+id/myfragment_text_dingdanliebiao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/distance_longest"
-                android:paddingRight="@dimen/distance_longest"
-                android:text="@string/dingdanliebiao"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                <TextView
+                    android:id="@+id/myfragment_text_wodeshangpu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:background="@drawable/selector_presscolor"
+                    android:drawableRight="@drawable/back_left"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/distance_normal"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:paddingRight="@dimen/distance_longest"
+                    android:text="@string/wodeshangpu"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@color/dise"></View>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/distance_normal"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:background="@color/dise"></View>
 
-            <TextView
-                android:id="@+id/myfragment_text_tongjichaxun"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/distance_longest"
-                android:paddingRight="@dimen/distance_longest"
-                android:text="@string/tongjichaxun"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                <TextView
+                    android:id="@+id/myfragment_text_wodeshangping"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:background="@drawable/selector_presscolor"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:paddingRight="@dimen/distance_longest"
+                    android:paddingBottom="15dp"
+                    android:text="@string/wodeshangpin"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="@dimen/distance_normal"
+                    android:textSize="@dimen/font_normal" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@color/dise"></View>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/distance_normal"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:background="@color/dise"></View>
 
-            <TextView
-                android:id="@+id/myfragment_text_wodebaojia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:drawableRight="@drawable/back_left"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/distance_longest"
-                android:paddingRight="@dimen/distance_longest"
-                android:text="@string/wodebaojia"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/font_normal" />
+                <TextView
+                    android:id="@+id/myfragment_text_dingdanliebiao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:background="@drawable/selector_presscolor"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:paddingRight="@dimen/distance_longest"
+                    android:paddingTop="@dimen/distance_normal"
+                    android:text="@string/dingdanliebiao"
+                    android:textColor="@android:color/black"
+                    android:paddingBottom="15dp"
+                    android:textSize="@dimen/font_normal" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/distance_normal"
-                android:layout_marginRight="@dimen/distance_normal"
-                android:layout_marginTop="@dimen/distance_normal"
-                android:background="@color/dise"></View>
-</LinearLayout>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/distance_normal"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:background="@color/dise"></View>
+
+                <TextView
+                    android:id="@+id/myfragment_text_tongjichaxun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:background="@drawable/selector_presscolor"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:paddingRight="@dimen/distance_longest"
+                    android:text="@string/tongjichaxun"
+                    android:paddingTop="@dimen/distance_normal"
+                    android:paddingBottom="15dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/distance_normal"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:background="@color/dise"></View>
+
+                <TextView
+                    android:id="@+id/myfragment_text_wodebaojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/distance_normal"
+                    android:background="@drawable/selector_presscolor"
+                    android:drawableRight="@drawable/back_left"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/distance_normal"
+                    android:paddingLeft="@dimen/distance_longest"
+                    android:paddingRight="@dimen/distance_longest"
+                    android:text="@string/wodebaojia"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/font_normal" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/distance_normal"
+                    android:layout_marginRight="@dimen/distance_normal"
+                    android:background="@color/dise"></View>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

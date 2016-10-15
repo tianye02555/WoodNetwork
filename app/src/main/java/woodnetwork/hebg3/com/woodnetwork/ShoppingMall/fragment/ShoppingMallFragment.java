@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_getAttribute;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shopcarAdd;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_shoppingMall_woodsList;
 import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_spinnerInfo;
+import woodnetwork.hebg3.com.woodnetwork.RequestParam.Request_versionInfo;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ConfirmOrderActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.activity.ShoopingCartActivity;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter.ShaiXuanAdapter;
@@ -50,15 +52,20 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterValue;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.contract.ShoppingMallContract;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.presenter.ShoppingMallPresenter;
 import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
+import woodnetwork.hebg3.com.woodnetwork.Utils.DialogUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils_shaiXuan;
+import woodnetwork.hebg3.com.woodnetwork.Utils.UpdateManager;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.SettingActivity;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.VersionInfo;
+import woodnetwork.hebg3.com.woodnetwork.net.Const;
 import woodnetwork.hebg3.com.woodnetwork.sysfunction.activity.LoginActivity;
 import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
 
-public class ShoppingMallFragment extends Fragment implements ShoppingMallContract.ShoppingMallView {
+public class ShoppingMallFragment extends Fragment implements ShoppingMallContract.ShoppingMallView ,View.OnTouchListener{
 
 
     @Bind(R.id.fragment_shopping_mall_recyclerview)
@@ -105,6 +112,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopping_mall, container, false);
+        view.setOnTouchListener(this);
         ButterKnife.bind(this, view);
 
         textTitle.setText("木联网");
@@ -126,6 +134,22 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
             myRequestInfo.req_meta = request_getAttribute;
             shoppingMallPresenter.getAttributeFilterListData(myRequestInfo);
             shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
+
+
+        Request_versionInfo request_versionInfo = new Request_versionInfo();
+        if (0 == CommonUtils.getVersionCode(getActivity())) {
+            CommonUtils.showToast(getActivity(), "获取版本号失败");
+
+        } else {
+            request_versionInfo.os_type = CommonUtils.getVersionCode(getActivity());
+            MyRequestInfo myRequestInfo = new MyRequestInfo();
+            myRequestInfo.req = request_versionInfo;
+            myRequestInfo.req_meta = request_getAttribute;
+            shoppingMallPresenter.getCheckUpdateData(myRequestInfo);
+        }
+
+
+
 
         return view;
     }
@@ -188,6 +212,19 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         shoppingMalAdapter.setProductInfoList(list);
         shoppingMalAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void uploadVerSion(final  VersionInfo versionInfo) {
+        if(versionInfo.number>CommonUtils.getVersionCode(getActivity())){
+
+                    UpdateManager manager = new UpdateManager(
+                            getActivity(), String.valueOf(versionInfo.number), Const.PICTURE_LUNBOTU+versionInfo.url,
+                            versionInfo.code, 1, "0");
+                    manager.checkUpdate();
+
+
+        }
     }
 
     @Override
@@ -404,4 +441,8 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         }
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return true;
+    }
 }

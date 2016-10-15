@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -32,7 +33,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
-public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface {
+public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface ,View.OnTouchListener{
 
     @Bind(R.id.text_title)
     TextView textTitle;
@@ -54,6 +55,7 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_busness_list, container, false);
+        view.setOnTouchListener(this);
         ButterKnife.bind(this, view);
         imgeTitleLeft.setVisibility(View.GONE);
         imageTitleRight.setVisibility(View.GONE);
@@ -158,5 +160,10 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return true;
     }
 }

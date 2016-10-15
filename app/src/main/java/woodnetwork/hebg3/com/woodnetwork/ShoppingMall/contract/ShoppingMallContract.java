@@ -13,6 +13,7 @@ import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.ProductFilterList_pro
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterAttribute;
 import woodnetwork.hebg3.com.woodnetwork.ShoppingMall.bean.WoodFilterInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
+import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.VersionInfo;
 
 /**
  * Created by ty on 2016/8/24 0024.
@@ -54,6 +55,11 @@ public interface ShoppingMallContract {
          * 更新
          */
         void refresh(ProductFilterList newList);
+
+        /**
+         * 更新版本
+         */
+        void uploadVerSion(VersionInfo versionInfo);
     }
     interface ShoppingMallPresenter extends BasePresenter{
         /**
@@ -72,5 +78,11 @@ public interface ShoppingMallContract {
          * @param myRequestInfo
          */
         void shopcarAdd(MyRequestInfo myRequestInfo);
+
+        /**
+         * 自动更新
+         * @param myRequestInfo
+         */
+        void getCheckUpdateData(MyRequestInfo myRequestInfo);
     }
 }

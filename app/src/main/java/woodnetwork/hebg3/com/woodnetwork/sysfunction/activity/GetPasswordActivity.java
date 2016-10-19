@@ -144,9 +144,9 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.getpassword_btn_getcode:
-                if (!TextUtils.isEmpty(getUserName())) {
-                    new CountTimer(120000).start();
-                    getPasswordPresenter.sendCode();
+                    if (!TextUtils.isEmpty(getUserName())) {
+                        new CountTimer(120000).start();
+                        getPasswordPresenter.sendCode();
                 } else {
                     CommonUtils.showToast(this, "用户名不能为空");
                 }
@@ -181,7 +181,7 @@ public class GetPasswordActivity extends AppCompatActivity implements GetPasswor
         @Override
         public void onTick(long l) {
             getpasswordBtnGetcode.setClickable(false);
-            getpasswordBtnGetcode.setBackgroundResource(R.drawable.button_shape_dise);
+            getpasswordBtnGetcode.setBackgroundResource(R.drawable.button_shape_hui);
             getpasswordBtnGetcode.setText(l / 1000 + "s");
         }
 

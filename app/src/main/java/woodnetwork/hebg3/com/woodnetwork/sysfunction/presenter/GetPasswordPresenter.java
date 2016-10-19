@@ -30,11 +30,10 @@ public class GetPasswordPresenter implements GetPasswordContract.GetPasswordPres
     @Override
     public void sendCode() {
         mGetPasswordView.showProgress();
-        Request_getPassword request_getPassword=new Request_getPassword();
-        request_getPassword.name=mGetPasswordView.getUserName();
-        request_getPassword.auth_code=mGetPasswordView.getCode();
-        request_getPassword.password=mGetPasswordView.getNewPassword();
-        getPasswordModel.sendCode(CommonUtils.getRequestInfo(request_getPassword,new Object()), new OnServiceBaceInterface() {
+        Request_getCode request_getCode=new Request_getCode();
+        request_getCode.name=mGetPasswordView.getUserName();
+
+        getPasswordModel.sendCode(CommonUtils.getRequestInfo(request_getCode,new Object()), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
                 mGetPasswordView.closeProgress();
@@ -53,9 +52,11 @@ public class GetPasswordPresenter implements GetPasswordContract.GetPasswordPres
     @Override
     public void submit() {
         mGetPasswordView.showProgress();
-        Request_getCode request_getCode=new Request_getCode();
-        request_getCode.name=mGetPasswordView.getUserName();
-        getPasswordModel.submit(CommonUtils.getRequestInfo(request_getCode,new Object()), new OnServiceBaceInterface() {
+        Request_getPassword request_getPassword=new Request_getPassword();
+        request_getPassword.name=mGetPasswordView.getUserName();
+        request_getPassword.auth_code=mGetPasswordView.getCode();
+        request_getPassword.password=mGetPasswordView.getNewPassword();
+        getPasswordModel.submit(CommonUtils.getRequestInfo(request_getPassword,new Object()), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
                 mGetPasswordView.closeProgress();

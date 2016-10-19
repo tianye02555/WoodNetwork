@@ -54,7 +54,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
     /**
      * new 出来的spinner 的id
      */
-    private int spinnerID;
+    private int spinnerID = 0;
     /**
      * 页面回调的数据
      */
@@ -67,9 +67,9 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
      * 存储选择的地址
      */
     private ConcurrentHashMap<Integer, String> addressMap = new ConcurrentHashMap<Integer, String>();
-    private  AreaList areaListNew;
+    private AreaList areaListNew;
 
-    private  ArrayList<String> stringArrayList;
+    private ArrayList<String> stringArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +104,13 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
                 break;
             case R.id.activity_choose_address_btn_queding:
                 String address = new String();
-                for (Integer key : addressMap.keySet()) {
-                    address=addressMap.get(key)+address;
+                //循环获取最终选择的地址
+                for (int i = 0; i < spinnerList.size(); i++) {
+                    //如果最后一项没有选择地区就不在拼接直接退出
+                    if (null == addressMap.get(spinnerList.get(i))) {
+                        break;
+                    }
+                    address = address + addressMap.get(spinnerList.get(i));
                 }
                 intent.putExtra("address", address);
                 setResult(RESULT_OK, intent);
@@ -116,17 +121,17 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
 
     @Override
     public void showNewSpinner(final AreaList areaList) {
-        if(0==areaList.list.size()){
+        if (0 == areaList.list.size()) {
             return;
         }
-        areaListNew=new AreaList();
-        AreaList_listItem areaList_listItem=new AreaList_listItem();
-        areaList_listItem.id="1";
-        areaList_listItem.name="请选择地址";
-        ArrayList<AreaList_listItem>  list=new ArrayList<AreaList_listItem>();
+        final AreaList areaListNew = new AreaList();
+        AreaList_listItem areaList_listItem = new AreaList_listItem();
+        areaList_listItem.id = "1";
+        areaList_listItem.name = "请选择地址";
+        ArrayList<AreaList_listItem> list = new ArrayList<AreaList_listItem>();
         list.add(areaList_listItem);
         list.addAll(areaList.list);
-        areaListNew.list=list;
+        areaListNew.list = list;//拼接集合（在第一个位置加入了“选择地址”）
         //获取服务器数据中的value
         stringArrayList = new ArrayList<String>();
         for (AreaList_listItem value : areaListNew.list) {
@@ -138,17 +143,13 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
 //            if(null!=spinnerMap.get(spinnerID)) {
 //                spinnerMap.put(spinnerID, true);
 //            }
-       final Spinner spinner = new Spinner(this);
+        final Spinner spinner = new Spinner(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(200, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         layoutParams.addRule(RelativeLayout.BELOW, nowView);
         layoutParams.topMargin = (int) getResources().getDimension(R.dimen.distance_normal);
         spinner.setLayoutParams(layoutParams);
-        if (android.os.Build.VERSION.SDK_INT >= 17) {
-            spinnerID = View.generateViewId();
-        } else {
-            spinnerID = generateViewId();
-        }
+        spinnerID++;
         spinner.setId(spinnerID);
         spinnerList.add(spinnerID);
         rootLayout.addView(spinner);
@@ -159,30 +160,31 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(0==i){
+                if (0 == i) {
                     return;
                 }
                 boolean isDelet = false;
-                for (int j=0;j<spinnerList.size();j++) {
+                for (int j = 0; j < spinnerList.size(); j++) {
                     if (isDelet) {
                         Spinner spinner = (Spinner) ChooseAddressActivity.this.findViewById(spinnerList.get(j));
                         rootLayout.removeView(spinner);
+                        addressMap.remove(spinner.getId());
                         spinnerList.remove(spinnerList.get(j));
-                        j-=1;//spinnerList的size 是变化的
+                        j -= 1;//spinnerList的size 是变化的
                     }
                     if (spinnerList.get(j) == spinner.getId()) {
-                        nowView=spinner.getId();
+                        nowView = spinner.getId();
                         isDelet = true;
                     }
                 }
-                intent.putExtra("addressID", areaListNew.list.get(i-1).id);//获取最后一个spinner的选中的项的id
+                intent.putExtra("addressID", areaListNew.list.get(i - 1).id);//获取最后一个spinner的选中的项的id
                 addressMap.put(spinner.getId(), areaListNew.list.get(i).name);
                 SharePreferencesUtils sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(ChooseAddressActivity.this);
                 Request_getAttribute request_getAttribute = new Request_getAttribute();
                 request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
                 Request_area_list request_area_list = new Request_area_list();
-                request_area_list.pid = areaList.list.get(i-1).id;
+                request_area_list.pid = areaList.list.get(i - 1).id;
 
                 MyRequestInfo myRequestInfo = new MyRequestInfo();
                 myRequestInfo.req = request_area_list;

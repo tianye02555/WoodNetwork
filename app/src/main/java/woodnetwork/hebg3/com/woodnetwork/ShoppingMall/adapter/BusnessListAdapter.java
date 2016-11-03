@@ -1,8 +1,10 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,8 +89,20 @@ public class BusnessListAdapter extends RecyclerView.Adapter<BusnessListAdapter.
             image_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+list.get(getAdapterPosition()-1).phone));
-                    context.startActivity(intent);
+                    new AlertDialog.Builder(context).setTitle("提示").setMessage("您将通过打电话的方式联系卖家").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+list.get(getAdapterPosition()-1).phone));
+                            context.startActivity(intent);
+
+                        }
+                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).show();
+
                 }
             });
             itemView.setOnClickListener(new View.OnClickListener() {

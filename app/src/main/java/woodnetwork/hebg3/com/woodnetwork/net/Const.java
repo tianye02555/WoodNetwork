@@ -11,11 +11,11 @@ public class Const {
     public static final String APPNAME = "MULIANWANG";
 
     //云
-    public static final String AUTHORITY = "www.woodlian.cn/dev/wood/v1";
+    public static final String AUTHORITY = "www.woodlian.com/dev/wood/v1";
     //外网图片前缀
-    public static final String PICTURE = "http://www.woodlian.cn/";
+    public static final String PICTURE = "http://www.woodlian.com/";
     //外网图片前缀
-    public static final String PICTURE_LUNBOTU = "http://www.woodlian.cn";
+    public static final String PICTURE_LUNBOTU = "http://www.woodlian.com";
 
 
 //    //本地

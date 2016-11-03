@@ -25,6 +25,8 @@ public class OrderBuyerInfo implements Serializable{
     @Expose
     public String seller ;
     @Expose
+    public String buyer ;
+    @Expose
     public String delivery_area ;
     @Expose
     public String receive_area ;

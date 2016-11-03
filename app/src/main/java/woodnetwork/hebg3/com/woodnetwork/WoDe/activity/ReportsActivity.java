@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -69,6 +70,19 @@ public class ReportsActivity extends AppCompatActivity implements ReportsContrac
     @Override
     public void showWebViewUri(final  ReportsInfo reportsInfo) {
         webView.loadUrl(Const.PICTURE+reportsInfo.url);
+        //重新设置
+          WebSettings s = webView.getSettings();
+        s.setBuiltInZoomControls(true);
+        s.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        s.setUseWideViewPort(true);
+        s.setLoadWithOverviewMode(true);
+        s.setSavePassword(true);
+        s.setSaveFormData(true);
+        s.setJavaScriptEnabled(true);
+         s.setGeolocationEnabled(true);
+        s.setJavaScriptEnabled(true);
+         s.setDomStorageEnabled(true);
+        webView.requestFocus();
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {

@@ -97,7 +97,7 @@ public class MyGallery extends Gallery implements AdapterView.OnItemClickListene
 		listImgs = new ArrayList<ImageView>();
 		for (int i = 0; i < mUris.length; i++) {
 			ImageView imageview = new ImageView(mContext);
-			imageview.setScaleType(ImageView.ScaleType.FIT_XY);
+			imageview.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageview.setLayoutParams(
 					new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 //			ImageLoader.getInstance().displayImage(mUris[i], imageview, displayPictureOptions);

@@ -141,7 +141,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements OrderBuye
     public void showSellerOrderInfo(OrderSellerInfo orderSellerInfo) {
         this.orderSellerInfo = orderSellerInfo;
 
-        text_maiJia.setText("买家信息：" + orderSellerInfo.seller);
+        text_maiJia.setText("买家信息：" + orderSellerInfo.buyer);
 
 
         text_shouHuoDiZhi.setText(orderSellerInfo.receive_area);

@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/activity_order_details_shouhuodizhitou"
         android:layout_below="@+id/activity_order_details_text_maijiaxinxi"
-        android:layout_marginLeft="@dimen/distance_normal"
+
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/activity_order_details_shouhuodizhitou"
         android:textColor="@android:color/black"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/activity_order_details_fahuodizhitou"
         android:layout_below="@+id/activity_order_details_shouhuodizhi"
-        android:layout_marginLeft="@dimen/distance_normal"
+
         android:layout_marginTop="@dimen/distance_normal"
         android:layout_toRightOf="@+id/activity_order_details_fahuodizhitou"
         android:textColor="@android:color/black"

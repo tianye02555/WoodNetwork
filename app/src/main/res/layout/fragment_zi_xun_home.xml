@@ -30,9 +30,11 @@
         <woodnetwork.hebg3.com.woodnetwork.view.MyGallery
             android:id="@+id/home_customgallery"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            />
 
         <RelativeLayout
+            android:id="@+id/wenzi"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_alignParentBottom="true"

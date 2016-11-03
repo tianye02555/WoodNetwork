@@ -123,17 +123,18 @@ public class SettingActivity extends AppCompatActivity implements SettingContrac
                 startActivity(new Intent(this, AboutMeActivity.class));
                 break;
             case R.id.activity_setting_btn_zhuxiao:
-                new AlertDialog.Builder(this).setMessage("确认要注销吗？").setTitle("提示").setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                }).setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(this).setMessage("确认要注销吗？").setTitle("提示").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         SharePreferencesUtils sharePreferences = SharePreferencesUtils.getSharePreferencesUtils(SettingActivity.this);
                         sharePreferences.clearData();
                         startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
                 }).show();
 

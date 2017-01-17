@@ -5,12 +5,22 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:/gradle-2.14.1" />
+        <option name="gradleHome" value="D:/android-studio/gradle/gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/circelapplication" />
+            <option value="$PROJECT_DIR$/file" />
+            <option value="$PROJECT_DIR$/louClock" />
+            <option value="$PROJECT_DIR$/myview" />
             <option value="$PROJECT_DIR$/payDemoActivity" />
+            <option value="$PROJECT_DIR$/phone" />
+            <option value="$PROJECT_DIR$/soundrecorde" />
+            <option value="$PROJECT_DIR$/studentStatu" />
+            <option value="$PROJECT_DIR$/sutdyMotion" />
+            <option value="$PROJECT_DIR$/teacher_StudentStatus" />
+            <option value="$PROJECT_DIR$/testapplication" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

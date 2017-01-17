@@ -48,7 +48,7 @@ public class DemanBuyerListAdapter extends RecyclerView.Adapter<DemanBuyerListAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.name.setText("商品名称：："+list.get(position).pname);
+        holder.name.setText("商品名称："+list.get(position).pname);
         holder.shouHuoDi.setText(list.get(position).receive_area);
         holder.shuliang.setText("购买数量："+list.get(position).number+"方");
         holder.baoJiaRenShu.setText( "报价人数："+list.get(position).qnumber);

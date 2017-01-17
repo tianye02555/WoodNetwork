@@ -327,11 +327,14 @@ public class MyOrderActivity extends AppCompatActivity implements MyOrderContrac
     }
 
     @Override
-    public void loadMoreAll(List<OrderBuyerProList_listItem> list) {
-        recyclerview.loadMoreComplete();
-        list_all = adapter.getList();
-        list_all.addAll(list);
-        adapter.notifyDataSetChanged();
+    public void loadMoreAll(List<OrderBuyerProList_listItem> list_new) {
+        if(null!=list_new){
+            recyclerview.loadMoreComplete();
+            list_all = adapter.getList();
+            list_all.addAll(list_new);
+            adapter.notifyDataSetChanged();
+        }
+
     }
 
     @Override

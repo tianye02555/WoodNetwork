@@ -1,6 +1,5 @@
-package woodnetwork.hebg3.com.woodnetwork.Utils;
+package woodnetwork.hebg3.com.phone.net;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -11,38 +10,45 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Message;
 
 import com.google.gson.Gson;
 
-import woodnetwork.hebg3.com.woodnetwork.net.Base;
+import woodnetwork.hebg3.com.phone.net.Base;
+import woodnetwork.hebg3.com.phone.service.RecorderService;
 
+/**
+ * 上传文件类
+ * @author Administrator
+ *
+ */
 public class AsyncTaskForUpLoadFilesNew extends
 		AsyncTask<Object, Object, Object> {
 
-	public String actionUrl;
+	public String actionUrl;//提交服务器地址
 	public Map<String, String> params;
-	public Map<String, File> files;
+	public File files;
+	public String fileParamName;//文件类型
 	public Message m;
 	public Gson g = new Gson();
-	public Context cont;
 
-	public AsyncTaskForUpLoadFilesNew(Context cont, String actionUrl,
-			Map<String, String> params, Map<String, File> files,Message m) {
+	public AsyncTaskForUpLoadFilesNew(String actionUrl,
+			Map<String, String> params,  File files,
+			String fileParamName, Message m) {
 		this.actionUrl = actionUrl;
+		this.files = files;
+		this.fileParamName = fileParamName;
 		this.m = m;
 		this.params = params;
-		this.files = files;
-		this.cont = cont;
 	}
 
 	@Override
 	protected String doInBackground(Object... paramss) {
-		return post(cont, actionUrl, params, files);
+		return post(actionUrl, params, files);
 	}
 
 	@Override
@@ -52,21 +58,11 @@ public class AsyncTaskForUpLoadFilesNew extends
 		if (response.equals("-1")) {
 			base = new Base();
 			base.msg = "提交失败";
-			base.code="1";
 		} else {
 			base = g.fromJson(response, Base.class);
 		}
-		if (base.code.equals("0")) {
-			m.what = 0;
-			m.obj = base;
-			m.sendToTarget();
-		}else{
-			m.what = 1;
-			m.obj = base;
-			m.sendToTarget();
-		}
-		
-		
+		m.obj = base;
+		m.sendToTarget();
 	}
 
 	/**
@@ -81,8 +77,11 @@ public class AsyncTaskForUpLoadFilesNew extends
 	 * @return 成功与否
 	 * @throws IOException
 	 */
-	public static String post(Context cont, String actionUrl,
-			Map<String, String> params, Map<String, File> files) {
+	public String post(String actionUrl, Map<String, String> params,
+			 File files) {
+		
+		//Map<String, File> files = new h...;
+		//
 
 		String BOUNDARY = java.util.UUID.randomUUID().toString();
 		String PREFIX = "--";// 起始标示
@@ -93,13 +92,12 @@ public class AsyncTaskForUpLoadFilesNew extends
 		try {
 			URL uri = new URL(actionUrl);
 			HttpURLConnection conn = (HttpURLConnection) uri.openConnection();
-			conn.setConnectTimeout(60 * 1000);
-			conn.setReadTimeout(60 * 1000);
+			conn.setConnectTimeout(600 * 1000);
+			conn.setReadTimeout(600 * 1000);
 			conn.setDoInput(true);// 允许输入
 			conn.setDoOutput(true);// 允许输出
 			conn.setUseCaches(false);
 			conn.setRequestMethod("POST"); // Post方式
-
 			conn.setRequestProperty("connection", "keep-alive");
 			conn.setRequestProperty("Charsert", "UTF-8");
 			conn.setRequestProperty("Content-Type", MULTIPART_FROM_DATA
@@ -119,56 +117,41 @@ public class AsyncTaskForUpLoadFilesNew extends
 				sb.append(entry.getValue());
 				sb.append(LINEND);
 			}
-			CommonUtils.log("++++++++++++++上传文件文本参数++++++++++++++++"+sb.toString());
 			DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
 			BufferedOutputStream bos = new BufferedOutputStream(dos);
 			bos.write(sb.toString().getBytes());
 			// 发送文件数据
-			if (files != null && files.size() > 0) {
-				for (int i = 0; i < files.size(); i++) {
+			if (files != null ) {
 					StringBuilder sb1 = new StringBuilder();
 					sb1.append(PREFIX);
 					sb1.append(BOUNDARY);
 					sb1.append(LINEND);
 					sb1.append("Content-Disposition: form-data; name=\""
-							+ "pic"
-							+ "\"; filename=\""
-							+ files.get("image")
-									.getPath()
-									.substring(
-											files.get("image").getPath()
-													.lastIndexOf("/") + 1,
-											files.get("image").getPath()
-													.length()) + "\"" + LINEND);
-					// sb1.append(("Content-Type:image/jpeg\r\n")
-					// .getBytes("utf-8"));
-					sb1.append("Content-Type: image/jpeg; charset=" + CHARSET
-							+ LINEND);
+							+ fileParamName + "\"; filename=\"" + files.getName()
+							+ "\"" + LINEND);
+					
+					sb1.append("Content-Type: multipart/form-data; charset="
+							+ CHARSET + LINEND);
 					sb1.append(LINEND);
 					bos.write(sb1.toString().getBytes("utf-8"));
-					InputStream is = new FileInputStream(files.get("image")
-							.getPath());
-					BufferedInputStream bis = new BufferedInputStream(is);
-					byte[] buffer = new byte[100 * 1024];
+					InputStream is = new FileInputStream(files);
+					byte[] buffer = new byte[10*1024];
 					int len = 0;
-					while ((len = bis.read(buffer)) != -1) {
+					while ((len = is.read(buffer)) != -1) {
 						bos.write(buffer, 0, len);
 					}
-					bis.close();
+					is.close();
 					bos.write(LINEND.getBytes());
 				}
-			}
+
 			// 请求结束标志
 			byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINEND).getBytes();
 			bos.write(end_data);
 			bos.flush();
 			// 得到响应码
-
-			CommonUtils.log("++++++++++++++上传文件响应码++++++++++++++++"+String.valueOf(conn.getResponseCode()));
 			if (conn.getResponseCode() == 200) {
 				InputStream in = conn.getInputStream();
-
-				String json = convertStreamToStringUTF8(in);// 未来教室用的gbk字符集，一般的项目要用utf-8
+				String json = convertStreamToStringGB2312(in);// 未来教室用的gbk字符集，一般的项目要用utf-8
 				bos.close();
 				dos.close();
 				conn.disconnect();
@@ -177,20 +160,22 @@ public class AsyncTaskForUpLoadFilesNew extends
 				return "-1";
 			}
 		} catch (IOException e) {
+			RecorderService.isLoading=false;//上传结束  标记还原
 			e.printStackTrace();
 			return "-1";
 		}
 	}
 
 	// 流转字符串 GB2312
-	private static String convertStreamToStringUTF8(InputStream is)
+	private static String convertStreamToStringGB2312(InputStream is)
 			throws IOException {
 		StringBuffer sb = new StringBuffer();
 		String line = null;
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is,
-					"utf-8"));
+					"GB2312"));
+
 			while ((line = br.readLine()) != null) {
 				sb.append(line);
 			}

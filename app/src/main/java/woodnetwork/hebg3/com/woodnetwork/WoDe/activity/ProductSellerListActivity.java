@@ -34,6 +34,9 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.MyQuotationContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.ProductSellerListContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.presenter.ProductSellerListPrecenter;
 
+/**
+ * 我的商品页
+ */
 public class ProductSellerListActivity extends AppCompatActivity implements ProductSellerListContract.ProductSellerListViewInterface {
 
     @Bind(R.id.imge_title_left)
@@ -113,13 +116,13 @@ public class ProductSellerListActivity extends AppCompatActivity implements Prod
     }
 
     @Override
-    public void loadMore(List<ProductSellerList_productsItem> list) {
-
-        recyclerview.loadMoreComplete();
-        list = adapter.getProductInfoList();
-        list.addAll(list);
-        adapter.notifyDataSetChanged();
-
+    public void loadMore(List<ProductSellerList_productsItem> list_new) {
+        if (null != list_new) {
+            recyclerview.loadMoreComplete();
+            list = adapter.getProductInfoList();
+            list.addAll(list_new);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

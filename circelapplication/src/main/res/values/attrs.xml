@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="pointX" format="dimension"></attr>
+    <attr name="pointY" format="dimension"></attr>
+    <attr name="insideRadius" format="dimension"></attr>
+    <attr name="outsideRadius" format="dimension"></attr>
+    <attr name="distance" format="dimension"></attr>
+    <attr name="insideText" format="string"></attr>
+    <attr name="outsideNumber" format="integer"></attr>
+    <declare-styleable name="CircleView">
+        <attr name="pointX"></attr>
+        <attr name="pointY"></attr>
+        <attr name="insideRadius"></attr>
+        <attr name="outsideRadius"></attr>
+        <attr name="distance"></attr>
+        <attr name="insideText"></attr>
+        <attr name="outsideNumber"></attr>
+    </declare-styleable>
+</resources>

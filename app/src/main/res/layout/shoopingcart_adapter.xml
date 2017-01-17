@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/shoppingcar_rel"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <RelativeLayout
         android:id="@+id/reltivelayout"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_margin="@dimen/distance_normal">
+
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/shopppingcart_adapter_simpledraweeview_head"
             android:layout_width="70dp"
             android:layout_height="70dp"
             fresco:placeholderImage="@drawable/defaultimg" />
+
         <TextView
             android:id="@+id/shopppingcart_adapter__text_qihuo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_smalltest"
+            android:layout_alignParentRight="true"
             android:text="@string/qihuo"
             android:textColor="@android:color/holo_red_light"
-            android:layout_alignParentRight="true"
-            android:visibility="gone"/>
+            android:textSize="@dimen/font_smalltest"
+            android:visibility="gone" />
     </RelativeLayout>
 
 
@@ -42,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/shopppingcart_adapter_txt_name"
         android:layout_marginTop="@dimen/distance_short"
-        android:layout_toRightOf="@+id/reltivelayout"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_stock"
+        android:layout_toRightOf="@+id/reltivelayout"
         android:text="万达实业有限公司ddddd"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
@@ -58,32 +61,35 @@
         android:text="发货地：新西兰"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_danjia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/reltivelayout"
-        android:text="@string/danjia"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_price"
+        android:text="@string/danjia"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/reltivelayout"
-        android:text="0"
         android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_yuanmeifang"
+        android:text="0"
         android:textColor="@color/jiage"
         android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_yuanmeifang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/reltivelayout"
-        android:text="@string/yuanmeifang"
-        android:layout_marginRight="@dimen/distance_short"
         android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/reltivelayout"
+        android:layout_marginRight="@dimen/distance_short"
+        android:text="@string/yuanmeifang"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
@@ -91,121 +97,133 @@
         android:id="@+id/shopppingcart_adapter_txt_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
         android:layout_below="@+id/shopppingcart_adapter_txt_company"
         android:layout_marginTop="@dimen/distance_short"
+        android:layout_toLeftOf="@+id/shopppingcart_adapter_edit_stock"
         android:text="@string/shuliang"
         android:textColor="@android:color/black"
-        android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
-        android:layout_toLeftOf="@+id/shopppingcart_adapter_edit_stock"
         android:textSize="@dimen/font_normal" />
+
     <EditText
         android:id="@+id/shopppingcart_adapter_edit_stock"
         android:layout_width="65dp"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
-        android:textSize="@dimen/font_normal"
         android:layout_below="@+id/shopppingcart_adapter_txt_price"
-        android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_fang" />
+        android:layout_toLeftOf="@+id/shopppingcart_adapter_txt_fang"
+        android:inputType="numberDecimal|numberSigned"
+
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_normal" />
+
+
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_fang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/shopppingcart_adapter_txt_company"
+        android:layout_marginRight="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_short"
         android:text="@string/fang"
         android:textColor="@android:color/black"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/distance_normal"
-        android:layout_alignBaseline="@+id/shopppingcart_adapter_edit_stock"
         android:textSize="@dimen/font_normal" />
+
     <View
         android:id="@+id/lin"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/dise"
+        android:layout_below="@+id/shopppingcart_adapter_txt_productarea"
         android:layout_marginTop="@dimen/distance_long"
-        android:layout_below="@+id/shopppingcart_adapter_txt_productarea"></View>
+        android:background="@color/dise"></View>
+
     <Button
         android:id="@+id/shopppingcart_adapter_btn_shanchu"
         android:layout_width="60dp"
         android:layout_height="35dp"
-        android:layout_below="@+id/lin"
-        android:background="@drawable/button_shape_title"
-        android:textColor="@android:color/white"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/distance_short"
+        android:layout_below="@+id/lin"
         android:layout_marginLeft="@dimen/distance_normal"
+        android:layout_marginTop="@dimen/distance_short"
+        android:background="@drawable/button_shape_title"
         android:text="@string/shanchu"
-        />
+        android:textColor="@android:color/white" />
+
     <Button
         android:id="@+id/shopppingcart_adapter_btn_baocun"
         android:layout_width="60dp"
         android:layout_height="35dp"
         android:layout_below="@+id/lin"
-        android:clickable="false"
-        android:background="@drawable/button_shape_hui"
-        android:textColor="@android:color/white"
-        android:layout_toLeftOf="@+id/shopppingcart_adapter_btn_shanchu"
         android:layout_marginTop="@dimen/distance_short"
+        android:layout_toLeftOf="@+id/shopppingcart_adapter_btn_shanchu"
+        android:background="@drawable/button_shape_hui"
+        android:clickable="false"
         android:text="@string/baocun"
-        />
+        android:textColor="@android:color/white" />
+
     <CheckBox
         android:id="@+id/shopppingcart_adapter_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_small"
-        android:layout_marginLeft="@dimen/distance_short"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
+        android:layout_below="@+id/lin"
+        android:layout_marginLeft="@dimen/distance_short"
         android:text="@string/xuanzhong"
-        android:layout_below="@+id/lin"/>
+        android:textSize="@dimen/font_small" />
+
     <TextView
         android:id="@+id/shopppingcart_adapter_text_shixiao"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:textSize="@dimen/font_normal"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="@dimen/distance_short"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
-        android:text="商品失效"
+        android:layout_below="@+id/lin"
+        android:layout_marginLeft="@dimen/distance_short"
         android:background="@color/gouwuchehui"
-        android:layout_below="@+id/lin"/>
+        android:text="商品失效"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_normal" />
 
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_xiaoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/reltivelayout"
-        android:text="@string/xiaoji"
-        android:layout_marginLeft="@dimen/distance_short"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
+        android:layout_alignTop="@+id/reltivelayout"
+        android:layout_marginLeft="@dimen/distance_short"
         android:layout_toRightOf="@+id/shopppingcart_adapter_checkbox"
+        android:text="@string/xiaoji"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_small" />
+
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_xiaojijinge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/reltivelayout"
-        android:text="0"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
+        android:layout_alignTop="@+id/reltivelayout"
         android:layout_toRightOf="@+id/shopppingcart_adapter_txt_xiaoji"
+        android:text="0"
         android:textColor="@color/jiage"
         android:textSize="@dimen/font_normal" />
+
     <TextView
         android:id="@+id/shopppingcart_adapter_txt_yuan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/reltivelayout"
-        android:text="@string/yuan"
-        android:layout_marginLeft="@dimen/distance_shortest"
         android:layout_alignBaseline="@+id/shopppingcart_adapter_btn_shanchu"
+        android:layout_alignTop="@+id/reltivelayout"
+        android:layout_marginLeft="@dimen/distance_shortest"
         android:layout_toRightOf="@+id/shopppingcart_adapter_txt_xiaojijinge"
+        android:text="@string/yuan"
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_small" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginTop="@dimen/distance_short"
         android:layout_below="@+id/shopppingcart_adapter_btn_baocun"
+        android:layout_marginTop="@dimen/distance_short"
         android:background="@color/dise"></View>
 </RelativeLayout>

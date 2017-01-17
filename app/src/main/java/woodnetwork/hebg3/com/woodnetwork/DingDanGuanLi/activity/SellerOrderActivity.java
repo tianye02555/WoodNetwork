@@ -286,10 +286,12 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
 
     @Override
     public void loadMoreAll(List<OrderSellerList_listItem> list) {
-        recyclerview.loadMoreComplete();
-        list_all = adapter.getList();
-        list_all.addAll(list);
-        adapter.notifyDataSetChanged();
+        if (null!=list) {
+            recyclerview.loadMoreComplete();
+            list_all = adapter.getList();
+            list_all.addAll(list);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -304,12 +306,13 @@ public class SellerOrderActivity extends AppCompatActivity implements SellerOrde
     }
 
     @Override
-    public void loadMoreFilter(List<OrderSellerFilterList_listItem> list) {
-        recyclerview.loadMoreComplete();
-
-        list_Filter = adapter_filter_weiFaHuo.getList();
-        list_Filter.addAll(list);
-        adapter.notifyDataSetChanged();
+    public void loadMoreFilter(List<OrderSellerFilterList_listItem> list_new) {
+        if(null!=list_new) {
+            recyclerview.loadMoreComplete();
+            list_Filter = adapter_filter_weiFaHuo.getList();
+            list_Filter.addAll(list_new);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

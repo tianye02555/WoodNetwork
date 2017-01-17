@@ -10,7 +10,7 @@
         android:textSize="@dimen/font_normal"
         android:textColor="@android:color/black"
         android:layout_below="@id/includ_title"
-        android:layout_marginLeft="@dimen/distance_longest" />
+        android:layout_marginLeft="@dimen/distance_normal" />
     <TextView
         android:id="@+id/adapter_quotationinfo_txt_value"
         android:layout_width="wrap_content"

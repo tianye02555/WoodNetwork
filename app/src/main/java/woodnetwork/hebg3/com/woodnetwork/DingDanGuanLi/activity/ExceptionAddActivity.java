@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -81,6 +82,8 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
     private String title_price = "";
     private String creatTime = "";
     private String id;
+    private int times;//存放文件的循环次数
+    private HashMap<String, String> params;//上传参数
 
     public int getChooseNumber() {
         return chooseNumber;
@@ -130,8 +133,8 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                 finish();
                 break;
             case R.id.activity_order_exceptionadd_btn_tijiao:
-
-                HashMap<String, String> params = new HashMap<String, String>();
+                showProgress();
+                 params = new HashMap<String, String>();
 
                 params.put("content", edit_yiChangYuanYin.getText().toString().trim());
                 params.put("oid", oid);
@@ -141,22 +144,14 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
                     showMessage("身份信息失效，请重新登录");
                     return;
                 }
-                int times;//存放文件的循环次数
                 if (addAdapter.getList().size() < 4) {
                     times = addAdapter.getList().size() - 1;
                 } else {
                     times = 4;
                 }
-                for (int i = 0; i < times; i++) {
-                    File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
-                    files.put("image", file);
-                }
-                if (null == files || files.size() == 0 || "".equals(edit_yiChangYuanYin.getText().toString().trim())) {
-                    showMessage("请完善异常信息");
-                    return;
-                }
-                showProgress();
-                presenter.submitExceptionOrder(ExceptionAddActivity.this, params, files);
+Bitmap2FileTask bitmap2FileTask=new Bitmap2FileTask();
+                bitmap2FileTask.execute("");
+
                 break;
         }
     }
@@ -389,5 +384,24 @@ public class ExceptionAddActivity extends AppCompatActivity implements Exception
             }
         }
     }
+    class Bitmap2FileTask extends AsyncTask<String,Integer,HashMap<String, File>> {
 
+        @Override
+        protected HashMap<String, File> doInBackground(String... params) {
+            for (int i = 0; i < times; i++) {
+                File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
+                files.put(file.getName(), file);
+            }
+            return files;
+        }
+        @Override
+        protected void onPostExecute(HashMap<String, File> file) {
+            super.onPostExecute(file);
+            if (null == files || files.size() == 0 || "".equals(edit_yiChangYuanYin.getText().toString().trim())) {
+                showMessage("请完善异常信息");
+                return;
+            }
+            presenter.submitExceptionOrder(ExceptionAddActivity.this, params, files);
+        }
+    }
 }

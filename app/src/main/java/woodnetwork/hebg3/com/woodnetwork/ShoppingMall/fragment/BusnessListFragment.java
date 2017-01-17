@@ -33,7 +33,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.MyRequestInfo;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
-public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface ,View.OnTouchListener{
+public class BusnessListFragment extends Fragment implements BusnessListContrac.BusnessListViewInterface, View.OnTouchListener {
 
     @Bind(R.id.text_title)
     TextView textTitle;
@@ -98,7 +98,7 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
                 }
                 request_busnessList.page_no = page_no;
                 myRequestInfo.req = request_busnessList;
-                presenter.getBusnessListData(myRequestInfo,2);
+                presenter.getBusnessListData(myRequestInfo, 2);
 
 
             }
@@ -112,12 +112,12 @@ public class BusnessListFragment extends Fragment implements BusnessListContrac.
 
     @Override
     public void loadMore(List<BusnessInfo> newList) {
-
-        recyclerview.loadMoreComplete();
-        list = adapter.getList();
-        list.addAll(newList);
-        adapter.notifyDataSetChanged();
-
+        if (null != newList) {
+            recyclerview.loadMoreComplete();
+            list = adapter.getList();
+            list.addAll(newList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

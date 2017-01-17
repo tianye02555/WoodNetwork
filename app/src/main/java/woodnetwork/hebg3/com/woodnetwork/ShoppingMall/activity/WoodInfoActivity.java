@@ -183,7 +183,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
                 DotContainer, R.drawable.dot_onn,
                 R.drawable.dot_offf, null, null);
 
-        Scrollview.smoothScrollTo(0,0);
+        Scrollview.smoothScrollTo(0, 0);
     }
 
     @Override
@@ -226,7 +226,7 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
         builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if("".equals(number.getText().toString().trim())||"-".equals(number.getText().toString().trim())||".".equals(number.getText().toString().trim())){
+                if ("".equals(number.getText().toString().trim()) || "-".equals(number.getText().toString().trim()) || ".".equals(number.getText().toString().trim())) {
                     showMessage("请输入正确购买数量");
                     return;
                 }
@@ -325,8 +325,8 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                    dialogInterface.dismiss();
-                }
+                dialogInterface.dismiss();
+            }
 
         });
         builder.show();
@@ -351,11 +351,10 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
 
     @Override
     public void showMessage(String string) {
-        Scrollview.setVisibility(View.GONE);
         CommonUtils.showToast(this, string);
     }
 
-    @OnClick({R.id.activity_wood_info_btn_lijigoumai, R.id.activity_wood_info_btn_jiarugouwuche, R.id.imge_title_left})
+    @OnClick({R.id.activity_wood_info_btn_lijigoumai, R.id.activity_wood_info_btn_jiarugouwuche, R.id.imge_title_left,R.id.image_title_right})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_wood_info_btn_lijigoumai://立即购买
@@ -366,6 +365,9 @@ public class WoodInfoActivity extends AppCompatActivity implements WoodInfoContr
                 break;
             case R.id.imge_title_left:
                 finish();
+                break;
+            case R.id.image_title_right:
+                startActivity(new Intent(this, ShoopingCartActivity.class));
                 break;
         }
     }

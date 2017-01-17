@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_normal"
         android:textColor="@android:color/black"
+        android:layout_marginTop="@dimen/distance_long"
         android:layout_below="@id/activity_busness_info_image_head"
         android:layout_marginLeft="@dimen/distance_longest" />
     <TextView

@@ -97,7 +97,7 @@ public class ShoppingMallActivity extends FragmentActivity {
         setContentView(R.layout.activity_shopping_mall);
         CommonUtils.addActivity(this);
         ButterKnife.bind(this);
-        sharePreferencesUtils=SharePreferencesUtils.getSharePreferencesUtils(this);
+        sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(this);
         if ("null".equals(sharePreferencesUtils.getData("userid", "null"))) {
             startActivity(new Intent(this, LoginActivity.class));
             return;
@@ -185,7 +185,11 @@ public class ShoppingMallActivity extends FragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            showTips();
+            if (shoppingMallFragment.isShaiXuanShow()) {
+                shoppingMallFragment.hidnShaiXuan();
+            } else {
+                showTips();
+            }
             return false;
         }
         return super.onKeyDown(keyCode, event);

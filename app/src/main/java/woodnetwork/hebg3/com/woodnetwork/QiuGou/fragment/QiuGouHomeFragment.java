@@ -39,7 +39,7 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.SharePreferencesUtils;
 
 
-public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface ,View.OnTouchListener{
+public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.QiuGouHomeViewInterface, View.OnTouchListener {
 
 
     @Bind(R.id.imge_title_left)
@@ -128,13 +128,13 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
     }
 
     @Override
-    public void loadMore(List<DemandList_listItem> list) {
-
-        recyclerView.loadMoreComplete();
-        list = qiuGouHomeAdapter.getDemandList();
-        list.addAll(list);
-        qiuGouHomeAdapter.notifyDataSetChanged();
-
+    public void loadMore(List<DemandList_listItem> list_new) {
+        if (null != list_new) {
+            recyclerView.loadMoreComplete();
+            list = qiuGouHomeAdapter.getDemandList();
+            list.addAll(list_new);
+            qiuGouHomeAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -170,6 +170,7 @@ public class QiuGouHomeFragment extends Fragment implements QiuGouHomeContract.Q
     public void showMessage(String string) {
         CommonUtils.showToast(getActivity(), string);
     }
+
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         return true;

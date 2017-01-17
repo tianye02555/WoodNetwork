@@ -1,5 +1,6 @@
 package woodnetwork.hebg3.com.woodnetwork.ShoppingMall.fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -65,7 +68,7 @@ import woodnetwork.hebg3.com.woodnetwork.sysfunction.activity.LoginActivity;
 import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
 
-public class ShoppingMallFragment extends Fragment implements ShoppingMallContract.ShoppingMallView ,View.OnTouchListener{
+public class ShoppingMallFragment extends Fragment implements ShoppingMallContract.ShoppingMallView, View.OnTouchListener {
 
 
     @Bind(R.id.fragment_shopping_mall_recyclerview)
@@ -118,22 +121,22 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         textTitle.setText("木联网");
         sharePreferencesUtils = SharePreferencesUtils.getSharePreferencesUtils(getActivity());
 
-            recyclerview.setHasFixedSize(true);
-            recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-            request_shoppingMall_woodsList = new Request_shoppingMall_woodsList();
-            request_shoppingMall_woodsList.page_no = 1;
-            request_shoppingMall_woodsList.page_size = 10;
-            request_shoppingMall_woodsList.attribute = request_spinnerInfoList;
+        recyclerview.setHasFixedSize(true);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        request_shoppingMall_woodsList = new Request_shoppingMall_woodsList();
+        request_shoppingMall_woodsList.page_no = 1;
+        request_shoppingMall_woodsList.page_size = 10;
+        request_shoppingMall_woodsList.attribute = request_spinnerInfoList;
 
-            new ShoppingMallPresenter(this);
+        new ShoppingMallPresenter(this);
 
-            Request_getAttribute request_getAttribute = new Request_getAttribute();
-            request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
-            myRequestInfo = new MyRequestInfo();
-            myRequestInfo.req = new Object();
-            myRequestInfo.req_meta = request_getAttribute;
-            shoppingMallPresenter.getAttributeFilterListData(myRequestInfo);
-            shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
+        Request_getAttribute request_getAttribute = new Request_getAttribute();
+        request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
+        myRequestInfo = new MyRequestInfo();
+        myRequestInfo.req = new Object();
+        myRequestInfo.req_meta = request_getAttribute;
+        shoppingMallPresenter.getAttributeFilterListData(myRequestInfo);
+        shoppingMallPresenter.getWoodsList(request_shoppingMall_woodsList, 0);
 
 
         Request_versionInfo request_versionInfo = new Request_versionInfo();
@@ -147,8 +150,6 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
             myRequestInfo.req_meta = request_getAttribute;
             shoppingMallPresenter.getCheckUpdateData(myRequestInfo);
         }
-
-
 
 
         return view;
@@ -215,15 +216,13 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
     }
 
     @Override
-    public void uploadVerSion(final  VersionInfo versionInfo) {
-        if(versionInfo.number>CommonUtils.getVersionCode(getActivity())){
+    public void uploadVerSion(final VersionInfo versionInfo) {
+        if (versionInfo.number > CommonUtils.getVersionCode(getActivity())) {
 
-                    UpdateManager manager = new UpdateManager(
-                            getActivity(), String.valueOf(versionInfo.number), Const.PICTURE_LUNBOTU+versionInfo.url,
-                            versionInfo.code, 1, "0");
-                    manager.checkUpdate();
-
-
+            UpdateManager manager = new UpdateManager(
+                    getActivity(), String.valueOf(versionInfo.number), Const.PICTURE_LUNBOTU + versionInfo.url,
+                    versionInfo.code, 1, "0");
+            manager.checkUpdate();
         }
     }
 
@@ -280,7 +279,7 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
         builder.setNegativeButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if("".equals(number.getText().toString().trim())||"-".equals(number.getText().toString().trim())||".".equals(number.getText().toString().trim())){
+                if ("".equals(number.getText().toString().trim()) || "-".equals(number.getText().toString().trim()) || ".".equals(number.getText().toString().trim())) {
                     showMessage("请输入正确购买数量");
                     return;
                 }
@@ -444,5 +443,17 @@ public class ShoppingMallFragment extends Fragment implements ShoppingMallContra
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         return true;
+    }
+
+    public boolean isShaiXuanShow() {
+        if (View.VISIBLE == relShaixuan.getVisibility()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void hidnShaiXuan(){
+        relShaixuan.setVisibility(View.GONE);
+        recyclerview.setVisibility(View.VISIBLE);
     }
 }

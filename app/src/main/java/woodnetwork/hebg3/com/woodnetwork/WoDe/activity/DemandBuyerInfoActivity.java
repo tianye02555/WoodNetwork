@@ -22,6 +22,9 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.DmandBuyerInfoContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.presenter.DemandBuyerInfoPresenter;
 import woodnetwork.hebg3.com.woodnetwork.view.MyListView;
 
+/**
+ * 我的求购信息详情页
+ */
 public class DemandBuyerInfoActivity extends AppCompatActivity implements DmandBuyerInfoContract.DmandBuyerInfoViewInterface {
 
     @Bind(R.id.imge_title_left)
@@ -36,8 +39,8 @@ public class DemandBuyerInfoActivity extends AppCompatActivity implements DmandB
     TextView number;
     @Bind(R.id.activity_demand_buyer_text_chanpinleixing)
     TextView chanPinLeiXing;
-    @Bind(R.id.activity_demand_buyer_text_fahuodi)
-    TextView faHuoDi;
+//    @Bind(R.id.activity_demand_buyer_text_fahuodi)
+//    TextView faHuoDi;
     @Bind(R.id.activity_demand_buyer_text_zhuangtai)
     TextView zhuangTai;
     @Bind(R.id.activity_demand_buyer_text_time)
@@ -104,8 +107,8 @@ public class DemandBuyerInfoActivity extends AppCompatActivity implements DmandB
             zhuangTai.setText("状       态：已完成");
         }
 
-        faHuoDi.setText( dmandBuyerInfo.receive_area);
-        time.setText("创建时间：" + dmandBuyerInfo.create_time);
+//        faHuoDi.setText( dmandBuyerInfo.receive_area);
+        time.setText("创建时间：" + dmandBuyerInfo.createTime);
 
     }
 

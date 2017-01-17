@@ -41,6 +41,8 @@ public class ShopcarList_listItem implements Serializable{
     @Expose
     public Integer flag;
     @Expose
+    public Integer saveEnable=0;//0 不可用 1//可用
+    @Expose
     public List<ShopcarList_listItem_attributeItem> attribute;
 
 }

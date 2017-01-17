@@ -21,6 +21,9 @@ import woodnetwork.hebg3.com.woodnetwork.Utils.CommonUtils;
 import woodnetwork.hebg3.com.woodnetwork.Utils.ProgressUtils;
 import woodnetwork.hebg3.com.woodnetwork.net.Const;
 
+/**
+ * 商家信息
+ */
 public class BusnessInfoActivity extends AppCompatActivity implements BusnessInfoContrac.BusnessInfoViewInterface {
 
     @Bind(R.id.imge_title_left)

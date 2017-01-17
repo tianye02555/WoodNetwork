@@ -1,2 +1,5 @@
-include ':app'
+include ':app', ':testapplication', ':circelapplication', ':sutdyMotion', ':phone', ':file', ':myview', ':soundrecorde'
 include ':payDemoActivity'
+include ':studentStatu'
+include ':teacher_StudentStatus'
+include ':louClock'

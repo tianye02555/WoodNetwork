@@ -263,7 +263,7 @@ public class FileDownLoadManager {
 	 * 安装APK文件
 	 */
 	private void installApk() {
-		File apkfile = new File(mSavePath, versionName);// 第二个参数为apk的名字
+		File apkfile = new File(mSavePath, versionName);//
 		if (!apkfile.exists()) {
 			return;
 		}

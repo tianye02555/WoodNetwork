@@ -46,6 +46,7 @@ public class ConfirmOrderPresenter implements ConfirmOrderContrac.ConfirmOrderPr
             public void onSuccess(Object object) {
                 confirmOrderView.closeProgress();
                 confirmOrderView.jumpActivitywithAttribute((OrderAdd) ((ResponseBody)object).obj);
+                confirmOrderView.showMessage(((ResponseBody)object).base.msg);
             }
 
             @Override

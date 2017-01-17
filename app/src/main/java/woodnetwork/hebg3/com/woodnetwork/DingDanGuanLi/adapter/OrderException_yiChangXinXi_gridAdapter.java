@@ -32,19 +32,21 @@ import woodnetwork.hebg3.com.woodnetwork.net.Const;
 public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
     private Context context;
     private List<String> list;
-    private List<String> finalList=new ArrayList<String>();
+    private List<String> finalList = new ArrayList<String>();
     private int type;
-    public OrderException_yiChangXinXi_gridAdapter(Context context, List<String> list,int type) {
-        this.context = context;
-        this.type=type;
-        this.list = list;
-        for(String url:list){
-            if(0==type){
-                finalList.add(Const.PICTURE+url);
-            }else{
-                finalList.add(Const.PICTURE_LUNBOTU+url);
-            }
 
+    public OrderException_yiChangXinXi_gridAdapter(Context context, List<String> list, int type) {
+        this.context = context;
+        this.type = type;
+        this.list = list;
+        if (null != list) {
+            for (String url : list) {
+                if (0 == type) {
+                    finalList.add(Const.PICTURE + url);
+                } else {
+                    finalList.add(Const.PICTURE_LUNBOTU + url);
+                }
+            }
         }
     }
 
@@ -72,21 +74,22 @@ public class OrderException_yiChangXinXi_gridAdapter extends BaseAdapter {
         if (null == contentView) {
             holder = new ViewHodler();
             contentView = LayoutInflater.from(context).inflate(R.layout.adapter_orderexception_gridview, viewGroup, false);
-            holder.image=(SimpleDraweeView) contentView.findViewById(R.id.adapter_orderexception_gridview_image);
+            holder.image = (SimpleDraweeView) contentView.findViewById(R.id.adapter_orderexception_gridview_image);
             contentView.setTag(holder);
         } else {
             holder = (ViewHodler) contentView.getTag();
         }
-        if(0==type){
-            CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position)),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
-        }else{
-            CommonUtils.displayImage(Uri.parse(Const.PICTURE_LUNBOTU+list.get(position)),holder.image,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
+        if (0 == type) {
+            CommonUtils.displayImage(Uri.parse(Const.PICTURE + list.get(position)), holder.image, context, CommonUtils.isOnlyWIFIDownLoadPic(context));
+        } else {
+            CommonUtils.displayImage(Uri.parse(Const.PICTURE_LUNBOTU + list.get(position)), holder.image, context, CommonUtils.isOnlyWIFIDownLoadPic(context));
         }
 
+        final ViewHodler finalHolder = holder;
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommonUtils.launchNetPictureShow(context,finalList,position);
+                CommonUtils.launchNetPictureShow(context, finalList, position, finalHolder.image);
             }
         });
         return contentView;

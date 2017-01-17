@@ -290,7 +290,8 @@ public class ShoopingCartActivity extends AppCompatActivity implements ShoopingC
     }
 
     @Override
-    public void changeNumber() {
+    public void changeNumber(int position) {
+        adapter.getList().get(position).saveEnable=0;
         adapter.notifyDataSetChanged();
     }
 

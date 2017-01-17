@@ -37,16 +37,16 @@ public class MyOrderPresenter implements MyOrderContract.MyOrderPresenterInterfa
         myOrderModel.getAllMyOrderData(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
-                if (0 == flag) {
-                    myOrderView.closeProgress();
-                    myOrderView.showMyOrderInfo((OrderBuyerProList) ((((ResponseBody) object).obj)));
-                } else if (1 == flag) {
-                    myOrderView.refreshAll(((OrderBuyerProList) ((ResponseBody) object).obj));
 
-                } else if (2 == flag) {
-                    myOrderView.loadMoreAll(((OrderBuyerProList) ((ResponseBody) object).obj).list);
-                }
+                    if (0 == flag) {
+                        myOrderView.closeProgress();
+                        myOrderView.showMyOrderInfo((OrderBuyerProList) ((((ResponseBody) object).obj)));
+                    } else if (1 == flag) {
+                        myOrderView.refreshAll(((OrderBuyerProList) ((ResponseBody) object).obj));
 
+                    } else if (2 == flag) {
+                        myOrderView.loadMoreAll(((OrderBuyerProList) ((ResponseBody) object).obj).list);
+                    }
 
             }
 

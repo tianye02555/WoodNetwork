@@ -57,10 +57,12 @@ public class MyOrder_pay_Adapter extends RecyclerView.Adapter<MyOrder_pay_Adapte
 
         holder.text_id.setText("订单编号：" + list.get(position).number);
         holder.text_date.setText("下单时间：" + list.get(position).creat_time);
-        holder.text_jian.setText(String.valueOf(list.get(position).products.size()));
-        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price) + "元");
-        int status=list.get(position).status;
-        int appeal_flag=list.get(position).appeal_flag;
+        if (null != list.get(position).products) {
+            holder.text_jian.setText(String.valueOf(list.get(position).products.size()));
+        }
+        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price));
+        int status = list.get(position).status;
+        int appeal_flag = list.get(position).appeal_flag;
         if (0 == status) { // 0：待付款；1：已付款；2：已发货；3：已到货；4：订单取消
             holder.text_daiShouHuo.setText("待付款");
             holder.btn_queRenDingDan.setVisibility(View.GONE);
@@ -86,14 +88,14 @@ public class MyOrder_pay_Adapter extends RecyclerView.Adapter<MyOrder_pay_Adapte
             holder.btn_guanBiDingDan.setVisibility(View.GONE);
             holder.btn_queRenDingDan.setVisibility(View.GONE);
             holder.btn_yiChangDingDan.setVisibility(View.GONE);
-        }else{
+        } else {
             holder.btn_guanBiDingDan.setVisibility(View.VISIBLE);
             holder.btn_queRenDingDan.setVisibility(View.VISIBLE);
             holder.btn_yiChangDingDan.setVisibility(View.VISIBLE);
         }
         if (0 == appeal_flag) {//0：订单正常；1：订单异常
             holder.text_yiChang.setVisibility(View.GONE);
-        }else{
+        } else {
             holder.text_yiChang.setVisibility(View.VISIBLE);
         }
         holder.btn_guanBiDingDan.setOnClickListener(new View.OnClickListener() {
@@ -110,13 +112,13 @@ public class MyOrder_pay_Adapter extends RecyclerView.Adapter<MyOrder_pay_Adapte
 
             }
         });
-        holder. btn_yiChangDingDan.setOnClickListener(new View.OnClickListener() {
+        holder.btn_yiChangDingDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderExceptionActivity.class);
                 intent.putExtra("seller", list.get(position).seller);
                 intent.putExtra("number", String.valueOf(list.size()));
-                intent.putExtra("oid",list.get(position).id);
+                intent.putExtra("oid", list.get(position).id);
                 intent.putExtra("id", list.get(position).number);
                 intent.putExtra("creat_time", list.get(position).creat_time);
                 intent.putExtra("total_price", String.valueOf(list.get(position).total_price));
@@ -163,12 +165,11 @@ public class MyOrder_pay_Adapter extends RecyclerView.Adapter<MyOrder_pay_Adapte
             ButterKnife.bind(this, itemView);
 
 
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, OrderDetailsActivity.class);
-                    intent.putExtra("oid", list.get(getAdapterPosition()-1).id);
+                    intent.putExtra("oid", list.get(getAdapterPosition() - 1).id);
                     context.startActivity(intent);
                 }
             });
@@ -177,7 +178,7 @@ public class MyOrder_pay_Adapter extends RecyclerView.Adapter<MyOrder_pay_Adapte
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Intent intent = new Intent(context, OrderDetailsActivity.class);
-                    intent.putExtra("oid", list.get(getAdapterPosition()-1).id);
+                    intent.putExtra("oid", list.get(getAdapterPosition() - 1).id);
                     context.startActivity(intent);
                 }
             });

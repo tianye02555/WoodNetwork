@@ -33,6 +33,9 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.bean.DemandBuyerList_listItem;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.AdviceContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.DemanBuyerListContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.presenter.DemanBuyerListPresenter;
+/**
+ * 我的求购信息页面
+ */
 
 public class DemandBuyerListActivity extends AppCompatActivity implements DemanBuyerListContract.DemanBuyerListViewInterface {
 
@@ -50,6 +53,7 @@ public class DemandBuyerListActivity extends AppCompatActivity implements DemanB
     private Request_demandBuyerList request_demandBuyerList;
     private MyRequestInfo myRequestInfo;
     private List<DemandBuyerList_listItem> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +70,14 @@ public class DemandBuyerListActivity extends AppCompatActivity implements DemanB
         Request_getAttribute request_getAttribute = new Request_getAttribute();
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
-         request_demandBuyerList = new Request_demandBuyerList();
+        request_demandBuyerList = new Request_demandBuyerList();
         request_demandBuyerList.page_no = 1;
         request_demandBuyerList.page_size = 10;
 
-         myRequestInfo = new MyRequestInfo();
+        myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_demandBuyerList;
         myRequestInfo.req_meta = request_getAttribute;
-        presenter.getDemanBuyerListData(myRequestInfo,0);
+        presenter.getDemanBuyerListData(myRequestInfo, 0);
     }
 
     @OnClick(R.id.imge_title_left)
@@ -102,7 +106,7 @@ public class DemandBuyerListActivity extends AppCompatActivity implements DemanB
                 }
                 request_demandBuyerList.page_no = page_no;
                 myRequestInfo.req = request_demandBuyerList;
-                presenter.getDemanBuyerListData(myRequestInfo,2);
+                presenter.getDemanBuyerListData(myRequestInfo, 2);
 
 
             }
@@ -112,14 +116,15 @@ public class DemandBuyerListActivity extends AppCompatActivity implements DemanB
         }
         recyclerView.setAdapter(adapter);
     }
+
     @Override
-    public void loadMore(List<DemandBuyerList_listItem> list) {
-
-        recyclerView.loadMoreComplete();
-        list = adapter.getList();
-        list.addAll(list);
-        adapter.notifyDataSetChanged();
-
+    public void loadMore(List<DemandBuyerList_listItem> list_new) {
+        if (null != list_new) {
+            recyclerView.loadMoreComplete();
+            list = adapter.getList();
+            list.addAll(list_new);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -133,6 +138,7 @@ public class DemandBuyerListActivity extends AppCompatActivity implements DemanB
         adapter.notifyDataSetChanged();
 
     }
+
     @Override
     public void setPresenter(DemanBuyerListContract.DemanBuyerListPresenterInterface presenter) {
         if (null != presenter) {

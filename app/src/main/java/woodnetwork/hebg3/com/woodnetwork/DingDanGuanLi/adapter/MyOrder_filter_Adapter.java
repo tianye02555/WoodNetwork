@@ -60,7 +60,7 @@ public class MyOrder_filter_Adapter extends RecyclerView.Adapter<MyOrder_filter_
         holder.text_id.setText("订单编号：" +list.get(position).number);
         holder.text_date.setText("下单时间：" +list.get(position).creat_time);
         holder.text_jian.setText(String.valueOf(list.get(position).products.size()));
-        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price)+"元");
+        holder.text_titlePrice.setText(String.valueOf(list.get(position).total_price));
 
         adapter = new MyOrder_filterAdapterItem_Adapter(context, list.get(position).products, list.get(position).seller);
         holder.listView.setAdapter(adapter);

@@ -13,7 +13,7 @@ import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.adapter.VPAdapter;
 import woodnetwork.hebg3.com.woodnetwork.DingDanGuanLi.fragment.ShowNetPictureFragment;
 import woodnetwork.hebg3.com.woodnetwork.R;
 
-/** 显示网络图片;艺术品图片和动态图片用到 */
+/** 显示网络图片 */
 public class ShowNetPictureActivity extends FragmentActivity {
 	public static final String LS_PHOTOFILEPATH = "listPhotoFilePath";// 图片路径集合
 	public static final String IMG_POSITION = "imgPosition";// 用户点击图片item位置

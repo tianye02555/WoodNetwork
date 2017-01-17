@@ -28,7 +28,9 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.ProductSellerListActivity
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.ReportsActivity;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.activity.SettingActivity;
 
-
+/**
+ * 我的模块
+ */
 public class MyFragment extends Fragment implements View.OnTouchListener{
 
     @Bind(R.id.imge_title_left)
@@ -82,36 +84,36 @@ public class MyFragment extends Fragment implements View.OnTouchListener{
     @OnClick({R.id.image_title_right,R.id.myfragment_text_wodexinxi, R.id.myfragment_text_wodedingdan, R.id.myfragment_text_wodeqiugouxinxi, R.id.myfragment_text_qiugoudindan, R.id.myfragment_text_wodeshangpu, R.id.myfragment_text_wodeshangping, R.id.myfragment_text_dingdanliebiao, R.id.myfragment_text_tongjichaxun, R.id.myfragment_text_wodebaojia})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.image_title_right:
+            case R.id.image_title_right://设置
                 startActivity(SettingActivity.class);
                 break;
-            case R.id.myfragment_text_wodexinxi:
+            case R.id.myfragment_text_wodexinxi://我的信息
                 startActivity(MyInformationActivity.class);
                 break;
-            case R.id.myfragment_text_wodedingdan:
+            case R.id.myfragment_text_wodedingdan://我的订单
                 startActivity(MyOrderActivity.class);
                 break;
-            case R.id.myfragment_text_wodeqiugouxinxi:
+            case R.id.myfragment_text_wodeqiugouxinxi://我的求购信息
                 startActivity(DemandBuyerListActivity.class);
                 break;
-            case R.id.myfragment_text_qiugoudindan:
+            case R.id.myfragment_text_qiugoudindan://求购订单
                 startActivity(DemOrderActivity.class);
                 break;
-            case R.id.myfragment_text_wodeshangpu:
+            case R.id.myfragment_text_wodeshangpu://我的商铺
                 Intent intent=new Intent(getActivity(),BusnessInfoActivity.class);
                 intent.putExtra("from","MyFragment");
                 startActivity(intent);
                 break;
-            case R.id.myfragment_text_wodeshangping:
+            case R.id.myfragment_text_wodeshangping://我的商品
                 startActivity(ProductSellerListActivity.class);
                 break;
-            case R.id.myfragment_text_dingdanliebiao:
+            case R.id.myfragment_text_dingdanliebiao://订单列表
                 startActivity(SellerOrderActivity.class);
                 break;
-            case R.id.myfragment_text_tongjichaxun:
+            case R.id.myfragment_text_tongjichaxun://统计查询
                 startActivity(ReportsActivity.class);
                 break;
-            case R.id.myfragment_text_wodebaojia:
+            case R.id.myfragment_text_wodebaojia://我的报价
                 startActivity(MyQuotationActivity.class);
                 break;
         }

@@ -298,10 +298,12 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
 
     @Override
     public void loadMoreAll(List<OrderBuyerDemList_listItem> list) {
-        recyclerview.loadMoreComplete();
-        list_all = adapter.getList();
-        list_all.addAll(list);
-        adapter.notifyDataSetChanged();
+        if(null!=list) {
+            recyclerview.loadMoreComplete();
+            list_all = adapter.getList();
+            list_all.addAll(list);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -378,11 +380,13 @@ public class DemOrderActivity extends AppCompatActivity implements DemOrderContr
         presenter.getorderBuyerDemClose(myRequestInfo);
     }
     @Override
-    public void loadMorePay(List<OrderBuyerDemPayList_listItem> list) {
-        recyclerview.loadMoreComplete();
-        list_pay = adapter_pay.getList();
-        list_pay.addAll(list);
-        adapter.notifyDataSetChanged();
+    public void loadMorePay(List<OrderBuyerDemPayList_listItem> list_new) {
+        if(null!=list_new) {
+            recyclerview.loadMoreComplete();
+            list_pay = adapter_pay.getList();
+            list_pay.addAll(list_new);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

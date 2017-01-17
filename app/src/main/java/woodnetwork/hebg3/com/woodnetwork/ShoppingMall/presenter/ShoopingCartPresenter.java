@@ -56,13 +56,13 @@ public class ShoopingCartPresenter implements ShoopingCartContract.ShoopingCartP
     }
 
     @Override
-    public void changeGoodsNumber(MyRequestInfo myRequestInfo) {
+    public void changeGoodsNumber(MyRequestInfo myRequestInfo, final int position) {
 //        shoopingCartView.showProgress();
         shoopingCartModel.changeGoodsNumber(CommonUtils.getRequestInfo(myRequestInfo.req, myRequestInfo.req_meta), new OnServiceBaceInterface() {
             @Override
             public void onSuccess(Object object) {
 //                shoopingCartView.closeProgress();
-                shoopingCartView.changeNumber();
+                shoopingCartView.changeNumber(position);
                 shoopingCartView.showMessage(((ResponseBody)object).base.msg);
             }
 

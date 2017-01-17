@@ -10,6 +10,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -98,6 +99,8 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
     private String oid;
     private SharePreferencesUtils sharePreferencesUtils;
     private OrderReceiveContract.OrderReceivePresenterInterface presenter;
+    private HashMap<String, String> params;
+    private int times;//存放文件的循环次数
     public int getChooseNumber() {
         return chooseNumber;
     }
@@ -147,8 +150,8 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                 finish();
                 break;
             case R.id.activity_order_receive_btn_tijiao:
-
-                HashMap<String, String> params = new HashMap<String, String>();
+                showProgress();
+                 params = new HashMap<String, String>();
 
                 params.put("content", edit_beiZhu.getText().toString().trim());
                 params.put("oid", oid);
@@ -159,33 +162,35 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
                     showMessage("身份信息失效，请重新登录");
                     return;
                 }
-                int times;//存放文件的循环次数
+
                 if (addAdapter.getList().size() < 4) {
                     times = addAdapter.getList().size() - 1;
                 } else {
                     times = 4;
                 }
-                for (int i = 0; i < times; i++) {
-                    File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
-                    files.put("image", file);
-                }
-                if(null==files||files.size()==0){
-                    showMessage("请添加确认图片");
-                    return;
-                }
-                showProgress();
-                if (null != getIntent()) {
-                    if ("1".equals(getIntent().getStringExtra("flag"))) {
-                        //发货接口
-                        presenter.submitDelevryOrder(OrderReceiveActivity.this, params, files);
-                    } else {
-                        //收货接口
-                        presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
-                    }
-                } else {
-                    //收货接口
-                    presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
-                }
+                Bitmap2FileTask bitmap2FileTask=new Bitmap2FileTask();
+                bitmap2FileTask.execute("");
+//                for (int i = 0; i < times; i++) {
+//                    File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
+//                    files.put(file.getName(), file);
+//                }
+//                if(null==files||files.size()==0){
+//                    showMessage("请添加确认图片");
+//                    return;
+//                }
+
+//                if (null != getIntent()) {
+//                    if ("1".equals(getIntent().getStringExtra("flag"))) {
+//                        //发货接口
+//                        presenter.submitDelevryOrder(OrderReceiveActivity.this, params, files);
+//                    } else {
+//                        //收货接口
+//                        presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
+//                    }
+//                } else {
+//                    //收货接口
+//                    presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
+//                }
                 break;
         }
     }
@@ -383,5 +388,40 @@ public class OrderReceiveActivity extends AppCompatActivity implements OrderRece
     public void closeActivity() {
         setResult(RESULT_OK);
         finish();
+    }
+    class Bitmap2FileTask extends AsyncTask<String,Integer,HashMap<String, File>> {
+
+        @Override
+        protected HashMap<String, File> doInBackground(String... params) {
+            for (int i = 0; i < times; i++) {
+                File file = new File(CommonUtils.saveBitmapToFile(addAdapter.getList().get(i)));
+                files.put(file.getName(), file);
+            }
+            return files;
+        }
+        @Override
+        protected void onPostExecute(HashMap<String, File> file) {
+            super.onPostExecute(file);
+//            if (null == files || files.size() == 0 || "".equals(edit_yiChangYuanYin.getText().toString().trim())) {
+//                showMessage("请完善异常信息");
+//                return;
+//            }
+            if(null==files||files.size()==0){
+                showMessage("请添加确认图片");
+                return;
+            }
+            if (null != getIntent()) {
+                    if ("1".equals(getIntent().getStringExtra("flag"))) {
+                        //发货接口
+                        presenter.submitDelevryOrder(OrderReceiveActivity.this, params, files);
+                    } else {
+                        //收货接口
+                        presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
+                    }
+                } else {
+                    //收货接口
+                    presenter.submitReceiveOrder(OrderReceiveActivity.this, params, files);
+                }
+        }
     }
 }

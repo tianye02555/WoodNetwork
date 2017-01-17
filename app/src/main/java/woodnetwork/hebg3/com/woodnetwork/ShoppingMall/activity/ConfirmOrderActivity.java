@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -189,7 +190,9 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
         for (ShopcarList_listItem shopcarList_listItem : shopcarList.list) {
             totlePrice += shopcarList_listItem.xiaoJi;
         }
-        yingFuJinge.setText(String.valueOf(totlePrice));
+        DecimalFormat df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
+        String temp = df.format(totlePrice);
+        yingFuJinge.setText(temp);
         adapter = new ConfirmOrderAdapter(this, shopcarList.list);
         listView.setAdapter(adapter);
 
@@ -212,10 +215,12 @@ public class ConfirmOrderActivity extends AppCompatActivity implements ConfirmOr
 
     @Override
     public void jumpActivitywithAttribute(OrderAdd orderAdd) {
+
         Intent intent = new Intent(this, OrderListActivity.class);
         intent.putExtra("orderadd", orderAdd);
         intent.putExtra("shopcarList", shopcarList);
         startActivity(intent);
+        finish();
     }
 
     @Override

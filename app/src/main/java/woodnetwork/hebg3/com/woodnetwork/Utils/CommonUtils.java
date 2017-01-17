@@ -24,6 +24,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -37,10 +38,12 @@ import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -109,17 +112,17 @@ public class CommonUtils {
 
     public static void log(String msg) {
         if (true)
-            Log.i(generateTag(), msg);
+            Log.w(generateTag(), msg);
     }
 
     public static void log(Exception e) {
         if (true)
-            Log.i(generateTag(), e.toString(), e.getCause());
+            Log.w(generateTag(), e.toString(), e.getCause());
     }
 
     public static void log(Throwable tr) {
         if (true)
-            Log.i(generateTag(), tr.toString(), tr);
+            Log.w(generateTag(), tr.toString(), tr);
     }
 
 
@@ -621,7 +624,7 @@ public class CommonUtils {
      * @param  listPictureUrl 照片文件的路径的集合
      * @param imgPosition 界面最初显示是哪张图片
      */
-    public static void launchNetPictureShow(Context context, List<String> listPictureUrl, int imgPosition) {
+    public static void launchNetPictureShow(Context context, List<String> listPictureUrl, int imgPosition,View view) {
         if (!CommonUtils.isExistSdcard()) {
             CommonUtils.showToast(context, "sd卡不存在");
             return;
@@ -629,7 +632,11 @@ public class CommonUtils {
         Intent intent = new Intent(context, ShowNetPictureActivity.class);
         intent.putExtra(ShowNetPictureActivity.LS_PHOTOFILEPATH, (Serializable) listPictureUrl);
         intent.putExtra(ShowNetPictureActivity.IMG_POSITION, imgPosition);
-        context.startActivity(intent);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation((Activity) context, view, "aaa").toBundle());
+//        } else {
+            context.startActivity(intent);
+//        }
     }
 
 
@@ -686,7 +693,7 @@ public class CommonUtils {
         int degree = readPictureDegree(filsPath);
 
         BitmapFactory.Options opts = new BitmapFactory.Options();//获取缩略图显示到屏幕上
-        opts.inSampleSize = 2;
+        opts.inSampleSize = 4;
         Bitmap cbitmap = BitmapFactory.decodeFile(filsPath, opts);
 
         /**
@@ -708,7 +715,7 @@ public class CommonUtils {
         File file = new File(filePath);
         try {
             FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            bmp.compress(Bitmap.CompressFormat.PNG, 10, out);
             out.flush();
             out.close();
         } catch (Exception e) {

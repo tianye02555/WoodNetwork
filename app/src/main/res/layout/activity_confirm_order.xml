@@ -82,7 +82,7 @@
                     android:layout_toEndOf="@+id/activity_confirm_order_text_harvestplace"
                     android:layout_toRightOf="@+id/activity_confirm_order_text_harvestplace"
                     android:layout_weight="7"
-                    android:lines="1"
+
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_normal" />
 
@@ -129,7 +129,6 @@
                     android:layout_toEndOf="@+id/activity_confirm_order_text_address"
                     android:layout_toRightOf="@+id/activity_confirm_order_text_address"
                     android:layout_weight="7"
-                    android:lines="1"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_normal" />
 

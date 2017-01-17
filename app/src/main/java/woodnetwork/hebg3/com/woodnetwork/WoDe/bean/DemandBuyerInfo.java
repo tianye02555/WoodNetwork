@@ -14,7 +14,7 @@ public class DemandBuyerInfo {
     @Expose
     public String receive_area;
     @Expose
-    public String create_time;
+    public String createTime;
     @Expose
     public String pname;
     @Expose

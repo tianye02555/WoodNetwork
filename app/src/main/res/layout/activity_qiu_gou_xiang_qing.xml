@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activity_qiu_gou_xiang_qing_txt_shangpingxingxi"
-                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/font_normal"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
@@ -106,7 +106,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginLeft="@dimen/distance_normal"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 
@@ -130,7 +130,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/distance_normal"
-                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginLeft="@dimen/distance_normal"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal" />
 

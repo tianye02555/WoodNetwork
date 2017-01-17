@@ -57,7 +57,7 @@ public class DemandBuyerInfoAdapter extends BaseAdapter {
         } else {
             holder = (ViewHodler) contentView.getTag();
         }
-        holder.name.setText(list.get(position).name+" : ");
+        holder.name.setText(list.get(position).name+"：");
         holder.value.setText(list.get(position).value);
         return contentView;
     }

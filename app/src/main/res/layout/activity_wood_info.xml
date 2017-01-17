@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_rl_tp"
-                android:layout_marginLeft="@dimen/distance_longest"
+                android:layout_marginLeft="@dimen/distance_normal"
                 android:layout_marginTop="@dimen/font_normal"
                 android:text="名        称："
                 android:textColor="@android:color/black"

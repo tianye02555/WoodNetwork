@@ -36,7 +36,7 @@ public interface ShoopingCartContract {
         /**
          * 修改数量
          */
-        void changeNumber();
+        void changeNumber(int position);
 
         /**
          * 显示总价
@@ -66,7 +66,7 @@ public interface ShoopingCartContract {
          *
          * @param myRequestInfo
          */
-        void changeGoodsNumber(MyRequestInfo myRequestInfo);
+        void changeGoodsNumber(MyRequestInfo myRequestInfo,int position);
 
         /**
          * 删除商品接口

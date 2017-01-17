@@ -34,6 +34,9 @@ import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.AdviceContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.contract.MyQuotationContract;
 import woodnetwork.hebg3.com.woodnetwork.WoDe.presenter.MyQuotationPresenter;
 
+/**
+ * 我的报价
+ */
 public class MyQuotationActivity extends AppCompatActivity implements MyQuotationContract.MyQuotationViewInterface {
 
     @Bind(R.id.imge_title_left)
@@ -47,7 +50,7 @@ public class MyQuotationActivity extends AppCompatActivity implements MyQuotatio
     private MyQuotationContract.MyQuotationPresenterInterface presenter;
     private MyQuotationAdapter adapter;
     private int page_no = 1;
-    private  Request_quotationList request_quotationList;
+    private Request_quotationList request_quotationList;
     private MyRequestInfo myRequestInfo;
     private List<QuotationList_quotationItem> list;
 
@@ -67,13 +70,13 @@ public class MyQuotationActivity extends AppCompatActivity implements MyQuotatio
         request_getAttribute.user_id = (String) sharePreferencesUtils.getData("userid", "");
 
 
-         request_quotationList=new Request_quotationList();
-        request_quotationList.page_no=1;
-        request_quotationList.page_size=10;
-         myRequestInfo = new MyRequestInfo();
+        request_quotationList = new Request_quotationList();
+        request_quotationList.page_no = 1;
+        request_quotationList.page_size = 10;
+        myRequestInfo = new MyRequestInfo();
         myRequestInfo.req = request_quotationList;
         myRequestInfo.req_meta = request_getAttribute;
-        presenter.getMyQuotationData(myRequestInfo,0);
+        presenter.getMyQuotationData(myRequestInfo, 0);
 
 
     }
@@ -105,7 +108,7 @@ public class MyQuotationActivity extends AppCompatActivity implements MyQuotatio
                 }
                 request_quotationList.page_no = page_no;
                 myRequestInfo.req = request_quotationList;
-                presenter.getMyQuotationData(myRequestInfo,2);
+                presenter.getMyQuotationData(myRequestInfo, 2);
 
 
             }
@@ -115,14 +118,15 @@ public class MyQuotationActivity extends AppCompatActivity implements MyQuotatio
         }
         recyclerview.setAdapter(adapter);
     }
+
     @Override
-    public void loadMore(List<QuotationList_quotationItem> list) {
-
-        recyclerview.loadMoreComplete();
-        list = adapter.getList();
-        list.addAll(list);
-        adapter.notifyDataSetChanged();
-
+    public void loadMore(List<QuotationList_quotationItem> list_new) {
+        if (null != list_new) {
+            recyclerview.loadMoreComplete();
+            list = adapter.getList();
+            list.addAll(list_new);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -136,6 +140,7 @@ public class MyQuotationActivity extends AppCompatActivity implements MyQuotatio
         adapter.notifyDataSetChanged();
 
     }
+
     @Override
     public void setPresenter(MyQuotationContract.MyQuotationPresenterInterface presenter) {
         if (null != presenter) {

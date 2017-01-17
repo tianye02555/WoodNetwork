@@ -46,9 +46,16 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
     private List<ShopcarList_listItem> list;
     private DecimalFormat df;
 
+
     public ShoopingCartAdapter(Context context, List<ShopcarList_listItem> list) {
         this.context = context;
         this.list = list;
+        if(null!=list){//计算小结 并赋值
+            for(int i=0;i<list.size();i++){
+                Double numberTitle = (list.get(i).stock) * (list.get(i).price);
+                list.get(i).xiaoJi=numberTitle;
+            }
+        }
     }
 
     public List<ShopcarList_listItem> getList() {
@@ -68,7 +75,9 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        CommonUtils.displayImage(Uri.parse(Const.PICTURE+list.get(position).pimg),holder.head,context,CommonUtils.isOnlyWIFIDownLoadPic(context));
+        holder.number.setText(String.valueOf(list.get(position).stock));
+        holder.number.setTag(position);
+        CommonUtils.displayImage(Uri.parse(Const.PICTURE + list.get(position).pimg), holder.head, context, CommonUtils.isOnlyWIFIDownLoadPic(context));
         df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
         Double number = (list.get(position).stock) * (list.get(position).price);//一个订单的小结
         String stringNumber = df.format(number);//字符串类型的小结
@@ -76,24 +85,42 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
         holder.name.setText(list.get(position).pname);
         holder.company.setText(list.get(position).seller.sname);
         holder.faHuoDi.setText("发货地：" + list.get(position).delivery);
-        holder.xuanZhong.setChecked(list.get(position).checkbox);
+        holder.xuanZhong.setTag(position);
+        if ((Integer) holder.xuanZhong.getTag() == position) {
+            holder.xuanZhong.setChecked(list.get((Integer) holder.xuanZhong.getTag()).checkbox);
+        }
+
         holder.price.setText(String.valueOf(list.get(position).price));
-        holder.number.setText(String.valueOf(list.get(position).stock));
-        if(list.get(position).flag==0){
+        holder.baoCun.setTag(position);
+
+        if (list.get(position).flag == 0) {
             holder.shiXiao.setVisibility(View.INVISIBLE);
             holder.xuanZhong.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.shiXiao.setVisibility(View.VISIBLE);
             holder.xuanZhong.setVisibility(View.INVISIBLE);
             holder.number.setEnabled(false);
         }
-        if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
-            holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
-            holder.baoCun.setClickable(false);
-        }else {
-            holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
-            holder.baoCun.setClickable(true);
+//        if (holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))) {
+//            holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
+//            holder.baoCun.setClickable(false);
+//        } else {
+//            holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
+//            holder.baoCun.setClickable(true);
+//        }
+        if ((Integer) holder.baoCun.getTag() == position){
+            if(list.get(position).saveEnable == 0) {
+                holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
+                holder.baoCun.setEnabled(false);
+            } else {
+                holder.baoCun.setEnabled(true);
+                holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
+
+
+            }
+
         }
+
         holder.number.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -102,46 +129,49 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
-                    holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
-                    holder.baoCun.setClickable(false);
-                }else {
-                    holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
-                    holder.baoCun.setClickable(true);
+                if ((Integer) holder.baoCun.getTag() == position&& holder.number.hasFocus()) {
+                    if (holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))) {
+                        holder.baoCun.setBackgroundResource(R.drawable.button_shape_hui);
+                        holder.baoCun.setEnabled(false);
+                        list.get((Integer) holder.baoCun.getTag()).saveEnable = 0;
+                    } else {
+                        holder.baoCun.setBackgroundResource(R.drawable.button_shape_title);
+                        holder.baoCun.setEnabled(true);
+                        list.get((Integer) holder.baoCun.getTag()).saveEnable = 1;
+                    }
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
-
-                final String number = editable.toString().trim();
-                if ("".equals(number)) {
-                    return;
-                }
-                if ("-".equals(number) || ".".equals(number)) {
-                    new AlertDialog.Builder(context).setMessage("只能输入数字").setNeutralButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                           holder.number.setText(null);
-                            dialogInterface.dismiss();
-                        }
-                    }).show();
-                    return;
-                }
-                if (number.contains(".")) {
-                    int index = number.indexOf(".");
-                    if (number.length() - 1 - index > 3) {
-                        holder.number.setText(number.substring(0, index + 4));
-                        new AlertDialog.Builder(context).setMessage("最多保留小数点后3位").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                if ((Integer) holder.number.getTag() == position && holder.number.hasFocus()) {
+                    final String number = editable.toString().trim();
+                    if ("".equals(number)) {
+                        return;
+                    }
+                    if ("-".equals(number) || ".".equals(number)) {
+                        new AlertDialog.Builder(context).setMessage("只能输入数字").setNeutralButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                holder.number.setText(null);
                                 dialogInterface.dismiss();
                             }
                         }).show();
                         return;
                     }
-                }
+                    if (number.contains(".")) {
+                        int index = number.indexOf(".");
+                        if (number.length() - 1 - index > 3) {
+                            holder.number.setText(number.substring(0, index + 4));
+                            new AlertDialog.Builder(context).setMessage("最多保留小数点后3位").setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                            return;
+                        }
+                    }
 //                if ("".equals(holder.number.getText().toString().trim())||Double.parseDouble(holder.number.getText().toString().trim()) <= 0) {
 //                    new AlertDialog.Builder(context).setMessage("数量不能小于0").setNeutralButton("确定", new DialogInterface.OnClickListener() {
 //                        @Override
@@ -163,31 +193,34 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
 //                    }).show();
 //                    return;
 //                }
-                list.get(position).stock = Double.parseDouble(number);
+                    list.get(position).stock = Double.parseDouble(number);
 
-                Double numberTitle = (list.get(position).stock) * (list.get(position).price);
+                    Double numberTitle = (list.get(position).stock) * (list.get(position).price);
 
 
-                String temp = df.format(numberTitle);
-                holder.xiaoJi.setText(String.valueOf(temp));
-                list.get(position).xiaoJi = Double.parseDouble(temp);
-                ((ShoopingCartActivity) context).showTitlePrice();
+                    String temp = df.format(numberTitle);
+                    holder.xiaoJi.setText(String.valueOf(temp));
+                    list.get(position).xiaoJi = Double.parseDouble(temp);
+                    ((ShoopingCartActivity) context).showTitlePrice();
+                }
             }
+
+
         });
         holder.xiaoJi.setText(String.valueOf(list.get(position).xiaoJi));
         holder.baoCun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))){
-                   return;
-                }
+//                if (holder.number.getText().toString().trim().equals(String.valueOf(list.get(position).stock))) {
+//                    return;
+//                }
                 if ("0".equals(holder.number.getText().toString().trim())) {
-                    CommonUtils.showToast(context,"购买数量必须大于0");
+                    CommonUtils.showToast(context, "购买数量必须大于0");
                     return;
                 }
 
                 if ("".equals(holder.number.getText().toString().trim())) {
-                    CommonUtils.showToast(context,"请输入购买数量");
+                    CommonUtils.showToast(context, "请输入购买数量");
                     return;
                 }
 
@@ -208,16 +241,20 @@ public class ShoopingCartAdapter extends RecyclerView.Adapter<ShoopingCartAdapte
                 MyRequestInfo myRequestInfo = new MyRequestInfo();
                 myRequestInfo.req = request_shopcar_update;
                 myRequestInfo.req_meta = request_getAttribute;
-                ((ShoopingCartActivity) context).presenter.changeGoodsNumber(myRequestInfo);
+                ((ShoopingCartActivity) context).presenter.changeGoodsNumber(myRequestInfo,position);
 
 
             }
         });
+
         holder.xuanZhong.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                list.get(position).checkbox = b;
-                ((ShoopingCartActivity) context).showTitlePrice();
+                if ((Integer) holder.xuanZhong.getTag() == position) {
+                    list.get((Integer) holder.xuanZhong.getTag()).checkbox = b;
+                    ((ShoopingCartActivity) context).showTitlePrice();
+                }
+
             }
         });
         holder.rel.setOnClickListener(new View.OnClickListener() {

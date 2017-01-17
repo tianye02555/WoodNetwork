@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -117,7 +119,9 @@ private ShopcarList shopcarList;
         }
         orderNumber.setText("订单编号："+orderAdd.number);
         orderTime.setText("下单时间："+orderAdd.creat_time);
-        yingFuFinge.setText(String.valueOf(orderAdd.total));
+        DecimalFormat df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
+        String temp = df.format(orderAdd.total);
+        yingFuFinge.setText(temp);
 
         ConfirmOrderAdapter adapter=new ConfirmOrderAdapter(this,shopcarList.list);
 

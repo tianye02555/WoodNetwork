@@ -74,7 +74,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
         imageTitleRight.setVisibility(View.GONE);
         if (null != getIntent()) {
             textTitle.setText(getIntent().getStringExtra("title"));
-            pid=getIntent().getStringExtra("pid");
+            pid = getIntent().getStringExtra("pid");
         }
 
 
@@ -114,7 +114,7 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
                         request_article_list = new Request_article_list();
-                        request_article_list.cid =(String)compoundButton.getTag();
+                        request_article_list.cid = (String) compoundButton.getTag();
                         request_article_list.page_no = 1;
                         request_article_list.page_size = 10;
                         myRequestInfo.req = request_article_list;
@@ -170,13 +170,13 @@ public class ZiXunListActivity extends AppCompatActivity implements ZiXunListCon
     }
 
     @Override
-    public void loadMore(List<ArticleList_listItem> list) {
-
-        recyclerView.loadMoreComplete();
-        list = ziXunListAdapter.getArticleList();
-        list.addAll(list);
-        ziXunListAdapter.notifyDataSetChanged();
-
+    public void loadMore(List<ArticleList_listItem> list_new) {
+        if (null != list_new) {
+            recyclerView.loadMoreComplete();
+            list = ziXunListAdapter.getArticleList();
+            list.addAll(list_new);
+            ziXunListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

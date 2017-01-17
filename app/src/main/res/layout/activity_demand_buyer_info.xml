@@ -38,7 +38,6 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:listSelector="#00000000">
-
     </woodnetwork.hebg3.com.woodnetwork.view.MyListView>
 
     <TextView
@@ -50,34 +49,33 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/font_normal" />
 
-    <TextView
-        android:id="@+id/activity_demand_buyer_text_fahuodibiaoshi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"
-        android:layout_marginLeft="@dimen/distance_normal"
-        android:layout_marginTop="@dimen/distance_normal"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/font_normal" />
+    <!--<TextView-->
+        <!--android:id="@+id/activity_demand_buyer_text_fahuodibiaoshi"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"-->
+        <!--android:layout_marginLeft="@dimen/distance_normal"-->
+        <!--android:layout_marginTop="@dimen/distance_normal"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="@dimen/font_normal" />-->
 
-    <TextView
-        android:id="@+id/activity_demand_buyer_text_fahuodi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/activity_demand_buyer_text_fahuodibiaoshi"
-        android:layout_marginLeft="@dimen/distance_normal"
-        android:layout_marginRight="@dimen/distance_normal"
-        android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"
-        android:layout_marginTop="@dimen/distance_normal"
-        android:layout_toRightOf="@+id/activity_demand_buyer_text_fahuodibiaoshi"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/font_normal" />
+    <!--<TextView-->
+        <!--android:id="@+id/activity_demand_buyer_text_fahuodi"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBaseline="@+id/activity_demand_buyer_text_fahuodibiaoshi"-->
+        <!--android:layout_marginLeft="@dimen/distance_normal"-->
+        <!--android:layout_marginRight="@dimen/distance_normal"-->
+        <!--android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"-->
+        <!--android:layout_toRightOf="@+id/activity_demand_buyer_text_fahuodibiaoshi"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="@dimen/font_normal" />-->
 
     <TextView
         android:id="@+id/activity_demand_buyer_text_zhuangtai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_demand_buyer_text_fahuodi"
+        android:layout_below="@+id/activity_demand_buyer_text_chanpinleixing"
         android:layout_marginLeft="@dimen/distance_normal"
         android:layout_marginTop="@dimen/distance_normal"
         android:textColor="@android:color/black"

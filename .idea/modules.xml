@@ -4,7 +4,17 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WoodNetwork.iml" filepath="$PROJECT_DIR$/WoodNetwork.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/circelapplication/circelapplication.iml" filepath="$PROJECT_DIR$/circelapplication/circelapplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/file/file.iml" filepath="$PROJECT_DIR$/file/file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/louClock/louClock.iml" filepath="$PROJECT_DIR$/louClock/louClock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myview/myview.iml" filepath="$PROJECT_DIR$/myview/myview.iml" />
       <module fileurl="file://$PROJECT_DIR$/payDemoActivity/payDemoActivity.iml" filepath="$PROJECT_DIR$/payDemoActivity/payDemoActivity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/phone/phone.iml" filepath="$PROJECT_DIR$/phone/phone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/soundrecorde/soundrecorde.iml" filepath="$PROJECT_DIR$/soundrecorde/soundrecorde.iml" />
+      <module fileurl="file://$PROJECT_DIR$/studentStatu/studentStatu.iml" filepath="$PROJECT_DIR$/studentStatu/studentStatu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sutdyMotion/sutdyMotion.iml" filepath="$PROJECT_DIR$/sutdyMotion/sutdyMotion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/teacher_StudentStatus/teacher_StudentStatus.iml" filepath="$PROJECT_DIR$/teacher_StudentStatus/teacher_StudentStatus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testapplication/testapplication.iml" filepath="$PROJECT_DIR$/testapplication/testapplication.iml" />
     </modules>
   </component>
 </project>

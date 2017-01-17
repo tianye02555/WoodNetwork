@@ -144,7 +144,7 @@ public class ChooseAddressActivity extends AppCompatActivity implements ChooseAd
 //                spinnerMap.put(spinnerID, true);
 //            }
         final Spinner spinner = new Spinner(this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(200, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         layoutParams.addRule(RelativeLayout.BELOW, nowView);
         layoutParams.topMargin = (int) getResources().getDimension(R.dimen.distance_normal);

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.Bind;
@@ -68,7 +69,9 @@ public class ConfirmOrderAdapter extends BaseAdapter {
             holder = (MyViewHolder) contentView.getTag();
         }
         holder.name.setText("商   品：" + list.get(position).pname);
-        holder.jingE.setText(String.valueOf(list.get(position).xiaoJi));
+        DecimalFormat df = new DecimalFormat("###############0.00");//   16位整数位，两小数位
+        String temp = df.format(list.get(position).xiaoJi);
+        holder.jingE.setText(temp);
         holder.price.setText(String.valueOf(list.get(position).price));
         holder.shuLiang.setText(String.valueOf(list.get(position).stock));
         if (list.get(position).gridView) {

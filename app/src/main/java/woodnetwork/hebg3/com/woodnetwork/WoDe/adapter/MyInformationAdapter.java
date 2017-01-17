@@ -61,10 +61,11 @@ public class MyInformationAdapter extends BaseAdapter {
             myViewHolder = new MyViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.adapter_myinformation, viewGroup, false);
             myViewHolder.image = (SimpleDraweeView) convertView.findViewById(R.id.adapter_myinformation_image);
+            final MyViewHolder finalMyViewHolder = myViewHolder;
             myViewHolder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CommonUtils.launchNetPictureShow(context,listString,position);
+                    CommonUtils.launchNetPictureShow(context,listString,position, finalMyViewHolder.image);
                 }
             });
             convertView.setTag(myViewHolder);
